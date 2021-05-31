@@ -9,7 +9,7 @@ import '../global.dart';
 class WalletApi {
   importWallet({required String mnemonicString, required String walletAlias}) {
     final mnemonic = mnemonicString.split(' ');
-    final wallet = alan.Wallet.derive(mnemonic, globalNetworkInfo);
+    final wallet = alan.Wallet.derive(mnemonic, baseEnv.networkInfo);
 
     globalCache.wallets.add(
       WalletDetails(
@@ -41,7 +41,7 @@ class WalletApi {
       ..denom = denom
       ..amount = amount);
 
-    final signer = alan.TxSigner.fromNetworkInfo(globalNetworkInfo);
+    final signer = alan.TxSigner.fromNetworkInfo(baseEnv.networkInfo);
     final tx = await signer.createAndSign(
         globalCache.wallets
             .firstWhere((element) => element.walletAddress == fromAddress)
@@ -49,7 +49,7 @@ class WalletApi {
         [message]);
 
     // 4. Broadcast the transaction
-    final txSender = alan.TxSender.fromNetworkInfo(globalNetworkInfo);
+    final txSender = alan.TxSender.fromNetworkInfo(baseEnv.networkInfo);
     final response = await txSender.broadcastTx(tx);
 
     // Check the result
