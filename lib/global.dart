@@ -13,7 +13,20 @@ class GlobalCache {
 
 final globalCache = GlobalCache(wallets: []);
 
-final globalNetworkInfo = NetworkInfo.fromSingleHost(
-  bech32Hrp: 'cosmos',
-  host: 'localhost',
-);
+class BaseEnv {
+  NetworkInfo? _networkInfo;
+
+  setEnv(grpcUrl, lcdUrl, grpcPort) {
+    _networkInfo = NetworkInfo(
+        bech32Hrp: 'cosmos',
+        grpcInfo: GRPCInfo(
+          host: grpcUrl,
+          port: int.tryParse(grpcPort.toString())!,
+        ),
+        lcdInfo: LCDInfo(host: lcdUrl));
+  }
+
+  NetworkInfo get networkInfo => _networkInfo!;
+}
+
+final BaseEnv baseEnv = BaseEnv();
