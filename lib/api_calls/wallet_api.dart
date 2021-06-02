@@ -22,7 +22,7 @@ class WalletApi {
 
   Future<BalancesModel> getWalletBalances(String walletAddress) async {
     final Uri uri = Uri.parse(
-        'http://localhost:1317/cosmos/bank/v1beta1/balances/$walletAddress');
+        '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress');
     var response = await client.get(uri);
     var map = jsonDecode(response.body);
     return BalancesModel.fromJson(map);
