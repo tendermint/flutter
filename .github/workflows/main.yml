@@ -29,6 +29,6 @@ jobs:
         enable-commit-comment: true
         overwrites-pull-request-comment: true
       env:
-        NETLIFY_AUTH_TOKEN: 6x9iI4iD-Rl1fEw5GLr7JqX3mnRPEGoOWie6RbIEfjw
-        NETLIFY_SITE_ID: 702537ef-be76-42f2-9a2a-3c650ea001d4
+        NETLIFY_AUTH_TOKEN: ${{ secrets.netlify_auth_token }}
+        NETLIFY_SITE_ID: ${{ secrets.netlify_site_id }}
       timeout-minutes: 1
