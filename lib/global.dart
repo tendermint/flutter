@@ -36,7 +36,7 @@ class BaseEnv {
           ? LCDInfo(host: fullLcdUrl)
           : LCDInfo(
               host: fullLcdUrl,
-              port: grpcPort,
+              port: int.tryParse(grpcPort.toString())!,
             ),
     );
     var apiPort = isLocal ? networkInfo.lcdInfo.port : grpcPort;
