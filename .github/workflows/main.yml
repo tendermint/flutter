@@ -1,0 +1,34 @@
+name: Flutter Web
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: stable
+    - run: flutter config --enable-web
+    - run: flutter build web --dart-define=BASE_GRPC_URL=grpc.testnet.cosmos.network --dart-define=BASE_LCD_URL=api.testnet.cosmos.network --dart-define=BASE_GRPC_PORT=443
+
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v1.1
+      with:
+        publish-dir: './build/web'
+        production-branch: master
+        github-token: $
+        deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: false
+        enable-commit-comment: true
+        overwrites-pull-request-comment: true
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.netlify_auth_token }}
+        NETLIFY_SITE_ID: ${{ secrets.netlify_site_id }}
+      timeout-minutes: 1
