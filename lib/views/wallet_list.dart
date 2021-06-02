@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api_calls/wallet_api.dart';
 import 'package:flutter_app/models/wallet_details.dart';
@@ -43,6 +44,18 @@ class _WalletListingPageState extends State<WalletListingPage> {
                         child: ListTile(
                           title: Text(e.walletAlias.toString()),
                           subtitle: Text(e.walletAddress),
+                          isThreeLine: true,
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                child: Icon(Icons.copy),
+                                onTap: () {
+                                  FlutterClipboard.copy(e.walletAddress);
+                                },
+                              ),
+                            ],
+                          ),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
