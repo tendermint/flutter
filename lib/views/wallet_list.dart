@@ -45,11 +45,16 @@ class _WalletListingPageState extends State<WalletListingPage> {
                           title: Text(e.walletAlias.toString()),
                           subtitle: Text(e.walletAddress),
                           isThreeLine: true,
-                          trailing: InkWell(
-                            child: Icon(Icons.copy),
-                            onTap: () {
-                              FlutterClipboard.copy(e.walletAddress);
-                            },
+                          trailing: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                child: Icon(Icons.copy),
+                                onTap: () {
+                                  FlutterClipboard.copy(e.walletAddress);
+                                },
+                              ),
+                            ],
                           ),
                           onTap: () {
                             Navigator.of(context).push(
