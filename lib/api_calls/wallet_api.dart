@@ -1,15 +1,19 @@
 import 'dart:convert';
-import 'package:alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
-import 'package:alan/alan.dart' as alan;
 import 'package:flutter_app/models/balances.dart';
+import 'package:flutter_app/models/transaction.dart';
 import 'package:flutter_app/models/wallet_details.dart';
+import 'package:sacco/models/transactions/std_msg.dart';
+import 'package:sacco/tx_builder.dart';
+import 'package:sacco/tx_sender.dart';
+import 'package:sacco/tx_signer.dart';
+import 'package:sacco/wallet.dart' as sacco;
 
 import '../global.dart';
 
 class WalletApi {
   importWallet({required String mnemonicString, required String walletAlias}) {
     final mnemonic = mnemonicString.split(' ');
-    final wallet = alan.Wallet.derive(mnemonic, baseEnv.networkInfo);
+    final wallet = sacco.Wallet.derive(mnemonic, baseEnv.networkInfo);
 
     globalCache.wallets.add(
       WalletDetails(
@@ -34,29 +38,31 @@ class WalletApi {
     required String denom,
     required String amount,
   }) async {
-    final message = bank.MsgSend.create()
-      ..fromAddress = fromAddress
-      ..toAddress = toAddress;
-    message.amount.add(alan.Coin.create()
-      ..denom = denom
-      ..amount = amount);
+    final message = StdMsg(
+      type: 'cosmos-sdk/MsgSend',
+      value: Transaction(
+        fromAddress: fromAddress,
+        toAddress: toAddress,
+        amount: [
+          Amount(denom: denom, amount: amount),
+        ]
+      ).toJson(),
+    );
+    final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
+    var wallet = globalCache.wallets
+        .firstWhere((element) => element.walletAddress == fromAddress)
+        .wallet;
+    final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
 
-    final signer = alan.TxSigner.fromNetworkInfo(baseEnv.networkInfo);
-    final tx = await signer.createAndSign(
-        globalCache.wallets
-            .firstWhere((element) => element.walletAddress == fromAddress)
-            .wallet,
-        [message]);
+    final result = await TxSender.broadcastStdTx(
+      wallet: wallet,
+      stdTx: signedStdTx,
+    );
 
-    // 4. Broadcast the transaction
-    final txSender = alan.TxSender.fromNetworkInfo(baseEnv.networkInfo);
-    final response = await txSender.broadcastTx(tx);
-
-    // Check the result
-    if (response.isSuccessful) {
-      print('Tx sent successfully. Response: ${response}');
+    if (result.success) {
+      print('Tx send successfully. Hash: ${result.hash}');
     } else {
-      print('Tx errored: ${response}');
+      print('Tx send error: ${result.error?.errorMessage}');
     }
   }
 }

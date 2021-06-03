@@ -23,9 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  alan: ^0.40.2+1
+#  alan: ^0.40.2+1
+  sacco:
+    git:
+      url: https://github.com/wal33d006/sacco.dart.git
   http: ^0.13.1
   clipboard: ^0.1.3
+  grpc: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

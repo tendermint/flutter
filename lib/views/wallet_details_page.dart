@@ -30,6 +30,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     Icon(Icons.workspaces_filled),
   ];
 
+  String _errorText = '';
+
 
   @override
   void initState() {
@@ -79,7 +81,16 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                 'Sending your money\nPlease wait ...',
                 textAlign: TextAlign.center,
               )),
-            )
+            ),
+          if(_errorText.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Center(
+                  child: Text(
+                    _errorText,
+                    textAlign: TextAlign.center,
+                  )),
+            ),
         ],
       ),
     );
@@ -160,16 +171,22 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   Future _sendMoney(Balances e) async {
     _isSendMoneyLoading = true;
     setState(() {});
-    await api.sendAmount(
-      denom: e.denom,
-      amount: _amount,
-      toAddress: _toAddress,
-      fromAddress: widget.walletAddress,
-    );
-    await Future.delayed(Duration(seconds: 2));
-    _fetchWalletDetails();
-    _isSendMoneyLoading = false;
-    setState(() {});
+    try {
+      await api.sendAmount(
+        denom: e.denom,
+        amount: _amount,
+        toAddress: _toAddress,
+        fromAddress: widget.walletAddress,
+      );
+      await Future.delayed(Duration(seconds: 2));
+      _fetchWalletDetails();
+      _isSendMoneyLoading = false;
+      setState(() {});
+    } catch (ex) {
+      _isSendMoneyLoading = false;
+      _errorText = ex.toString();
+      setState(() {});
+    }
   }
 
   void _fetchWalletDetails() async {
