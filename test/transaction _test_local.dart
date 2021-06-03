@@ -7,22 +7,40 @@ void main() {
 
   // Local hosted URLs
   var grpcUrl = 'localhost';
-  var grcpPort = 9090;
+  var port = 1317;
   var lcdUrl = 'localhost';
 
-  baseEnv.setEnv(grpcUrl, lcdUrl, grcpPort);
+  baseEnv.setEnv(lcdUrl, port);
 
   test('Import wallet', () {
     api.importWallet(
         mnemonicString:
-            'brush bleak category link own under around element update either jungle trap base swamp fitness hour section skill soon bread cousin text evil jazz',
+            'wonder find habit barely border neck half appear area split praise next when state wrist exhibit movie parade cheap govern end result industry fly',
         walletAlias: 'Alice');
   });
 
-  test('Get first wallet balances', () async {
-    var address = globalCache.wallets.first.walletAddress;
+  test('Import Bob wallet', () {
+    api.importWallet(
+        mnemonicString:
+        'old near pigeon pipe magnet razor fatal whale minor scale good certain wheel pretty fitness twist detail all noble virtual room fitness cherry drip',
+        walletAlias: 'Bob');
+  });
+
+  test('Get Alice wallet balances', () async {
+    var address = globalCache.wallets[0].walletAddress;
     var balances =
         await api.getWalletBalances(address);
+    print(globalCache.wallets[0].walletAlias);
+    balances.balances.forEach((element) {
+      print(element.denom + ' ' + element.amount);
+    });
+  });
+
+  test('Get Bob wallet balances', () async {
+    var address = globalCache.wallets[1].walletAddress;
+    var balances =
+    await api.getWalletBalances(address);
+    print(globalCache.wallets[1].walletAlias);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
     });
@@ -30,17 +48,26 @@ void main() {
 
   test('Make a transaction from Alice to Bob', () async {
     await api.sendAmount(
-      toAddress: 'cosmos12mav3ua40cnrfmeg08tucn3py6nvj4qkmn5nsu',
-      fromAddress: globalCache.wallets.first.walletAddress,
+      fromAddress: globalCache.wallets[0].walletAddress,
+      toAddress: globalCache.wallets[1].walletAddress,
       amount: '10',
       denom: 'token',
     );
   });
 
-  test('Get wallet balances', () async {
-    await Future.delayed(Duration(seconds: 2));
+  test('Get Alice wallet balances', () async {
+    var address = globalCache.wallets[0].walletAddress;
     var balances =
-        await api.getWalletBalances(globalCache.wallets.first.walletAddress);
+    await api.getWalletBalances(address);
+    balances.balances.forEach((element) {
+      print(element.denom + ' ' + element.amount);
+    });
+  });
+
+  test('Get Bob wallet balances', () async {
+    var address = globalCache.wallets[1].walletAddress;
+    var balances =
+    await api.getWalletBalances(address);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
     });

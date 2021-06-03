@@ -22,7 +22,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
     list = globalCache.wallets;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tendermint 1.0.1'),
+        title: Text('Tendermint 1.0.2'),
       ),
       body: list.isEmpty
           ? Center(

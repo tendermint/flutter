@@ -18,10 +18,10 @@ class BaseEnv {
   String? _apiProtocol;
   String? _baseApiUrl;
 
-  setEnv(grpcUrl, lcdUrl, grpcPort) {
-    var isLocal = grpcUrl == 'localhost';
+  setEnv(lcdUrl, port) {
+    var isLocal = lcdUrl == 'localhost';
     _apiProtocol = isLocal ? 'http' : 'https';
-    var fullLcdUrl = '$_apiProtocol://$lcdUrl';
+    var fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
     _networkInfo = NetworkInfo(
       bech32Hrp: 'cosmos',
       lcdUrl: Uri.parse(fullLcdUrl),
