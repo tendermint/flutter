@@ -16,7 +16,7 @@ jobs:
       with:
         channel: stable
     - run: flutter config --enable-web
-    - run: flutter build web --dart-define=BASE_GRPC_URL=grpc.testnet.cosmos.network --dart-define=BASE_LCD_URL=api.testnet.cosmos.network --dart-define=BASE_GRPC_PORT=443
+    - run: flutter build web --dart-define=BASE_LCD_URL=api.testnet.cosmos.network --dart-define=PORT=443
 
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
