@@ -12,7 +12,7 @@ void main() {
   var grcpPort = 443;
   var lcdUrl = 'api.testnet.cosmos.network';
 
-  baseEnv.setEnv(grpcUrl, lcdUrl, grcpPort);
+  baseEnv.setEnv(lcdUrl, grcpPort);
 
   test('Import Alice wallet', () {
     api.importWallet(
