@@ -49,10 +49,10 @@ class WalletApi {
       ).toJson(),
     );
     final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
-//    var wallet = globalCache.wallets
-//        .firstWhere((element) => element.walletAddress == fromAddress)
-//        .wallet;
-//    final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
+    var wallet = globalCache.wallets
+        .firstWhere((element) => element.walletAddress == fromAddress)
+        .wallet;
+    final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
 //
 //    final result = await TxSender.broadcastStdTx(
 //      wallet: wallet,
