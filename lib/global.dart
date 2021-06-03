@@ -1,6 +1,5 @@
-import 'package:alan/alan.dart';
 import 'package:http/http.dart';
-import 'package:grpc/grpc.dart' as grpc;
+import 'package:sacco/network_info.dart';
 
 import 'models/wallet_details.dart';
 
@@ -25,22 +24,9 @@ class BaseEnv {
     var fullLcdUrl = '$_apiProtocol://$lcdUrl';
     _networkInfo = NetworkInfo(
       bech32Hrp: 'cosmos',
-      grpcInfo: GRPCInfo(
-        host: grpcUrl,
-        credentials: isLocal
-            ? grpc.ChannelCredentials.insecure()
-            : grpc.ChannelCredentials.secure(),
-        port: int.tryParse(grpcPort.toString())!,
-      ),
-      lcdInfo: isLocal
-          ? LCDInfo(host: fullLcdUrl)
-          : LCDInfo(
-              host: fullLcdUrl,
-              port: int.tryParse(grpcPort.toString())!,
-            ),
+      lcdUrl: Uri.parse(fullLcdUrl),
     );
-    var apiPort = isLocal ? networkInfo.lcdInfo.port : grpcPort;
-    _baseApiUrl = '${_networkInfo!.lcdInfo.host}:$apiPort';
+    _baseApiUrl = fullLcdUrl;
   }
 
   NetworkInfo get networkInfo => _networkInfo!;

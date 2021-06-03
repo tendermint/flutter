@@ -1,6 +1,4 @@
-import 'package:alan/alan.dart';
-
-import 'balances.dart';
+import 'package:sacco/wallet.dart';
 
 class WalletDetails {
   String walletAddress;
