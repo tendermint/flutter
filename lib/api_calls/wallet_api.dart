@@ -62,7 +62,7 @@ class WalletApi {
     if (result.success) {
       print('Tx send successfully. Hash: ${result.hash}');
     } else {
-      print('Tx send error: ${result.error?.errorMessage}');
+      throw('Tx send error: ${result.error?.errorMessage}');
     }
   }
 }
