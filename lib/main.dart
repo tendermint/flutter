@@ -4,7 +4,7 @@ import 'package:flutter_app/views/wallet_list.dart';
 
 void main() {
   var port =
-      const String.fromEnvironment('GRPC_PORT', defaultValue: '1317');
+      const String.fromEnvironment('PORT', defaultValue: '1317');
   var lcdUrl =
       const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
