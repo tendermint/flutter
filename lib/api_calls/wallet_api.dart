@@ -53,16 +53,16 @@ class WalletApi {
         .firstWhere((element) => element.walletAddress == fromAddress)
         .wallet;
     final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
-//
-//    final result = await TxSender.broadcastStdTx(
-//      wallet: wallet,
-//      stdTx: signedStdTx,
-//    );
-//
-//    if (result.success) {
-//      print('Tx send successfully. Hash: ${result.hash}');
-//    } else {
-//      print('Tx send error: ${result.error?.errorMessage}');
-//    }
+
+    final result = await TxSender.broadcastStdTx(
+      wallet: wallet,
+      stdTx: signedStdTx,
+    );
+
+    if (result.success) {
+      print('Tx send successfully. Hash: ${result.hash}');
+    } else {
+      print('Tx send error: ${result.error?.errorMessage}');
+    }
   }
 }
