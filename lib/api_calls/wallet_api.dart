@@ -48,7 +48,7 @@ class WalletApi {
         ]
       ).toJson(),
     );
-//    final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
+    final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
 //    var wallet = globalCache.wallets
 //        .firstWhere((element) => element.walletAddress == fromAddress)
 //        .wallet;
