@@ -1,6 +1,6 @@
 # Flutter app for integrating with Cosmos SDK
 
-This is a sample application which is integrated to Cosmos-SDK for adding wallets through mnemonnics and sending tokens to different addresses.
+This is a sample application for a Cosmos SDK blockchain that supports basic wallet management (importing mnemonics), and sending tokens.
 
 ## Setup (Localhost)
 
