@@ -2,7 +2,7 @@
 
 This is a sample application for a Cosmos SDK blockchain that supports basic wallet management (importing mnemonics), and sending tokens.
 
-## Setup (Localhost)
+## Setup (on `localhost`)
 
 - [Setup Flutter](https://flutter.dev/docs/get-started/install)
 - [Install Starport](https://docs.starport.network/intro/install.html)
