@@ -5,8 +5,8 @@ on:
       - opened
       - edited
       - synchronize
-  workflow_dispatch:
-  
+    branches: [main]
+
 jobs:
   main:
     runs-on: ubuntu-latest
