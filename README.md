@@ -1,16 +1,16 @@
-# flutter_app
+# Flutter application for integrating with Cosmos-SDK
 
-A new Flutter project.
+This is a sample application which is integrated to Cosmos-SDK for adding wallets through mnemonnics and sending tokens to different addresses.
 
-## Getting Started
+## Setup (Localhost)
 
-This project is a starting point for a Flutter application.
+- [Setup Flutter](https://flutter.dev/docs/get-started/install)
+- [Install Starport](https://docs.starport.network/intro/install.html)
+- Scaffold a blockchain using `starport app github.com/hello/planet`
+- Navigate to `planet` folder and run `starport serve`
+- After it is successfully built, you will see two mnenomics for Alice and Bob along with their wallet addresses in the terminal
+- Run your Flutter app without any extra command line arguments and add both wallets in your app using the mnemonics from the terminal
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Setup (Hosted Testnet)
+- [Setup Flutter](https://flutter.dev/docs/get-started/install)
+- Run your Flutter app using `--dart-define=BASE_LCD_URL=api.testnet.cosmos.network --dart-define=PORT=443` as command line arguments
