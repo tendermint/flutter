@@ -27,6 +27,7 @@ dependencies:
   sacco:
     git:
       url: https://github.com/wal33d006/sacco.dart.git
+      ref: account-url-fix
   http: ^0.13.1
   clipboard: ^0.1.3
 
