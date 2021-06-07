@@ -7,12 +7,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   WalletApi api = WalletApi();
   FaucetApi faucetApi = FaucetApi();
-  // Public hosted URLs
-  var grpcUrl = 'grpc.testnet.cosmos.network';
-  var grcpPort = 443;
-  var lcdUrl = 'api.testnet.cosmos.network';
 
-  baseEnv.setEnv(lcdUrl, grcpPort);
+  var port =
+  const String.fromEnvironment('PORT', defaultValue: '1317');
+  var lcdUrl =
+  const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+
+  baseEnv.setEnv(lcdUrl, port);
 
   test('Import Alice wallet', () {
     api.importWallet(

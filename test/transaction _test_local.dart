@@ -5,24 +5,24 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   WalletApi api = WalletApi();
 
-  // Local hosted URLs
-  var grpcUrl = 'localhost';
-  var port = 1317;
-  var lcdUrl = 'localhost';
+  var port =
+  const String.fromEnvironment('PORT', defaultValue: '1317');
+  var lcdUrl =
+  const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
   baseEnv.setEnv(lcdUrl, port);
 
   test('Import wallet', () {
     api.importWallet(
         mnemonicString:
-            'wonder find habit barely border neck half appear area split praise next when state wrist exhibit movie parade cheap govern end result industry fly',
+            'system cube slight program float all alert kite current home balcony sight arena web parent manage noodle boost asthma sudden canoe gain around inflict',
         walletAlias: 'Alice');
   });
 
   test('Import Bob wallet', () {
     api.importWallet(
         mnemonicString:
-        'old near pigeon pipe magnet razor fatal whale minor scale good certain wheel pretty fitness twist detail all noble virtual room fitness cherry drip',
+        'matter tree shrimp orange rich can motion air devote salmon stomach practice kid frog pelican topple wrist cancel sense abuse write nuclear faculty camp',
         walletAlias: 'Bob');
   });
 
