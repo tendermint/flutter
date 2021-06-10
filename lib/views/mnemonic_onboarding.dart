@@ -14,30 +14,19 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
             child: mnemonic.isNotEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Wrap(
+                        spacing: 8,
                         alignment: WrapAlignment.spaceBetween,
                         children: mnemonic
                             .split(' ')
                             .map(
-                              (e) => Padding(
-                                padding: EdgeInsets.only(right: 16.0),
-                                child: ChoiceChip(
-                                  label: Text(e),
-                                  selected: true,
-                                  labelStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  selectedColor:
-                                      Theme.of(context).primaryColorDark,
-                                ),
-                              ),
+                              (e) => buildChoiceChip(e, context),
                             )
                             .toList(),
                       ),
@@ -58,6 +47,18 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
           ),
         ),
       ),
+    );
+  }
+
+  ChoiceChip buildChoiceChip(String e, BuildContext context) {
+    return ChoiceChip(
+      label: Text(e),
+      selected: true,
+      labelStyle: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+      selectedColor: Theme.of(context).primaryColorDark,
     );
   }
 }
