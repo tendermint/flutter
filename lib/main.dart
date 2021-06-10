@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global.dart';
-import 'package:flutter_app/views/wallet_list.dart';
+import 'package:flutter_app/views/mnemonic_onboarding.dart';
 
 void main() {
   var port =
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WalletListingPage(),
+      home: MnemonicOnboarding(),
     );
   }
 }

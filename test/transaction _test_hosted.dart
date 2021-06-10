@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:flutter_app/api_calls/faucet_api.dart';
 import 'package:flutter_app/api_calls/wallet_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -111,19 +110,4 @@ void main() {
       print(element.denom + ' ' + element.amount);
     });
   });
-}
-
-class FaucetApi {
-  getFreeTokens(String address) async {
-    final Uri uri = Uri.parse('https://faucet.testnet.cosmos.network/');
-    await client.post(
-      uri,
-      body: jsonEncode(
-        {
-          "address": address,
-          "coins": ["100uphoton"]
-        },
-      ),
-    );
-  }
 }
