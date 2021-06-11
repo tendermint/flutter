@@ -21,8 +21,8 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Wrap(
-                        spacing: 8,
-                        alignment: WrapAlignment.spaceBetween,
+                        spacing: 4,
+                        alignment: WrapAlignment.spaceAround,
                         children: mnemonic
                             .split(' ')
                             .map(
@@ -50,10 +50,19 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
     );
   }
 
-  ChoiceChip buildChoiceChip(String e, BuildContext context) {
+  Widget buildChoiceChip(String e, BuildContext context) {
     return ChoiceChip(
       label: Text(e),
       selected: true,
+      avatar: CircleAvatar(
+        backgroundColor: Theme.of(context).primaryColorLight,
+        child: Text(
+          (mnemonic.split(' ').indexOf(e) + 1).toString(),
+          style: TextStyle(
+            fontSize: 12
+          ),
+        ),
+      ),
       labelStyle: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
