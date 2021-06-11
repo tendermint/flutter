@@ -7,7 +7,7 @@ import 'package:web3dart/web3dart.dart';
 
 void main() {
   test(
-    'Etherium test',
+    'Ethereum test',
     () async {
       var rng = new Random.secure();
       String privateKey = Web3.privateKeyFromMnemonic(
