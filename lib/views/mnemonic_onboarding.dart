@@ -19,10 +19,12 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
             child: mnemonic.isNotEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Wrap(
-                        spacing: 4,
-                        alignment: WrapAlignment.spaceAround,
+                      GridView.count(
+                        crossAxisCount: 2,
+                        shrinkWrap: true,
+                        childAspectRatio: 5,
                         children: mnemonic
                             .split(' ')
                             .map(
@@ -58,9 +60,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
         backgroundColor: Theme.of(context).primaryColorLight,
         child: Text(
           (mnemonic.split(' ').indexOf(e) + 1).toString(),
-          style: TextStyle(
-            fontSize: 12
-          ),
+          style: TextStyle(fontSize: 12),
         ),
       ),
       labelStyle: TextStyle(
