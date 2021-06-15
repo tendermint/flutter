@@ -35,3 +35,9 @@ class BaseEnv {
 }
 
 final BaseEnv baseEnv = BaseEnv();
+
+
+
+abstract class SharedPreferencesKeys {
+  static const isWalletCreated = 'IS_APP_INSTALLED';
+}

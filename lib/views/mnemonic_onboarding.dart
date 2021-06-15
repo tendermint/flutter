@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_generator.dart';
+import 'package:flutter_app/views/password_generation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MnemonicOnboarding extends StatefulWidget {
   @override
@@ -8,6 +11,12 @@ class MnemonicOnboarding extends StatefulWidget {
 
 class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
   String mnemonic = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getSharedPreferences();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +45,24 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                       Text(
                         'Please write this down somewhere safe, if you lose this, you will not get your account back. Not even Demeris could help you with that.',
                         textAlign: TextAlign.center,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PasswordGenerationPage(mnemonic: mnemonic),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('Proceed'),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_forward),
+                          ],
+                        ),
                       )
                     ],
                   )
@@ -69,5 +96,17 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
       ),
       selectedColor: Theme.of(context).primaryColorDark,
     );
+  }
+
+  void _getSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var isWalletCreated = prefs.getBool(SharedPreferencesKeys.isWalletCreated);
+    if (isWalletCreated != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PasswordGenerationPage(),
+        ),
+      );
+    }
   }
 }

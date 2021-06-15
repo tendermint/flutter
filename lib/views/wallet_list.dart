@@ -121,7 +121,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
             ),
           );
         },
-        label: Text('Add a wallet'),
+        label: Text('Import a wallet'),
       ),
     );
   }
