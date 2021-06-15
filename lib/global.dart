@@ -40,4 +40,6 @@ final BaseEnv baseEnv = BaseEnv();
 
 abstract class SharedPreferencesKeys {
   static const isWalletCreated = 'IS_APP_INSTALLED';
+
+  static const encryptedMnemonic = 'ENCRYPTED_MNEMONIC';
 }

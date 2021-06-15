@@ -1,4 +1,5 @@
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,14 +12,21 @@ abstract class MnemonicEncryptor {
     final iv = IV.fromLength(16);
 
     final encrypter = Encrypter(AES(key));
-
     final encrypted = encrypter.encrypt(mnemonic, iv: iv);
 
-    final storage = new FlutterSecureStorage();
-
-    await storage.write(key: 'ENCRYPTED_MNEMONIC', value: encrypted.base64);
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    if (foundation.kIsWeb) {
+      await prefs.setString(
+          SharedPreferencesKeys.encryptedMnemonic, encrypted.base64);
+    } else {
+      final storage = new FlutterSecureStorage();
+
+      await storage.write(
+          key: SharedPreferencesKeys.encryptedMnemonic,
+          value: encrypted.base64);
+    }
+
     await prefs.setBool(SharedPreferencesKeys.isWalletCreated, true);
   }
 
@@ -29,7 +37,15 @@ abstract class MnemonicEncryptor {
 
     final encrypter = Encrypter(AES(key));
     final storage = new FlutterSecureStorage();
-    String? value = await storage.read(key: 'ENCRYPTED_MNEMONIC');
+
+    String? value = '';
+
+    if (foundation.kIsWeb) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      value = prefs.getString(SharedPreferencesKeys.encryptedMnemonic);
+    } else {
+      value = await storage.read(key: SharedPreferencesKeys.encryptedMnemonic);
+    }
     String decrypted = '';
 
     if (value != null) {
