@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -7,12 +9,8 @@ import '../global.dart';
 
 abstract class MnemonicEncryptor {
   static Future encryptMnemonic(String mnemonic, String password) async {
-    // TODO: To be updated when we find some other encryption technique
-    final key = Key.fromUtf8('htey45%#&YthtagastwfhHDG');
-    final iv = IV.fromLength(16);
-
-    final encrypter = Encrypter(AES(key));
-    final encrypted = encrypter.encrypt(mnemonic, iv: iv);
+    Encrypter encrypter = _generateEncrypter(password);
+    final encrypted = encrypter.encrypt(mnemonic, iv: IV.fromLength(16));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -31,11 +29,7 @@ abstract class MnemonicEncryptor {
   }
 
   static Future<String> decryptMnemonic(String password) async {
-    // TODO: To be updated when we find some other encryption technique
-    final key = Key.fromUtf8('htey45%#&YthtagastwfhHDG');
-    final iv = IV.fromLength(16);
-
-    final encrypter = Encrypter(AES(key));
+    Encrypter encrypter = _generateEncrypter(password);
     final storage = new FlutterSecureStorage();
 
     String? value = '';
@@ -49,9 +43,19 @@ abstract class MnemonicEncryptor {
     String decrypted = '';
 
     if (value != null) {
-      decrypted = encrypter.decrypt(Encrypted.fromBase64(value), iv: iv);
+      decrypted =
+          encrypter.decrypt(Encrypted.fromBase64(value), iv: IV.fromLength(16));
     }
 
     return decrypted;
+  }
+
+  static Encrypter _generateEncrypter(String password) {
+    final key = Key.fromUtf8(password);
+    final salt = Uint8List(16);
+    final stretchedKey = key.stretch(24, salt: salt);
+
+    final encrypter = Encrypter(AES(stretchedKey));
+    return encrypter;
   }
 }
