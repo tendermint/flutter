@@ -31,7 +31,8 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       GridView.count(
-                        crossAxisCount: 2,
+                        crossAxisCount:
+                            (MediaQuery.of(context).size.width * 0.005).ceil(),
                         shrinkWrap: true,
                         childAspectRatio: 5,
                         children: mnemonic
