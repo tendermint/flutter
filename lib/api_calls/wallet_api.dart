@@ -57,6 +57,7 @@ class WalletApi {
     final result = await TxSender.broadcastStdTx(
       wallet: wallet,
       stdTx: signedStdTx,
+      mode: 'block',
     );
 
     if (result.success) {
