@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../global.dart';
 
 class FaucetApi {
-  getFreeTokens(String address) async {
+  Future<void> getFreeTokens(String address) async {
     final Uri uri = Uri.parse('https://faucet.testnet.cosmos.network/');
     await client.post(
       uri,

@@ -104,7 +104,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      await api.importWallet(
+                      api.importWallet(
                         mnemonicString: _mnemonic,
                         walletAlias: _alias,
                       );

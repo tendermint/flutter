@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../global.dart';
 
 abstract class MnemonicEncryptor {
-  static Future encryptMnemonic(String mnemonic, String password) async {
+  static Future<void> encryptMnemonic(String mnemonic, String password) async {
     Encrypter encrypter = _generateEncrypter(password);
     final encrypted = encrypter.encrypt(mnemonic, iv: IV.fromLength(16));
 
