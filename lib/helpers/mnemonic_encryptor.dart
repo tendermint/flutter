@@ -53,7 +53,7 @@ abstract class MnemonicEncryptor {
   static Encrypter _generateEncrypter(String password) {
     final key = Key.fromUtf8(password);
     final salt = Uint8List(16);
-    final stretchedKey = key.stretch(24, salt: salt);
+    final stretchedKey = key.stretch(32, salt: salt);
 
     final encrypter = Encrypter(AES(stretchedKey));
     return encrypter;
