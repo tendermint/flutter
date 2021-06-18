@@ -49,7 +49,9 @@ class _WalletListingPageState extends State<WalletListingPage> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 2),
                                 decoration: BoxDecoration(
-                                    color: Colors.orange,
+                                    color: e.walletType == WalletType.Eth
+                                        ? Colors.deepPurple
+                                        : Colors.blueGrey,
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Text(
                                   e.walletType.toString().split('.')[1],
