@@ -11,7 +11,7 @@ void main() {
     () async {
       var rng = new Random.secure();
       String privateKey = Web3.privateKeyFromMnemonic(
-          'amount zebra lecture crew select clay define faculty globe story bitter canvas');
+          'anger horse tourist lab duck category second direct human ocean chalk tomorrow', childIndex: 1);
       var privateEthCredentials = EthPrivateKey.fromHex(privateKey);
       Wallet wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
 
@@ -28,10 +28,10 @@ void main() {
         privateEthCredentials,
         Transaction(
           to: EthereumAddress.fromHex(
-              '0xF71902AB854d2C6cecce644EcAE9810662121ca2'),
+              '0xbd8e84c44d916d9ed5eae3c47402ce09f870be93'),
           gasPrice: EtherAmount.inWei(BigInt.one),
           maxGas: 100000,
-          value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 1),
+          value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 5),
         ),
       );
     },

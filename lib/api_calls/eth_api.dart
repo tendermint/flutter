@@ -11,7 +11,7 @@ class EthApi extends BaseWalletApi {
 
   @override
   Future<BalancesModel> getWalletBalances(String walletAddress) async {
-    var apiUrl = "HTTP://127.0.0.1:7545"; //Replace with your API
+    var apiUrl = baseEnv.baseEthUrl;
 
     var httpClient = new Client();
     var ethClient = new Web3Client(apiUrl, httpClient);
@@ -49,7 +49,7 @@ class EthApi extends BaseWalletApi {
       required String toAddress,
       required String denom,
       required String amount}) async {
-    var apiUrl = "HTTP://127.0.0.1:7545"; //Replace with your API
+    var apiUrl = baseEnv.baseEthUrl; //Replace with your API
 
     var httpClient = new Client();
     var ethClient = new Web3Client(apiUrl, httpClient);

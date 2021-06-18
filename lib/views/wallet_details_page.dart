@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api_calls/base_wallet_api.dart';
 import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/models/balances.dart';
@@ -31,6 +32,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   ];
 
   String _errorText = '';
+
+  BaseWalletApi? api;
 
   @override
   void initState() {
@@ -171,7 +174,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     _isSendMoneyLoading = true;
     setState(() {});
     try {
-      await cosmosApi.sendAmount(
+      api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
+      await api!.sendAmount(
         denom: e.denom,
         amount: _amount,
         toAddress: _toAddress,
@@ -191,9 +195,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   void _fetchWalletDetails() async {
     _isLoading = true;
     setState(() {});
-    var api =
-        widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
-    var response = await api.getWalletBalances(widget.wallet.walletAddress);
+    api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
+    var response = await api!.getWalletBalances(widget.wallet.walletAddress);
     model = response;
     _isLoading = false;
     setState(() {});

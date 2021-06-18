@@ -9,7 +9,10 @@ void main() {
   var lcdUrl =
       const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
-  baseEnv.setEnv(lcdUrl, port);
+  var ethUrl =
+      const String.fromEnvironment('BASE_ETH_URL', defaultValue: 'localhost');
+
+  baseEnv.setEnv(lcdUrl, port, ethUrl);
 
   test('Import wallet', () {
     api.importWallet(

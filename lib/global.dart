@@ -19,8 +19,9 @@ class BaseEnv {
   NetworkInfo? _networkInfo;
   String? _apiProtocol;
   String? _baseApiUrl;
+  String? _baseEthUrl;
 
-  setEnv(lcdUrl, port) {
+  setEnv(lcdUrl, port, ethUrl) {
     var isLocal = lcdUrl == 'localhost';
     _apiProtocol = isLocal ? 'http' : 'https';
     var fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
@@ -29,11 +30,14 @@ class BaseEnv {
       lcdUrl: Uri.parse(fullLcdUrl),
     );
     _baseApiUrl = fullLcdUrl;
+    _baseEthUrl = ethUrl;
   }
 
   NetworkInfo get networkInfo => _networkInfo!;
 
   String get baseApiUrl => _baseApiUrl!;
+
+  String get baseEthUrl => _baseEthUrl!;
 }
 
 final BaseEnv baseEnv = BaseEnv();
