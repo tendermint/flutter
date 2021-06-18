@@ -11,7 +11,7 @@ import 'package:sacco/wallet.dart' as sacco;
 import '../global.dart';
 
 class WalletApi {
-  importWallet({required String mnemonicString, required String walletAlias}) {
+  void importWallet({required String mnemonicString, required String walletAlias}) {
     final mnemonic = mnemonicString.split(' ');
     final wallet = sacco.Wallet.derive(mnemonic, baseEnv.networkInfo);
 
@@ -32,7 +32,7 @@ class WalletApi {
     return BalancesModel.fromJson(map);
   }
 
-  Future sendAmount({
+  Future<void> sendAmount({
     required String fromAddress,
     required String toAddress,
     required String denom,
