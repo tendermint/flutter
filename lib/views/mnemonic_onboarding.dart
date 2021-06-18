@@ -44,7 +44,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'Please write this down somewhere safe, if you lose this, you will not get your account back. Not even Demeris could help you with that.',
+                        'Follow best practices for security. Be sure to write your mnemonic pass phrase in a safe place. This phrase is the only way to recover your account if you forget your password. Without your password or recovery passphrase, account recovery is not possible. Even Emeris cannot help you.',
                         textAlign: TextAlign.center,
                       ),
                       ElevatedButton(
