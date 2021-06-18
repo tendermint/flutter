@@ -5,23 +5,19 @@ class BalancesModel {
   BalancesModel({required this.balances, required this.pagination});
 
   BalancesModel.fromJson(Map<String, dynamic> json) {
+    balances = <Balances>[];
     if (json['balances'] != null) {
-      balances = <Balances>[];
-      json['balances'].forEach((v) {
-        balances.add(new Balances.fromJson(v));
+      json['balances'].forEach((Map<String, dynamic> v) {
+        balances.add(Balances.fromJson(v));
       });
     }
-    pagination = Pagination.fromJson(json['pagination']);
+    pagination = Pagination.fromJson(json['pagination'] as Map<String, dynamic>);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.balances != null) {
-      data['balances'] = this.balances.map((v) => v.toJson()).toList();
-    }
-    if (this.pagination != null) {
-      data['pagination'] = this.pagination.toJson();
-    }
+    final data = <String, dynamic>{};
+    data['balances'] = balances.map((v) => v.toJson()).toList();
+    data['pagination'] = pagination.toJson();
     return data;
   }
 }
@@ -33,33 +29,33 @@ class Balances {
   Balances({required this.denom, required this.amount});
 
   Balances.fromJson(Map<String, dynamic> json) {
-    denom = json['denom'];
-    amount = json['amount'];
+    denom = json['denom'] as String;
+    amount = json['amount'] as String;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['denom'] = this.denom;
-    data['amount'] = this.amount;
+    final data = <String, dynamic>{};
+    data['denom'] = denom;
+    data['amount'] = amount;
     return data;
   }
 }
 
 class Pagination {
-  Null nextKey;
+  dynamic nextKey;
   late String total;
 
   Pagination({this.nextKey, required this.total});
 
   Pagination.fromJson(Map<String, dynamic> json) {
     nextKey = json['next_key'];
-    total = json['total'];
+    total = json['total'] as String;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['next_key'] = this.nextKey;
-    data['total'] = this.total;
+    final data = <String, dynamic>{};
+    data['next_key'] = nextKey;
+    data['total'] = total;
     return data;
   }
 }

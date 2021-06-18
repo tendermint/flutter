@@ -6,7 +6,7 @@ class WalletDetailsPage extends StatefulWidget {
   final String walletAddress;
   final String alias;
 
-  WalletDetailsPage({
+  const WalletDetailsPage({
     required this.walletAddress,
     required this.alias,
   });
@@ -16,7 +16,6 @@ class WalletDetailsPage extends StatefulWidget {
 }
 
 class _WalletDetailsPageState extends State<WalletDetailsPage> {
-
   BalancesModel? model;
   bool _isSendMoneyLoading = false;
   bool _isLoading = false;
@@ -24,14 +23,13 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   String _toAddress = '';
   WalletApi api = WalletApi();
 
-  List<Widget> icons = <Icon>[
+  List<Widget> icons = const [
     Icon(Icons.wifi_tethering),
     Icon(Icons.workspaces_filled),
     Icon(Icons.workspaces_filled),
   ];
 
   String _errorText = '';
-
 
   @override
   void initState() {
@@ -44,52 +42,51 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.alias}\'s Wallet'),
+        title: Text("${widget.alias}'s Wallet"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text('Wallet address'),
+            title: const Text('Wallet address'),
             subtitle: Text(widget.walletAddress),
           ),
-          Divider(),
-          Padding(padding: const EdgeInsets.only(top: 16)),
+          const Divider(),
+          const Padding(padding: EdgeInsets.only(top: 16)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
             child: Text(
               'Balances',
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
           if (_isLoading)
-            Center(child: CircularProgressIndicator())
+            const Center(child: CircularProgressIndicator())
           else
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                children:
-                    model!.balances.map((e) => _buildCard(e, context)).toList(),
+                children: model!.balances.map((e) => _buildCard(e, context)).toList(),
               ),
             ),
           if (_isSendMoneyLoading)
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0),
               child: Center(
                   child: Text(
                 'Sending your money\nPlease wait ...',
                 textAlign: TextAlign.center,
               )),
             ),
-          if(_errorText.isNotEmpty)
+          if (_errorText.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Center(
                   child: Text(
-                    _errorText,
-                    textAlign: TextAlign.center,
-                  )),
+                _errorText,
+                textAlign: TextAlign.center,
+              )),
             ),
         ],
       ),
@@ -107,14 +104,14 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         )],
         trailing: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            shape: StadiumBorder(),
+            shape: const StadiumBorder(),
           ),
           onPressed: _isSendMoneyLoading
               ? null
               : () async {
                   await showMoneyTransferBottomSheet(context, e);
                 },
-          child: Text('Transfer'),
+          child: const Text('Transfer'),
         ),
       ),
     );
@@ -127,14 +124,14 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(padding: EdgeInsets.only(top: 16)),
+            const Padding(padding: EdgeInsets.only(top: 16)),
             Text(
               'Send ${e.denom}',
               style: Theme.of(context).textTheme.headline6,
             ),
             ListTile(
               title: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Enter wallet address',
                   border: OutlineInputBorder(),
                 ),
@@ -145,8 +142,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
             ),
             ListTile(
               title: TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Enter amount', border: OutlineInputBorder()),
+                decoration: const InputDecoration(labelText: 'Enter amount', border: OutlineInputBorder()),
                 onChanged: (value) {
                   _amount = value;
                 },
@@ -157,10 +153,10 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                 Navigator.of(context).pop();
                 await _sendMoney(e);
               },
-              child: Text('Send money'),
               style: ElevatedButton.styleFrom(
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
               ),
+              child: const Text('Send money'),
             ),
           ],
         ),
@@ -178,7 +174,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         toAddress: _toAddress,
         fromAddress: widget.walletAddress,
       );
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       _fetchWalletDetails();
       _isSendMoneyLoading = false;
       setState(() {});
@@ -189,11 +185,11 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     }
   }
 
-  void _fetchWalletDetails() async {
+  Future<void> _fetchWalletDetails() async {
     _isLoading = true;
     setState(() {});
-    WalletApi api = WalletApi();
-    var response = await api.getWalletBalances(widget.walletAddress);
+    final api = WalletApi();
+    final response = await api.getWalletBalances(widget.walletAddress);
     model = response;
     _isLoading = false;
     setState(() {});
