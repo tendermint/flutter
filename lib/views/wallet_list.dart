@@ -1,7 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
-import 'package:flutter_app/models/wallet_details.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
+import 'package:flutter_app/models/cosmos_wallet.dart';
 import 'package:flutter_app/views/wallet_details_page.dart';
 
 import '../global.dart';
@@ -12,10 +12,9 @@ class WalletListingPage extends StatefulWidget {
 }
 
 class _WalletListingPageState extends State<WalletListingPage> {
-  List<WalletDetails> list = [];
+  List<BaseWalletDetails> list = [];
   String _mnemonic = '';
   String _alias = '';
-  WalletApi api = WalletApi();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,26 @@ class _WalletListingPageState extends State<WalletListingPage> {
                       (e) => Card(
                         elevation: 4,
                         child: ListTile(
-                          title: Text(e.walletAlias.toString()),
+                          title: Row(
+                            children: [
+                              Text(e.walletAlias.toString()),
+                              Container(
+                                margin: EdgeInsets.only(left: 8),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: Colors.orange,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Text(
+                                  e.walletType.toString().split('.')[1],
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
                           subtitle: Text(e.walletAddress),
                           isThreeLine: true,
                           trailing: Column(
@@ -60,7 +78,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => WalletDetailsPage(
-                                  walletAddress: e.walletAddress,
+                                  wallet: e,
                                   alias: e.walletAlias,
                                 ),
                               ),
@@ -104,7 +122,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      api.importWallet(
+                      cosmosApi.importWallet(
                         mnemonicString: _mnemonic,
                         walletAlias: _alias,
                       );

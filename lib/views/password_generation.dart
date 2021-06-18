@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
+import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_encryptor.dart';
 import 'package:flutter_app/views/wallet_list.dart';
 
@@ -54,21 +55,28 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_forward),
-        onPressed: widget.mnemonic != null ? () async {
-          await encryptMnemonic(context);
-        } : () async {
-          var mnemonic = await MnemonicEncryptor.decryptMnemonic(passwordController.text);
-          WalletApi api = WalletApi();
-          api.importWallet(
-            mnemonicString: mnemonic,
-            walletAlias: 'Tendermint',
-          );
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => WalletListingPage(),
-            ),
-          );
-        },
+        onPressed: widget.mnemonic != null
+            ? () async {
+                await encryptMnemonic(context);
+              }
+            : () async {
+                var mnemonic = await MnemonicEncryptor.decryptMnemonic(
+                    passwordController.text);
+                cosmosApi.importWallet(
+                  mnemonicString: mnemonic,
+                  walletAlias: 'First wallet',
+                );
+
+                ethApi.importWallet(
+                  mnemonicString: mnemonic,
+                  walletAlias: 'Another wallet',
+                );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => WalletListingPage(),
+                  ),
+                );
+              },
       ),
     );
   }
@@ -76,10 +84,14 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
   Future<void> encryptMnemonic(BuildContext context) async {
     await MnemonicEncryptor.encryptMnemonic(
         widget.mnemonic!, passwordController.text);
-    WalletApi api = WalletApi();
-    api.importWallet(
+    cosmosApi.importWallet(
       mnemonicString: widget.mnemonic!,
-      walletAlias: 'Tendermint',
+      walletAlias: 'First wallet',
+    );
+
+    ethApi.importWallet(
+      mnemonicString: widget.mnemonic!,
+      walletAlias: 'Another wallet',
     );
     Navigator.of(context).push(
       MaterialPageRoute(

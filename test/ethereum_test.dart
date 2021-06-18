@@ -14,7 +14,6 @@ void main() {
           'amount zebra lecture crew select clay define faculty globe story bitter canvas');
       var privateEthCredentials = EthPrivateKey.fromHex(privateKey);
       Wallet wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
-      print(wallet.toJson());
 
       var apiUrl = "HTTP://127.0.0.1:7545"; //Replace with your API
 
@@ -36,6 +35,6 @@ void main() {
         ),
       );
     },
-    skip: true,
+//    skip: true,
   );
 }

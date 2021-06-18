@@ -1,10 +1,10 @@
 import 'package:flutter_app/api_calls/faucet_api.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  WalletApi api = WalletApi();
+  CosmosApi api = CosmosApi();
   FaucetApi faucetApi = FaucetApi();
 
   var port =

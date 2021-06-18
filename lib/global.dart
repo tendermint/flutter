@@ -1,12 +1,14 @@
+import 'package:flutter_app/api_calls/cosmos_api.dart';
+import 'package:flutter_app/api_calls/eth_api.dart';
 import 'package:http/http.dart';
 import 'package:sacco/network_info.dart';
 
-import 'models/wallet_details.dart';
+import 'models/cosmos_wallet.dart';
 
 final Client client = Client();
 
 class GlobalCache {
-  List<WalletDetails> wallets;
+  List<BaseWalletDetails> wallets;
 
   GlobalCache({required this.wallets});
 }
@@ -35,6 +37,9 @@ class BaseEnv {
 }
 
 final BaseEnv baseEnv = BaseEnv();
+
+final CosmosApi cosmosApi = CosmosApi();
+final EthApi ethApi = EthApi();
 
 
 

@@ -1,14 +1,13 @@
-import 'package:flutter_app/api_calls/wallet_api.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  WalletApi api = WalletApi();
+  CosmosApi api = CosmosApi();
 
-  var port =
-  const String.fromEnvironment('PORT', defaultValue: '1317');
+  var port = const String.fromEnvironment('PORT', defaultValue: '1317');
   var lcdUrl =
-  const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+      const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
   baseEnv.setEnv(lcdUrl, port);
 
@@ -22,14 +21,13 @@ void main() {
   test('Import Bob wallet', () {
     api.importWallet(
         mnemonicString:
-        'matter tree shrimp orange rich can motion air devote salmon stomach practice kid frog pelican topple wrist cancel sense abuse write nuclear faculty camp',
+            'matter tree shrimp orange rich can motion air devote salmon stomach practice kid frog pelican topple wrist cancel sense abuse write nuclear faculty camp',
         walletAlias: 'Bob');
   });
 
   test('Get Alice wallet balances', () async {
     var address = globalCache.wallets[0].walletAddress;
-    var balances =
-        await api.getWalletBalances(address);
+    var balances = await api.getWalletBalances(address);
     print(globalCache.wallets[0].walletAlias);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
@@ -38,8 +36,7 @@ void main() {
 
   test('Get Bob wallet balances', () async {
     var address = globalCache.wallets[1].walletAddress;
-    var balances =
-    await api.getWalletBalances(address);
+    var balances = await api.getWalletBalances(address);
     print(globalCache.wallets[1].walletAlias);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
@@ -57,8 +54,7 @@ void main() {
 
   test('Get Alice wallet balances', () async {
     var address = globalCache.wallets[0].walletAddress;
-    var balances =
-    await api.getWalletBalances(address);
+    var balances = await api.getWalletBalances(address);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
     });
@@ -66,8 +62,7 @@ void main() {
 
   test('Get Bob wallet balances', () async {
     var address = globalCache.wallets[1].walletAddress;
-    var balances =
-    await api.getWalletBalances(address);
+    var balances = await api.getWalletBalances(address);
     balances.balances.forEach((element) {
       print(element.denom + ' ' + element.amount);
     });
