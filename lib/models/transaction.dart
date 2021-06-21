@@ -6,24 +6,22 @@ class Transaction {
   Transaction({required this.fromAddress, required this.toAddress, required this.amount});
 
   Transaction.fromJson(Map<String, dynamic> json) {
-    fromAddress = json['from_address'];
-    toAddress = json['to_address'];
+    fromAddress = json['from_address'] as String;
+    toAddress = json['to_address'] as String;
     amount = <Amount>[];
     if (json['amount'] != null) {
       amount = <Amount>[];
-      json['amount'].forEach((v) {
-        amount.add(new Amount.fromJson(v));
+      json['amount'].forEach((Map<String, dynamic> v) {
+        amount.add(Amount.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['from_address'] = this.fromAddress;
-    data['to_address'] = this.toAddress;
-    if (this.amount != null) {
-      data['amount'] = this.amount.map((v) => v.toJson()).toList();
-    }
+    final data = <String, dynamic>{};
+    data['from_address'] = fromAddress;
+    data['to_address'] = toAddress;
+    data['amount'] = amount.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -35,14 +33,14 @@ class Amount {
   Amount({required this.denom, required this.amount});
 
   Amount.fromJson(Map<String, dynamic> json) {
-    denom = json['denom'];
-    amount = json['amount'];
+    denom = json['denom'] as String;
+    amount = json['amount'] as String;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['denom'] = this.denom;
-    data['amount'] = this.amount;
+    final data = <String, dynamic>{};
+    data['denom'] = denom;
+    data['amount'] = amount;
     return data;
   }
 }

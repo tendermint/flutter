@@ -21,16 +21,13 @@ class _WalletListingPageState extends State<WalletListingPage> {
     list = globalCache.wallets;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tendermint 1.0.2'),
+        title: const Text('Tendermint 1.0.2'),
       ),
       body: list.isEmpty
           ? Center(
               child: Text(
                 'No wallets found. Add one.',
-                style: Theme.of(context)
-                    .textTheme
-                    .title
-                    ?.copyWith(color: Colors.grey),
+                style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.grey),
               ),
             )
           : Padding(
@@ -69,10 +66,10 @@ class _WalletListingPageState extends State<WalletListingPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                child: Icon(Icons.copy),
                                 onTap: () {
                                   FlutterClipboard.copy(e.walletAddress);
                                 },
+                                child: const Icon(Icons.copy),
                               ),
                             ],
                           ),
@@ -102,7 +99,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                 children: [
                   ListTile(
                     title: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Enter mnemonic',
                         border: OutlineInputBorder(),
                       ),
@@ -113,7 +110,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                   ),
                   ListTile(
                     title: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Enter alias',
                         border: OutlineInputBorder(),
                       ),
@@ -131,17 +128,17 @@ class _WalletListingPageState extends State<WalletListingPage> {
                       Navigator.of(context).pop();
                       setState(() {});
                     },
-                    child: Text('Add wallet'),
                     style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
+                      shape: const StadiumBorder(),
                     ),
+                    child: const Text('Add wallet'),
                   ),
                 ],
               ),
             ),
           );
         },
-        label: Text('Import a wallet'),
+        label: const Text('Import a wallet'),
       ),
     );
   }

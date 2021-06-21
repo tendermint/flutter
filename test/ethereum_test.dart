@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:wallet_core/wallet_core.dart';
@@ -9,32 +10,32 @@ void main() {
   test(
     'Ethereum test',
     () async {
-      var rng = new Random.secure();
-      String privateKey = Web3.privateKeyFromMnemonic(
-          'anger horse tourist lab duck category second direct human ocean chalk tomorrow', childIndex: 1);
-      var privateEthCredentials = EthPrivateKey.fromHex(privateKey);
-      Wallet wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
+      final rng = Random.secure();
+      final privateKey =
+          Web3.privateKeyFromMnemonic('amount zebra lecture crew select clay define faculty globe story bitter canvas');
+      final privateEthCredentials = EthPrivateKey.fromHex(privateKey);
+      final wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
+      debugPrint(wallet.toJson());
 
-      var apiUrl = "HTTP://127.0.0.1:7545"; //Replace with your API
+      const apiUrl = "HTTP://127.0.0.1:7545"; //Replace with your API
 
-      var httpClient = new Client();
-      var ethClient = new Web3Client(apiUrl, httpClient);
+      final httpClient = Client();
+      final ethClient = Web3Client(apiUrl, httpClient);
 
-      EtherAmount balance = await ethClient.getBalance(
+      final balance = await ethClient.getBalance(
         EthereumAddress.fromHex(wallet.privateKey.address.hex),
       );
-      print(balance.getValueInUnit(EtherUnit.ether));
+      debugPrint("${balance.getValueInUnit(EtherUnit.ether)}");
       await ethClient.sendTransaction(
         privateEthCredentials,
         Transaction(
-          to: EthereumAddress.fromHex(
-              '0xbd8e84c44d916d9ed5eae3c47402ce09f870be93'),
+          to: EthereumAddress.fromHex('0xF71902AB854d2C6cecce644EcAE9810662121ca2'),
           gasPrice: EtherAmount.inWei(BigInt.one),
           maxGas: 100000,
-          value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 5),
+          value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 1),
         ),
       );
     },
-//    skip: true,
+    skip: true,
   );
 }

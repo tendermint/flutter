@@ -9,20 +9,9 @@
 .history
 .svn/
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -30,6 +19,7 @@
 .pub-cache/
 .pub/
 /build/
+.last_build_id
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -40,7 +30,56 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Widget golden test failures
+**/failures/*.png
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+signaling_server/node_modules
+*.g.dart
+*.gen.dart
+*.freezed.dart
+app_component.config.dart
+router.gr.dart
+lib/generated
+.fvm
+!.fvm/fvm_config.json
+report.xml
+
+##### INTELLIJ
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+
+# auto-import.
+.idea/artifacts
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
+misc.xml

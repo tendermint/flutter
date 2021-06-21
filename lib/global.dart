@@ -3,6 +3,8 @@ import 'package:flutter_app/api_calls/eth_api.dart';
 import 'package:http/http.dart';
 import 'package:sacco/network_info.dart';
 
+import 'api_calls/cosmos_api.dart';
+import 'api_calls/eth_api.dart';
 import 'models/cosmos_wallet.dart';
 
 final Client client = Client();
@@ -16,15 +18,15 @@ class GlobalCache {
 final globalCache = GlobalCache(wallets: []);
 
 class BaseEnv {
-  NetworkInfo? _networkInfo;
+  late NetworkInfo _networkInfo;
   String? _apiProtocol;
-  String? _baseApiUrl;
-  String? _baseEthUrl;
+  late String _baseApiUrl;
+  late String _baseEthUrl;
 
-  setEnv(lcdUrl, port, ethUrl) {
-    var isLocal = lcdUrl == 'localhost';
+  void setEnv(String lcdUrl, String port, String ethUrl) {
+    final isLocal = lcdUrl == 'localhost';
     _apiProtocol = isLocal ? 'http' : 'https';
-    var fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
+    final fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
     _networkInfo = NetworkInfo(
       bech32Hrp: 'cosmos',
       lcdUrl: Uri.parse(fullLcdUrl),
@@ -33,11 +35,11 @@ class BaseEnv {
     _baseEthUrl = ethUrl;
   }
 
-  NetworkInfo get networkInfo => _networkInfo!;
+  NetworkInfo get networkInfo => _networkInfo;
 
-  String get baseApiUrl => _baseApiUrl!;
+  String get baseApiUrl => _baseApiUrl;
 
-  String get baseEthUrl => _baseEthUrl!;
+  String get baseEthUrl => _baseEthUrl;
 }
 
 final BaseEnv baseEnv = BaseEnv();

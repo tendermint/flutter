@@ -7,7 +7,7 @@ import 'package:flutter_app/views/wallet_list.dart';
 class PasswordGenerationPage extends StatefulWidget {
   final String? mnemonic;
 
-  PasswordGenerationPage({this.mnemonic});
+  const PasswordGenerationPage({this.mnemonic});
 
   @override
   _PasswordGenerationPageState createState() => _PasswordGenerationPageState();
@@ -24,21 +24,20 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Password generation'),
+        title: const Text('Password generation'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: TextFormField(
                 obscureText: isPasswordVisible,
                 controller: passwordController,
                 decoration: InputDecoration(
                   hintText: 'Enter password',
-                  helperText:
-                      'This password will be used to recover your account every time you log in to the app',
+                  helperText: 'This password will be used to recover your account every time you log in to the app',
                   helperMaxLines: 3,
                   suffixIcon: InkWell(
                     onTap: () {
@@ -54,13 +53,13 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_forward),
+        child: const Icon(Icons.arrow_forward),
         onPressed: widget.mnemonic != null
             ? () async {
                 await encryptMnemonic(context);
               }
             : () async {
-                var mnemonic = await MnemonicEncryptor.decryptMnemonic(
+                final mnemonic = await MnemonicEncryptor.decryptMnemonic(
                     passwordController.text);
                 cosmosApi.importWallet(
                   mnemonicString: mnemonic,

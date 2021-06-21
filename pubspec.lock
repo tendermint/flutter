@@ -98,7 +98,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.1.0"
+    version: "8.0.6"
   characters:
     dependency: transitive
     description:
@@ -366,6 +366,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  lint:
+    dependency: "direct dev"
+    description:
+      name: lint
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.3"
   logging:
     dependency: transitive
     description:
@@ -654,7 +661,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.2"
+    version: "2.0.5"
   xdg_directories:
     dependency: transitive
     description:
@@ -670,5 +677,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.26.0-17.6.pre"

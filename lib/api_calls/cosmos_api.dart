@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_app/api_calls/base_wallet_api.dart';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app/models/balances.dart';
 import 'package:flutter_app/models/transaction.dart';
 import 'package:flutter_app/models/cosmos_wallet.dart';
@@ -29,10 +31,9 @@ class CosmosApi extends BaseWalletApi {
 
   @override
   Future<BalancesModel> getWalletBalances(String walletAddress) async {
-    final Uri uri = Uri.parse(
-        '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress');
-    var response = await client.get(uri);
-    var map = jsonDecode(response.body);
+    final uri = Uri.parse('${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress');
+    final response = await client.get(uri);
+    final map = jsonDecode(response.body) as Map<String, dynamic>;
     return BalancesModel.fromJson(map);
   }
 
@@ -51,7 +52,7 @@ class CosmosApi extends BaseWalletApi {
       ]).toJson(),
     );
     final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
-    var wallet = (globalCache.wallets
+    final wallet = (globalCache.wallets
                 .firstWhere((element) => element.walletAddress == fromAddress)
             as CosmosWallet)
         .wallet;
@@ -64,9 +65,9 @@ class CosmosApi extends BaseWalletApi {
     );
 
     if (result.success) {
-      print('Tx send successfully. Hash: ${result.hash}');
+      debugPrint('Tx send successfully. Hash: ${result.hash}');
     } else {
-      throw ('Tx send error: ${result.error?.errorMessage}');
+      throw 'Tx send error: ${result.error?.errorMessage}';
     }
   }
 }
