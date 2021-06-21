@@ -1,4 +1,6 @@
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_app/models/balances.dart';
 import 'package:flutter_app/models/transaction.dart';
 import 'package:flutter_app/models/wallet_details.dart';
@@ -25,10 +27,9 @@ class WalletApi {
   }
 
   Future<BalancesModel> getWalletBalances(String walletAddress) async {
-    final Uri uri = Uri.parse(
-        '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress');
-    var response = await client.get(uri);
-    var map = jsonDecode(response.body);
+    final uri = Uri.parse('${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress');
+    final response = await client.get(uri);
+    final map = jsonDecode(response.body) as Map<String, dynamic>;
     return BalancesModel.fromJson(map);
   }
 
@@ -40,18 +41,12 @@ class WalletApi {
   }) async {
     final message = StdMsg(
       type: 'cosmos-sdk/MsgSend',
-      value: Transaction(
-        fromAddress: fromAddress,
-        toAddress: toAddress,
-        amount: [
-          Amount(denom: denom, amount: amount),
-        ]
-      ).toJson(),
+      value: Transaction(fromAddress: fromAddress, toAddress: toAddress, amount: [
+        Amount(denom: denom, amount: amount),
+      ]).toJson(),
     );
     final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
-    var wallet = globalCache.wallets
-        .firstWhere((element) => element.walletAddress == fromAddress)
-        .wallet;
+    final wallet = globalCache.wallets.firstWhere((element) => element.walletAddress == fromAddress).wallet;
     final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
 
     final result = await TxSender.broadcastStdTx(
@@ -61,9 +56,9 @@ class WalletApi {
     );
 
     if (result.success) {
-      print('Tx send successfully. Hash: ${result.hash}');
+      debugPrint('Tx send successfully. Hash: ${result.hash}');
     } else {
-      throw('Tx send error: ${result.error?.errorMessage}');
+      throw 'Tx send error: ${result.error?.errorMessage}';
     }
   }
 }

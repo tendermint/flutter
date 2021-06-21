@@ -14,14 +14,14 @@ class GlobalCache {
 final globalCache = GlobalCache(wallets: []);
 
 class BaseEnv {
-  NetworkInfo? _networkInfo;
+  late NetworkInfo _networkInfo;
   String? _apiProtocol;
-  String? _baseApiUrl;
+  late String _baseApiUrl;
 
-  setEnv(lcdUrl, port) {
-    var isLocal = lcdUrl == 'localhost';
+  void setEnv(String lcdUrl, String port) {
+    final isLocal = lcdUrl == 'localhost';
     _apiProtocol = isLocal ? 'http' : 'https';
-    var fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
+    final fullLcdUrl = '$_apiProtocol://$lcdUrl:$port';
     _networkInfo = NetworkInfo(
       bech32Hrp: 'cosmos',
       lcdUrl: Uri.parse(fullLcdUrl),
@@ -29,14 +29,12 @@ class BaseEnv {
     _baseApiUrl = fullLcdUrl;
   }
 
-  NetworkInfo get networkInfo => _networkInfo!;
+  NetworkInfo get networkInfo => _networkInfo;
 
-  String get baseApiUrl => _baseApiUrl!;
+  String get baseApiUrl => _baseApiUrl;
 }
 
 final BaseEnv baseEnv = BaseEnv();
-
-
 
 abstract class SharedPreferencesKeys {
   static const isWalletCreated = 'IS_APP_INSTALLED';

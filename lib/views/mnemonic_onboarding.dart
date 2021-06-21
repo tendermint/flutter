@@ -23,7 +23,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Center(
             child: mnemonic.isNotEmpty
                 ? Column(
@@ -31,8 +31,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       GridView.count(
-                        crossAxisCount:
-                            (MediaQuery.of(context).size.width * 0.005).ceil(),
+                        crossAxisCount: (MediaQuery.of(context).size.width * 0.005).ceil(),
                         shrinkWrap: true,
                         childAspectRatio: 5,
                         children: mnemonic
@@ -51,14 +50,13 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  PasswordGenerationPage(mnemonic: mnemonic),
+                              builder: (context) => PasswordGenerationPage(mnemonic: mnemonic),
                             ),
                           );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Text('Proceed'),
                             SizedBox(width: 4),
                             Icon(Icons.arrow_forward),
@@ -72,7 +70,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                       mnemonic = MnemonicGenerator.generateMnemonic();
                       setState(() {});
                     },
-                    child: Text('Create a new wallet'),
+                    child: const Text('Create a new wallet'),
                   ),
           ),
         ),
@@ -88,10 +86,10 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
         backgroundColor: Theme.of(context).primaryColorLight,
         child: Text(
           (mnemonic.split(' ').indexOf(e) + 1).toString(),
-          style: TextStyle(fontSize: 12),
+          style: const TextStyle(fontSize: 12),
         ),
       ),
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -99,13 +97,13 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
     );
   }
 
-  void _getSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var isWalletCreated = prefs.getBool(SharedPreferencesKeys.isWalletCreated);
+  Future<void> _getSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isWalletCreated = prefs.getBool(SharedPreferencesKeys.isWalletCreated);
     if (isWalletCreated != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => PasswordGenerationPage(),
+          builder: (context) => const PasswordGenerationPage(),
         ),
       );
     }
