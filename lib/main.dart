@@ -3,10 +3,8 @@ import 'package:flutter_app/global.dart';
 import 'package:flutter_app/views/mnemonic_onboarding.dart';
 
 void main() {
-  var port =
-      const String.fromEnvironment('PORT', defaultValue: '1317');
-  var lcdUrl =
-      const String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+  const port = String.fromEnvironment('PORT', defaultValue: '1317');
+  const lcdUrl = String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
   baseEnv.setEnv(lcdUrl, port);
   runApp(MyApp());
@@ -19,11 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder()
-        )
-      ),
+          primarySwatch: Colors.blue, inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder())),
       home: MnemonicOnboarding(),
     );
   }
