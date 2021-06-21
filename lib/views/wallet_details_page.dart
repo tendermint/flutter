@@ -58,11 +58,32 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
           const Divider(),
           const Padding(padding: EdgeInsets.only(top: 16)),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            child: Text(
-              'Balances',
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headline6,
+            padding:
+                const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+            child: Row(
+              children: [
+                Text(
+                  'Balances',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                      color: widget.wallet.walletType == WalletType.Eth
+                          ? Colors.deepPurple
+                          : Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    widget.wallet.walletType.toString().split('.')[1],
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12),
+                  ),
+                )
+              ],
             ),
           ),
           if (_isLoading)
@@ -89,9 +110,9 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
               padding: const EdgeInsets.only(top: 8.0),
               child: Center(
                   child: Text(
-                    _errorText,
-                    textAlign: TextAlign.center,
-                  )),
+                _errorText,
+                textAlign: TextAlign.center,
+              )),
             ),
         ],
       ),
@@ -147,7 +168,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
             ),
             ListTile(
               title: TextFormField(
-                decoration: const InputDecoration(labelText: 'Enter amount', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                    labelText: 'Enter amount', border: OutlineInputBorder()),
                 onChanged: (value) {
                   _amount = value;
                 },
@@ -194,7 +216,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   Future<void> _fetchWalletDetails() async {
     _isLoading = true;
     setState(() {});
-    final api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
+    final api =
+        widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
     final response = await api.getWalletBalances(widget.wallet.walletAddress);
     model = response;
     _isLoading = false;
