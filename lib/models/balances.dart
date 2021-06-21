@@ -7,11 +7,14 @@ class BalancesModel {
   BalancesModel.fromJson(Map<String, dynamic> json) {
     balances = <Balances>[];
     if (json['balances'] != null) {
-      json['balances'].forEach((Map<String, dynamic> v) {
-        balances.add(Balances.fromJson(v));
-      });
+      if ((json['balances'] as List).isNotEmpty) {
+        json['balances'].forEach((Map<String, dynamic> v) {
+          balances.add(Balances.fromJson(v));
+        });
+      }
     }
-    pagination = Pagination.fromJson(json['pagination'] as Map<String, dynamic>);
+    pagination =
+        Pagination.fromJson(json['pagination'] as Map<String, dynamic>);
   }
 
   Map<String, dynamic> toJson() {
