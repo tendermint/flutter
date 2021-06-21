@@ -9,7 +9,7 @@ class WalletDetailsPage extends StatefulWidget {
   final BaseWalletDetails wallet;
   final String alias;
 
-  WalletDetailsPage({
+  const WalletDetailsPage({
     required this.wallet,
     required this.alias,
   });

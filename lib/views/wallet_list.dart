@@ -1,6 +1,5 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/models/cosmos_wallet.dart';
 import 'package:flutter_app/views/wallet_details_page.dart';
 
@@ -42,8 +41,8 @@ class _WalletListingPageState extends State<WalletListingPage> {
                             children: [
                               Text(e.walletAlias.toString()),
                               Container(
-                                margin: EdgeInsets.only(left: 8),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(left: 8),
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 2),
                                 decoration: BoxDecoration(
                                     color: e.walletType == WalletType.Eth
@@ -52,7 +51,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Text(
                                   e.walletType.toString().split('.')[1],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),

@@ -1,18 +1,19 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/api_calls/faucet_api.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final api = WalletApi();
+  final api = CosmosApi();
   final faucetApi = FaucetApi();
 
   const port = String.fromEnvironment('PORT', defaultValue: '1317');
-  // ignore: prefer_const_declarations
   const lcdUrl = String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
-  baseEnv.setEnv(lcdUrl, port);
+  const ethUrl = String.fromEnvironment('BASE_ETH_URL', defaultValue: 'localhost');
+
+  baseEnv.setEnv(lcdUrl, port, ethUrl);
 
   test('Import Alice wallet', () {
     api.importWallet(

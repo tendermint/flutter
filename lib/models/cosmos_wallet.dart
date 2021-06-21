@@ -4,9 +4,9 @@ class CosmosWallet extends BaseWalletDetails {
   Wallet wallet;
 
   CosmosWallet({
-    required walletAddress,
-    required walletAlias,
-    walletType = WalletType.Cosmos,
+    required String walletAddress,
+    required String walletAlias,
+    WalletType walletType = WalletType.Cosmos,
     required this.wallet,
   }) : super(
           walletAlias: walletAlias,

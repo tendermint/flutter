@@ -11,12 +11,12 @@ class EthApi extends BaseWalletApi {
 
   @override
   Future<BalancesModel> getWalletBalances(String walletAddress) async {
-    var apiUrl = baseEnv.baseEthUrl;
+    final apiUrl = baseEnv.baseEthUrl;
 
-    var httpClient = new Client();
-    var ethClient = new Web3Client(apiUrl, httpClient);
+    final httpClient = Client();
+    final ethClient = Web3Client(apiUrl, httpClient);
 
-    EtherAmount balance = await ethClient.getBalance(
+    final balance = await ethClient.getBalance(
       EthereumAddress.fromHex(walletAddress),
     );
 
@@ -31,10 +31,10 @@ class EthApi extends BaseWalletApi {
   @override
   void importWallet(
       {required String mnemonicString, required String walletAlias}) {
-    var rng = new Random.secure();
+    final rng = Random.secure();
     privateKey = Web3.privateKeyFromMnemonic(mnemonicString);
-    var privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
-    Wallet wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
+    final privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
+    final wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
     globalCache.wallets.add(
       EthWallet(
           walletAddress: wallet.privateKey.address.hex,
@@ -49,12 +49,12 @@ class EthApi extends BaseWalletApi {
       required String toAddress,
       required String denom,
       required String amount}) async {
-    var apiUrl = baseEnv.baseEthUrl; //Replace with your API
+    final apiUrl = baseEnv.baseEthUrl; //Replace with your API
 
-    var httpClient = new Client();
-    var ethClient = new Web3Client(apiUrl, httpClient);
+    final httpClient = Client();
+    final ethClient = Web3Client(apiUrl, httpClient);
 
-    var privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
+    final privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
 
     await ethClient.sendTransaction(
       privateEthCredentials,

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/cosmos_wallet.dart';
 
 abstract class BaseWalletApi {
   void importWallet(

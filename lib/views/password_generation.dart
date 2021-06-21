@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_encryptor.dart';
 import 'package:flutter_app/views/wallet_list.dart';
@@ -53,7 +52,6 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.arrow_forward),
         onPressed: widget.mnemonic != null
             ? () async {
                 await encryptMnemonic(context);
@@ -76,6 +74,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                   ),
                 );
               },
+        child: const Icon(Icons.arrow_forward),
       ),
     );
   }

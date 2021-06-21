@@ -5,9 +5,9 @@ class EthWallet extends BaseWalletDetails {
   Wallet wallet;
 
   EthWallet({
-    required walletAddress,
-    required walletAlias,
-    walletType = WalletType.Eth,
+    required String walletAddress,
+    required String walletAlias,
+    WalletType walletType = WalletType.Eth,
     required this.wallet,
   }) : super(
           walletAlias: walletAlias,
