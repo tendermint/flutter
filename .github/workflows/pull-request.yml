@@ -21,9 +21,9 @@ jobs:
 
     - name: tests
       run: flutter test
-
-    - name: build iOS app
-      run: flutter build ios
+# TODO reenable it when proper development team is set up in app store connect
+#    - name: build iOS app
+#      run: flutter build ios
 
     - name: build Android app
       run: flutter build appbundle
