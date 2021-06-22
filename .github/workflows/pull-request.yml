@@ -1,0 +1,29 @@
+name: Pull Request Worfklow
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.2.2'
+    - name: pub get
+      run: flutter pub get
+
+    - name: check codestyle
+      run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+
+    - name: dart analysis
+      run: flutter analyze
+
+    - name: tests
+      run: flutter test
+# TODO reenable it when proper development team is set up in app store connect
+#    - name: build iOS app
+#      run: flutter build ios
+
+    - name: build Android app
+      run: flutter build appbundle
