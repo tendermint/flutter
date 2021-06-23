@@ -1,3 +1,4 @@
+import 'package:flutter_app/models/wallet_type.dart';
 import 'package:sacco/wallet.dart';
 import 'package:flutter_app/models/wallet_details.dart';
 

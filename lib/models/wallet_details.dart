@@ -1,3 +1,5 @@
+import 'package:flutter_app/models/wallet_type.dart';
+
 class BaseWalletDetails {
   final String walletAddress;
   final String walletAlias;
@@ -9,5 +11,3 @@ class BaseWalletDetails {
     required this.walletAddress,
   });
 }
-
-enum WalletType { Eth, Cosmos }
