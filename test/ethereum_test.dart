@@ -18,8 +18,7 @@ void main() {
       debugPrint(wallet.toJson());
 
 //      const apiUrl = "HTTP://127.0.0.1:7545"; // localhost
-      const apiUrl =
-          "https://ropsten.infura.io/v3/96ac5dcb92d545b6a7ffc3d8af21fde0"; // publicly hosted
+      const apiUrl = "https://ropsten.infura.io/v3/96ac5dcb92d545b6a7ffc3d8af21fde0"; // publicly hosted
 
       final httpClient = Client();
       final ethClient = Web3Client(apiUrl, httpClient);
@@ -34,8 +33,7 @@ void main() {
       await ethClient.sendTransaction(
         privateEthCredentials,
         Transaction(
-          to: EthereumAddress.fromHex(
-              '0xf44b768c75438a4e9e0c461d49832799f77245a8'),
+          to: EthereumAddress.fromHex('0xf44b768c75438a4e9e0c461d49832799f77245a8'),
           gasPrice: EtherAmount.inWei(BigInt.one),
           maxGas: 100000,
           value: EtherAmount.fromUnitAndValue(EtherUnit.ether, 10),

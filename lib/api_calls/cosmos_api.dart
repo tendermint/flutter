@@ -15,8 +15,7 @@ import '../global.dart';
 
 class CosmosApi extends BaseWalletApi {
   @override
-  void importWallet(
-      {required String mnemonicString, required String walletAlias}) {
+  void importWallet({required String mnemonicString, required String walletAlias}) {
     final mnemonic = mnemonicString.split(' ');
     final wallet = sacco.Wallet.derive(mnemonic, baseEnv.networkInfo);
 
@@ -46,16 +45,13 @@ class CosmosApi extends BaseWalletApi {
   }) async {
     final message = StdMsg(
       type: 'cosmos-sdk/MsgSend',
-      value:
-          Transaction(fromAddress: fromAddress, toAddress: toAddress, amount: [
+      value: Transaction(fromAddress: fromAddress, toAddress: toAddress, amount: [
         Amount(denom: denom, amount: amount),
       ]).toJson(),
     );
     final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
-    final wallet = (globalCache.wallets
-                .firstWhere((element) => element.walletAddress == fromAddress)
-            as CosmosWallet)
-        .wallet;
+    final wallet =
+        (globalCache.wallets.firstWhere((element) => element.walletAddress == fromAddress) as CosmosWallet).wallet;
     final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
 
     final result = await TxSender.broadcastStdTx(

@@ -42,19 +42,14 @@ class _WalletListingPageState extends State<WalletListingPage> {
                               Text(e.walletAlias.toString()),
                               Container(
                                 margin: const EdgeInsets.only(left: 8),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 2),
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                 decoration: BoxDecoration(
-                                    color: e.walletType == WalletType.Eth
-                                        ? Colors.deepPurple
-                                        : Colors.blueGrey,
+                                    color: e.walletType == WalletType.Eth ? Colors.deepPurple : Colors.blueGrey,
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Text(
                                   e.walletType.toString().split('.')[1],
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
+                                  style:
+                                      const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
                                 ),
                               )
                             ],

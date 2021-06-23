@@ -29,26 +29,19 @@ class EthereumApi extends BaseWalletApi {
   }
 
   @override
-  void importWallet(
-      {required String mnemonicString, required String walletAlias}) {
+  void importWallet({required String mnemonicString, required String walletAlias}) {
     final rng = Random.secure();
     privateKey = Web3.privateKeyFromMnemonic(mnemonicString);
     final privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
     final wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
     globalCache.wallets.add(
-      EthWallet(
-          walletAddress: wallet.privateKey.address.hex,
-          walletAlias: walletAlias,
-          wallet: wallet),
+      EthWallet(walletAddress: wallet.privateKey.address.hex, walletAlias: walletAlias, wallet: wallet),
     );
   }
 
   @override
   Future<void> sendAmount(
-      {required String fromAddress,
-      required String toAddress,
-      required String denom,
-      required String amount}) async {
+      {required String fromAddress, required String toAddress, required String denom, required String amount}) async {
     final apiUrl = baseEnv.baseEthUrl; //Replace with your API
 
     final httpClient = Client();

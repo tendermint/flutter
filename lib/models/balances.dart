@@ -13,8 +13,7 @@ class BalancesModel {
         });
       }
     }
-    pagination =
-        Pagination.fromJson(json['pagination'] as Map<String, dynamic>);
+    pagination = Pagination.fromJson(json['pagination'] as Map<String, dynamic>);
   }
 
   Map<String, dynamic> toJson() {

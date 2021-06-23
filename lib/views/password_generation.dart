@@ -57,8 +57,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                 await encryptMnemonic(context);
               }
             : () async {
-                final mnemonic = await MnemonicEncryptor.decryptMnemonic(
-                    passwordController.text);
+                final mnemonic = await MnemonicEncryptor.decryptMnemonic(passwordController.text);
                 cosmosApi.importWallet(
                   mnemonicString: mnemonic,
                   walletAlias: 'First wallet',
@@ -80,8 +79,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
   }
 
   Future<void> encryptMnemonic(BuildContext context) async {
-    await MnemonicEncryptor.encryptMnemonic(
-        widget.mnemonic!, passwordController.text);
+    await MnemonicEncryptor.encryptMnemonic(widget.mnemonic!, passwordController.text);
     cosmosApi.importWallet(
       mnemonicString: widget.mnemonic!,
       walletAlias: 'First wallet',

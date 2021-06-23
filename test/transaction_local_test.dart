@@ -7,11 +7,9 @@ void main() {
   final api = CosmosApi();
 
   const port = String.fromEnvironment('PORT', defaultValue: '1317');
-  const lcdUrl =
-      String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+  const lcdUrl = String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
 
-  const ethUrl =
-      String.fromEnvironment('BASE_ETH_URL', defaultValue: 'localhost');
+  const ethUrl = String.fromEnvironment('BASE_ETH_URL', defaultValue: 'localhost');
 
   baseEnv.setEnv(lcdUrl, port, ethUrl);
 
