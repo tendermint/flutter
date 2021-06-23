@@ -1,4 +1,4 @@
-import 'package:flutter_app/models/cosmos_wallet.dart';
+import 'package:flutter_app/models/wallet_details.dart';
 import 'package:web3dart/web3dart.dart';
 
 class EthWallet extends BaseWalletDetails {

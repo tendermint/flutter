@@ -6,7 +6,7 @@ import 'package:flutter_app/models/eth_wallet.dart';
 import 'package:http/http.dart';
 import 'package:wallet_core/wallet_core.dart';
 
-class EthApi extends BaseWalletApi {
+class EthereumApi extends BaseWalletApi {
   String? privateKey;
 
   @override

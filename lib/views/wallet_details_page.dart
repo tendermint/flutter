@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api_calls/base_wallet_api.dart';
-import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/cosmos_wallet.dart';
+import 'package:flutter_app/models/wallet_details.dart';
 
 class WalletDetailsPage extends StatefulWidget {
   final BaseWalletDetails wallet;

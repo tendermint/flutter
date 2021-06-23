@@ -1,6 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/cosmos_wallet.dart';
+import 'package:flutter_app/models/wallet_details.dart';
 import 'package:flutter_app/views/wallet_details_page.dart';
 
 import '../global.dart';

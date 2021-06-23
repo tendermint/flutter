@@ -1,11 +1,11 @@
 import 'package:flutter_app/api_calls/cosmos_api.dart';
-import 'package:flutter_app/api_calls/eth_api.dart';
+import 'package:flutter_app/api_calls/ethereum_api.dart';
 import 'package:http/http.dart';
 import 'package:sacco/network_info.dart';
+import 'package:flutter_app/models/wallet_details.dart';
 
 import 'api_calls/cosmos_api.dart';
-import 'api_calls/eth_api.dart';
-import 'models/cosmos_wallet.dart';
+import 'api_calls/ethereum_api.dart';
 
 final Client client = Client();
 
@@ -45,9 +45,7 @@ class BaseEnv {
 final BaseEnv baseEnv = BaseEnv();
 
 final CosmosApi cosmosApi = CosmosApi();
-final EthApi ethApi = EthApi();
-
-
+final EthereumApi ethApi = EthereumApi();
 
 abstract class SharedPreferencesKeys {
   static const isWalletCreated = 'IS_APP_INSTALLED';

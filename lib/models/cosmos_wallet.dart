@@ -1,4 +1,5 @@
 import 'package:sacco/wallet.dart';
+import 'package:flutter_app/models/wallet_details.dart';
 
 class CosmosWallet extends BaseWalletDetails {
   Wallet wallet;
@@ -14,17 +15,3 @@ class CosmosWallet extends BaseWalletDetails {
           walletType: walletType,
         );
 }
-
-class BaseWalletDetails {
-  String walletAddress;
-  String walletAlias;
-  WalletType walletType;
-
-  BaseWalletDetails({
-    required this.walletType,
-    required this.walletAlias,
-    required this.walletAddress,
-  });
-}
-
-enum WalletType { Eth, Cosmos }
