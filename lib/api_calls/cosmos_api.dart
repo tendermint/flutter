@@ -23,7 +23,7 @@ class CosmosApi extends BaseWalletApi {
     globalCache.wallets.add(
       CosmosWallet(
         wallet: wallet,
-        baseWalletDetails: BaseWalletDetails(
+        baseWalletDetails: WalletDetails(
           walletAddress: wallet.bech32Address,
           walletAlias: walletAlias,
         ),

@@ -4,7 +4,7 @@ import 'package:web3dart/web3dart.dart';
 
 class EthereumWallet implements EmerisWallet {
   final Wallet wallet;
-  final BaseWalletDetails baseWalletDetails;
+  final WalletDetails baseWalletDetails;
 
   EthereumWallet({
     required this.baseWalletDetails,
@@ -12,7 +12,7 @@ class EthereumWallet implements EmerisWallet {
   });
 
   @override
-  BaseWalletDetails get walletDetails => baseWalletDetails;
+  WalletDetails get walletDetails => baseWalletDetails;
 
   @override
   WalletType get walletType => WalletType.Eth;

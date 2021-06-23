@@ -38,7 +38,7 @@ class EthereumApi extends BaseWalletApi {
     globalCache.wallets.add(
       EthereumWallet(
         wallet: wallet,
-        baseWalletDetails: BaseWalletDetails(
+        baseWalletDetails: WalletDetails(
           walletAddress: wallet.privateKey.address.hex,
           walletAlias: walletAlias,
         ),

@@ -1,17 +1,17 @@
 import 'package:flutter_app/models/wallet_type.dart';
 
-class BaseWalletDetails {
+class WalletDetails {
   final String walletAddress;
   final String walletAlias;
 
-  const BaseWalletDetails({
+  const WalletDetails({
     required this.walletAlias,
     required this.walletAddress,
   });
 }
 
 abstract class EmerisWallet {
-  BaseWalletDetails get walletDetails;
+  WalletDetails get walletDetails;
 
   WalletType get walletType;
 }
