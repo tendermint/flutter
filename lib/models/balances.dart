@@ -8,8 +8,8 @@ class BalancesModel {
     balances = <Balances>[];
     if (json['balances'] != null) {
       if ((json['balances'] as List).isNotEmpty) {
-        json['balances'].forEach((Map<String, dynamic> v) {
-          balances.add(Balances.fromJson(v));
+        json['balances'].forEach((v) {
+          balances.add(Balances.fromJson(v as Map<String, dynamic>));
         });
       }
     }
