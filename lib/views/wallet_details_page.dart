@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api_calls/base_wallet_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/wallet_details.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
 import 'package:flutter_app/models/wallet_type.dart';
 
 class WalletDetailsPage extends StatefulWidget {
-  final BaseWalletDetails wallet;
+  final EmerisWallet wallet;
   final String alias;
 
   const WalletDetailsPage({
@@ -52,7 +52,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         children: [
           ListTile(
             title: const Text('Wallet address'),
-            subtitle: Text(widget.wallet.walletAddress),
+            subtitle: Text(widget.wallet.walletDetails.walletAddress),
           ),
           const Divider(),
           const Padding(padding: EdgeInsets.only(top: 16)),
@@ -191,7 +191,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         denom: e.denom,
         amount: _amount,
         toAddress: _toAddress,
-        fromAddress: widget.wallet.walletAddress,
+        fromAddress: widget.wallet.walletDetails.walletAddress,
       );
       await Future.delayed(const Duration(seconds: 2));
       _fetchWalletDetails();
@@ -208,7 +208,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     _isLoading = true;
     setState(() {});
     final api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
-    final response = await api.getWalletBalances(widget.wallet.walletAddress);
+    final response = await api.getWalletBalances(widget.wallet.walletDetails.walletAddress);
     model = response;
     _isLoading = false;
     setState(() {});

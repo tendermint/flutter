@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_app/models/balances.dart';
 import 'package:flutter_app/models/transaction.dart';
 import 'package:flutter_app/models/cosmos_wallet.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
 import 'package:sacco/models/transactions/std_msg.dart';
 import 'package:sacco/tx_builder.dart';
 import 'package:sacco/tx_sender.dart';
@@ -21,9 +22,11 @@ class CosmosApi extends BaseWalletApi {
 
     globalCache.wallets.add(
       CosmosWallet(
-        walletAddress: wallet.bech32Address,
-        walletAlias: walletAlias,
         wallet: wallet,
+        baseWalletDetails: BaseWalletDetails(
+          walletAddress: wallet.bech32Address,
+          walletAlias: walletAlias,
+        ),
       ),
     );
   }
@@ -50,8 +53,10 @@ class CosmosApi extends BaseWalletApi {
       ]).toJson(),
     );
     final stdTx = TxBuilder.buildStdTx(stdMsgs: [message]);
-    final wallet =
-        (globalCache.wallets.firstWhere((element) => element.walletAddress == fromAddress) as CosmosWallet).wallet;
+    final wallet = (globalCache.wallets
+                .firstWhere((element) => (element as CosmosWallet).walletDetails.walletAddress == fromAddress)
+            as CosmosWallet)
+        .wallet;
     final signedStdTx = await TxSigner.signStdTx(wallet: wallet, stdTx: stdTx);
 
     final result = await TxSender.broadcastStdTx(

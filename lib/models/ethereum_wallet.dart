@@ -1,12 +1,12 @@
-import 'package:flutter_app/models/wallet_type.dart';
-import 'package:sacco/wallet.dart';
 import 'package:flutter_app/models/emeris_wallet.dart';
+import 'package:flutter_app/models/wallet_type.dart';
+import 'package:web3dart/web3dart.dart';
 
-class CosmosWallet implements EmerisWallet {
+class EthereumWallet implements EmerisWallet {
   final Wallet wallet;
   final BaseWalletDetails baseWalletDetails;
 
-  CosmosWallet({
+  EthereumWallet({
     required this.baseWalletDetails,
     required this.wallet,
   });
@@ -15,5 +15,5 @@ class CosmosWallet implements EmerisWallet {
   BaseWalletDetails get walletDetails => baseWalletDetails;
 
   @override
-  WalletType get walletType => WalletType.Cosmos;
+  WalletType get walletType => WalletType.Eth;
 }

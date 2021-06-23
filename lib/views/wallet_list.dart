@@ -1,6 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/wallet_details.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
 import 'package:flutter_app/models/wallet_type.dart';
 import 'package:flutter_app/views/wallet_details_page.dart';
 
@@ -12,7 +12,7 @@ class WalletListingPage extends StatefulWidget {
 }
 
 class _WalletListingPageState extends State<WalletListingPage> {
-  List<BaseWalletDetails> list = [];
+  List<EmerisWallet> list = [];
   String _mnemonic = '';
   String _alias = '';
 
@@ -40,7 +40,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                         child: ListTile(
                           title: Row(
                             children: [
-                              Text(e.walletAlias.toString()),
+                              Text(e.walletDetails.walletAlias.toString()),
                               Container(
                                 margin: const EdgeInsets.only(left: 8),
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -55,14 +55,14 @@ class _WalletListingPageState extends State<WalletListingPage> {
                               )
                             ],
                           ),
-                          subtitle: Text(e.walletAddress),
+                          subtitle: Text(e.walletDetails.walletAddress),
                           isThreeLine: true,
                           trailing: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
                                 onTap: () {
-                                  FlutterClipboard.copy(e.walletAddress);
+                                  FlutterClipboard.copy(e.walletDetails.walletAddress);
                                 },
                                 child: const Icon(Icons.copy),
                               ),
@@ -73,7 +73,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                               MaterialPageRoute(
                                 builder: (context) => WalletDetailsPage(
                                   wallet: e,
-                                  alias: e.walletAlias,
+                                  alias: e.walletDetails.walletAlias,
                                 ),
                               ),
                             );

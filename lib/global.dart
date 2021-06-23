@@ -2,7 +2,7 @@ import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/api_calls/ethereum_api.dart';
 import 'package:http/http.dart';
 import 'package:sacco/network_info.dart';
-import 'package:flutter_app/models/wallet_details.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
 
 import 'api_calls/cosmos_api.dart';
 import 'api_calls/ethereum_api.dart';
@@ -10,7 +10,7 @@ import 'api_calls/ethereum_api.dart';
 final Client client = Client();
 
 class GlobalCache {
-  List<BaseWalletDetails> wallets;
+  List<EmerisWallet> wallets;
 
   GlobalCache({required this.wallets});
 }

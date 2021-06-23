@@ -2,7 +2,8 @@ import 'dart:math';
 import 'package:flutter_app/api_calls/base_wallet_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/eth_wallet.dart';
+import 'package:flutter_app/models/ethereum_wallet.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
 import 'package:http/http.dart';
 import 'package:wallet_core/wallet_core.dart';
 
@@ -35,7 +36,13 @@ class EthereumApi extends BaseWalletApi {
     final privateEthCredentials = EthPrivateKey.fromHex(privateKey!);
     final wallet = Wallet.createNew(privateEthCredentials, 'Hello', rng);
     globalCache.wallets.add(
-      EthWallet(walletAddress: wallet.privateKey.address.hex, walletAlias: walletAlias, wallet: wallet),
+      EthereumWallet(
+        wallet: wallet,
+        baseWalletDetails: BaseWalletDetails(
+          walletAddress: wallet.privateKey.address.hex,
+          walletAlias: walletAlias,
+        ),
+      ),
     );
   }
 
