@@ -8,10 +8,10 @@ void main() {
   final api = CosmosApi();
   final faucetApi = FaucetApi();
 
-  const port = String.fromEnvironment('PORT', defaultValue: '1317');
-  const lcdUrl = String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+  const port = '443';
+  const lcdUrl = 'api.testnet.cosmos.network';
 
-  const ethUrl = String.fromEnvironment('BASE_ETH_URL', defaultValue: 'localhost');
+  const ethUrl = 'https://ropsten.infura.io/v3/96ac5dcb92d545b6a7ffc3d8af21fde0';
 
   baseEnv.setEnv(lcdUrl, port, ethUrl);
 

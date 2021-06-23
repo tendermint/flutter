@@ -27,50 +27,70 @@ void main() {
         walletAlias: 'Bob');
   });
 
-  test('Get Alice wallet balances', () async {
-    final address = globalCache.wallets[0].walletAddress;
-    final balances = await api.getWalletBalances(address);
-    debugPrint(globalCache.wallets[0].walletAlias);
+  test(
+    'Get Alice wallet balances',
+    () async {
+      final address = globalCache.wallets[0].walletAddress;
+      final balances = await api.getWalletBalances(address);
+      debugPrint(globalCache.wallets[0].walletAlias);
 
-    for (final element in balances.balances) {
-      debugPrint('${element.denom} ${element.amount}');
-    }
-  });
+      for (final element in balances.balances) {
+        debugPrint('${element.denom} ${element.amount}');
+      }
+    },
+    skip: true,
+  );
 
-  test('Get Bob wallet balances', () async {
-    final address = globalCache.wallets[1].walletAddress;
-    final balances = await api.getWalletBalances(address);
-    debugPrint(globalCache.wallets[1].walletAlias);
+  test(
+    'Get Bob wallet balances',
+    () async {
+      final address = globalCache.wallets[1].walletAddress;
+      final balances = await api.getWalletBalances(address);
+      debugPrint(globalCache.wallets[1].walletAlias);
 
-    for (final element in balances.balances) {
-      debugPrint('${element.denom} ${element.amount}');
-    }
-  });
+      for (final element in balances.balances) {
+        debugPrint('${element.denom} ${element.amount}');
+      }
+    },
+    skip: true,
+  );
 
-  test('Make a transaction from Alice to Bob', () async {
-    await api.sendAmount(
-      fromAddress: globalCache.wallets[0].walletAddress,
-      toAddress: globalCache.wallets[1].walletAddress,
-      amount: '10',
-      denom: 'token',
-    );
-  });
+  test(
+    'Make a transaction from Alice to Bob',
+    () async {
+      await api.sendAmount(
+        fromAddress: globalCache.wallets[0].walletAddress,
+        toAddress: globalCache.wallets[1].walletAddress,
+        amount: '10',
+        denom: 'token',
+      );
+    },
+    skip: true,
+  );
 
-  test('Get Alice wallet balances', () async {
-    final address = globalCache.wallets[0].walletAddress;
-    final balances = await api.getWalletBalances(address);
+  test(
+    'Get Alice wallet balances',
+    () async {
+      final address = globalCache.wallets[0].walletAddress;
+      final balances = await api.getWalletBalances(address);
 
-    for (final element in balances.balances) {
-      debugPrint('${element.denom} ${element.amount}');
-    }
-  });
+      for (final element in balances.balances) {
+        debugPrint('${element.denom} ${element.amount}');
+      }
+    },
+    skip: true,
+  );
 
-  test('Get Bob wallet balances', () async {
-    final address = globalCache.wallets[1].walletAddress;
-    final balances = await api.getWalletBalances(address);
+  test(
+    'Get Bob wallet balances',
+    () async {
+      final address = globalCache.wallets[1].walletAddress;
+      final balances = await api.getWalletBalances(address);
 
-    for (final element in balances.balances) {
-      debugPrint('${element.denom} ${element.amount}');
-    }
-  });
+      for (final element in balances.balances) {
+        debugPrint('${element.denom} ${element.amount}');
+      }
+    },
+    skip: true,
+  );
 }
