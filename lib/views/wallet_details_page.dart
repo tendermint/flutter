@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
+import 'package:flutter_app/api_calls/base_wallet_api.dart';
+import 'package:flutter_app/global.dart';
 import 'package:flutter_app/models/balances.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
+import 'package:flutter_app/models/wallet_type.dart';
 
 class WalletDetailsPage extends StatefulWidget {
-  final String walletAddress;
+  final EmerisWallet wallet;
   final String alias;
 
   const WalletDetailsPage({
-    required this.walletAddress,
+    required this.wallet,
     required this.alias,
   });
 
@@ -21,7 +24,6 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   bool _isLoading = false;
   String _amount = '';
   String _toAddress = '';
-  WalletApi api = WalletApi();
 
   List<Widget> icons = const [
     Icon(Icons.wifi_tethering),
@@ -31,9 +33,10 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
 
   String _errorText = '';
 
+  BaseWalletApi? api;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchWalletDetails();
   }
@@ -49,16 +52,31 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         children: [
           ListTile(
             title: const Text('Wallet address'),
-            subtitle: Text(widget.walletAddress),
+            subtitle: Text(widget.wallet.walletDetails.walletAddress),
           ),
           const Divider(),
           const Padding(padding: EdgeInsets.only(top: 16)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            child: Text(
-              'Balances',
-              textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.headline6,
+            child: Row(
+              children: [
+                Text(
+                  'Balances',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                      color: widget.wallet.walletType == WalletType.Eth ? Colors.deepPurple : Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    widget.wallet.walletType.toString().split('.')[1],
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                )
+              ],
             ),
           ),
           if (_isLoading)
@@ -168,11 +186,12 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     _isSendMoneyLoading = true;
     setState(() {});
     try {
-      await api.sendAmount(
+      api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
+      await api!.sendAmount(
         denom: e.denom,
         amount: _amount,
         toAddress: _toAddress,
-        fromAddress: widget.walletAddress,
+        fromAddress: widget.wallet.walletDetails.walletAddress,
       );
       await Future.delayed(const Duration(seconds: 2));
       _fetchWalletDetails();
@@ -188,8 +207,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   Future<void> _fetchWalletDetails() async {
     _isLoading = true;
     setState(() {});
-    final api = WalletApi();
-    final response = await api.getWalletBalances(widget.walletAddress);
+    final api = widget.wallet.walletType == WalletType.Cosmos ? cosmosApi : ethApi;
+    final response = await api.getWalletBalances(widget.wallet.walletDetails.walletAddress);
     model = response;
     _isLoading = false;
     setState(() {});

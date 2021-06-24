@@ -1,7 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
-import 'package:flutter_app/models/wallet_details.dart';
+import 'package:flutter_app/models/emeris_wallet.dart';
+import 'package:flutter_app/models/wallet_type.dart';
 import 'package:flutter_app/views/wallet_details_page.dart';
 
 import '../global.dart';
@@ -12,10 +12,9 @@ class WalletListingPage extends StatefulWidget {
 }
 
 class _WalletListingPageState extends State<WalletListingPage> {
-  List<WalletDetails> list = [];
+  List<EmerisWallet> list = [];
   String _mnemonic = '';
   String _alias = '';
-  WalletApi api = WalletApi();
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +38,31 @@ class _WalletListingPageState extends State<WalletListingPage> {
                       (e) => Card(
                         elevation: 4,
                         child: ListTile(
-                          title: Text(e.walletAlias.toString()),
-                          subtitle: Text(e.walletAddress),
+                          title: Row(
+                            children: [
+                              Text(e.walletDetails.walletAlias.toString()),
+                              Container(
+                                margin: const EdgeInsets.only(left: 8),
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                decoration: BoxDecoration(
+                                    color: e.walletType == WalletType.Eth ? Colors.deepPurple : Colors.blueGrey,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Text(
+                                  e.walletType.toString().split('.')[1],
+                                  style:
+                                      const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                              )
+                            ],
+                          ),
+                          subtitle: Text(e.walletDetails.walletAddress),
                           isThreeLine: true,
                           trailing: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
                                 onTap: () {
-                                  FlutterClipboard.copy(e.walletAddress);
+                                  FlutterClipboard.copy(e.walletDetails.walletAddress);
                                 },
                                 child: const Icon(Icons.copy),
                               ),
@@ -57,8 +72,8 @@ class _WalletListingPageState extends State<WalletListingPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => WalletDetailsPage(
-                                  walletAddress: e.walletAddress,
-                                  alias: e.walletAlias,
+                                  wallet: e,
+                                  alias: e.walletDetails.walletAlias,
                                 ),
                               ),
                             );
@@ -101,7 +116,7 @@ class _WalletListingPageState extends State<WalletListingPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      api.importWallet(
+                      cosmosApi.importWallet(
                         mnemonicString: _mnemonic,
                         walletAlias: _alias,
                       );

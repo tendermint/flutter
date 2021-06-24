@@ -1,18 +1,19 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app/api_calls/cosmos_api.dart';
 import 'package:flutter_app/api_calls/faucet_api.dart';
-import 'package:flutter_app/api_calls/wallet_api.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final api = WalletApi();
+  final api = CosmosApi();
   final faucetApi = FaucetApi();
 
-  const port = String.fromEnvironment('PORT', defaultValue: '1317');
-  // ignore: prefer_const_declarations
-  const lcdUrl = String.fromEnvironment('BASE_LCD_URL', defaultValue: 'localhost');
+  const port = '443';
+  const lcdUrl = 'api.testnet.cosmos.network';
 
-  baseEnv.setEnv(lcdUrl, port);
+  const ethUrl = 'https://ropsten.infura.io/v3/96ac5dcb92d545b6a7ffc3d8af21fde0';
+
+  baseEnv.setEnv(lcdUrl, port, ethUrl);
 
   test('Import Alice wallet', () {
     api.importWallet(
@@ -30,9 +31,9 @@ void main() {
 
   test('Get first wallet balances', () async {
     final wallet = globalCache.wallets[0];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
     }
@@ -40,9 +41,9 @@ void main() {
 
   test('Get second wallet balances', () async {
     final wallet = globalCache.wallets[1];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
 
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
@@ -51,23 +52,23 @@ void main() {
 
   test('Get free tokens for Alice', () async {
     final wallet = globalCache.wallets[0];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     debugPrint('Getting free tokens for Alice');
     await faucetApi.getFreeTokens(address);
   });
 
   test('Get free tokens for Bob', () async {
     final wallet = globalCache.wallets[1];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     debugPrint('Getting free tokens for Bob');
     await faucetApi.getFreeTokens(address);
   });
 
   test('Get first wallet balances', () async {
     final wallet = globalCache.wallets[0];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
 
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
@@ -76,9 +77,9 @@ void main() {
 
   test('Get second wallet balances', () async {
     final wallet = globalCache.wallets[1];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
 
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
@@ -87,8 +88,8 @@ void main() {
 
   test('Make a transaction from Alice to Bob', () async {
     await api.sendAmount(
-      fromAddress: globalCache.wallets[0].walletAddress,
-      toAddress: globalCache.wallets[1].walletAddress,
+      fromAddress: globalCache.wallets[0].walletDetails.walletAddress,
+      toAddress: globalCache.wallets[1].walletDetails.walletAddress,
       amount: '10',
       denom: 'uphoton',
     );
@@ -96,9 +97,9 @@ void main() {
 
   test('Get first wallet balances', () async {
     final wallet = globalCache.wallets[0];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
     }
@@ -106,9 +107,9 @@ void main() {
 
   test('Get second wallet balances', () async {
     final wallet = globalCache.wallets[1];
-    final address = wallet.walletAddress;
+    final address = wallet.walletDetails.walletAddress;
     final balances = await api.getWalletBalances(address);
-    debugPrint(wallet.walletAlias);
+    debugPrint(wallet.walletDetails.walletAlias);
 
     for (final element in balances.balances) {
       debugPrint('${element.denom} ${element.amount}');
