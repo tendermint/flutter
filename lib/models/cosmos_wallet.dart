@@ -4,15 +4,13 @@ import 'package:flutter_app/models/emeris_wallet.dart';
 
 class CosmosWallet implements EmerisWallet {
   final Wallet wallet;
-  final WalletDetails baseWalletDetails;
+  @override
+  final WalletDetails walletDetails;
 
   CosmosWallet({
-    required this.baseWalletDetails,
+    required this.walletDetails,
     required this.wallet,
   });
-
-  @override
-  WalletDetails get walletDetails => baseWalletDetails;
 
   @override
   WalletType get walletType => WalletType.Cosmos;
