@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api_calls/base_wallet_api.dart';
+import 'package:flutter_app/data/api_calls/base_wallet_api.dart';
 import 'package:flutter_app/global.dart';
-import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/emeris_wallet.dart';
-import 'package:flutter_app/models/wallet_type.dart';
+import 'package:flutter_app/data/model/balances.dart';
+import 'package:flutter_app/data/model/emeris_wallet.dart';
+import 'package:flutter_app/data/model/wallet_type.dart';
 
 class WalletDetailsPage extends StatefulWidget {
   final EmerisWallet wallet;

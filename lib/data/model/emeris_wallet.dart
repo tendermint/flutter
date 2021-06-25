@@ -1,4 +1,4 @@
-import 'package:flutter_app/models/wallet_type.dart';
+import 'package:flutter_app/data/model/wallet_type.dart';
 
 class WalletDetails {
   final String walletAddress;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../global.dart';
+import 'package:flutter_app/global.dart';
 
 class FaucetApi {
   Future<void> getFreeTokens(String address) async {
