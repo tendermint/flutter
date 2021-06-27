@@ -37,7 +37,8 @@ analyzer:
     non_constant_identifier_names: ignore
     only_throw_errors: error
     exhaustive_cases: error
-
+    always_use_package_imports: error
+    missing_enum_constant_in_switch: error
 
 linter:
   rules:
@@ -64,8 +65,7 @@ linter:
     - unnecessary_parenthesis
     - unnecessary_overrides
     - use_rethrow_when_possible
-
-
+    - always_use_package_imports
     - avoid_init_to_null
     - avoid_null_checks_in_equality_operators
     - avoid_return_types_on_setters
