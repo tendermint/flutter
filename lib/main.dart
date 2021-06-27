@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_widget.dart';
+import 'package:flutter_app/dependency_injection/app_component.dart';
 import 'package:flutter_app/global.dart';
-import 'package:flutter_app/views/mnemonic_onboarding.dart';
 
 void main() {
   const port = String.fromEnvironment('PORT', defaultValue: '1317');
@@ -9,22 +10,13 @@ void main() {
   const ethUrl = String.fromEnvironment('BASE_ETH_URL', defaultValue: 'HTTP://127.0.0.1:7545');
 
   baseEnv.setEnv(lcdUrl, port, ethUrl);
-  runApp(MyApp());
+  configureDependencies();
+  runApp(EmerisApp());
 }
 
-class MyApp extends StatelessWidget {
+class EmerisApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-      ),
-      home: MnemonicOnboarding(),
-    );
+    return const AppWidget();
   }
 }

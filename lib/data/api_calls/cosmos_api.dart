@@ -1,18 +1,17 @@
 import 'dart:convert';
-import 'package:flutter_app/api_calls/base_wallet_api.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_app/models/balances.dart';
-import 'package:flutter_app/models/transaction.dart';
-import 'package:flutter_app/models/cosmos_wallet.dart';
-import 'package:flutter_app/models/emeris_wallet.dart';
+import 'package:flutter_app/data/api_calls/base_wallet_api.dart';
+import 'package:flutter_app/global.dart';
+import 'package:flutter_app/data/model/balances.dart';
+import 'package:flutter_app/data/model/cosmos_wallet.dart';
+import 'package:flutter_app/data/model/emeris_wallet.dart';
+import 'package:flutter_app/data/model/transaction.dart';
 import 'package:sacco/models/transactions/std_msg.dart';
 import 'package:sacco/tx_builder.dart';
 import 'package:sacco/tx_sender.dart';
 import 'package:sacco/tx_signer.dart';
 import 'package:sacco/wallet.dart' as sacco;
-
-import '../global.dart';
 
 class CosmosApi extends BaseWalletApi {
   @override

@@ -1,11 +1,8 @@
-import 'package:flutter_app/api_calls/cosmos_api.dart';
-import 'package:flutter_app/api_calls/ethereum_api.dart';
+import 'package:flutter_app/data/api_calls/cosmos_api.dart';
+import 'package:flutter_app/data/api_calls/ethereum_api.dart';
+import 'package:flutter_app/data/model/emeris_wallet.dart';
 import 'package:http/http.dart';
 import 'package:sacco/network_info.dart';
-import 'package:flutter_app/models/emeris_wallet.dart';
-
-import 'api_calls/cosmos_api.dart';
-import 'api_calls/ethereum_api.dart';
 
 final Client client = Client();
 

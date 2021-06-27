@@ -1,4 +1,4 @@
-import 'package:flutter_app/models/balances.dart';
+import 'package:flutter_app/data/model/balances.dart';
 
 abstract class BaseWalletApi {
   void importWallet({required String mnemonicString, required String walletAlias});
