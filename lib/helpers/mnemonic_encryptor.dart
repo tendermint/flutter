@@ -2,10 +2,9 @@ import 'dart:typed_data';
 
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:flutter_app/global.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../global.dart';
 
 abstract class MnemonicEncryptor {
   static Future<void> encryptMnemonic(String mnemonic, String password) async {

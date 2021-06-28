@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/navigation/app_navigator.dart';
+import 'package:flutter_app/utils/app_theme.dart';
 import 'package:flutter_app/views/mnemonic_onboarding.dart';
 
 class AppWidget extends StatelessWidget {
@@ -9,13 +11,9 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-      ),
+      theme: AppTheme.buildAppTheme(),
       home: MnemonicOnboarding(),
+      navigatorKey: AppNavigator.navigatorKey,
     );
   }
 }
