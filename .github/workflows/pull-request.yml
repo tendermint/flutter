@@ -2,14 +2,16 @@ name: Pull Request Worfklow
 
 on: [pull_request]
 
+env:
+  FLUTTER_VERSION: '2.2.2'
 jobs:
-  build:
-    runs-on: macos-latest
+  test:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.2'
+        flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: pub get
       run: flutter pub get
 
@@ -21,9 +23,23 @@ jobs:
 
     - name: tests
       run: flutter test
-# TODO reenable it when proper development team is set up in app store connect
-#    - name: build iOS app
-#      run: flutter build ios
 
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: build Android app
       run: flutter build appbundle
+# TODO reenable it when proper development team is set up in app store connect
+#  build-ios:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: subosito/flutter-action@v1
+#      with:
+#        flutter-version: ${{ env.FLUTTER_VERSION }}
+#    - name: build Android app
+#      run: flutter build appbundle
