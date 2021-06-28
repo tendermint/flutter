@@ -3,6 +3,7 @@ import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_encryptor.dart';
 import 'package:flutter_app/presentation/wallets_list/wallets_list_initial_params.dart';
 import 'package:flutter_app/ui/pages/wallets_list/wallets_list_page.dart';
+import 'package:flutter_app/utils/strings.dart';
 
 class PasswordGenerationPage extends StatefulWidget {
   final String? mnemonic;
@@ -24,7 +25,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Password generation'),
+        title: Text(strings.appTitle),
       ),
       body: Center(
         child: Column(

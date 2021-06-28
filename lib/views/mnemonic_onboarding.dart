@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_generator.dart';
+import 'package:flutter_app/utils/strings.dart';
 import 'package:flutter_app/views/password_generation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +21,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
 
   @override
   Widget build(BuildContext context) {
+    initializeAppLocalizations(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
