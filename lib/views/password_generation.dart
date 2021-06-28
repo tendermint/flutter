@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_encryptor.dart';
-import 'package:flutter_app/views/wallet_list.dart';
+import 'package:flutter_app/presentation/wallets_list/wallets_list_initial_params.dart';
+import 'package:flutter_app/ui/pages/wallets_list/wallets_list_page.dart';
 
 class PasswordGenerationPage extends StatefulWidget {
   final String? mnemonic;
@@ -69,7 +70,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                 );
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => WalletListingPage(),
+                    builder: (context) => const WalletsListPage(initialParams: WalletsListInitialParams()),
                   ),
                 );
               },
@@ -91,7 +92,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
     );
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WalletListingPage(),
+        builder: (context) => const WalletsListPage(initialParams: WalletsListInitialParams()),
       ),
     );
   }
