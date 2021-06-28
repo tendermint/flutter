@@ -44,8 +44,8 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                             .toList(),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Follow best practices for security. Be sure to write your mnemonic pass phrase in a safe place. This phrase is the only way to recover your account if you forget your password. Without your password or recovery passphrase, account recovery is not possible. Even Emeris cannot help you.',
+                      Text(
+                        strings.mnemonicHelperText,
                         textAlign: TextAlign.center,
                       ),
                       ElevatedButton(
@@ -58,10 +58,10 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Text('Proceed'),
-                            SizedBox(width: 4),
-                            Icon(Icons.arrow_forward),
+                          children: [
+                            Text(strings.proceed),
+                            const SizedBox(width: 4),
+                            const Icon(Icons.arrow_forward),
                           ],
                         ),
                       )
@@ -72,7 +72,7 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
                       mnemonic = MnemonicGenerator.generateMnemonic();
                       setState(() {});
                     },
-                    child: const Text('Create a new wallet'),
+                    child: Text(strings.createNewWallet),
                   ),
           ),
         ),

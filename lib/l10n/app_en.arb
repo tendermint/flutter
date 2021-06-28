@@ -1,6 +1,18 @@
 {
     "appTitle": "Emeris",
     "@appTitle": {
-      "description": "The conventional newborn programmer greeting"
+      "description": "Title of the application"
+    },
+    "createNewWallet": "Create a new wallet",
+    "@createNewWallet": {
+      "description": "Button text for mnemonic onboarding"
+    },
+    "proceed": "Proceed",
+    "@proceed": {
+      "description": "Button text for proceeding to next page"
+    },
+    "mnemonicHelperText": "Follow best practices for security. Be sure to write your mnemonic pass phrase in a safe place. This phrase is the only way to recover your account if you forget your password. Without your password or recovery passphrase, account recovery is not possible. Even Emeris cannot help you.",
+    "@mnemonicHelperText": {
+      "description": "Helper text for the user to store mnemonic safely"
     }
 }
