@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/api_calls/base_wallet_api.dart';
-import 'package:flutter_app/global.dart';
 import 'package:flutter_app/data/model/balances.dart';
 import 'package:flutter_app/data/model/emeris_wallet.dart';
 import 'package:flutter_app/data/model/wallet_type.dart';
+import 'package:flutter_app/global.dart';
+import 'package:flutter_app/navigation/app_navigator.dart';
 
 class WalletDetailsPage extends StatefulWidget {
   final EmerisWallet wallet;
@@ -213,4 +214,17 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     _isLoading = false;
     setState(() {});
   }
+}
+
+abstract class WalletDetailsRoute {
+  BuildContext get context;
+
+  AppNavigator get appNavigator;
+
+  factory WalletDetailsRoute._() => throw UnsupportedError("This class is meant to be mixed in");
+
+  Future<void> openWalletDetails(EmerisWallet wallet) => appNavigator.push(
+        context,
+        materialRoute(WalletDetailsPage(wallet: wallet, alias: wallet.walletDetails.walletAlias)),
+      );
 }

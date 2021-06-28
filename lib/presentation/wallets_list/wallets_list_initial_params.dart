@@ -1,0 +1,3 @@
+class WalletsListInitialParams {
+  const WalletsListInitialParams();
+}
