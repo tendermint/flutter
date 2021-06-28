@@ -14,5 +14,17 @@
     "mnemonicHelperText": "Follow best practices for security. Be sure to write your mnemonic pass phrase in a safe place. This phrase is the only way to recover your account if you forget your password. Without your password or recovery passphrase, account recovery is not possible. Even Emeris cannot help you.",
     "@mnemonicHelperText": {
       "description": "Helper text for the user to store mnemonic safely"
+    },
+    "passwordGeneration": "Password generation",
+    "@passwordGeneration": {
+      "description": "App bar title for password generation page"
+    },
+    "enterPassword": "Enter password",
+    "@enterPassword": {
+      "description": "Hint text for password field"
+    },
+    "passwordHelperText": "This password will be used to recover your account every time you log in to the app",
+    "@passwordHelperText": {
+      "description": "Helper text for password field"
     }
 }
