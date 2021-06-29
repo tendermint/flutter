@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/helpers/mnemonic_generator.dart';
-import 'package:flutter_app/utils/strings.dart';
+import 'package:flutter_app/navigation/app_navigator.dart';
 import 'package:flutter_app/views/password_generation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+abstract class MnemonicOnboardingRoute {
+  AppNavigator get appNavigator;
+
+  BuildContext get context;
+
+  factory MnemonicOnboardingRoute._() => throw UnsupportedError("This class is meant to be mixed in");
+
+  Future<void> openMnemonicOnboarding() async => appNavigator.push(context, materialRoute(MnemonicOnboarding()));
+}
 
 class MnemonicOnboarding extends StatefulWidget {
   @override
@@ -21,7 +31,6 @@ class _MnemonicOnboardingState extends State<MnemonicOnboarding> {
 
   @override
   Widget build(BuildContext context) {
-    initializeAppLocalizations(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(

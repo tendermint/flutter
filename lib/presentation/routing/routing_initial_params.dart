@@ -1,0 +1,3 @@
+class RoutingInitialParams {
+  const RoutingInitialParams();
+}
