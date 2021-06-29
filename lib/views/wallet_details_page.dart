@@ -5,6 +5,7 @@ import 'package:flutter_app/data/model/emeris_wallet.dart';
 import 'package:flutter_app/data/model/wallet_type.dart';
 import 'package:flutter_app/global.dart';
 import 'package:flutter_app/navigation/app_navigator.dart';
+import 'package:flutter_app/utils/strings.dart';
 
 class WalletDetailsPage extends StatefulWidget {
   final EmerisWallet wallet;
@@ -46,13 +47,15 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.alias}'s Wallet"),
+        title: Text(
+          strings.walletDetailsTitle(widget.alias),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: const Text('Wallet address'),
+            title: Text(strings.walletAddress),
             subtitle: Text(widget.wallet.walletDetails.walletAddress),
           ),
           const Divider(),
@@ -62,7 +65,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
             child: Row(
               children: [
                 Text(
-                  'Balances',
+                  strings.balances,
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.headline6,
                 ),
@@ -90,13 +93,14 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
               ),
             ),
           if (_isSendMoneyLoading)
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
               child: Center(
-                  child: Text(
-                'Sending your money\nPlease wait ...',
-                textAlign: TextAlign.center,
-              )),
+                child: Text(
+                  strings.sendingMoney,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           if (_errorText.isNotEmpty)
             Padding(
@@ -130,7 +134,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
               : () async {
                   await showMoneyTransferBottomSheet(context, e);
                 },
-          child: const Text('Transfer'),
+          child: Text(strings.transfer),
         ),
       ),
     );
@@ -145,14 +149,14 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
           children: [
             const Padding(padding: EdgeInsets.only(top: 16)),
             Text(
-              'Send ${e.denom}',
+              strings.sendDenom(e.denom),
               style: Theme.of(context).textTheme.headline6,
             ),
             ListTile(
               title: TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Enter wallet address',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: strings.enterWalletAddress,
+                  border: const OutlineInputBorder(),
                 ),
                 onChanged: (value) {
                   _toAddress = value;
@@ -161,7 +165,10 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
             ),
             ListTile(
               title: TextFormField(
-                decoration: const InputDecoration(labelText: 'Enter amount', border: OutlineInputBorder()),
+                decoration: InputDecoration(
+                  labelText: strings.enterAmount,
+                  border: const OutlineInputBorder(),
+                ),
                 onChanged: (value) {
                   _amount = value;
                 },
@@ -175,7 +182,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
               style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(),
               ),
-              child: const Text('Send money'),
+              child: Text(strings.sendMoney),
             ),
           ],
         ),
