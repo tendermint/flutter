@@ -25,7 +25,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.appTitle),
+        title: Text(strings.passwordGeneration),
       ),
       body: Center(
         child: Column(
@@ -37,8 +37,8 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                 obscureText: isPasswordVisible,
                 controller: passwordController,
                 decoration: InputDecoration(
-                  hintText: 'Enter password',
-                  helperText: 'This password will be used to recover your account every time you log in to the app',
+                  hintText: strings.enterPassword,
+                  helperText: strings.passwordHelperText,
                   helperMaxLines: 3,
                   suffixIcon: InkWell(
                     onTap: () {

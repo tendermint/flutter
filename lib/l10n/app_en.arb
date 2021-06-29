@@ -1,6 +1,92 @@
 {
-    "appTitle": "Emeris",
-    "@appTitle": {
-      "description": "The conventional newborn programmer greeting"
+  "appTitle": "Emeris",
+  "@appTitle": {
+    "description": "Title of the application"
+  },
+  "createNewWallet": "Create a new wallet",
+  "@createNewWallet": {
+    "description": "Button text for mnemonic onboarding"
+  },
+  "proceed": "Proceed",
+  "@proceed": {
+    "description": "Button text for proceeding to next page"
+  },
+  "mnemonicHelperText": "Follow best practices for security. Be sure to write your mnemonic pass phrase in a safe place. This phrase is the only way to recover your account if you forget your password. Without your password or recovery passphrase, account recovery is not possible. Even Emeris cannot help you.",
+  "@mnemonicHelperText": {
+    "description": "Helper text for the user to store mnemonic safely"
+  },
+  "passwordGeneration": "Password generation",
+  "@passwordGeneration": {
+    "description": "App bar title for password generation page"
+  },
+  "enterPassword": "Enter password",
+  "@enterPassword": {
+    "description": "Hint text for password field"
+  },
+  "passwordHelperText": "This password will be used to recover your account every time you log in to the app",
+  "@passwordHelperText": {
+    "description": "Helper text for password field"
+  },
+  "walletDetailsTitle": "{alias}'s Wallet",
+  "@walletDetailsTitle": {
+    "description": "Wallet details page dynamic title",
+    "placeholders": {
+      "alias": {}
     }
+  },
+  "walletAddress": "Wallet address",
+  "@walletAddress": {
+    "description": "Wallet address text"
+  },
+  "balances": "Balances",
+  "@balances": {
+    "description": "Balances text"
+  },
+  "sendingMoney": "Sending your money\nPlease wait ...",
+  "@sendingMoney": {
+    "description": "Sending money loading text"
+  },
+  "transfer": "Transfer",
+  "@transfer": {
+    "description": "Transfer text"
+  },
+  "sendDenom": "Send {denom}",
+  "@sendDenom": {
+    "description": "Denom dynamic text",
+    "placeholders": {
+      "denom": {}
+    }
+  },
+  "enterWalletAddress": "Enter wallet address",
+  "@enterWalletAddress": {
+    "description": "Wallet address field hint text"
+  },
+  "enterAmount": "Enter Amount",
+  "@enterAmount": {
+    "description": "Amount field hint text"
+  },
+  "sendMoney": "Send Money",
+  "@sendMoney": {
+    "description": "Send money button text"
+  },
+  "enterMnemonic": "Enter mnemonic",
+  "@enterMnemonic": {
+    "description": "Hint text for mnemonic field"
+  },
+  "enterAlias": "Enter alias",
+  "@enterAlias": {
+    "description": "Hint text for alias field"
+  },
+  "addWallet": "Add wallet",
+  "@addWallet": {
+    "description": "Button text for add wallet"
+  },
+  "walletListEmptyText": "No wallets found. Add one.",
+  "@walletListEmptyText": {
+    "description": "Empty text for wallet listing"
+  },
+  "importWallet": "Import a wallet",
+  "@importWallet": {
+    "description": "Import wallet button text"
+  }
 }
