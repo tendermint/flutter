@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/domain/entities/import_wallet_form_data.dart';
+import 'package:flutter_app/utils/strings.dart';
 
 abstract class AddWalletRoute {
   BuildContext get context;
@@ -29,9 +30,9 @@ class _AddWalletBottomSheetState extends State<AddWalletBottomSheet> {
         children: [
           ListTile(
             title: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Enter mnemonic',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: strings.enterMnemonic,
+                border: const OutlineInputBorder(),
               ),
               onChanged: (value) {
                 _mnemonic = value;
@@ -40,9 +41,9 @@ class _AddWalletBottomSheetState extends State<AddWalletBottomSheet> {
           ),
           ListTile(
             title: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Enter alias',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: strings.enterAlias,
+                border: const OutlineInputBorder(),
               ),
               onChanged: (value) {
                 _alias = value;
@@ -54,7 +55,7 @@ class _AddWalletBottomSheetState extends State<AddWalletBottomSheet> {
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(),
             ),
-            child: const Text('Add wallet'),
+            child: Text(strings.addWallet),
           ),
         ],
       ),

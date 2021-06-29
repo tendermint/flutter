@@ -68,5 +68,25 @@
   "sendMoney": "Send Money",
   "@sendMoney": {
     "description": "Send money button text"
+  },
+  "enterMnemonic": "Enter mnemonic",
+  "@enterMnemonic": {
+    "description": "Hint text for mnemonic field"
+  },
+  "enterAlias": "Enter alias",
+  "@enterAlias": {
+    "description": "Hint text for alias field"
+  },
+  "addWallet": "Add wallet",
+  "@addWallet": {
+    "description": "Button text for add wallet"
+  },
+  "walletListEmptyText": "No wallets found. Add one.",
+  "@walletListEmptyText": {
+    "description": "Empty text for wallet listing"
+  },
+  "importWallet": "Import a wallet",
+  "@importWallet": {
+    "description": "Import wallet button text"
   }
 }

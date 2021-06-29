@@ -10,6 +10,7 @@ import 'package:flutter_app/ui/pages/wallets_list/widgets/wallets_list_view.dart
 import 'package:flutter_app/ui/widgets/content_empty_loading_switcher.dart';
 import 'package:flutter_app/ui/widgets/emeris_app_bar.dart';
 import 'package:flutter_app/ui/widgets/empty_list_message.dart';
+import 'package:flutter_app/utils/strings.dart';
 
 class WalletsListPage extends StatefulWidget {
   final WalletsListInitialParams initialParams;
@@ -47,12 +48,13 @@ class _WalletsListPageState extends State<WalletsListPage> {
   Widget build(BuildContext context) {
     list = globalCache.wallets;
     return Scaffold(
+      // Not translating this.
       appBar: const EmerisAppBar(
         title: 'Tendermint 1.0.2',
       ),
       body: ContentLoadingEmptyViewSwitcher(
-          emptyChild: const EmptyListMessage(
-            message: 'No wallets found. Add one.',
+          emptyChild: EmptyListMessage(
+            message: strings.walletListEmptyText,
           ),
           isEmpty: list.isEmpty,
           contentChild: Padding(
@@ -64,7 +66,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
           )),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => presenter.addWalletClicked(),
-        label: const Text('Import a wallet'),
+        label: Text(strings.importWallet),
       ),
     );
   }
