@@ -1,1 +1,0 @@
-enum WalletType { Eth, Cosmos }
