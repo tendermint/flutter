@@ -1,0 +1,21 @@
+name: transaction_signing_gateway
+description: Transaction Signing gateway
+version: 0.0.1
+author: Andrzej Chmielewski
+homepage: tendermint.com
+publish_to: 'none' # TODO publish it when ready
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.5"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^1.5.3
+
+flutter:
