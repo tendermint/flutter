@@ -7,12 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/signing_gateway
+        working-directory: packages/transaction_signing_gateway
     steps:
     - uses: actions/checkout@v2
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: '2.2.2'
+
     - name: pub get
       run: flutter pub get
 

@@ -22,5 +22,5 @@ class NotFoundTransactionSigner implements TransactionSigner {
     required PrivateWalletCredentials privateCredentials,
     required UnsignedTransaction transaction,
   }) async =>
-      left(const NotFoundTransactionSignerFailure());
+      left(const TransactionSignerNotFoundFailure());
 }

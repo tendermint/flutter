@@ -9,11 +9,11 @@ abstract class TransactionSigningFailure {
   TransactionSigningFailType get type;
 }
 
-class NotFoundTransactionSignerFailure implements TransactionSigningFailure {
+class TransactionSignerNotFoundFailure implements TransactionSigningFailure {
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.noTransactionSignerFound;
 
-  const NotFoundTransactionSignerFailure();
+  const TransactionSignerNotFoundFailure();
 }
 
 class UserDeclinedTransactionSignerFailure implements TransactionSigningFailure {
