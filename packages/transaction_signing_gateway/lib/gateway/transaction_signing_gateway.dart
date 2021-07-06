@@ -22,10 +22,17 @@ class TransactionSigningGateway {
 
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,
+    required String walletId,
+    required String chainId,
+    required String password,
   }) async =>
       _transactionSummaryUI
           .showTransactionSummaryUI(transaction: transaction)
-          .flatMap((userAccepted) => _infoStorage.getPrivateCredentials())
+          .flatMap((userAccepted) => _infoStorage.getPrivateCredentials(
+                walletId: walletId,
+                chainId: chainId,
+                password: password,
+              ))
           .flatMap((privateCreds) async => _findCapableSigner(transaction).sign(
                 privateCredentials: privateCreds,
                 transaction: transaction,

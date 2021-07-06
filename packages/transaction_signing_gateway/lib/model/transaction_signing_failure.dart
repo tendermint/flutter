@@ -1,5 +1,6 @@
 enum TransactionSigningFailType {
   userDeclined,
+  invalidPassword,
   noTransactionSignerFound,
   walletCredentialsRetrievalFailure,
   unknown,
@@ -23,9 +24,17 @@ class UserDeclinedTransactionSignerFailure implements TransactionSigningFailure 
   const UserDeclinedTransactionSignerFailure();
 }
 
+class InvalidPasswordTransactionSignerFailure implements TransactionSigningFailure {
+  @override
+  TransactionSigningFailType get type => TransactionSigningFailType.invalidPassword;
+
+  const InvalidPasswordTransactionSignerFailure();
+}
+
 class WalletCredentialsRetrievalFailure implements TransactionSigningFailure {
+  final String message;
   @override
   TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsRetrievalFailure;
 
-  const WalletCredentialsRetrievalFailure();
+  const WalletCredentialsRetrievalFailure(this.message);
 }
