@@ -37,4 +37,9 @@ class WalletCredentialsRetrievalFailure implements TransactionSigningFailure {
   TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsRetrievalFailure;
 
   const WalletCredentialsRetrievalFailure(this.message);
+
+  @override
+  String toString() {
+    return 'WalletCredentialsRetrievalFailure{message: $message}';
+  }
 }

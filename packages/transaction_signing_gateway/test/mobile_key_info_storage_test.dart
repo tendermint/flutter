@@ -21,7 +21,7 @@ void main() {
     //
     test("save and retrieve creds", () async {
       final saveResult = await storage.savePrivateCredentials(walletCredentials: privateCredsStub, password: password);
-      expect(saveResult.isRight(), true);
+      expect(saveResult.isRight(), true, reason: "$saveResult");
 
       final readResult = await storage.getPrivateCredentials(chainId: chainId, walletId: walletId, password: password);
       expect(readResult.isRight(), true);
