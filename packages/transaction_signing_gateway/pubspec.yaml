@@ -12,10 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dartz: ^0.10.0-nullsafety.2
-  equatable: ^2.0.3
-  flutter_secure_storage: ^4.2.0
-  encrypt: ^5.0.0
+  dartz: 0.10.0-nullsafety.2
+  equatable: 2.0.3
+  flutter_secure_storage: 4.2.0
+  encrypt: 5.0.0
 
 dev_dependencies:
   flutter_test:

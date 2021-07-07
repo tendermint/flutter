@@ -29,7 +29,7 @@ class AESCipher implements Cipher {
 
   IV _iv() => IV.fromSecureRandom(16);
 
-  String _salt() => IV.fromLength(32).base64;
+  String _salt() => IV.fromSecureRandom(32).base64;
 
   Encrypter _fromPassword({required String password, required String salt}) {
     final key = Key.fromUtf8(password).stretch(32, salt: IV.fromBase64(salt).bytes);
