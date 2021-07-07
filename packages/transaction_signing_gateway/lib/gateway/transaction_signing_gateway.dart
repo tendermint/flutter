@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
-import 'package:transaction_signing_gateway/mobile/mobile_key_info_storage.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
@@ -15,10 +14,10 @@ class TransactionSigningGateway {
 
   TransactionSigningGateway({
     required List<TransactionSigner> signers,
-    KeyInfoStorage? infoStorage,
+    required KeyInfoStorage infoStorage,
     required TransactionSummaryUI transactionSummaryUI,
-  })   : _signers = List.unmodifiable(signers),
-        _infoStorage = infoStorage ?? MobileKeyInfoStorage(),
+  })  : _signers = List.unmodifiable(signers),
+        _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({

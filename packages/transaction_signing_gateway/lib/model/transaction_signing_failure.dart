@@ -3,6 +3,7 @@ enum TransactionSigningFailType {
   invalidPassword,
   noTransactionSignerFound,
   walletCredentialsRetrievalFailure,
+  walletCredentialsSavingFailure,
   unknown,
 }
 
@@ -41,5 +42,18 @@ class WalletCredentialsRetrievalFailure implements TransactionSigningFailure {
   @override
   String toString() {
     return 'WalletCredentialsRetrievalFailure{message: $message}';
+  }
+}
+
+class WalletCredentialsSavingFailure implements TransactionSigningFailure {
+  final String message;
+  @override
+  TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsSavingFailure;
+
+  const WalletCredentialsSavingFailure(this.message);
+
+  @override
+  String toString() {
+    return 'WalletCredentialsSavingFailure{message: $message}';
   }
 }

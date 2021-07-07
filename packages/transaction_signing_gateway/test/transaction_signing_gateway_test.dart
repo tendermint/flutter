@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 import 'mocks/key_info_storage_mock.dart';
+import 'mocks/private_wallet_credentials_mock.dart';
 import 'mocks/transaction_summary_ui_mock.dart';
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
     const walletId = "123walletId";
     const mnemonic =
         "fruit talent run shallow police ripple wheat original cabbage vendor tilt income gasp meat acid annual armed system target great oxygen artist net elegant";
-    const privateCredsStub = PrivateWalletCredentials(
+    const privateCredsStub = PrivateWalletCredentialsMock(
       chainId: chainId,
       walletId: walletId,
       mnemonic: mnemonic,
