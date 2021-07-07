@@ -51,9 +51,15 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
   }) async {
     final jsonString = await compute(jsonEncode, walletCredentials.toJson());
     try {
-      final encrypted = _cipher.encrypt(password: password, data: jsonString);
-      final key2 = _key(chainId: walletCredentials.chainId, walletId: walletCredentials.walletId);
-      await _storage.write(key: key2, value: encrypted);
+      final encrypted = _cipher.encrypt(
+        password: password,
+        data: jsonString,
+      );
+      final key = _key(
+        chainId: walletCredentials.chainId,
+        walletId: walletCredentials.walletId,
+      );
+      await _storage.write(key: key, value: encrypted);
       return right(unit);
     } catch (e) {
       return left(WalletCredentialsRetrievalFailure("$e"));
