@@ -22,7 +22,6 @@ class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCre
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         mnemonic,
         chainId,

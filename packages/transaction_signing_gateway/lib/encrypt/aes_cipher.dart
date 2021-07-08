@@ -10,8 +10,8 @@ class AESCipher implements Cipher {
     }
     final encrypter = _fromPassword(password: password, salt: bundle.salt);
     return encrypter.decrypt(
-      Encrypted.fromBase64(bundle.encryptedData),
-      iv: IV.fromBase64(bundle.iv),
+      bundle.encryptedData,
+      iv: bundle.iv,
     );
   }
 
@@ -21,27 +21,27 @@ class AESCipher implements Cipher {
     final salt = _salt();
     final encrypter = _fromPassword(password: password, salt: salt);
     return _EncryptedBundle(
-      iv: iv.base64,
+      iv: iv,
       salt: salt,
-      encryptedData: encrypter.encrypt(data, iv: iv).base64,
+      encryptedData: encrypter.encrypt(data, iv: iv),
     ).string;
   }
 
   IV _iv() => IV.fromSecureRandom(16);
 
-  String _salt() => IV.fromSecureRandom(32).base64;
+  IV _salt() => IV.fromSecureRandom(32);
 
-  Encrypter _fromPassword({required String password, required String salt}) {
-    final key = Key.fromUtf8(password).stretch(32, salt: IV.fromBase64(salt).bytes);
+  Encrypter _fromPassword({required String password, required IV salt}) {
+    final key = Key.fromUtf8(password).stretch(32, salt: salt.bytes, iterationCount: 500);
     return Encrypter(AES(key));
   }
 }
 
 class _EncryptedBundle {
   static const _delimiter = "|";
-  final String iv;
-  final String salt;
-  final String encryptedData;
+  final IV iv;
+  final IV salt;
+  final Encrypted encryptedData;
 
   _EncryptedBundle({
     required this.iv,
@@ -54,9 +54,13 @@ class _EncryptedBundle {
     if (split.length != 3) {
       return null;
     } else {
-      return _EncryptedBundle(iv: split[0], salt: split[1], encryptedData: split[2]);
+      return _EncryptedBundle(
+        iv: IV.fromBase64(split[0]),
+        salt: IV.fromBase64(split[1]),
+        encryptedData: Encrypted.fromBase64(split[2]),
+      );
     }
   }
 
-  String get string => "$iv$_delimiter$salt$_delimiter$encryptedData";
+  String get string => "${iv.base64}$_delimiter${salt.base64}$_delimiter${encryptedData.base64}";
 }
