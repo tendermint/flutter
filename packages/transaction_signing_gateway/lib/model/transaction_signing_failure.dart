@@ -1,9 +1,10 @@
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
+
 enum TransactionSigningFailType {
   userDeclined,
   invalidPassword,
   noTransactionSignerFound,
-  walletCredentialsRetrievalFailure,
-  walletCredentialsSavingFailure,
+  walletCredentialsStorageFailure,
   unknown,
 }
 
@@ -32,28 +33,15 @@ class InvalidPasswordTransactionSignerFailure implements TransactionSigningFailu
   const InvalidPasswordTransactionSignerFailure();
 }
 
-class WalletCredentialsRetrievalFailure implements TransactionSigningFailure {
-  final String message;
+class StorageProblemSigningFailure implements TransactionSigningFailure {
+  final CredentialsStorageFailure failure;
   @override
-  TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsRetrievalFailure;
+  TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsStorageFailure;
 
-  const WalletCredentialsRetrievalFailure(this.message);
-
-  @override
-  String toString() {
-    return 'WalletCredentialsRetrievalFailure{message: $message}';
-  }
-}
-
-class WalletCredentialsSavingFailure implements TransactionSigningFailure {
-  final String message;
-  @override
-  TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsSavingFailure;
-
-  const WalletCredentialsSavingFailure(this.message);
+  const StorageProblemSigningFailure(this.failure);
 
   @override
   String toString() {
-    return 'WalletCredentialsSavingFailure{message: $message}';
+    return 'StorageProblemSigningFailure{fail: $failure}';
   }
 }

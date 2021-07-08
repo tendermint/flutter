@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
@@ -52,7 +53,7 @@ void main() {
         chainId: anyNamed("chainId"),
         walletId: anyNamed("walletId"),
         password: anyNamed("password"),
-      )).thenAnswer((_) async => left(const WalletCredentialsRetrievalFailure("fail")));
+      )).thenAnswer((_) async => left(const CredentialsStorageFailure("fail")));
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
@@ -62,7 +63,7 @@ void main() {
       );
       // THEN
       expect(result.isLeft(), true);
-      expect(result.fold((l) => l, (r) => r), isA<WalletCredentialsRetrievalFailure>());
+      expect(result.fold((l) => l, (r) => r), isA<TransactionSigningFailure>());
       verify(summaryUI.showTransactionSummaryUI(transaction: anyNamed("transaction")));
     });
 

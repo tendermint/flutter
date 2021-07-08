@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/utils/future_either.dart';
 
@@ -20,6 +22,15 @@ class TransactionSigningGateway {
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
+  Future<Either<CredentialsStorageFailure, Unit>> storeWalletCredentials({
+    required PrivateWalletCredentials credentials,
+    required String password,
+  }) =>
+      _infoStorage.savePrivateCredentials(
+        walletCredentials: credentials,
+        password: password,
+      );
+
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,
     required String walletId,
@@ -28,11 +39,15 @@ class TransactionSigningGateway {
   }) async =>
       _transactionSummaryUI
           .showTransactionSummaryUI(transaction: transaction)
-          .flatMap((userAccepted) => _infoStorage.getPrivateCredentials(
-                walletId: walletId,
-                chainId: chainId,
-                password: password,
-              ))
+          .flatMap(
+            (userAccepted) => _infoStorage
+                .getPrivateCredentials(
+                  walletId: walletId,
+                  chainId: chainId,
+                  password: password,
+                )
+                .leftMap((err) => left(StorageProblemSigningFailure(err))),
+          )
           .flatMap((privateCreds) async => _findCapableSigner(transaction).sign(
                 privateCredentials: privateCreds,
                 transaction: transaction,

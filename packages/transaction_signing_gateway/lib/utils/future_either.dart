@@ -10,6 +10,15 @@ extension FutureEither<L, R> on Future<Either<L, R>> {
     );
   }
 
+  Future<Either<L2, R>> leftMap<L2>(Function1<L, Either<L2, R>> f) {
+    return then(
+      (either1) => either1.fold(
+        (l) => Future.value(f(l)),
+        (r) => Future.value(right<L2, R>(r)),
+      ),
+    );
+  }
+
   Future<Either<L, R2>> map<R2>(Function1<R, Either<L, R2>> f) {
     return then(
       (either1) => either1.fold(

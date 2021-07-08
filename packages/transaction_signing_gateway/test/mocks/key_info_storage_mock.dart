@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 
-typedef KeyInfoRetriever = Future<Either<TransactionSigningFailure, PrivateWalletCredentials>> Function(
+typedef KeyInfoRetriever = Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> Function(
     String, String, String);
 
 class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
@@ -12,11 +12,10 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
 
   KeyInfoStorageMock({
     KeyInfoRetriever? retriever,
-  }) : keyInfoRetriever =
-            retriever ?? ((_, __, ___) async => left(const WalletCredentialsRetrievalFailure("not implemented")));
+  }) : keyInfoRetriever = retriever ?? ((_, __, ___) async => left(const CredentialsStorageFailure("not implemented")));
 
   @override
-  Future<Either<TransactionSigningFailure, PrivateWalletCredentials>> getPrivateCredentials({
+  Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials({
     required String? chainId,
     required String? walletId,
     required String? password,
@@ -27,8 +26,8 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
           #walletId: walletId,
           #password: password,
         }),
-        returnValue: Future<Either<TransactionSigningFailure, PrivateWalletCredentials>>.value(
-          left(const TransactionSignerNotFoundFailure()),
+        returnValue: Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>>.value(
+          left(const CredentialsStorageFailure("not mocked")),
         ),
-      ) as Future<Either<TransactionSigningFailure, PrivateWalletCredentials>>;
+      ) as Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>>;
 }

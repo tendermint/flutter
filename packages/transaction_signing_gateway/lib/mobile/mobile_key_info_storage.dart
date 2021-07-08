@@ -6,9 +6,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:transaction_signing_gateway/encrypt/aes_cipher.dart';
 import 'package:transaction_signing_gateway/encrypt/cipher.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/utils/future_either.dart';
 
 class MobileKeyInfoStorage implements KeyInfoStorage {
@@ -24,7 +24,7 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
         _cipher = cipher ?? AESCipher();
 
   @override
-  Future<Either<TransactionSigningFailure, PrivateWalletCredentials>> getPrivateCredentials({
+  Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials({
     required String chainId,
     required String walletId,
     required String password,
@@ -32,13 +32,13 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
     final encryptedData = await _storage.read(key: _credentialsKey(chainId: chainId, walletId: walletId));
     if (encryptedData == null) {
       return left(
-        WalletCredentialsRetrievalFailure("Cannot find credentials for chainId: $chainId and walletId: $walletId"),
+        CredentialsStorageFailure("Cannot find credentials for chainId: $chainId and walletId: $walletId"),
       );
     }
     final serializer = await _findDeserializer(_serializerIdKey(chainId: chainId, walletId: walletId));
     if (serializer == null) {
-      return left(WalletCredentialsRetrievalFailure(
-          "Could not find proper deserializer for walletId: $walletId, chainId: $chainId"));
+      return left(
+          CredentialsStorageFailure("Could not find proper deserializer for walletId: $walletId, chainId: $chainId"));
     }
 
     try {
@@ -46,7 +46,7 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
       final json = await compute(jsonDecode, decrypted) as Map<String, dynamic>;
       return serializer.fromJson(json);
     } catch (error) {
-      return left(const InvalidPasswordTransactionSignerFailure());
+      return left(const CredentialsStorageFailure("invalid password"));
     }
   }
 
@@ -55,14 +55,14 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
   String _serializerIdKey({required String chainId, required String walletId}) => "$chainId:$walletId:serializer";
 
   @override
-  Future<Either<TransactionSigningFailure, Unit>> savePrivateCredentials({
+  Future<Either<CredentialsStorageFailure, Unit>> savePrivateCredentials({
     required PrivateWalletCredentials walletCredentials,
     required String password,
   }) async {
     final serializer = _findSerializer(walletCredentials);
     if (serializer == null) {
       return left(
-        WalletCredentialsSavingFailure("Could not find proper serializer for ${walletCredentials.runtimeType}"),
+        CredentialsStorageFailure("Could not find proper serializer for ${walletCredentials.runtimeType}"),
       );
     }
     final credsKey = _credentialsKey(
@@ -83,7 +83,7 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
           await _storage.write(key: serializerKey, value: walletCredentials.serializerIdentifier);
           return right(unit);
         } catch (e) {
-          return left(WalletCredentialsRetrievalFailure("$e"));
+          return left(CredentialsStorageFailure("$e"));
         }
       },
     );
