@@ -9,9 +9,12 @@ import 'package:transaction_signing_gateway/key_info_storage.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
+import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/wallet_public_info_serializer.dart';
 import 'package:transaction_signing_gateway/utils/future_either.dart';
 
 class MobileKeyInfoStorage implements KeyInfoStorage {
+  static const _publicKeySuffix = ":public";
   final FlutterSecureStorage _storage;
   final Cipher _cipher;
   final List<PrivateWalletCredentialsSerializer> serializers;
@@ -52,6 +55,10 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
 
   String _credentialsKey({required String chainId, required String walletId}) => "$chainId:$walletId";
 
+  String _publicInfoKey({required String chainId, required String walletId}) => "$chainId:$walletId$_publicKeySuffix";
+
+  bool _isPublicInfoKey(String key) => key.endsWith(_publicKeySuffix);
+
   String _serializerIdKey({required String chainId, required String walletId}) => "$chainId:$walletId:serializer";
 
   @override
@@ -66,13 +73,18 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
       );
     }
     final credsKey = _credentialsKey(
-      chainId: walletCredentials.chainId,
-      walletId: walletCredentials.walletId,
+      chainId: walletCredentials.publicInfo.chainId,
+      walletId: walletCredentials.publicInfo.walletId,
     );
     final serializerKey = _serializerIdKey(
-      chainId: walletCredentials.chainId,
-      walletId: walletCredentials.walletId,
+      chainId: walletCredentials.publicInfo.chainId,
+      walletId: walletCredentials.publicInfo.walletId,
     );
+    final publicInfoKey = _publicInfoKey(
+      chainId: walletCredentials.publicInfo.chainId,
+      walletId: walletCredentials.publicInfo.walletId,
+    );
+    final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(walletCredentials.publicInfo));
     return Future.value(serializer.toJson(walletCredentials))
         .flatMap((jsonMap) async => right(await compute(jsonEncode, jsonMap)))
         .flatMap(
@@ -81,12 +93,28 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
           final encrypted = _cipher.encrypt(password: password, data: jsonString);
           await _storage.write(key: credsKey, value: encrypted);
           await _storage.write(key: serializerKey, value: walletCredentials.serializerIdentifier);
+          await _storage.write(key: publicInfoKey, value: publicInfoJson);
           return right(unit);
         } catch (e) {
           return left(CredentialsStorageFailure("$e"));
         }
       },
     );
+  }
+
+  @override
+  Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() async {
+    try {
+      final storageMap = await _storage.readAll();
+      final infos = storageMap.keys //
+          .where((element) => _isPublicInfoKey(element))
+          .map((key) => jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>)
+          .map((json) => WalletPublicInfoSerializer.fromMap(json))
+          .toList();
+      return right(infos);
+    } catch (e) {
+      return left(CredentialsStorageFailure("$e"));
+    }
   }
 
   Future<PrivateWalletCredentialsSerializer?> _findDeserializer(String serializerIdKey) async {

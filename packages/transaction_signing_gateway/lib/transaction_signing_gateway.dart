@@ -9,4 +9,5 @@ export 'package:transaction_signing_gateway/model/private_wallet_credentials.dar
 export 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
 export 'package:transaction_signing_gateway/model/signed_transaction.dart';
 export 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
+export 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 export 'package:transaction_signing_gateway/transaction_signer.dart';

@@ -3,29 +3,27 @@ import 'package:equatable/equatable.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
+import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCredentials {
   @override
   final String mnemonic;
+
   @override
-  final String chainId;
-  @override
-  final String walletId;
+  final WalletPublicInfo publicInfo;
 
   @override
   String get serializerIdentifier => TestPrivateCredentialsSerializer.sIdentifier;
 
   const PrivateWalletCredentialsMock({
     required this.mnemonic,
-    required this.chainId,
-    required this.walletId,
+    required this.publicInfo,
   });
 
   @override
   List<Object?> get props => [
         mnemonic,
-        chainId,
-        walletId,
+        publicInfo,
         serializerIdentifier,
       ];
 }
@@ -39,8 +37,12 @@ class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerial
   ) {
     try {
       return right(PrivateWalletCredentialsMock(
-        chainId: json['chainId'] as String,
-        walletId: json['walletId'] as String,
+        publicInfo: WalletPublicInfo(
+          chainId: json['chainId'] as String,
+          walletId: json['walletId'] as String,
+          name: json['name'] as String,
+          publicAddress: json['publicAddress'] as String,
+        ),
         mnemonic: json['mnemonic'] as String,
       ));
     } catch (e) {
@@ -56,8 +58,10 @@ class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerial
     PrivateWalletCredentials credentials,
   ) =>
       right({
-        'chainId': credentials.chainId,
-        'walletId': credentials.walletId,
+        'chainId': credentials.publicInfo.chainId,
+        'walletId': credentials.publicInfo.walletId,
         'mnemonic': credentials.mnemonic,
+        'name': credentials.publicInfo.name,
+        'publicAddress': credentials.publicInfo.publicAddress
       });
 }

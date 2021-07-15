@@ -16,11 +16,17 @@ void main() {
     late TransactionSigningGateway signingGateway;
     const chainId = "atom";
     const walletId = "123walletId";
+    const publicAddress = "cosmos1wze8mn5nsgl9qrgazq6a92fvh7m5e6psjcx2du";
+    const name = "name";
     const mnemonic =
         "fruit talent run shallow police ripple wheat original cabbage vendor tilt income gasp meat acid annual armed system target great oxygen artist net elegant";
     const privateCredsStub = PrivateWalletCredentialsMock(
-      chainId: chainId,
-      walletId: walletId,
+      publicInfo: WalletPublicInfo(
+        name: name,
+        publicAddress: publicAddress,
+        walletId: walletId,
+        chainId: chainId,
+      ),
       mnemonic: mnemonic,
     );
 

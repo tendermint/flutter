@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
+import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 abstract class KeyInfoStorage {
   Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials({
@@ -13,4 +14,6 @@ abstract class KeyInfoStorage {
     required PrivateWalletCredentials walletCredentials,
     required String password,
   });
+
+  Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList();
 }
