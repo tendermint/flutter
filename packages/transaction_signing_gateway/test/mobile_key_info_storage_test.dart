@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:transaction_signing_gateway/mobile/mobile_key_info_storage.dart';
+import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 import 'mocks/private_wallet_credentials_mock.dart';
@@ -43,7 +44,11 @@ void main() {
       final saveResult = await storage.savePrivateCredentials(walletCredentials: privateCredsStub, password: password);
       expect(saveResult.isRight(), true, reason: "$saveResult");
 
-      final readResult = await storage.getPrivateCredentials(chainId: chainId, walletId: walletId, password: password);
+      final readResult = await storage.getPrivateCredentials(const WalletLookupKey(
+        chainId: chainId,
+        walletId: walletId,
+        password: password,
+      ));
       expect(readResult.isRight(), true, reason: "$readResult");
       expect(readResult.getOrElse(() => throw AssertionError()), privateCredsStub);
     });

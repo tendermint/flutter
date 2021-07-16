@@ -4,6 +4,7 @@ import 'package:transaction_signing_gateway/model/credentials_storage_failure.da
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
+import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -19,7 +20,7 @@ class TransactionSigningGateway {
     required List<TransactionSigner> signers,
     required KeyInfoStorage infoStorage,
     required TransactionSummaryUI transactionSummaryUI,
-  })   : _signers = List.unmodifiable(signers),
+  })  : _signers = List.unmodifiable(signers),
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
@@ -34,19 +35,13 @@ class TransactionSigningGateway {
 
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,
-    required String walletId,
-    required String chainId,
-    required String password,
+    required WalletLookupKey walletLookupKey,
   }) async =>
       _transactionSummaryUI
           .showTransactionSummaryUI(transaction: transaction)
           .flatMap(
             (userAccepted) => _infoStorage
-                .getPrivateCredentials(
-                  walletId: walletId,
-                  chainId: chainId,
-                  password: password,
-                )
+                .getPrivateCredentials(walletLookupKey)
                 .leftMap((err) => left(StorageProblemSigningFailure(err))),
           )
           .flatMap((privateCreds) async => _findCapableSigner(transaction).sign(
@@ -55,6 +50,9 @@ class TransactionSigningGateway {
               ));
 
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
+
+  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(WalletLookupKey walletLookupKey) =>
+      _infoStorage.verifyLookupKey(walletLookupKey);
 
   TransactionSigner _findCapableSigner(UnsignedTransaction transaction) => _signers.firstWhere(
         (element) => element.canSign(transaction),

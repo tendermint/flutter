@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
+import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 import 'mocks/key_info_storage_mock.dart';
@@ -37,35 +38,32 @@ void main() {
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
-        chainId: chainId,
-        password: "password",
-        walletId: walletId,
+        walletLookupKey: const WalletLookupKey(
+          chainId: chainId,
+          password: "password",
+          walletId: walletId,
+        ),
       );
       // THEN
       expect(result.isLeft(), true);
       expect(result.fold((l) => l, (r) => r), isA<UserDeclinedTransactionSignerFailure>());
-      verifyNever(infoStorage.getPrivateCredentials(
-        chainId: anyNamed("chainId"),
-        walletId: anyNamed("walletId"),
-        password: anyNamed("password"),
-      ));
+      verifyNever(infoStorage.getPrivateCredentials(any));
     });
 
     test("failing to retrieve key returns failure", () async {
       // GIVEN
       when(summaryUI.showTransactionSummaryUI(transaction: anyNamed("transaction")))
           .thenAnswer((_) async => right(unit));
-      when(infoStorage.getPrivateCredentials(
-        chainId: anyNamed("chainId"),
-        walletId: anyNamed("walletId"),
-        password: anyNamed("password"),
-      )).thenAnswer((_) async => left(const CredentialsStorageFailure("fail")));
+      when(infoStorage.getPrivateCredentials(any)) //
+          .thenAnswer((_) async => left(const CredentialsStorageFailure("fail")));
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
-        chainId: chainId,
-        password: "password",
-        walletId: walletId,
+        walletLookupKey: const WalletLookupKey(
+          chainId: chainId,
+          password: "password",
+          walletId: walletId,
+        ),
       );
       // THEN
       expect(result.isLeft(), true);
@@ -77,27 +75,21 @@ void main() {
       // GIVEN
       when(summaryUI.showTransactionSummaryUI(transaction: anyNamed("transaction")))
           .thenAnswer((_) async => right(unit));
-      when(infoStorage.getPrivateCredentials(
-        chainId: anyNamed("chainId"),
-        walletId: anyNamed("walletId"),
-        password: anyNamed("password"),
-      )).thenAnswer((_) async => right(privateCredsStub));
+      when(infoStorage.getPrivateCredentials(any)).thenAnswer((_) async => right(privateCredsStub));
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
-        chainId: chainId,
-        password: "password",
-        walletId: walletId,
+        walletLookupKey: const WalletLookupKey(
+          chainId: chainId,
+          password: "password",
+          walletId: walletId,
+        ),
       );
       // THEN
       expect(result.isLeft(), true);
       expect(result.fold((l) => l, (r) => r), isA<TransactionSignerNotFoundFailure>());
       verify(summaryUI.showTransactionSummaryUI(transaction: anyNamed("transaction")));
-      verify(infoStorage.getPrivateCredentials(
-        chainId: anyNamed("chainId"),
-        walletId: anyNamed("walletId"),
-        password: anyNamed("password"),
-      ));
+      verify(infoStorage.getPrivateCredentials(any));
     });
 
     setUp(() {
