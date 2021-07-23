@@ -35,7 +35,14 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.1"
+  bech32:
+    dependency: transitive
+    description:
+      name: bech32
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -193,6 +200,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.3"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   lint:
     dependency: "direct dev"
     description:
@@ -263,6 +284,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  sacco:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: account-url-fix
+      resolved-ref: "6a4a6e26ced17931cf840201513c01c5ebb40217"
+      url: "https://github.com/wal33d006/sacco.dart.git"
+    source: git
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -281,7 +311,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:
@@ -316,7 +346,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.19"
+    version: "0.3.0"
   typed_data:
     dependency: transitive
     description:

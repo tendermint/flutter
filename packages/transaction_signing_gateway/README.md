@@ -1,14 +1,18 @@
 # transaction_signing_gateway
 
-Transaction Signing gateway
+Transaction Signing gateway library encapsulates logic for securely storing wallet credentials as well as allows for specifying a sandboxed environment for transaction signing. This library was created with extendability in mind, so that you can pass in your own implementation of signing transactions and serializing/deserializing wallet credentials if you wish to support your own, propiertiary chain implementations.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+An access point is the `TransactionSigningGateway` class, which you have to initialize first with the implementations of various dependent classes., for example:
+```dart
+final signingGateway = TransactionSigningGateway(
+      transactionSummaryUI: MobileTransactionSummaryUI(),
+      infoStorage: MobileKeyInfoStorage(serializers: [
+          SaccoCredentialsSerializer(),
+      ]),
+      signers: [
+        SaccoTransactionSigner(),
+      ],
+    );
+```
