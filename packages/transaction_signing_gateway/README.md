@@ -1,10 +1,10 @@
 # transaction_signing_gateway
 
-Transaction Signing gateway library encapsulates logic for securely storing wallet credentials as well as allows for specifying a sandboxed environment for transaction signing. This library was created with extendability in mind, so that you can pass in your own implementation of signing transactions and serializing/deserializing wallet credentials if you wish to support your own, propiertiary chain implementations.
+The transaction signing gateway library encapsulates the logic for securely storing wallet credentials and allows for specifying a sandbox environment for transaction signing. This library was created with extendability in mind. If you want to support your own proprietary chain implementations, you can pass in your own implementation of signing transactions as well as serializing and deserializing wallet credentials.
 
 ## Getting Started
 
-An access point is the `TransactionSigningGateway` class, which you have to initialize first with the implementations of various dependent classes., for example:
+An access point is the `TransactionSigningGateway` class that you must first initialize with the implementations of various dependent classes. For example:
 ```dart
 final signingGateway = TransactionSigningGateway(
       transactionSummaryUI: MobileTransactionSummaryUI(),

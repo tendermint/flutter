@@ -24,11 +24,11 @@ class TransactionSigningGateway {
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
-  /// Stores the passed in wallet credentials securely on the device.
+  /// Stores the passed-in wallet credentials securely on the device.
   ///
-  /// It uses `secure_storage` package and strong encryption under the hood, where [password] is used to generate
-  /// encryption key. Password IS NOT STORED, it needs to be passed every time in order to access the private credentials.
-  /// [WalletPublicInfo], which is part of the [PrivateWalletCredentials] will be accessible without a password though.
+  /// The `secure_storage` package and strong encryption are used internally,  where [password] is used to generate the
+  /// encryption key. Password IS NOT STORED but is passed every time in order to access the private credentials.
+  /// [WalletPublicInfo], part of the [PrivateWalletCredentials], is accessible without a password.
   Future<Either<CredentialsStorageFailure, Unit>> storeWalletCredentials({
     required PrivateWalletCredentials credentials,
     required String password,
@@ -40,9 +40,9 @@ class TransactionSigningGateway {
 
   /// Signs the passed [transaction].
   ///
-  /// This will trigger the entire signing flow, where first a transaction summary is shown to the user,
-  /// if accepted it then looks for a capable [TransactionSigner].
-  /// After successful credentials retrieval and transaction signing, a [SignedTransaction] object is spit out.
+  /// This function triggers the entire signing flow, where a transaction summary is first shown to the user.
+  /// If the transaction is accepted, the workflow looks for a capable [TransactionSigner].
+  /// After a credentials retrieval and transaction signing is successful, a [SignedTransaction] object is output.
   /// If any of the steps fail, a [TransactionSigningFailure] is returned.
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,

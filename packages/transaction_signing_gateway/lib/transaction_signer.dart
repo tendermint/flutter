@@ -13,9 +13,9 @@ abstract class TransactionSigner {
     required UnsignedTransaction transaction,
   });
 
-  /// Checks if passed in transaction can be signed by this [TransactionSigner].
+  /// Checks if the passed-in transaction can be signed by this [TransactionSigner].
   ///
-  /// At least a type check should be performed on the passed transaction to determine if this is transaction meant
+  /// At least a type check must be performed on the passed transaction to determine if this transaction is meant
   /// for this signer, for example: `return unsignedTransaction is SaccoTransaction`
   bool canSign(UnsignedTransaction unsignedTransaction);
 }
