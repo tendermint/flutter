@@ -1,20 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sacco/sacco.dart' as sacco;
+import 'package:alan/alan.dart' as alan;
+import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
+import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
-import 'package:transaction_signing_gateway/sacco/sacco_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/sacco/sacco_private_wallet_credentials.dart';
 
 void main() {
-  group("Sacco Serializer tests", () {
-    final serializer = SaccoCredentialsSerializer();
-    final credentials = SaccoPrivateWalletCredentials(
+  group("Alan Serializer tests", () {
+    final serializer = AlanCredentialsSerializer();
+    final credentials = AlanPrivateWalletCredentials(
       mnemonic: "mnemonic",
-      networkInfo: sacco.NetworkInfo(
-        bech32Hrp: "bech32Hrp",
-        lcdUrl: Uri.parse("https://google.com/"),
-        name: "name",
-        iconUrl: "iconUrl",
-        defaultTokenDenom: "defaultTokenDenom",
+      networkInfo: alan.NetworkInfo.fromSingleHost(
+        bech32Hrp: "cosmos",
+        host: 'localhost',
       ),
       publicInfo: const WalletPublicInfo(
         chainId: "chainId",
