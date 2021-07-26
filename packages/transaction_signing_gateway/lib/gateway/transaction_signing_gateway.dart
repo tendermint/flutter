@@ -24,6 +24,11 @@ class TransactionSigningGateway {
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
+  /// Stores the passed-in wallet credentials securely on the device.
+  ///
+  /// The `secure_storage` package and strong encryption are used internally,  where [password] is used to generate the
+  /// encryption key. Password IS NOT STORED but is passed every time in order to access the private credentials.
+  /// [WalletPublicInfo], part of the [PrivateWalletCredentials], is accessible without a password.
   Future<Either<CredentialsStorageFailure, Unit>> storeWalletCredentials({
     required PrivateWalletCredentials credentials,
     required String password,
@@ -33,6 +38,12 @@ class TransactionSigningGateway {
         password: password,
       );
 
+  /// Signs the passed [transaction].
+  ///
+  /// This function triggers the entire signing flow, where a transaction summary is first shown to the user.
+  /// If the transaction is accepted, the workflow looks for a capable [TransactionSigner].
+  /// After a credentials retrieval and transaction signing is successful, a [SignedTransaction] object is output.
+  /// If any of the steps fail, a [TransactionSigningFailure] is returned.
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,
     required WalletLookupKey walletLookupKey,
@@ -51,6 +62,7 @@ class TransactionSigningGateway {
 
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
 
+  /// Verifies if passed lookupKey is pointing to a valid wallet stored within the secure storage.
   Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(WalletLookupKey walletLookupKey) =>
       _infoStorage.verifyLookupKey(walletLookupKey);
 
