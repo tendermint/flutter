@@ -375,15 +375,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  sacco:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: account-url-fix
-      resolved-ref: "6a4a6e26ced17931cf840201513c01c5ebb40217"
-      url: "https://github.com/wal33d006/sacco.dart.git"
-    source: git
-    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
