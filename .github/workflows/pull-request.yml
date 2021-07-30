@@ -3,26 +3,56 @@ name: Pull Request Worfklow
 on: [pull_request]
 
 jobs:
-  build-signing-gateway:
+  check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/transaction_signing_gateway
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: check for changes in folders
+      run: |
+        echo "changes_starport_template=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
+        echo "changes_transaction_signing_gateway=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/transaction_signing_gateway && echo "false" || echo "true")" >> $GITHUB_ENV
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: '2.2.2'
-
-    - name: pub get
+    - name: transaction_signing_gateway - pub get
+      working-directory: packages/transaction_signing_gateway
+      if: env.changes_transaction_signing_gateway == 'true'
       run: flutter pub get
 
-    - name: check codestyle
+    - name: transaction_signing_gateway - check codestyle
+      working-directory: packages/transaction_signing_gateway
+      if: env.changes_transaction_signing_gateway == 'true'
       run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
 
-    - name: dart analysis
+    - name: transaction_signing_gateway - dart analysis
+      working-directory: packages/transaction_signing_gateway
+      if: env.changes_transaction_signing_gateway == 'true'
       run: flutter analyze
 
-    - name: tests
+    - name: transaction_signing_gateway - tests
+      working-directory: packages/transaction_signing_gateway
+      if: env.changes_transaction_signing_gateway == 'true'
+      run: flutter test
+
+    - name: starport_template - pub get
+      working-directory: starport_template
+      if: env.changes_starport_template == 'true'
+      run: flutter pub get
+
+    - name: starport_template - check codestyle
+      working-directory: starport_template
+      if: env.changes_starport_template == 'true'
+      run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+
+    - name: starport_template - dart analysis
+      working-directory: starport_template
+      if: env.changes_starport_template == 'true'
+      run: flutter analyze
+
+    - name: starport_template - tests
+      working-directory: starport_template
+      if: env.changes_starport_template == 'true'
       run: flutter test
 
