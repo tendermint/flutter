@@ -9,6 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  transaction_signing_gateway:
+    path: ../packages/transaction_signing_gateway
+  cosmos_ui_components:
+    path: ../packages/cosmos_ui_components
 
 
   cupertino_icons: ^1.0.3
