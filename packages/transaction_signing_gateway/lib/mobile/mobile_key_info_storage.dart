@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -13,7 +14,6 @@ import 'package:transaction_signing_gateway/model/transaction_signing_failure.da
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info_serializer.dart';
-import 'package:transaction_signing_gateway/utils/future_either.dart';
 
 class MobileKeyInfoStorage implements KeyInfoStorage {
   static const _publicKeySuffix = ":public";
