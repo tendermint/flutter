@@ -98,6 +98,7 @@ void main() {
       signingGateway = TransactionSigningGateway(
         transactionSummaryUI: summaryUI,
         signers: [],
+        broadcasters: [],
         infoStorage: infoStorage,
       );
     });

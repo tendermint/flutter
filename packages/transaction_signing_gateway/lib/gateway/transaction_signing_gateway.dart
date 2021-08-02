@@ -3,24 +3,30 @@ import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
+import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
+import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
 
 class TransactionSigningGateway {
   final List<TransactionSigner> _signers;
+  final List<TransactionBroadcaster> _broadcasters;
   final KeyInfoStorage _infoStorage;
   final TransactionSummaryUI _transactionSummaryUI;
 
   TransactionSigningGateway({
     required List<TransactionSigner> signers,
+    required List<TransactionBroadcaster> broadcasters,
     required KeyInfoStorage infoStorage,
     required TransactionSummaryUI transactionSummaryUI,
   })  : _signers = List.unmodifiable(signers),
+        _broadcasters = List.unmodifiable(broadcasters),
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
@@ -60,6 +66,18 @@ class TransactionSigningGateway {
                 transaction: transaction,
               ));
 
+  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcastTransaction({
+    required WalletLookupKey walletLookupKey,
+    required SignedTransaction transaction,
+  }) async =>
+      _infoStorage
+          .getPrivateCredentials(walletLookupKey)
+          .leftMap<TransactionBroadcastingFailure>((err) => left(StorageProblemBroadcastingFailure()))
+          .flatMap((privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
+                transaction: transaction,
+                privateWalletCredentials: privateCreds,
+              ));
+
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
 
   /// Verifies if passed lookupKey is pointing to a valid wallet stored within the secure storage.
@@ -69,5 +87,10 @@ class TransactionSigningGateway {
   TransactionSigner _findCapableSigner(UnsignedTransaction transaction) => _signers.firstWhere(
         (element) => element.canSign(transaction),
         orElse: () => NotFoundTransactionSigner(),
+      );
+
+  TransactionBroadcaster _findCapableBroadcaster(SignedTransaction transaction) => _broadcasters.firstWhere(
+        (element) => element.canBroadcast(transaction),
+        orElse: () => NotFoundBroadcaster(),
       );
 }
