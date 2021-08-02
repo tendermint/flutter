@@ -12,6 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cosmos_utils:
+    path: ../cosmos_utils/
+
 
 dev_dependencies:
   flutter_test:

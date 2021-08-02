@@ -13,7 +13,8 @@ dependencies:
     path: ../packages/transaction_signing_gateway
   cosmos_ui_components:
     path: ../packages/cosmos_ui_components
-
+  cosmos_utils:
+    path: ../packages/cosmos_utils
 
   cupertino_icons: ^1.0.3
 

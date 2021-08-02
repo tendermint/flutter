@@ -14,9 +14,11 @@ dependencies:
     sdk: flutter
   dartz: 0.10.0-nullsafety.2
   equatable: 2.0.3
-  flutter_secure_storage: 4.2.0
+  flutter_secure_storage: 4.2.1
   encrypt: 5.0.0
   alan: 0.40.2+1
+  cosmos_utils:
+    path: ../cosmos_utils/
 
 dev_dependencies:
   flutter_test:
