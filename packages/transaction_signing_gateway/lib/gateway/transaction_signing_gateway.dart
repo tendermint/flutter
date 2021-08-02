@@ -20,7 +20,7 @@ class TransactionSigningGateway {
     required List<TransactionSigner> signers,
     required KeyInfoStorage infoStorage,
     required TransactionSummaryUI transactionSummaryUI,
-  })   : _signers = List.unmodifiable(signers),
+  })  : _signers = List.unmodifiable(signers),
         _infoStorage = infoStorage,
         _transactionSummaryUI = transactionSummaryUI;
 
