@@ -1,5 +1,20 @@
-abstract class TransactionBroadcastingFailure {}
+enum TransactionBroadcastingFailType {
+  noTransactionBroadcasterFound,
+  walletCredentialsStorageFailure,
+  unknown,
+}
 
-class TransactionBroadcasterNotFoundFailure extends TransactionBroadcastingFailure {}
+abstract class TransactionBroadcastingFailure {
+  TransactionBroadcastingFailType get type;
+}
 
-class StorageProblemBroadcastingFailure extends TransactionBroadcastingFailure {}
+class TransactionBroadcasterNotFoundFailure extends TransactionBroadcastingFailure {
+  @override
+  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.noTransactionBroadcasterFound;
+}
+
+class StorageProblemBroadcastingFailure extends TransactionBroadcastingFailure {
+  @override
+  // TODO: implement type
+  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.walletCredentialsStorageFailure;
+}

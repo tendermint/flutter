@@ -13,7 +13,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast(
       {required SignedTransaction transaction, required PrivateWalletCredentials privateWalletCredentials}) async {
     if (transaction is! SignedAlanTransaction) {
-      return left(AlanTransactionBroadcastingFailure('passed transaction is not $UnsignedAlanTransaction'));
+      return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
     }
     if (privateWalletCredentials is! AlanPrivateWalletCredentials) {
       return left(AlanTransactionBroadcastingFailure("passed privateCredentials is not $AlanPrivateWalletCredentials"));
@@ -41,4 +41,8 @@ class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure 
   String toString() {
     return 'AlanTransactionSigningFailure{cause: $cause}';
   }
+
+  @override
+  // TODO: implement type
+  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.unknown;
 }
