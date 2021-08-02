@@ -67,15 +67,12 @@ class TransactionSigningGateway {
               ));
 
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcastTransaction({
+    required WalletLookupKey walletLookupKey,
     required SignedTransaction transaction,
   }) async =>
-      _transactionSummaryUI
-          .showTransactionSummaryUI(transaction: transaction)
-          .flatMap(
-            (userAccepted) => _infoStorage
-                .getPrivateCredentials(walletLookupKey)
-                .leftMap((err) => left(StorageProblemBroadcastingFailure())),
-          )
+      _infoStorage
+          .getPrivateCredentials(walletLookupKey)
+          .leftMap<TransactionBroadcastingFailure>((err) => left(StorageProblemBroadcastingFailure()))
           .flatMap((privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
                 transaction: transaction,
                 privateWalletCredentials: privateCreds,
