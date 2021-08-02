@@ -18,12 +18,13 @@ class _RoutingPageState extends State<RoutingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: ContentStateSwitcher(
         isLoading: StarportApp.walletsStore.areWalletsLoading.value,
-        isError: StarportApp.walletsStore..loadWalletsFailure.value != null,
-        contentChild: SizedBox(),
-        emptyChild:,
+        isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
+        errorChild: CosmosErrorView(
+            title: "Something went wrong", message: "We had problems retrieving wallets from secure storage."),
+        contentChild: const SizedBox(),
       ),
     );
   }

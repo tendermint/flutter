@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: main
-      resolved-ref: "2094d62b6ca111c0a7586609a65b15b24df76f7c"
+      ref: "feature/template-routing-page"
+      resolved-ref: "46f9513631a8c93419385f5c0b6486830d6781f9"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
