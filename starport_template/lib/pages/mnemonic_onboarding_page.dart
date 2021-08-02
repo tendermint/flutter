@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 
 class MnemonicOnboardingPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CosmosAppBar(
-        title: "Enter mnemonic",
+        title: "Wallet Creation",
       ),
       body: SafeArea(
         child: Padding(
@@ -58,7 +59,7 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
     );
   }
 
-  void _generateMnemonicClicked() {}
+  void _generateMnemonicClicked() => setState(() => mnemonic = generateMnemonic());
 
-  void _proceedClicked() {}
+  void _proceedClicked() => notImplemented(context);
 }
