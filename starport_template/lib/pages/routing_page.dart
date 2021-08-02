@@ -1,5 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/pages/mnemonic_onboarding_page.dart';
+import 'package:starport_template/pages/wallets_list_page.dart';
 import 'package:starport_template/starport_app.dart';
 
 class RoutingPage extends StatefulWidget {
@@ -13,7 +15,19 @@ class _RoutingPageState extends State<RoutingPage> {
   @override
   void initState() {
     super.initState();
-    final loadWallets = StarportApp.walletsStore.loadWallets();
+    _loadWallets();
+  }
+
+  Future<void> _loadWallets() async {
+    final store = StarportApp.walletsStore;
+    await store.loadWallets();
+    if (store.loadWalletsFailure.value == null) {
+      if (store.wallets.value.isEmpty) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MnemonicOnboardingPage()));
+      } else {
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
+      }
+    }
   }
 
   @override
@@ -22,8 +36,10 @@ class _RoutingPageState extends State<RoutingPage> {
       body: ContentStateSwitcher(
         isLoading: StarportApp.walletsStore.areWalletsLoading.value,
         isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
-        errorChild: CosmosErrorView(
-            title: "Something went wrong", message: "We had problems retrieving wallets from secure storage."),
+        errorChild: const CosmosErrorView(
+          title: "Something went wrong",
+          message: "We had problems retrieving wallets from secure storage.",
+        ),
         contentChild: const SizedBox(),
       ),
     );

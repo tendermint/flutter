@@ -139,7 +139,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: "feature/template-routing-page"
-      resolved-ref: "46f9513631a8c93419385f5c0b6486830d6781f9"
+      resolved-ref: "8d806c743aff52a079cbb101b176be10b3c36eef"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +148,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "2094d62b6ca111c0a7586609a65b15b24df76f7c"
+      resolved-ref: b5def25829007bef4b10498514805f79f30b111e
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
