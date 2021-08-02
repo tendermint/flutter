@@ -18,7 +18,10 @@ dependencies:
   encrypt: 5.0.0
   alan: 0.40.2+1
   cosmos_utils:
-    path: ../cosmos_utils/
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_utils
+      ref: main
 
 dev_dependencies:
   flutter_test:

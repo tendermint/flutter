@@ -158,9 +158,11 @@ packages:
   cosmos_utils:
     dependency: "direct main"
     description:
-      path: "../cosmos_utils"
-      relative: true
-    source: path
+      path: "packages/cosmos_utils"
+      ref: main
+      resolved-ref: "5f4b35053f2c6775c5109d01e0ec6ff975286f32"
+      url: "https://github.com/tendermint/flutter.git"
+    source: git
     version: "0.0.1"
   crypto:
     dependency: transitive
