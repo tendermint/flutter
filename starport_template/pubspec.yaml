@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  transaction_signing_gateway:
-    path: ../packages/transaction_signing_gateway
 
+  mobx: ^2.0.3
+  flutter_mobx: ^2.0.1
   cosmos_ui_components:
     git:
       url: https://github.com/tendermint/flutter.git
@@ -22,6 +22,12 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_utils
+      ref: main
+
+  transaction_signing_gateway:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/transaction_signing_gateway
       ref: main
 
   cupertino_icons: ^1.0.3

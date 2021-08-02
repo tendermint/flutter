@@ -220,6 +220,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_mobx:
+    dependency: "direct main"
+    description:
+      name: flutter_mobx
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flutter_secure_storage:
     dependency: transitive
     description:
@@ -330,6 +337,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  mobx:
+    dependency: "direct main"
+    description:
+      name: mobx
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   package_config:
     dependency: transitive
     description:
@@ -436,9 +450,11 @@ packages:
   transaction_signing_gateway:
     dependency: "direct main"
     description:
-      path: "../packages/transaction_signing_gateway"
-      relative: true
-    source: path
+      path: "packages/transaction_signing_gateway"
+      ref: main
+      resolved-ref: b5def25829007bef4b10498514805f79f30b111e
+      url: "https://github.com/tendermint/flutter.git"
+    source: git
     version: "0.0.1"
   typed_data:
     dependency: transitive
