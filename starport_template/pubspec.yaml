@@ -19,7 +19,7 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: setup_password_sheet
+      ref: main
 
   cosmos_utils:
     git:
