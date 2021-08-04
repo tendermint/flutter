@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: setup_password_sheet
-      resolved-ref: d44b95621ae969a8c26d8a34b81138299d1b42d4
+      ref: main
+      resolved-ref: "6a4eee7dd7ed22211dd9904cb1355bc4c92c918e"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

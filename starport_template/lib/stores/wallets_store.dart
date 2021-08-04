@@ -43,7 +43,7 @@ class WalletsStore {
       mnemonic: mnemonic,
       networkInfo: baseEnv.networkInfo,
     );
-    final result = await _transactionSigningGateway.storeWalletCredentials(
+    await _transactionSigningGateway.storeWalletCredentials(
       credentials: creds,
       password: password,
     );
