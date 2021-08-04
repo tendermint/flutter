@@ -3,7 +3,6 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/wallets_list_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/widgets/password_setup_sheet.dart';
 
 class MnemonicOnboardingPage extends StatefulWidget {
