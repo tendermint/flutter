@@ -1,6 +1,9 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/pages/wallets_list_page.dart';
+import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/widgets/password_setup_sheet.dart';
 
 class MnemonicOnboardingPage extends StatefulWidget {
@@ -69,6 +72,9 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
         ),
       );
 
-  // TODO
-  void submitPasswordClicked(String password) => notImplemented(context);
+  Future submitPasswordClicked(String password) async {
+    final store = StarportApp.walletsStore;
+    await store.importAlanWallet(baseEnv, mnemonic, password);
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
+  }
 }
