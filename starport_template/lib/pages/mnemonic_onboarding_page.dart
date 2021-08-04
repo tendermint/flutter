@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/widgets/password_setup_sheet.dart';
 
 class MnemonicOnboardingPage extends StatefulWidget {
   const MnemonicOnboardingPage({Key? key}) : super(key: key);
@@ -61,5 +62,13 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
 
   void _generateMnemonicClicked() => setState(() => mnemonic = generateMnemonic());
 
-  void _proceedClicked() => notImplemented(context);
+  void _proceedClicked() => showModalBottomSheet(
+        context: context,
+        builder: (context) => PasswordSetupSheet(
+          submitClicked: submitPasswordClicked,
+        ),
+      );
+
+  // TODO
+  void submitPasswordClicked(String password) => notImplemented(context);
 }

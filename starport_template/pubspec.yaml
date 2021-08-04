@@ -13,10 +13,11 @@ dependencies:
   mobx: ^2.0.3
   flutter_mobx: ^2.0.1
   cosmos_ui_components:
+#    path: ../packagefs/cosmos_ui_components
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: feature/template-routing-page
+      ref: main
 
   cosmos_utils:
     git:

@@ -77,7 +77,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.1.0"
   build_config:
     dependency: transitive
     description:
@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: "feature/template-routing-page"
-      resolved-ref: "8d806c743aff52a079cbb101b176be10b3c36eef"
+      ref: main
+      resolved-ref: "5c0e386284a8e380e26cc08fa93a46689b57ed8f"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +148,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: b5def25829007bef4b10498514805f79f30b111e
+      resolved-ref: "5c0e386284a8e380e26cc08fa93a46689b57ed8f"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -452,7 +452,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: b5def25829007bef4b10498514805f79f30b111e
+      resolved-ref: "5c0e386284a8e380e26cc08fa93a46689b57ed8f"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
