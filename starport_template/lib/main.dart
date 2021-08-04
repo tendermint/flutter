@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/stores/wallets_store.dart';
+import 'package:starport_template/utils/base_env.dart';
 import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction_signer.dart';
@@ -26,5 +27,15 @@ void _buildDependencies() {
       serializers: [AlanCredentialsSerializer()],
     ),
   );
-  StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway);
+  StarportApp.walletsStore = WalletsStore(
+    StarportApp.signingGateway,
+    BaseEnv()
+      ..setEnv(
+        lcdUrl: lcdUrl,
+        grpcUrl: grpcUrl,
+        lcdPort: lcdPort,
+        grpcPort: grpcPort,
+        ethUrl: ethUrl,
+      ),
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/components/template/cosmos_password_field.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class PasswordSetupSheet extends StatefulWidget {
@@ -21,16 +22,14 @@ class _PasswordSetupSheetState extends State<PasswordSetupSheet> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: CosmosAppTheme.spacingM),
           child: CosmosPasswordField(
-            onPasswordUpdated: (value) {
-              password = value;
-            },
+            onPasswordUpdated: (value) => setState(() => password = value),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => password != null ? widget.submitClicked(password!) : null,
+        onPressed: password == null ? null : () => widget.submitClicked(password!),
         child: const Icon(Icons.arrow_forward),
       ),
     );

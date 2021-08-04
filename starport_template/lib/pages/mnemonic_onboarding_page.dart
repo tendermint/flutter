@@ -74,7 +74,7 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
 
   Future submitPasswordClicked(String password) async {
     final store = StarportApp.walletsStore;
-    await store.importAlanWallet(baseEnv, mnemonic, password);
+    await store.importAlanWallet(mnemonic, password);
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
   }
 }

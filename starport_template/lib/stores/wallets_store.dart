@@ -9,8 +9,9 @@ import 'package:uuid/uuid.dart';
 
 class WalletsStore {
   final TransactionSigningGateway _transactionSigningGateway;
+  final BaseEnv baseEnv;
 
-  WalletsStore(this._transactionSigningGateway);
+  WalletsStore(this._transactionSigningGateway, this.baseEnv);
 
   final Observable<bool> areWalletsLoading = Observable(false);
 
@@ -28,7 +29,6 @@ class WalletsStore {
   }
 
   Future<WalletPublicInfo> importAlanWallet(
-    BaseEnv baseEnv,
     String mnemonic,
     String password,
   ) async {
