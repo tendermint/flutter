@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/components/template/cosmos_password_field.dart';
 import 'package:flutter/material.dart';
 
 class PasswordSetupSheet extends StatefulWidget {
@@ -13,11 +14,7 @@ class PasswordSetupSheet extends StatefulWidget {
 }
 
 class _PasswordSetupSheetState extends State<PasswordSetupSheet> {
-  bool obscurePassword = true;
-
-  void togglePasswordVisibility() => setState(() => obscurePassword = !obscurePassword);
-
-  final TextEditingController _passwordController = TextEditingController();
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +22,15 @@ class _PasswordSetupSheetState extends State<PasswordSetupSheet> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: TextFormField(
-            obscureText: obscurePassword,
-            controller: _passwordController,
-            decoration: InputDecoration(
-              hintText: 'Enter password',
-              helperText: 'This password will be used to recover your account every time you log in to the app',
-              helperMaxLines: 3,
-              suffixIcon: InkWell(
-                onTap: togglePasswordVisibility,
-                child: Icon(obscurePassword ? Icons.visibility : Icons.visibility_off),
-              ),
-            ),
+          child: CosmosPasswordField(
+            onPasswordUpdated: (value) {
+              password = value;
+            },
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => widget.submitClicked(_passwordController.text),
+        onPressed: () => password != null ? widget.submitClicked(password!) : null,
         child: const Icon(Icons.arrow_forward),
       ),
     );
