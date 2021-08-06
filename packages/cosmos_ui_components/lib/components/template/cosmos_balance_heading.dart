@@ -1,10 +1,14 @@
+import 'package:cosmos_ui_components/cosmos_app_theme.dart';
 import 'package:flutter/material.dart';
 
 class BalanceHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      padding: const EdgeInsets.symmetric(
+        vertical: CosmosAppTheme.spacingXS,
+        horizontal: CosmosAppTheme.spacingM,
+      ),
       child: Row(
         children: [
           Text(
@@ -13,12 +17,18 @@ class BalanceHeading extends StatelessWidget {
             style: Theme.of(context).textTheme.headline6,
           ),
           Container(
-            margin: const EdgeInsets.only(left: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
+            margin: const EdgeInsets.only(left: CosmosAppTheme.spacingS),
+            padding:
+                const EdgeInsets.symmetric(horizontal: CosmosAppTheme.spacingM, vertical: CosmosAppTheme.spacingXS),
+            decoration:
+                BoxDecoration(color: Colors.blueGrey, borderRadius: BorderRadius.circular(CosmosAppTheme.radiusL)),
             child: const Text(
               'Cosmos',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: CosmosAppTheme.fontSizeXS,
+              ),
             ),
           )
         ],
