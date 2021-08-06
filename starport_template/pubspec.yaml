@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   mobx: ^2.0.3
+  alan:
+  uuid: 3.0.4
   flutter_mobx: ^2.0.1
   cosmos_ui_components:
 #    path: ../packagefs/cosmos_ui_components
