@@ -27,15 +27,13 @@ void _buildDependencies() {
       serializers: [AlanCredentialsSerializer()],
     ),
   );
-  StarportApp.walletsStore = WalletsStore(
-    StarportApp.signingGateway,
-    BaseEnv()
-      ..setEnv(
-        lcdUrl: lcdUrl,
-        grpcUrl: grpcUrl,
-        lcdPort: lcdPort,
-        grpcPort: grpcPort,
-        ethUrl: ethUrl,
-      ),
-  );
+  StarportApp.baseEnv = BaseEnv()
+    ..setEnv(
+      lcdUrl: lcdUrl,
+      grpcUrl: grpcUrl,
+      lcdPort: lcdPort,
+      grpcPort: grpcPort,
+      ethUrl: ethUrl,
+    );
+  StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway, StarportApp.baseEnv);
 }

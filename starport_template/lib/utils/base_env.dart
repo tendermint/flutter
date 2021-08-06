@@ -33,12 +33,3 @@ const grpcPort = String.fromEnvironment('GRPC_PORT', defaultValue: '9091');
 const lcdUrl = String.fromEnvironment('LCD_URL', defaultValue: 'localhost');
 const grpcUrl = String.fromEnvironment('GRPC_URL', defaultValue: 'localhost');
 const ethUrl = String.fromEnvironment('ETH_URL', defaultValue: 'HTTP://127.0.0.1:7545');
-
-final baseEnv = BaseEnv()
-  ..setEnv(
-    lcdUrl: lcdUrl,
-    grpcUrl: grpcUrl,
-    lcdPort: lcdPort,
-    grpcPort: grpcPort,
-    ethUrl: ethUrl,
-  );
