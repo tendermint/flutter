@@ -27,7 +27,7 @@ class BalanceHeading extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: CosmosAppTheme.fontSizeXS,
+                fontSize: CosmosAppTheme.fontSizeS,
               ),
             ),
           )
