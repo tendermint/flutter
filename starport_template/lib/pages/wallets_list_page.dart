@@ -62,7 +62,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
 
   void _walletClicked(int index) => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const WalletDetailsPage(),
+          builder: (context) => WalletDetailsPage(walletInfo: walletInfos[index]),
         ),
       );
 }
