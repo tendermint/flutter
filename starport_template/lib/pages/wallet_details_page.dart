@@ -93,7 +93,6 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
 
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
-    setState(() {});
   }
 
   Future<void> _openSendMoneySheet(Denom denom) async {
