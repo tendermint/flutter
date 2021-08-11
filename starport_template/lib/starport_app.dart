@@ -9,6 +9,7 @@ class StarportApp extends StatelessWidget {
   static late TransactionSigningGateway signingGateway;
   static late WalletsStore walletsStore;
   static late BaseEnv baseEnv;
+  static late String password;
 
   @override
   Widget build(BuildContext context) {

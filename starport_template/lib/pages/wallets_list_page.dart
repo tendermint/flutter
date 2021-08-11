@@ -23,6 +23,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
         (publicInfo) => WalletInfo(
           name: publicInfo.name,
           address: publicInfo.publicAddress,
+          walletId: publicInfo.walletId,
         ),
       )
       .toList();
@@ -62,7 +63,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
 
   void _walletClicked(int index) => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const WalletDetailsPage(),
+          builder: (context) => WalletDetailsPage(walletInfo: walletInfos[index]),
         ),
       );
 }

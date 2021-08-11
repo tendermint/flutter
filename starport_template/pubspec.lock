@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: main
-      resolved-ref: "6a4eee7dd7ed22211dd9904cb1355bc4c92c918e"
+      ref: wallet_details_page
+      resolved-ref: "54e443c00d9c95e4910fca82925c13ad5b0ec4fe"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +148,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: d974f4db6b705e46e613180f10fb795a5e8f8091
+      resolved-ref: c6af198f7fdaf4a0ea65871ff05d373e47b87aed
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -180,6 +180,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.0-nullsafety.2"
+  decimal:
+    dependency: "direct main"
+    description:
+      name: decimal
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.0"
   encrypt:
     dependency: transitive
     description:
@@ -259,7 +266,7 @@ packages:
       name: grpc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   hex:
     dependency: transitive
     description:
@@ -268,7 +275,7 @@ packages:
     source: hosted
     version: "0.2.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -393,6 +400,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -452,7 +466,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: d974f4db6b705e46e613180f10fb795a5e8f8091
+      resolved-ref: c6af198f7fdaf4a0ea65871ff05d373e47b87aed
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
