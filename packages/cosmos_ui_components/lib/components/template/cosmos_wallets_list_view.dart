@@ -31,9 +31,11 @@ class CosmosWalletsListView extends StatelessWidget {
 class WalletInfo {
   final String name;
   final String address;
+  final String walletId;
 
   WalletInfo({
     required this.name,
     required this.address,
+    required this.walletId,
   });
 }
