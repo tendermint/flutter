@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
@@ -18,6 +19,7 @@ class WalletsStore {
   final Observable<bool> areWalletsLoading = Observable(false);
 
   final Observable<bool> isSendMoneyLoading = Observable(false);
+  final Observable<bool> isSendMoneyError = Observable(false);
   final Observable<bool> isBalancesLoading = Observable(false);
   final Observable<bool> isError = Observable(false);
 
@@ -34,6 +36,17 @@ class WalletsStore {
       (newWallets) => wallets.value = newWallets,
     );
     areWalletsLoading.value = false;
+  }
+
+  Future<void> getBalances(String walletAddress) async {
+    isError.value = false;
+    isBalancesLoading.value = true;
+    try {
+      balancesList.value = await CosmosBalances(baseEnv).getBalances(walletAddress);
+    } catch (error) {
+      isError.value = false;
+    }
+    isBalancesLoading.value = false;
   }
 
   Future<WalletPublicInfo> importAlanWallet(
@@ -59,15 +72,22 @@ class WalletsStore {
     return creds.publicInfo;
   }
 
-  Future sendCosmosMoney(
+  Future<void> sendCosmosMoney(
     WalletPublicInfo info,
     Balance balance,
     String toAddress,
   ) async {
-    await TokenSender(_transactionSigningGateway).sendCosmosMoney(
-      info,
-      balance,
-      toAddress,
-    );
+    isSendMoneyLoading.value = true;
+    isSendMoneyError.value = false;
+    try {
+      await TokenSender(_transactionSigningGateway).sendCosmosMoney(
+        info,
+        balance,
+        toAddress,
+      );
+    } catch (ex) {
+      isError.value = true;
+    }
+    isSendMoneyLoading.value = false;
   }
 }

@@ -54,19 +54,19 @@ class _SendMoneySheetState extends State<SendMoneySheet> {
           ),
         ),
         CosmosElevatedButton(
-          onTap: onSendMoneyClicked,
+          onTap: _onSendMoneyClicked,
           text: 'Send money',
         ),
       ],
     );
   }
 
-  void onSendMoneyClicked() {
+  void _onSendMoneyClicked() {
     final amount = Amount.fromString(_amount);
     final info = WalletPublicInfo(
       name: widget.walletInfo.name,
       publicAddress: widget.walletInfo.address,
-      walletId: widget.walletInfo.address,
+      walletId: widget.walletInfo.walletId,
       chainId: 'cosmos',
     );
     final balance = Balance(denom: widget.denom, amount: amount);

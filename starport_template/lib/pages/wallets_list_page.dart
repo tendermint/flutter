@@ -23,6 +23,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
         (publicInfo) => WalletInfo(
           name: publicInfo.name,
           address: publicInfo.publicAddress,
+          walletId: publicInfo.walletId,
         ),
       )
       .toList();

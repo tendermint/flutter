@@ -1,7 +1,7 @@
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/starport_app.dart';
 import 'package:alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
 import 'package:alan/alan.dart' as alan;
+import 'package:starport_template/starport_app.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
@@ -12,12 +12,11 @@ class TokenSender {
 
   TokenSender(this.transactionSigningGateway);
 
-  Future sendCosmosMoney(
+  Future<void> sendCosmosMoney(
     WalletPublicInfo info,
     Balance balance,
     String toAddress,
   ) async {
-    StarportApp.walletsStore.isSendMoneyLoading.value = true;
     final message = bank.MsgSend.create()
       ..fromAddress = info.publicAddress
       ..toAddress = toAddress;
@@ -44,6 +43,5 @@ class TokenSender {
       (signedTransaction) => transactionSigningGateway.broadcastTransaction(
           walletLookupKey: walletLookupKey, transaction: signedTransaction),
     );
-    StarportApp.walletsStore.isSendMoneyLoading.value = false;
   }
 }

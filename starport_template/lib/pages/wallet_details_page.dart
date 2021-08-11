@@ -7,7 +7,6 @@ import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/widgets/send_money_sheet.dart';
 
 class WalletDetailsPage extends StatefulWidget {
@@ -93,10 +92,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   }
 
   Future _fetchWalletBalances() async {
-    await CosmosBalances(StarportApp.baseEnv).getCosmosBalances(
-      StarportApp.baseEnv,
-      widget.walletInfo.address,
-    );
+    await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
     setState(() {});
   }
 

@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: main
-      resolved-ref: c6af198f7fdaf4a0ea65871ff05d373e47b87aed
+      ref: wallet_details_page
+      resolved-ref: "54e443c00d9c95e4910fca82925c13ad5b0ec4fe"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -233,7 +233,7 @@ packages:
       name: flutter_mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.1"
   flutter_secure_storage:
     dependency: transitive
     description:
@@ -266,7 +266,7 @@ packages:
       name: grpc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   hex:
     dependency: transitive
     description:
@@ -350,7 +350,7 @@ packages:
       name: mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.3"
   package_config:
     dependency: transitive
     description:
