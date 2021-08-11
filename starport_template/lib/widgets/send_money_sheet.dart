@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/components/cosmos_elevated_button.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_wallets_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/amount.dart';
@@ -40,9 +41,7 @@ class _SendMoneySheetState extends State<SendMoneySheet> {
               labelText: 'Enter wallet address',
               border: OutlineInputBorder(),
             ),
-            onChanged: (value) {
-              _toAddress = value;
-            },
+            onChanged: (value) => _toAddress = value,
           ),
         ),
         ListTile(
@@ -51,29 +50,26 @@ class _SendMoneySheetState extends State<SendMoneySheet> {
               labelText: 'Enter amount',
               border: OutlineInputBorder(),
             ),
-            onChanged: (value) {
-              _amount = value;
-            },
+            onChanged: (value) => _amount = value,
           ),
         ),
-        ElevatedButton(
-          onPressed: () async {
-            final amount = Amount.fromString(_amount);
-            final info = WalletPublicInfo(
-              name: widget.walletInfo.name,
-              publicAddress: widget.walletInfo.address,
-              walletId: widget.walletInfo.address,
-              chainId: 'cosmos',
-            );
-            final balance = Balance(denom: widget.denom, amount: amount);
-            StarportApp.walletsStore.sendCosmosMoney(info, balance, _toAddress);
-          },
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-          ),
-          child: const Text('Send money'),
+        CosmosElevatedButton(
+          onTap: onSendMoneyClicked,
+          text: 'Send money',
         ),
       ],
     );
+  }
+
+  void onSendMoneyClicked() {
+    final amount = Amount.fromString(_amount);
+    final info = WalletPublicInfo(
+      name: widget.walletInfo.name,
+      publicAddress: widget.walletInfo.address,
+      walletId: widget.walletInfo.address,
+      chainId: 'cosmos',
+    );
+    final balance = Balance(denom: widget.denom, amount: amount);
+    StarportApp.walletsStore.sendCosmosMoney(info, balance, _toAddress);
   }
 }

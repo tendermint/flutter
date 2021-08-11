@@ -12,9 +12,7 @@ class Balance extends Equatable {
   });
 
   @override
-  String toString() {
-    return '$amount $denom';
-  }
+  String toString() => '$amount $denom';
 
   @override
   List<Object> get props => [

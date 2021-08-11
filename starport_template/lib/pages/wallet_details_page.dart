@@ -7,6 +7,7 @@ import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/widgets/send_money_sheet.dart';
 
 class WalletDetailsPage extends StatefulWidget {
@@ -57,10 +58,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                             (balance) => BalanceCard(
                               denomText: balance.denom.text,
                               amountDisplayText: balance.amount.value.toString(),
-                              onTransferPressed: () {
-                                final denom = Denom(balance.denom.text);
-                                openSendMoneySheet(denom);
-                              },
+                              onTransferPressed: () => _transferPressed(balance),
                             ),
                           )
                           .toList(),
@@ -89,15 +87,20 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     );
   }
 
+  void _transferPressed(Balance balance) {
+    final denom = Denom(balance.denom.text);
+    _openSendMoneySheet(denom);
+  }
+
   Future _fetchWalletBalances() async {
-    await StarportApp.walletsStore.getCosmosBalances(
+    await CosmosBalances(StarportApp.baseEnv).getCosmosBalances(
       StarportApp.baseEnv,
       widget.walletInfo.address,
     );
     setState(() {});
   }
 
-  Future<void> openSendMoneySheet(Denom denom) async {
+  Future<void> _openSendMoneySheet(Denom denom) async {
     showModalBottomSheet(
       context: context,
       builder: (context) => SafeArea(

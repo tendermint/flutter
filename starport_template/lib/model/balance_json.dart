@@ -8,11 +8,4 @@ class BalanceJson {
     denom = json['denom'] as String;
     amount = json['amount'] as String;
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['denom'] = denom;
-    data['amount'] = amount;
-    return data;
-  }
 }
