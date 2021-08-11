@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: wallet_details_page
-      resolved-ref: "54e443c00d9c95e4910fca82925c13ad5b0ec4fe"
+      ref: main
+      resolved-ref: "44b68fc4e3199d098b89b4cdc84f5c103a7d8fde"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +148,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: c6af198f7fdaf4a0ea65871ff05d373e47b87aed
+      resolved-ref: "44b68fc4e3199d098b89b4cdc84f5c103a7d8fde"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -466,7 +466,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: c6af198f7fdaf4a0ea65871ff05d373e47b87aed
+      resolved-ref: "44b68fc4e3199d098b89b4cdc84f5c103a7d8fde"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

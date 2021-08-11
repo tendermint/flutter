@@ -21,7 +21,7 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: wallet_details_page
+      ref: main
 
   cosmos_utils:
     git:
