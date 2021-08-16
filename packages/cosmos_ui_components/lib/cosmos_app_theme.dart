@@ -27,7 +27,7 @@ class CosmosAppTheme {
   static ThemeData buildAppTheme() {
     return ThemeData(
       brightness: Brightness.light,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         brightness: Brightness.light,
         backgroundColor: CosmosColors.lightBg,
         foregroundColor: CosmosColors.onLightText,
@@ -69,7 +69,7 @@ class CosmosAppTheme {
       scaffoldBackgroundColor: CosmosColors.darkBg,
       disabledColor: CosmosColors.darkInactive,
       dividerColor: CosmosColors.darkDivider,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         brightness: Brightness.dark,
         backgroundColor: CosmosColors.darkBg,
         foregroundColor: CosmosColors.onDarkText,
