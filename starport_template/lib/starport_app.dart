@@ -15,6 +15,7 @@ class StarportApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Starport template',
+      darkTheme: CosmosAppTheme.buildDarkAppTheme(),
       theme: CosmosAppTheme.buildAppTheme(),
       home: const RoutingPage(),
     );
