@@ -26,13 +26,95 @@ class CosmosAppTheme {
 
   static ThemeData buildAppTheme() {
     return ThemeData(
-      scaffoldBackgroundColor: offWhite,
-      disabledColor: Colors.grey,
-      dividerColor: Colors.grey,
-      primarySwatch: Colors.blue,
+      brightness: Brightness.light,
+      appBarTheme: AppBarTheme(
+        brightness: Brightness.light,
+        backgroundColor: CosmosColors.lightBg,
+        foregroundColor: CosmosColors.onLightText,
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: CosmosColors.onLightText,
+          ),
+        ),
+      ),
+      scaffoldBackgroundColor: CosmosColors.lightBg,
+      disabledColor: CosmosColors.lightInactive,
+      dividerColor: CosmosColors.lightDivider,
+      colorScheme: const ColorScheme(
+        primary: CosmosColors.darkBg,
+        primaryVariant: CosmosColors.lightSurface,
+        secondary: CosmosColors.darkBg,
+        secondaryVariant: CosmosColors.lightBg,
+        surface: CosmosColors.lightSurface,
+        background: CosmosColors.lightBg,
+        error: CosmosColors.error,
+        onPrimary: CosmosColors.onDarkText,
+        onSecondary: CosmosColors.onDarkText,
+        onSurface: CosmosColors.onLightText,
+        onBackground: CosmosColors.onLightText,
+        onError: CosmosColors.onDarkText,
+        brightness: Brightness.light,
+      ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
     );
   }
+
+  static ThemeData buildDarkAppTheme() {
+    return ThemeData(
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: CosmosColors.darkBg,
+      disabledColor: CosmosColors.darkInactive,
+      dividerColor: CosmosColors.darkDivider,
+      appBarTheme: AppBarTheme(
+        brightness: Brightness.dark,
+        backgroundColor: CosmosColors.darkBg,
+        foregroundColor: CosmosColors.onDarkText,
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: CosmosColors.onDarkText,
+          ),
+        ),
+      ),
+      colorScheme: const ColorScheme(
+        primary: CosmosColors.darkBg,
+        primaryVariant: CosmosColors.darkSurface,
+        secondary: CosmosColors.lightBg,
+        secondaryVariant: CosmosColors.lightBg,
+        surface: CosmosColors.darkSurface,
+        background: CosmosColors.darkBg,
+        error: CosmosColors.error,
+        onPrimary: CosmosColors.onDarkText,
+        onSecondary: CosmosColors.onLightText,
+        onSurface: CosmosColors.onDarkText,
+        onBackground: CosmosColors.onDarkText,
+        onError: CosmosColors.onLightText,
+        brightness: Brightness.dark,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+}
+
+class CosmosColors {
+  static const lightBg = Color(0xFFFFFFFF);
+  static const onLightText = Color(0xFF000000);
+  static const lightInactive = Color(0x2C000000);
+  static const lightDivider = Color(0x17000000);
+  static const lightSurface = Color(0xFFFFFFFF);
+
+  static const darkBg = Color(0xFF000000);
+  static const darkInactive = Color(0x2CFFFFFF);
+  static const darkSurface = Color(0xFF171717);
+  static const onDarkText = Color(0xFFFFFFFF);
+  static const darkDivider = Color(0x17FFFFFF);
+
+  static const error = Color(0xFFE74444);
 }
