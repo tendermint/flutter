@@ -1,5 +1,6 @@
 enum WalletDerivationFailType {
   invalidMnemonic,
+  derivatorNotFound,
   unknown,
 }
 
@@ -19,4 +20,11 @@ class InvalidMnemonicFailure implements WalletDerivationFailure {
   String toString() {
     return 'InvalidMnemonicFailure{fail: $failure}';
   }
+}
+
+class DerivatorNotFoundFailure implements WalletDerivationFailure {
+  @override
+  WalletDerivationFailType get type => WalletDerivationFailType.derivatorNotFound;
+
+  const DerivatorNotFoundFailure();
 }
