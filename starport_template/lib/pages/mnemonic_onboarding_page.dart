@@ -75,6 +75,9 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
     final store = StarportApp.walletsStore;
     StarportApp.password = password;
     await store.importAlanWallet(mnemonic, password);
+    if (!mounted) {
+      return;
+    }
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
   }
 }
