@@ -1,3 +1,4 @@
+import 'package:alan/alan.dart' as alan;
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/utils/base_env.dart';
@@ -7,7 +8,6 @@ import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
-import 'package:alan/alan.dart' as alan;
 import 'package:uuid/uuid.dart';
 
 class WalletsStore {
@@ -16,12 +16,32 @@ class WalletsStore {
 
   WalletsStore(this._transactionSigningGateway, this.baseEnv);
 
-  final Observable<bool> areWalletsLoading = Observable(false);
+  final Observable<bool> _areWalletsLoading = Observable(false);
 
-  final Observable<bool> isSendMoneyLoading = Observable(false);
-  final Observable<bool> isSendMoneyError = Observable(false);
-  final Observable<bool> isBalancesLoading = Observable(false);
-  final Observable<bool> isError = Observable(false);
+  final Observable<bool> _isSendMoneyLoading = Observable(false);
+  final Observable<bool> _isSendMoneyError = Observable(false);
+  final Observable<bool> _isBalancesLoading = Observable(false);
+  final Observable<bool> _isError = Observable(false);
+
+  bool get areWalletsLoading => _areWalletsLoading.value;
+
+  set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+
+  bool get isSendMoneyError => _isSendMoneyError.value;
+
+  set isSendMoneyError(bool val) => Action(() => _isSendMoneyError.value = val)();
+
+  bool get isSendMoneyLoading => _isSendMoneyLoading.value;
+
+  set isSendMoneyLoading(bool val) => Action(() => _isSendMoneyLoading.value = val)();
+
+  bool get isError => _isError.value;
+
+  set isError(bool val) => Action(() => _isError.value = val)();
+
+  bool get isBalancesLoading => _isBalancesLoading.value;
+
+  set isBalancesLoading(bool val) => Action(() => _isBalancesLoading.value = val)();
 
   final Observable<List<Balance>> balancesList = Observable([]);
 
@@ -30,23 +50,23 @@ class WalletsStore {
   Observable<List<WalletPublicInfo>> wallets = Observable([]);
 
   Future<void> loadWallets() async {
-    areWalletsLoading.value = true;
+    areWalletsLoading = true;
     (await _transactionSigningGateway.getWalletsList()).fold(
       (fail) => loadWalletsFailure.value = fail,
       (newWallets) => wallets.value = newWallets,
     );
-    areWalletsLoading.value = false;
+    areWalletsLoading = false;
   }
 
   Future<void> getBalances(String walletAddress) async {
-    isError.value = false;
-    isBalancesLoading.value = true;
+    isError = false;
+    isBalancesLoading = true;
     try {
       balancesList.value = await CosmosBalances(baseEnv).getBalances(walletAddress);
     } catch (error) {
-      isError.value = false;
+      isError = false;
     }
-    isBalancesLoading.value = false;
+    isBalancesLoading = false;
   }
 
   Future<WalletPublicInfo> importAlanWallet(
@@ -77,8 +97,8 @@ class WalletsStore {
     Balance balance,
     String toAddress,
   ) async {
-    isSendMoneyLoading.value = true;
-    isSendMoneyError.value = false;
+    isSendMoneyLoading = true;
+    isSendMoneyError = false;
     try {
       await TokenSender(_transactionSigningGateway).sendCosmosMoney(
         info,
@@ -86,8 +106,8 @@ class WalletsStore {
         toAddress,
       );
     } catch (ex) {
-      isError.value = true;
+      isError = true;
     }
-    isSendMoneyLoading.value = false;
+    isSendMoneyLoading = false;
   }
 }
