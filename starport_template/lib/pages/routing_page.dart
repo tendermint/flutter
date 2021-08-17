@@ -37,7 +37,7 @@ class _RoutingPageState extends State<RoutingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ContentStateSwitcher(
-        isLoading: StarportApp.walletsStore.areWalletsLoading.value,
+        isLoading: StarportApp.walletsStore.areWalletsLoading,
         isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
         errorChild: const CosmosErrorView(
           title: "Something went wrong",
