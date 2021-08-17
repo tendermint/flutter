@@ -22,6 +22,9 @@ class _RoutingPageState extends State<RoutingPage> {
     final store = StarportApp.walletsStore;
     await store.loadWallets();
     if (store.loadWalletsFailure.value == null) {
+      if (!mounted) {
+        return;
+      }
       if (store.wallets.value.isEmpty) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MnemonicOnboardingPage()));
       } else {
