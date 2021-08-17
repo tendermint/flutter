@@ -85,9 +85,10 @@ class TransactionSigningGateway {
                 privateWalletCredentials: privateCreds,
               ));
 
-  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> deriveWallet(
-          {required AlanWalletDerivationInfo alanWalletDerivationInfo}) async =>
-      _findCapableDerivator(alanWalletDerivationInfo).derive(walletDerivationInfo: alanWalletDerivationInfo);
+  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> deriveWallet({
+    required WalletDerivationInfo walletDerivationInfo,
+  }) async =>
+      _findCapableDerivator(walletDerivationInfo).derive(walletDerivationInfo: walletDerivationInfo);
 
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
 
