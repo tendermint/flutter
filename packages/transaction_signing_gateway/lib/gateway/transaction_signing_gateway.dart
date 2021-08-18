@@ -1,6 +1,7 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.dart';
+import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
@@ -9,16 +10,20 @@ import 'package:transaction_signing_gateway/model/transaction_broadcasting_failu
 import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
+import 'package:transaction_signing_gateway/model/wallet_derivation_failure.dart';
+import 'package:transaction_signing_gateway/model/wallet_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
+import 'package:transaction_signing_gateway/wallet_derivator.dart';
 
 class TransactionSigningGateway {
   final List<TransactionSigner> _signers;
   final List<TransactionBroadcaster> _broadcasters;
+  final List<WalletDerivator> _derivators;
   final KeyInfoStorage _infoStorage;
   final TransactionSummaryUI _transactionSummaryUI;
 
@@ -27,8 +32,10 @@ class TransactionSigningGateway {
     List<TransactionBroadcaster>? broadcasters,
     KeyInfoStorage? infoStorage,
     TransactionSummaryUI? transactionSummaryUI,
+    List<WalletDerivator>? derivators,
   })  : _signers = List.unmodifiable(signers ?? [AlanTransactionSigner()]),
         _broadcasters = List.unmodifiable(broadcasters ?? [AlanTransactionBroadcaster()]),
+        _derivators = List.unmodifiable(derivators ?? [AlanWalletDerivator()]),
         _infoStorage = infoStorage ?? MobileKeyInfoStorage(serializers: [AlanCredentialsSerializer()]),
         _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();
 
@@ -80,6 +87,11 @@ class TransactionSigningGateway {
                 privateWalletCredentials: privateCreds,
               ));
 
+  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> deriveWallet({
+    required WalletDerivationInfo walletDerivationInfo,
+  }) async =>
+      _findCapableDerivator(walletDerivationInfo).derive(walletDerivationInfo: walletDerivationInfo);
+
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
 
   /// Verifies if passed lookupKey is pointing to a valid wallet stored within the secure storage.
@@ -94,5 +106,10 @@ class TransactionSigningGateway {
   TransactionBroadcaster _findCapableBroadcaster(SignedTransaction transaction) => _broadcasters.firstWhere(
         (element) => element.canBroadcast(transaction),
         orElse: () => NotFoundBroadcaster(),
+      );
+
+  WalletDerivator _findCapableDerivator(WalletDerivationInfo walletDerivationInfo) => _derivators.firstWhere(
+        (element) => element.canDerive(walletDerivationInfo),
+        orElse: () => NotFoundDerivator(),
       );
 }

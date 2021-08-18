@@ -100,6 +100,7 @@ void main() {
         signers: [],
         broadcasters: [],
         infoStorage: infoStorage,
+        derivators: [],
       );
     });
   });
