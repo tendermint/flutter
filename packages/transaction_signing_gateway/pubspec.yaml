@@ -6,16 +6,15 @@ homepage: tendermint.com
 publish_to: 'none' # TODO publish it when ready
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
   flutter: ">=2.0.5"
 
 dependencies:
   flutter:
     sdk: flutter
-  dartz: 0.10.0-nullsafety.2
   equatable: 2.0.3
   flutter_secure_storage: 4.2.1
-  encrypt: 5.0.0
+  encrypt: 5.0.1
   alan: 0.40.2+1
   cosmos_utils:
     git:
@@ -26,7 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: 1.5.3
-  mockito: 5.0.10
+  lint: 1.6.0
+  mockito: 5.0.14
 
 flutter:

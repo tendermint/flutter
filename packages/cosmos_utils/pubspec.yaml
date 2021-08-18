@@ -1,22 +1,22 @@
 name: cosmos_utils
 description: Common utils package
 version: 0.0.1
-homepage:
+homepage: starport.com
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  dartz: 0.10.0-nullsafety.2
-  bip39: ^1.0.6
+  dartz: 0.10.0
+  bip39: 1.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^1.5.3
+  lint: 1.6.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

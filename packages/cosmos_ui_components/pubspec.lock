@@ -62,7 +62,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "5f4b35053f2c6775c5109d01e0ec6ff975286f32"
+      resolved-ref: "3653301536287b516e873a7d2fb23d2314fadf6f"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -117,7 +117,7 @@ packages:
       name: lint
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.3"
+    version: "1.6.0"
   matcher:
     dependency: transitive
     description:
@@ -145,7 +145,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.3.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -208,5 +208,5 @@ packages:
     source: hosted
     version: "2.1.0"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.13.0 <3.0.0"
   flutter: ">=1.17.0"
