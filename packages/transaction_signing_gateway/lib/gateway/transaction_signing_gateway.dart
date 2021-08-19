@@ -1,6 +1,9 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
+import 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.dart';
+import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
+import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
@@ -25,16 +28,16 @@ class TransactionSigningGateway {
   final TransactionSummaryUI _transactionSummaryUI;
 
   TransactionSigningGateway({
-    required List<TransactionSigner> signers,
-    required List<TransactionBroadcaster> broadcasters,
-    required KeyInfoStorage infoStorage,
-    required TransactionSummaryUI transactionSummaryUI,
-    required List<WalletDerivator> derivators,
-  })  : _signers = List.unmodifiable(signers),
-        _broadcasters = List.unmodifiable(broadcasters),
-        _derivators = List.unmodifiable(derivators),
-        _infoStorage = infoStorage,
-        _transactionSummaryUI = transactionSummaryUI;
+    List<TransactionSigner>? signers,
+    List<TransactionBroadcaster>? broadcasters,
+    KeyInfoStorage? infoStorage,
+    TransactionSummaryUI? transactionSummaryUI,
+    List<WalletDerivator>? derivators,
+  })  : _signers = List.unmodifiable(signers ?? [AlanTransactionSigner()]),
+        _broadcasters = List.unmodifiable(broadcasters ?? [AlanTransactionBroadcaster()]),
+        _derivators = List.unmodifiable(derivators ?? [AlanWalletDerivator()]),
+        _infoStorage = infoStorage ?? MobileKeyInfoStorage(serializers: [AlanCredentialsSerializer()]),
+        _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();
 
   /// Stores the passed-in wallet credentials securely on the device.
   ///
