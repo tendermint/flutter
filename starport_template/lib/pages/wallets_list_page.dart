@@ -34,7 +34,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
     return Scaffold(
       // Not translating this.
       appBar: const CosmosAppBar(
-        title: 'Tendermint 1.0.2',
+        title: 'Starport',
       ),
       body: ContentStateSwitcher(
           emptyChild: const EmptyListMessage(
