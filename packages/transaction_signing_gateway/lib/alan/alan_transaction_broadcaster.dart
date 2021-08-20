@@ -1,3 +1,4 @@
+import 'package:alan/alan.dart';
 import 'package:alan/transactions/sender/tx_sender.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
@@ -19,7 +20,8 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
       return left(AlanTransactionBroadcastingFailure("passed privateCredentials is not $AlanPrivateWalletCredentials"));
     }
     final txSender = TxSender.fromNetworkInfo(privateWalletCredentials.networkInfo);
-    final response = await txSender.broadcastTx(transaction.signedTransaction);
+    final response =
+        await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 
     if (response.hasTxhash()) {
       return right(TransactionHash(txHash: response.txhash));

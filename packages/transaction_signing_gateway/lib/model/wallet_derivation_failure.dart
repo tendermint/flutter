@@ -17,9 +17,7 @@ class InvalidMnemonicFailure implements WalletDerivationFailure {
   const InvalidMnemonicFailure(this.failure);
 
   @override
-  String toString() {
-    return 'InvalidMnemonicFailure{fail: $failure}';
-  }
+  String toString() => 'InvalidMnemonicFailure{fail: $failure}';
 }
 
 class DerivatorNotFoundFailure implements WalletDerivationFailure {
@@ -27,4 +25,19 @@ class DerivatorNotFoundFailure implements WalletDerivationFailure {
   WalletDerivationFailType get type => WalletDerivationFailType.derivatorNotFound;
 
   const DerivatorNotFoundFailure();
+
+  @override
+  String toString() => 'DerivatorNotFoundFailure';
+}
+
+class UnknownNotFoundFailure implements WalletDerivationFailure {
+  final Object failure;
+
+  @override
+  WalletDerivationFailType get type => WalletDerivationFailType.unknown;
+
+  const UnknownNotFoundFailure(this.failure);
+
+  @override
+  String toString() => 'UnknownNotFoundFailure{fail: $failure}';
 }
