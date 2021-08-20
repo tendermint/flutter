@@ -2,13 +2,13 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class CosmosElevatedButton extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String text;
   final Widget? suffixIcon;
 
   const CosmosElevatedButton({
     Key? key,
-    required this.onTap,
+    this.onTap,
     this.text = "",
     this.suffixIcon,
   }) : super(key: key);
