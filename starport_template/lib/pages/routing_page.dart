@@ -25,7 +25,8 @@ class _RoutingPageState extends State<RoutingPage> {
       if (!mounted) {
         return;
       }
-      if (store.wallets.value.isEmpty) {
+      Navigator.of(context).pop();
+      if (store.wallets.isEmpty) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MnemonicOnboardingPage()));
       } else {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));

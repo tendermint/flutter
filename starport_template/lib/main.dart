@@ -27,13 +27,6 @@ void _buildDependencies() {
       serializers: [AlanCredentialsSerializer()],
     ),
   );
-  StarportApp.baseEnv = BaseEnv()
-    ..setEnv(
-      lcdUrl: lcdUrl,
-      grpcUrl: grpcUrl,
-      lcdPort: lcdPort,
-      grpcPort: grpcPort,
-      ethUrl: ethUrl,
-    );
+  StarportApp.baseEnv = BaseEnv();
   StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway, StarportApp.baseEnv);
 }
