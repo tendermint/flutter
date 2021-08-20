@@ -20,13 +20,13 @@ class WalletDetailsPage extends StatefulWidget {
 }
 
 class _WalletDetailsPageState extends State<WalletDetailsPage> {
-  Observable<List<Balance>>? get balancesList => StarportApp.walletsStore.balancesList;
+  ObservableList<Balance> get balancesList => StarportApp.walletsStore.balancesList;
 
   bool get isBalancesLoading => StarportApp.walletsStore.isBalancesLoading;
 
   bool get isSendMoneyLoading => StarportApp.walletsStore.isSendMoneyLoading;
 
-  bool get isError => StarportApp.walletsStore.isError;
+  bool get isError => StarportApp.walletsStore.isBalancesLoadingError;
 
   @override
   void initState() {
@@ -50,21 +50,20 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                   const Divider(),
                   const Padding(padding: EdgeInsets.only(top: 16)),
                   BalanceHeading(),
-                  if (balancesList != null)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: balancesList!.value
-                            .map(
-                              (balance) => BalanceCard(
-                                denomText: balance.denom.text,
-                                amountDisplayText: balance.amount.value.toString(),
-                                onTransferPressed: () => _transferPressed(balance),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: balancesList
+                          .map(
+                            (balance) => BalanceCard(
+                              denomText: balance.denom.text,
+                              amountDisplayText: balance.amount.value.toString(),
+                              onTransferPressed: () => _transferPressed(balance),
+                            ),
+                          )
+                          .toList(),
                     ),
+                  ),
                   if (isSendMoneyLoading)
                     const Padding(
                       padding: EdgeInsets.only(top: 8.0),
@@ -99,7 +98,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
   }
 
   Future<void> _openSendMoneySheet(Denom denom) async {
-    showModalBottomSheet(
+    final result = await showModalBottomSheet(
       context: context,
       builder: (context) => SafeArea(
         child: SendMoneySheet(
@@ -108,5 +107,8 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
         ),
       ),
     );
+    if (result == true) {
+      StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+    }
   }
 }

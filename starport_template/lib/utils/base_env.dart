@@ -1,35 +1,40 @@
+import 'dart:io';
+
 import 'package:alan/alan.dart';
 
 class BaseEnv {
-  late NetworkInfo _networkInfo;
-  late String _baseApiUrl;
-  late String _baseEthUrl;
+  final NetworkInfo networkInfo;
+  final String baseApiUrl;
 
-  void setEnv({
-    required String lcdUrl,
-    required String grpcUrl,
-    required String lcdPort,
-    required String grpcPort,
-    required String ethUrl,
-  }) {
-    _networkInfo = NetworkInfo(
-      bech32Hrp: 'cosmos',
-      lcdInfo: LCDInfo(host: lcdUrl, port: int.parse(lcdPort)),
-      grpcInfo: GRPCInfo(host: grpcUrl, port: int.parse(grpcPort)),
-    );
-    _baseApiUrl = "$lcdUrl:$lcdPort";
-    _baseEthUrl = ethUrl;
-  }
-
-  NetworkInfo get networkInfo => _networkInfo;
-
-  String get baseApiUrl => _baseApiUrl;
-
-  String get baseEthUrl => _baseEthUrl;
+  BaseEnv({
+    String? lcdUrl,
+    String? grpcUrl,
+    String? lcdPort,
+    String? grpcPort,
+  })  : networkInfo = NetworkInfo(
+          bech32Hrp: 'cosmos',
+          lcdInfo: LCDInfo(
+            host: lcdUrl ?? envLcdUrl,
+            port: int.parse(lcdPort ?? envLcdPort),
+          ),
+          grpcInfo: GRPCInfo(
+            host: grpcUrl ?? envGrpcUrl,
+            port: int.parse(grpcPort ?? envGrpcPort),
+          ),
+        ),
+        baseApiUrl = "${lcdUrl ?? envLcdUrl}:${lcdPort ?? envLcdPort}";
 }
 
-const lcdPort = String.fromEnvironment('LCD_PORT', defaultValue: '1317');
-const grpcPort = String.fromEnvironment('GRPC_PORT', defaultValue: '9091');
-const lcdUrl = String.fromEnvironment('LCD_URL', defaultValue: 'localhost');
-const grpcUrl = String.fromEnvironment('GRPC_URL', defaultValue: 'localhost');
-const ethUrl = String.fromEnvironment('ETH_URL', defaultValue: 'HTTP://127.0.0.1:7545');
+String get envLcdPort => const String.fromEnvironment('LCD_PORT', defaultValue: '1317');
+
+String get envGrpcPort => const String.fromEnvironment('GRPC_PORT', defaultValue: '9091');
+
+String get envLcdUrl => String.fromEnvironment(
+      'LCD_URL',
+      defaultValue: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost',
+    );
+
+String get envGrpcUrl => String.fromEnvironment(
+      'GRPC_URL',
+      defaultValue: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost',
+    );
