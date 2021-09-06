@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 
 class CosmosPasswordField extends StatefulWidget {
   final Function(String) onPasswordUpdated;
+  final String? helperText;
+  final String hintText;
 
-  const CosmosPasswordField({required this.onPasswordUpdated});
+  const CosmosPasswordField({
+    required this.onPasswordUpdated,
+    this.helperText = 'This password will be used to recover your account every time you log in to the app',
+    this.hintText = 'Enter password',
+  });
 
   @override
   _CosmosPasswordFieldState createState() => _CosmosPasswordFieldState();
@@ -22,8 +28,8 @@ class _CosmosPasswordFieldState extends State<CosmosPasswordField> {
         widget.onPasswordUpdated(value);
       },
       decoration: InputDecoration(
-        hintText: 'Enter password',
-        helperText: 'This password will be used to recover your account every time you log in to the app',
+        hintText: widget.hintText,
+        helperText: widget.helperText,
         helperMaxLines: 3,
         suffixIcon: InkWell(
           onTap: togglePasswordVisibility,
