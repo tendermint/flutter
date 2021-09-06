@@ -31,6 +31,9 @@ class CosmosAppTheme {
         brightness: Brightness.light,
         backgroundColor: CosmosColors.lightBg,
         foregroundColor: CosmosColors.onLightText,
+        actionsIconTheme: IconThemeData(
+          color: CosmosColors.onLightText,
+        ),
         textTheme: TextTheme(
           headline6: TextStyle(
             fontSize: 20,
