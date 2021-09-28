@@ -111,11 +111,13 @@ class _MnemonicOnboardingPageState extends State<MnemonicOnboardingPage> {
         ),
       );
 
-  Future submitPasswordClicked(String password, String name) async => _importWallet(ImportWalletFormData(
-        mnemonic: mnemonic.trim(),
-        name: name,
-        password: password,
-      ));
+  Future submitPasswordClicked(String password, String name) async => _importWallet(
+        ImportWalletFormData(
+          mnemonic: mnemonic.trim(),
+          name: name,
+          password: password,
+        ),
+      );
 
   Future<void> _importWallet(ImportWalletFormData data) async {
     await StarportApp.walletsStore.importAlanWallet(data);
