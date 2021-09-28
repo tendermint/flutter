@@ -1,6 +1,6 @@
+import 'package:alan/alan.dart' as alan;
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:alan/alan.dart' as alan;
 import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
@@ -24,19 +24,21 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
   Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(Map<String, dynamic> json) {
     try {
       final networkInfo = json[_networkInfoKey];
-      return right(AlanPrivateWalletCredentials(
-        mnemonic: json[_mnemonicKey] as String? ?? "",
-        networkInfo: alan.NetworkInfo.fromSingleHost(
-          bech32Hrp: networkInfo[_bech32HrpKey] as String? ?? "",
-          host: networkInfo[_host] as String? ?? "",
+      return right(
+        AlanPrivateWalletCredentials(
+          mnemonic: json[_mnemonicKey] as String? ?? "",
+          networkInfo: alan.NetworkInfo.fromSingleHost(
+            bech32Hrp: networkInfo[_bech32HrpKey] as String? ?? "",
+            host: networkInfo[_host] as String? ?? "",
+          ),
+          publicInfo: WalletPublicInfo(
+            name: json[_nameKey] as String? ?? "",
+            publicAddress: json[_publicAddressKey] as String? ?? "",
+            walletId: json[_walletIdKey] as String? ?? "",
+            chainId: json[_chainIdKey] as String? ?? "",
+          ),
         ),
-        publicInfo: WalletPublicInfo(
-          name: json[_nameKey] as String? ?? "",
-          publicAddress: json[_publicAddressKey] as String? ?? "",
-          walletId: json[_walletIdKey] as String? ?? "",
-          chainId: json[_chainIdKey] as String? ?? "",
-        ),
-      ));
+      );
     } catch (e, stack) {
       debugPrint("$e\n$stack");
       return left(CredentialsStorageFailure("Could not parse wallet credentials: $e"));
@@ -49,8 +51,11 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
   @override
   Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(PrivateWalletCredentials credentials) {
     if (credentials is! AlanPrivateWalletCredentials) {
-      return left(CredentialsStorageFailure(
-          "Passed credentials are not of type $AlanPrivateWalletCredentials. actual: $credentials"));
+      return left(
+        CredentialsStorageFailure(
+          "Passed credentials are not of type $AlanPrivateWalletCredentials. actual: $credentials",
+        ),
+      );
     }
     return right({
       _chainIdKey: credentials.publicInfo.chainId,

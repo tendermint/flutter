@@ -6,7 +6,10 @@ import 'package:transaction_signing_gateway/model/private_wallet_credentials.dar
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 
 typedef KeyInfoRetriever = Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> Function(
-    String, String, String);
+  String,
+  String,
+  String,
+);
 
 class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
   KeyInfoRetriever keyInfoRetriever;
@@ -20,9 +23,13 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
     WalletLookupKey? walletLookupKey,
   ) =>
       super.noSuchMethod(
-        Invocation.method(#getPrivateCredentials, [
-          walletLookupKey,
-        ], {}),
+        Invocation.method(
+          #getPrivateCredentials,
+          [
+            walletLookupKey,
+          ],
+          {},
+        ),
         returnValue: Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>>.value(
           left(const CredentialsStorageFailure("not mocked")),
         ),

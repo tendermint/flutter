@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class CosmosAppTheme {
   static const offWhite = Color(0xFFF2F2F2);
 
@@ -28,18 +30,16 @@ class CosmosAppTheme {
     return ThemeData(
       brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
-        brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: CosmosColors.lightBg,
         foregroundColor: CosmosColors.onLightText,
         actionsIconTheme: IconThemeData(
           color: CosmosColors.onLightText,
         ),
-        textTheme: TextTheme(
-          headline6: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: CosmosColors.onLightText,
-          ),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: CosmosColors.onLightText,
         ),
       ),
       scaffoldBackgroundColor: CosmosColors.lightBg,
@@ -73,15 +73,13 @@ class CosmosAppTheme {
       disabledColor: CosmosColors.darkInactive,
       dividerColor: CosmosColors.darkDivider,
       appBarTheme: const AppBarTheme(
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: CosmosColors.darkBg,
         foregroundColor: CosmosColors.onDarkText,
-        textTheme: TextTheme(
-          headline6: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: CosmosColors.onDarkText,
-          ),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: CosmosColors.onDarkText,
         ),
       ),
       colorScheme: const ColorScheme(

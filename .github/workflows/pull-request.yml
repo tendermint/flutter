@@ -20,7 +20,7 @@ jobs:
           echo "changes_cosmos_utils=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_utils && echo "false" || echo "true")" >> $GITHUB_ENV
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.2.2'
+          flutter-version: '2.5.1'
 
       ###########################################################################################
       ## TRANSACTION_SIGNING_GATEWAY

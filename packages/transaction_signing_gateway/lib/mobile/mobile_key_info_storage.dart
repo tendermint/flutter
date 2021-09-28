@@ -33,19 +33,22 @@ class MobileKeyInfoStorage implements KeyInfoStorage {
     WalletLookupKey walletLookupKey,
   ) async {
     final encryptedData = await _storage.read(
-        key: _credentialsKey(
-      chainId: walletLookupKey.chainId,
-      walletId: walletLookupKey.walletId,
-    ));
+      key: _credentialsKey(
+        chainId: walletLookupKey.chainId,
+        walletId: walletLookupKey.walletId,
+      ),
+    );
     if (encryptedData == null) {
       return left(
         CredentialsStorageFailure("Cannot find credentials for $walletLookupKey"),
       );
     }
-    final serializer = await _findDeserializer(_serializerIdKey(
-      chainId: walletLookupKey.chainId,
-      walletId: walletLookupKey.walletId,
-    ));
+    final serializer = await _findDeserializer(
+      _serializerIdKey(
+        chainId: walletLookupKey.chainId,
+        walletId: walletLookupKey.walletId,
+      ),
+    );
     if (serializer == null) {
       return left(CredentialsStorageFailure("Could not find proper deserializer for $walletLookupKey"));
     }

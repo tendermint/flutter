@@ -11,8 +11,10 @@ import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 
 class AlanTransactionBroadcaster implements TransactionBroadcaster {
   @override
-  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast(
-      {required SignedTransaction transaction, required PrivateWalletCredentials privateWalletCredentials}) async {
+  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
+    required SignedTransaction transaction,
+    required PrivateWalletCredentials privateWalletCredentials,
+  }) async {
     if (transaction is! SignedAlanTransaction) {
       return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
     }

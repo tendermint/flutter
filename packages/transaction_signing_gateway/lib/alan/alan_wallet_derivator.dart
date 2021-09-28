@@ -12,21 +12,24 @@ import 'package:uuid/uuid.dart';
 
 class AlanWalletDerivator implements WalletDerivator {
   @override
-  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> derive(
-      {required WalletDerivationInfo walletDerivationInfo}) async {
+  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> derive({
+    required WalletDerivationInfo walletDerivationInfo,
+  }) async {
     try {
       final alanWalletDerivationInfo = walletDerivationInfo as AlanWalletDerivationInfo;
       final wallet = await compute(_deriveWalletSync, alanWalletDerivationInfo);
-      return right(AlanPrivateWalletCredentials(
-        publicInfo: WalletPublicInfo(
-          chainId: alanWalletDerivationInfo.chainId,
-          walletId: const Uuid().v4(),
-          name: alanWalletDerivationInfo.walletAlias,
-          publicAddress: wallet.bech32Address,
+      return right(
+        AlanPrivateWalletCredentials(
+          publicInfo: WalletPublicInfo(
+            chainId: alanWalletDerivationInfo.chainId,
+            walletId: const Uuid().v4(),
+            name: alanWalletDerivationInfo.walletAlias,
+            publicAddress: wallet.bech32Address,
+          ),
+          mnemonic: alanWalletDerivationInfo.mnemonic,
+          networkInfo: alanWalletDerivationInfo.networkInfo,
         ),
-        mnemonic: alanWalletDerivationInfo.mnemonic,
-        networkInfo: alanWalletDerivationInfo.networkInfo,
-      ));
+      );
     } catch (ex) {
       return left(InvalidMnemonicFailure(ex.toString()));
     }

@@ -1,5 +1,6 @@
 import "package:transaction_signing_gateway/model/wallet_public_info.dart";
 
+//ignore: avoid_classes_with_only_static_members
 class WalletPublicInfoSerializer {
   static const _nameKey = "name";
   static const _chainIdKey = "chain_id";

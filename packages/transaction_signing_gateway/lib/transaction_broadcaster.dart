@@ -15,8 +15,10 @@ abstract class TransactionBroadcaster {
 
 class NotFoundBroadcaster implements TransactionBroadcaster {
   @override
-  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast(
-          {required SignedTransaction transaction, required PrivateWalletCredentials privateWalletCredentials}) async =>
+  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
+    required SignedTransaction transaction,
+    required PrivateWalletCredentials privateWalletCredentials,
+  }) async =>
       left(TransactionBroadcasterNotFoundFailure());
 
   @override

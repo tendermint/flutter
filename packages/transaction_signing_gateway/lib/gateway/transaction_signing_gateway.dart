@@ -70,10 +70,12 @@ class TransactionSigningGateway {
                 .getPrivateCredentials(walletLookupKey)
                 .leftMap((err) => left(StorageProblemSigningFailure(err))),
           )
-          .flatMap((privateCreds) async => _findCapableSigner(transaction).sign(
-                privateCredentials: privateCreds,
-                transaction: transaction,
-              ));
+          .flatMap(
+            (privateCreds) async => _findCapableSigner(transaction).sign(
+              privateCredentials: privateCreds,
+              transaction: transaction,
+            ),
+          );
 
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcastTransaction({
     required WalletLookupKey walletLookupKey,
@@ -82,10 +84,12 @@ class TransactionSigningGateway {
       _infoStorage
           .getPrivateCredentials(walletLookupKey)
           .leftMap<TransactionBroadcastingFailure>((err) => left(StorageProblemBroadcastingFailure()))
-          .flatMap((privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
-                transaction: transaction,
-                privateWalletCredentials: privateCreds,
-              ));
+          .flatMap(
+            (privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
+              transaction: transaction,
+              privateWalletCredentials: privateCreds,
+            ),
+          );
 
   Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> deriveWallet({
     required WalletDerivationInfo walletDerivationInfo,

@@ -44,11 +44,13 @@ void main() {
       final saveResult = await storage.savePrivateCredentials(walletCredentials: privateCredsStub, password: password);
       expect(saveResult.isRight(), true, reason: "$saveResult");
 
-      final readResult = await storage.getPrivateCredentials(const WalletLookupKey(
-        chainId: chainId,
-        walletId: walletId,
-        password: password,
-      ));
+      final readResult = await storage.getPrivateCredentials(
+        const WalletLookupKey(
+          chainId: chainId,
+          walletId: walletId,
+          password: password,
+        ),
+      );
       expect(readResult.isRight(), true, reason: "$readResult");
       expect(readResult.getOrElse(() => throw AssertionError()), privateCredsStub);
     });

@@ -85,3 +85,4 @@ report.xml
 **/*.iml
 **/*.ipr
 **/misc.xml
+starport_template/ios/build
