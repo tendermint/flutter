@@ -39,17 +39,18 @@ class _WalletsListPageState extends State<WalletsListPage> {
       ),
       body: Observer(
         builder: (context) => ContentStateSwitcher(
-            emptyChild: const EmptyListMessage(
-              message: "No wallets found. Add one.",
+          emptyChild: const EmptyListMessage(
+            message: "No wallets found. Add one.",
+          ),
+          isEmpty: walletInfos.isEmpty,
+          contentChild: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CosmosWalletsListView(
+              list: walletInfos,
+              onClicked: (index) => _walletClicked(index),
             ),
-            isEmpty: walletInfos.isEmpty,
-            contentChild: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CosmosWalletsListView(
-                list: walletInfos,
-                onClicked: (index) => _walletClicked(index),
-              ),
-            )),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _addWalletClicked(),

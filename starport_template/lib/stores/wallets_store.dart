@@ -90,12 +90,13 @@ class WalletsStore {
     isWalletImporting = true;
     final result = await _transactionSigningGateway
         .deriveWallet(
-            walletDerivationInfo: AlanWalletDerivationInfo(
-          walletAlias: data.name,
-          networkInfo: baseEnv.networkInfo,
-          mnemonic: data.mnemonic,
-          chainId: chainId,
-        ))
+          walletDerivationInfo: AlanWalletDerivationInfo(
+            walletAlias: data.name,
+            networkInfo: baseEnv.networkInfo,
+            mnemonic: data.mnemonic,
+            chainId: chainId,
+          ),
+        )
         .mapError<dynamic>((fail) => fail)
         .flatMap(
           (credentials) => _transactionSigningGateway

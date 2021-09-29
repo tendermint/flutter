@@ -39,6 +39,8 @@ analyzer:
     exhaustive_cases: error
     always_use_package_imports: error
     missing_enum_constant_in_switch: error
+    prefer_const_constructors: error
+    depend_on_referenced_packages: ignore
 
 linter:
   rules:
@@ -105,3 +107,4 @@ linter:
     - use_function_type_syntax_for_parameters
     - valid_regexps
     - exhaustive_cases
+    - prefer_const_constructors

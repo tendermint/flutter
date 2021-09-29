@@ -36,15 +36,17 @@ class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerial
     Map<String, dynamic> json,
   ) {
     try {
-      return right(PrivateWalletCredentialsMock(
-        publicInfo: WalletPublicInfo(
-          chainId: json['chainId'] as String,
-          walletId: json['walletId'] as String,
-          name: json['name'] as String,
-          publicAddress: json['publicAddress'] as String,
+      return right(
+        PrivateWalletCredentialsMock(
+          publicInfo: WalletPublicInfo(
+            chainId: json['chainId'] as String,
+            walletId: json['walletId'] as String,
+            name: json['name'] as String,
+            publicAddress: json['publicAddress'] as String,
+          ),
+          mnemonic: json['mnemonic'] as String,
         ),
-        mnemonic: json['mnemonic'] as String,
-      ));
+      );
     } catch (e) {
       return left(CredentialsStorageFailure("could not parse json:\n$json"));
     }

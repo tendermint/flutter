@@ -1,12 +1,11 @@
 name: transaction_signing_gateway
 description: Transaction Signing gateway
 version: 0.0.1
-author: andrzejchm
 homepage: tendermint.com
 publish_to: 'none' # TODO publish it when ready
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
   flutter: ">=2.0.5"
 
 dependencies:
@@ -26,7 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: 1.6.0
+  lint: 1.7.2
   mockito: 5.0.14
 
 flutter:
