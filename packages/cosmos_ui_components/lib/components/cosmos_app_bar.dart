@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
+  final Widget? leading;
   final double elevation;
 
   const CosmosAppBar({
@@ -10,6 +11,7 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title = "",
     this.actions,
     this.elevation = 0,
+    this.leading,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       elevation: 0,
       actions: actions,
+      leading: leading,
     );
   }
 
