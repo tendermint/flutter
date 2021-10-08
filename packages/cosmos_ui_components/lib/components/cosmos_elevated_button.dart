@@ -17,15 +17,15 @@ class CosmosElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final secondaryColor = Theme.of(context).colorScheme.secondary;
-    final primaryColor = Theme.of(context).colorScheme.primary;
+    final onPrimary = Theme.of(context).colorScheme.onSecondary;
+    final primary = Theme.of(context).colorScheme.secondary;
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        primary: outlined ? primaryColor : secondaryColor,
-        onPrimary: outlined ? secondaryColor : primaryColor,
+        primary: outlined ? onPrimary : primary,
+        onPrimary: outlined ? primary : onPrimary,
         side: BorderSide(
-          color: outlined ? secondaryColor : primaryColor,
+          color: outlined ? primary : onPrimary,
         ),
       ),
       child: Row(
