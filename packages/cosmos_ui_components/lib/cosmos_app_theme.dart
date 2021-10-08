@@ -20,6 +20,9 @@ class CosmosAppTheme {
   static const radiusS = 4.0;
 
   static const fontSizeS = 12.0;
+  static const fontSizeM = 20.0;
+  static const fontSizeL = 28.0;
+  static const fontSizeXL = 40.0;
 
   static const BorderRadius borderRadiusM = BorderRadius.all(Radius.circular(radiusM));
   static const BorderRadius borderRadiusS = BorderRadius.all(Radius.circular(radiusS));
