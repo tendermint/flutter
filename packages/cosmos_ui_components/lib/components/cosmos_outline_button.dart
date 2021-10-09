@@ -17,10 +17,6 @@ class CosmosOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        primary: Theme.of(context).colorScheme.secondary,
-        side: BorderSide(color: Theme.of(context).colorScheme.secondary),
-      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

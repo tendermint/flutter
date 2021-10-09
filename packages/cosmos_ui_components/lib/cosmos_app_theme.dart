@@ -67,6 +67,19 @@ class CosmosAppTheme {
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          side: MaterialStateProperty.all<BorderSide>(const BorderSide()),
+        ),
+      ),
     );
   }
 
@@ -103,6 +116,19 @@ class CosmosAppTheme {
       ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: CosmosColors.lightBg)),
+        ),
       ),
     );
   }
