@@ -25,18 +25,20 @@ class CosmosMnemonicWordsGrid extends StatelessWidget {
       shrinkWrap: true,
       childAspectRatio: 3,
       children: mnemonicWords //
-          .mapIndexed((index, word) => Padding(
-                padding: const EdgeInsets.only(
-                  top: CosmosAppTheme.spacingS,
-                  left: CosmosAppTheme.spacingS,
-                ),
-                child: MnemonicChoiceChip(
-                  index: index,
-                  word: word,
-                  showIndex: showIndices,
-                  onTap: onTapWord == null ? null : () => onTapWord!.call(index),
-                ),
-              ))
+          .mapIndexed(
+            (index, word) => Padding(
+              padding: const EdgeInsets.only(
+                top: CosmosAppTheme.spacingS,
+                left: CosmosAppTheme.spacingS,
+              ),
+              child: MnemonicChoiceChip(
+                index: index,
+                word: word,
+                showIndex: showIndices,
+                onTap: onTapWord == null ? null : () => onTapWord!.call(index),
+              ),
+            ),
+          )
           .toList(),
     );
   }

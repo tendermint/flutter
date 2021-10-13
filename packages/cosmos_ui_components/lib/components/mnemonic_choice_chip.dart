@@ -26,7 +26,8 @@ class MnemonicChoiceChip extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(CosmosAppTheme.radiusS)),
           border: Border.all(
-              color: lightInactive.withOpacity(word.isEmpty ? lightInactive.opacity / 2 : lightInactive.opacity)),
+            color: lightInactive.withOpacity(word.isEmpty ? lightInactive.opacity / 2 : lightInactive.opacity),
+          ),
           color: lightDivider.withOpacity(word.isEmpty ? lightDivider.opacity / 2 : lightDivider.opacity),
         ),
         child: Padding(
