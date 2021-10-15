@@ -9,9 +9,10 @@ void main() {
     final serializer = AlanCredentialsSerializer();
     final credentials = AlanPrivateWalletCredentials(
       mnemonic: "mnemonic",
-      networkInfo: alan.NetworkInfo.fromSingleHost(
+      networkInfo: alan.NetworkInfo(
         bech32Hrp: "cosmos",
-        host: 'localhost',
+        lcdInfo: alan.LCDInfo(host: "localhost", port: 9919),
+        grpcInfo: alan.GRPCInfo(host: "localhost", port: 1919),
       ),
       publicInfo: const WalletPublicInfo(
         chainId: "chainId",
@@ -26,7 +27,10 @@ void main() {
       expect(jsonResult.isRight(), true);
       final credentialsResult = jsonResult.flatMap((json) => serializer.fromJson(json));
       expect(credentialsResult.isRight(), true);
-      expect(credentialsResult.getOrElse(() => throw ""), credentials);
+      final alanCredsResult = credentialsResult.getOrElse(() => throw "") as AlanPrivateWalletCredentials;
+      expect(alanCredsResult, credentials);
+      expect(alanCredsResult.networkInfo.grpcInfo.port, 1919);
+      expect(alanCredsResult.networkInfo.lcdInfo.port, 9919);
     });
   });
 }

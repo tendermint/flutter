@@ -18,18 +18,30 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
   static const _bech32HrpKey = "bech32Hrp";
   static const _nameKey = "name";
   static const _publicAddressKey = "publicAddress";
-  static const _host = "host";
+  static const _hostKey = "host";
+  static const _portKey = "port";
+  static const _lcdInfoKey = "lcdInfo";
+  static const _grpcInfoKey = "grpcInfo";
 
   @override
   Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(Map<String, dynamic> json) {
     try {
       final networkInfo = json[_networkInfoKey];
+      final grpcInfo = networkInfo[_grpcInfoKey];
+      final lcdInfo = networkInfo[_lcdInfoKey];
       return right(
         AlanPrivateWalletCredentials(
           mnemonic: json[_mnemonicKey] as String? ?? "",
-          networkInfo: alan.NetworkInfo.fromSingleHost(
+          networkInfo: alan.NetworkInfo(
+            grpcInfo: alan.GRPCInfo(
+              host: grpcInfo[_hostKey] as String? ?? "",
+              port: grpcInfo[_portKey] as int? ?? 9090,
+            ),
+            lcdInfo: alan.LCDInfo(
+              host: lcdInfo[_hostKey] as String? ?? "",
+              port: lcdInfo[_portKey] as int? ?? 1317,
+            ),
             bech32Hrp: networkInfo[_bech32HrpKey] as String? ?? "",
-            host: networkInfo[_host] as String? ?? "",
           ),
           publicInfo: WalletPublicInfo(
             name: json[_nameKey] as String? ?? "",
@@ -65,7 +77,14 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
       _mnemonicKey: credentials.mnemonic,
       _networkInfoKey: {
         _bech32HrpKey: credentials.networkInfo.bech32Hrp,
-        _host: credentials.networkInfo.lcdInfo.host,
+        _lcdInfoKey: {
+          _hostKey: credentials.networkInfo.lcdInfo.host,
+          _portKey: credentials.networkInfo.lcdInfo.port,
+        },
+        _grpcInfoKey: {
+          _hostKey: credentials.networkInfo.grpcInfo.host,
+          _portKey: credentials.networkInfo.grpcInfo.port,
+        },
       },
     });
   }
