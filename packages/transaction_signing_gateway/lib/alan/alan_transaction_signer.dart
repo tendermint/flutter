@@ -10,6 +10,10 @@ import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 
 class AlanTransactionSigner implements TransactionSigner {
+  final NetworkInfo _networkInfo;
+
+  AlanTransactionSigner(this._networkInfo);
+
   @override
   bool canSign(UnsignedTransaction unsignedTransaction) => unsignedTransaction is UnsignedAlanTransaction;
 
@@ -26,9 +30,9 @@ class AlanTransactionSigner implements TransactionSigner {
     }
 
     try {
-      final signer = TxSigner.fromNetworkInfo(privateCredentials.networkInfo);
+      final signer = TxSigner.fromNetworkInfo(_networkInfo);
       final signedTrans = await signer.createAndSign(
-        privateCredentials.alanWallet,
+        privateCredentials.alanWallet(_networkInfo),
         transaction.messages,
         memo: transaction.memo,
         fee: transaction.fee,

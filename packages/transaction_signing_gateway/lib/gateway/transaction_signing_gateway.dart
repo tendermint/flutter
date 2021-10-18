@@ -1,6 +1,5 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
-import 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
 import 'package:transaction_signing_gateway/key_info_storage.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
@@ -33,8 +32,8 @@ class TransactionSigningGateway {
     KeyInfoStorage? infoStorage,
     TransactionSummaryUI? transactionSummaryUI,
     List<WalletDerivator>? derivators,
-  })  : _signers = List.unmodifiable(signers ?? [AlanTransactionSigner()]),
-        _broadcasters = List.unmodifiable(broadcasters ?? [AlanTransactionBroadcaster()]),
+  })  : _signers = List.unmodifiable(signers ?? []),
+        _broadcasters = List.unmodifiable(broadcasters ?? []),
         _derivators = List.unmodifiable(derivators ?? [AlanWalletDerivator()]),
         _infoStorage = infoStorage ?? MobileKeyInfoStorage(serializers: [AlanCredentialsSerializer()]),
         _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();

@@ -27,7 +27,6 @@ class AlanWalletDerivator implements WalletDerivator {
             publicAddress: wallet.bech32Address,
           ),
           mnemonic: alanWalletDerivationInfo.mnemonic,
-          networkInfo: alanWalletDerivationInfo.networkInfo,
         ),
       );
     } catch (ex) {
