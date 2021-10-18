@@ -10,6 +10,10 @@ import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 
 class AlanTransactionBroadcaster implements TransactionBroadcaster {
+  final NetworkInfo _networkInfo;
+
+  AlanTransactionBroadcaster(this._networkInfo);
+
   @override
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
     required SignedTransaction transaction,
@@ -21,7 +25,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
     if (privateWalletCredentials is! AlanPrivateWalletCredentials) {
       return left(AlanTransactionBroadcastingFailure("passed privateCredentials is not $AlanPrivateWalletCredentials"));
     }
-    final txSender = TxSender.fromNetworkInfo(privateWalletCredentials.networkInfo);
+    final txSender = TxSender.fromNetworkInfo(_networkInfo);
     final response =
         await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 

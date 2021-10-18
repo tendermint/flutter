@@ -11,15 +11,12 @@ class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCre
   @override
   final WalletPublicInfo publicInfo;
 
-  final alan.NetworkInfo networkInfo;
-
   const AlanPrivateWalletCredentials({
     required this.mnemonic,
     required this.publicInfo,
-    required this.networkInfo,
   });
 
-  alan.Wallet get alanWallet => alan.Wallet.derive(
+  alan.Wallet alanWallet(alan.NetworkInfo networkInfo) => alan.Wallet.derive(
         mnemonic.split(" "),
         networkInfo,
       );
@@ -31,6 +28,5 @@ class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCre
   List<Object?> get props => [
         publicInfo,
         mnemonic,
-        networkInfo.bech32Hrp,
       ];
 }
