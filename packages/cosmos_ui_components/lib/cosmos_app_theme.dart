@@ -69,14 +69,26 @@ class CosmosAppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return CosmosColors.darkBg.withOpacity(0.5);
+            } else {
+              return CosmosColors.darkBg;
+            }
+          }),
           foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
-          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          foregroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return CosmosColors.darkBg.withOpacity(0.5);
+            } else {
+              return CosmosColors.darkBg;
+            }
+          }),
           side: MaterialStateProperty.all<BorderSide>(const BorderSide()),
         ),
       ),
@@ -119,14 +131,26 @@ class CosmosAppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return CosmosColors.lightBg.withOpacity(0.5);
+            } else {
+              return CosmosColors.lightBg;
+            }
+          }),
           foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
-          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          foregroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return CosmosColors.lightBg.withOpacity(0.5);
+            } else {
+              return CosmosColors.lightBg;
+            }
+          }),
           side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: CosmosColors.lightBg)),
         ),
       ),
