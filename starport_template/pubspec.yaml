@@ -33,7 +33,7 @@ dependencies:
       path: packages/transaction_signing_gateway
       ref: starport-redesign
 
-  cupertino_icons: 1.0.3
+  cupertino_icons: 1.0.4
 
 dev_dependencies:
   flutter_test:
