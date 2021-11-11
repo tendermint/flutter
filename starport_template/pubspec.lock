@@ -28,14 +28,14 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.2"
+    version: "3.1.6"
   args:
     dependency: transitive
     description:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   asn1lib:
     dependency: transitive
     description:
@@ -77,7 +77,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   build_config:
     dependency: transitive
     description:
@@ -112,7 +112,7 @@ packages:
       name: cli_util
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.3"
+    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -138,8 +138,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: main
-      resolved-ref: ce7ca3ffbc9e44444965bd45548100f9b6d43783
+      ref: starport-redesign
+      resolved-ref: "81c3367974553d23928c36dee6b9437ec6d7dc30"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -147,8 +147,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_utils"
-      ref: main
-      resolved-ref: ce7ca3ffbc9e44444965bd45548100f9b6d43783
+      ref: starport-redesign
+      resolved-ref: "81c3367974553d23928c36dee6b9437ec6d7dc30"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -172,7 +172,7 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.1.1"
   dartz:
     dependency: transitive
     description:
@@ -252,14 +252,14 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   googleapis_auth:
     dependency: transitive
     description:
       name: googleapis_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   grpc:
     dependency: transitive
     description:
@@ -280,7 +280,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.3"
+    version: "0.13.4"
   http2:
     dependency: transitive
     description:
@@ -295,6 +295,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -308,7 +315,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.1.0"
   json_serializable:
     dependency: transitive
     description:
@@ -329,7 +336,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   matcher:
     dependency: transitive
     description:
@@ -350,14 +357,14 @@ packages:
       name: mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   package_config:
     dependency: transitive
     description:
       name: package_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -378,7 +385,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.1"
+    version: "3.4.0"
   protobuf:
     dependency: transitive
     description:
@@ -392,14 +399,14 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   pubspec_parse:
     dependency: transitive
     description:
       name: pubspec_parse
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   rational:
     dependency: transitive
     description:
@@ -465,8 +472,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/transaction_signing_gateway"
-      ref: main
-      resolved-ref: ce7ca3ffbc9e44444965bd45548100f9b6d43783
+      ref: starport-redesign
+      resolved-ref: "81c3367974553d23928c36dee6b9437ec6d7dc30"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -483,7 +490,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:
@@ -497,7 +504,7 @@ packages:
       name: watcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   yaml:
     dependency: transitive
     description:
