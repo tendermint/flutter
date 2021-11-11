@@ -61,7 +61,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
 
   void _addWalletClicked() => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const OnboardingPage(openWalletsListOnDone: false),
+          builder: (context) => const OnboardingPage(),
         ),
       );
 
