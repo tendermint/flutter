@@ -11,21 +11,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: 2.0.3
-  flutter_secure_storage: 4.2.1
-  encrypt: 5.0.1
-  alan: 0.40.2+1
-  uuid: 3.0.4
+  equatable: ^2.0.3
+  flutter_secure_storage: ^4.2.1
+  encrypt: ^5.0.1
+  alan: ^0.40.2+1
+  uuid: ^3.0.5
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_utils
-      ref: main
+      ref: starport-redesign
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: 1.7.2
-  mockito: 5.0.14
+  mockito: 5.0.16
 
 flutter:

@@ -18,8 +18,8 @@ class MnemonicChoiceChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final lightInactive = CosmosColors.lightInactive;
-    final lightDivider = CosmosColors.lightDivider;
+    const lightInactive = CosmosColors.lightInactive;
+    const lightDivider = CosmosColors.lightDivider;
     return InkWell(
       onTap: onTap,
       child: Container(
