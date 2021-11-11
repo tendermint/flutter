@@ -67,6 +67,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
       );
 
   void _onTapImportAccount() => Navigator.of(context).push(
-    MaterialPageRoute(builder: (_) => const ImportWalletPage()),
-  );
+        MaterialPageRoute(builder: (_) => const ImportWalletPage()),
+      );
 }
