@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "81c3367974553d23928c36dee6b9437ec6d7dc30"
+      resolved-ref: "5be93e55bfff2b98bdb0ecc76e2c30ec3960b925"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -166,7 +166,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.1"
+    version: "3.4.0"
   sky_engine:
     dependency: transitive
     description: flutter
