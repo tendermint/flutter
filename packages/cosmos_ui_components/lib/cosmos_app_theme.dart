@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // ignore: avoid_classes_with_only_static_members
+@Deprecated("Use CosmosThemeData instead")
 class CosmosAppTheme {
   static const offWhite = Color(0xFFF2F2F2);
 
@@ -168,6 +169,7 @@ TextTheme buildTextTheme(ColorScheme colorScheme) => TextTheme(
       caption: CosmosTextTheme.copy0Normal.copyWith(color: colorScheme.onSurface.withOpacity(0.6)),
     );
 
+@Deprecated("Use CosmosColorsPalette instead")
 class CosmosColors {
   static const lightBg = Color(0xFFFFFFFF);
   static const onLightText = Color(0xFF000000);

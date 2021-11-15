@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/components/mnemonic_choice_chip.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,9 @@ class CosmosMnemonicWordsGrid extends StatelessWidget {
       children: mnemonicWords //
           .mapIndexed(
             (index, word) => Padding(
-              padding: const EdgeInsets.only(
-                top: CosmosAppTheme.spacingS,
-                left: CosmosAppTheme.spacingS,
+              padding: EdgeInsets.only(
+                top: CosmosTheme.of(context).spacingS,
+                left: CosmosTheme.of(context).spacingS,
               ),
               child: MnemonicChoiceChip(
                 index: index,

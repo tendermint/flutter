@@ -1,4 +1,4 @@
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class CosmosOutlineButton extends StatelessWidget {
@@ -22,7 +22,7 @@ class CosmosOutlineButton extends StatelessWidget {
         children: [
           Text(text),
           if (suffixIcon != null) ...[
-            const SizedBox(width: CosmosAppTheme.spacingS),
+            SizedBox(width: CosmosTheme.of(context).spacingS),
             suffixIcon!,
           ],
         ],

@@ -1,5 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class CosmosElevatedButton extends StatelessWidget {
@@ -24,7 +24,7 @@ class CosmosElevatedButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
         elevation: 0,
       ),
       child: Row(
@@ -35,7 +35,7 @@ class CosmosElevatedButton extends StatelessWidget {
             style: CosmosTextTheme.elevatedButton,
           ),
           if (suffixIcon != null) ...[
-            const SizedBox(width: CosmosAppTheme.spacingS),
+            SizedBox(width: CosmosTheme.of(context).spacingS),
             suffixIcon!,
           ],
         ],
