@@ -1,6 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/pages/mnemonic_onboarding_page.dart';
+import 'package:starport_template/pages/onboarding_page.dart';
 import 'package:starport_template/pages/wallets_list_page.dart';
 import 'package:starport_template/starport_app.dart';
 
@@ -27,7 +27,7 @@ class _RoutingPageState extends State<RoutingPage> {
       }
       Navigator.of(context).pop();
       if (store.wallets.isEmpty) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MnemonicOnboardingPage()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingPage()));
       } else {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
       }

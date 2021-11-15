@@ -2,7 +2,7 @@ import 'package:cosmos_ui_components/components/empty_list_message.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:starport_template/pages/mnemonic_onboarding_page.dart';
+import 'package:starport_template/pages/onboarding_page.dart';
 import 'package:starport_template/pages/wallet_details_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
@@ -61,7 +61,7 @@ class _WalletsListPageState extends State<WalletsListPage> {
 
   void _addWalletClicked() => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const MnemonicOnboardingPage(openWalletsListOnDone: false),
+          builder: (context) => const OnboardingPage(),
         ),
       );
 

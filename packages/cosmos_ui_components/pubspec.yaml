@@ -27,3 +27,10 @@ dev_dependencies:
 ## it points to the location of the checked out tendermint/flutter repository
 #  cosmos_utils:
 #    path: ../cosmos_utils
+
+
+flutter:
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: lib/fonts/inter.ttf

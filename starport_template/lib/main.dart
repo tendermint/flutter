@@ -1,3 +1,4 @@
+import 'package:alan/alan.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/stores/wallets_store.dart';
@@ -15,13 +16,18 @@ void main() {
 }
 
 void _buildDependencies() {
+  StarportApp.networkInfo = NetworkInfo(
+    bech32Hrp: 'cosmos',
+    lcdInfo: LCDInfo(host: "http://localhost"),
+    grpcInfo: GRPCInfo(host: "http://localhost", port: 9091),
+  );
   StarportApp.signingGateway = TransactionSigningGateway(
     transactionSummaryUI: NoOpTransactionSummaryUI(),
     signers: [
-      AlanTransactionSigner(),
+      AlanTransactionSigner(StarportApp.networkInfo),
     ],
     broadcasters: [
-      AlanTransactionBroadcaster(),
+      AlanTransactionBroadcaster(StarportApp.networkInfo),
     ],
     infoStorage: MobileKeyInfoStorage(
       serializers: [AlanCredentialsSerializer()],
