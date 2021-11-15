@@ -1,4 +1,4 @@
-import 'package:cosmos_ui_components/cosmos_app_theme.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/create_wallet_page.dart';
@@ -9,7 +9,7 @@ class OnboardingPage extends StatefulWidget {
 
   const OnboardingPage({
     Key? key,
-    this.openWalletsListOnDone = false,
+    this.openWalletsListOnDone = true,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(CosmosAppTheme.spacingL),
+              padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
