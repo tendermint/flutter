@@ -1,4 +1,4 @@
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class ContentLoadingIndicator extends StatelessWidget {
@@ -16,7 +16,7 @@ class ContentLoadingIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const CircularProgressIndicator(),
-          const SizedBox(height: CosmosAppTheme.spacingM),
+          SizedBox(height: CosmosTheme.of(context).spacingM),
           if (message.isNotEmpty) Text(message),
         ],
       ),

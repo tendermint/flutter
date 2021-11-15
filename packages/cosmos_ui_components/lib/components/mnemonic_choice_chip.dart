@@ -1,4 +1,4 @@
-import 'package:cosmos_ui_components/cosmos_app_theme.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class MnemonicChoiceChip extends StatelessWidget {
@@ -18,22 +18,22 @@ class MnemonicChoiceChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    const lightInactive = CosmosColors.lightInactive;
-    const lightDivider = CosmosColors.lightDivider;
+    const lightInactive = CosmosColorsData.lightInactive;
+    const lightDivider = CosmosColorsData.lightDivider;
     return InkWell(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(CosmosAppTheme.radiusS)),
+          borderRadius: BorderRadius.all(Radius.circular(CosmosTheme.of(context).radiusS)),
           border: Border.all(
             color: lightInactive.withOpacity(word.isEmpty ? lightInactive.opacity / 2 : lightInactive.opacity),
           ),
           color: lightDivider.withOpacity(word.isEmpty ? lightDivider.opacity / 2 : lightDivider.opacity),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: CosmosAppTheme.spacingS,
-            vertical: CosmosAppTheme.spacingXS,
+          padding: EdgeInsets.symmetric(
+            horizontal: CosmosTheme.of(context).spacingS,
+            vertical: CosmosTheme.of(context).spacingXS,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class MnemonicChoiceChip extends StatelessWidget {
                   "$index",
                   style: textTheme.bodyText1,
                 ),
-                const SizedBox(width: CosmosAppTheme.spacingS),
+                SizedBox(width: CosmosTheme.of(context).spacingS),
               ],
               Text(
                 word,

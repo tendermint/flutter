@@ -1,4 +1,4 @@
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class CosmosErrorView extends StatelessWidget {
@@ -21,9 +21,9 @@ class CosmosErrorView extends StatelessWidget {
             Icons.error,
             color: Theme.of(context).colorScheme.error,
           ),
-          const SizedBox(height: CosmosAppTheme.spacingM),
+          SizedBox(height: CosmosTheme.of(context).spacingM),
           Text(title),
-          const SizedBox(height: CosmosAppTheme.spacingM),
+          SizedBox(height: CosmosTheme.of(context).spacingM),
           Text(message),
         ],
       ),
