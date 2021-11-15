@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -5,10 +6,10 @@ import 'package:flutter/services.dart';
 class CosmosAppTheme {
   static const offWhite = Color(0xFFF2F2F2);
 
-  static const spacingXL = 48.0;
-  static const spacingL = 24.0;
-  static const spacingM = 12.0;
-  static const spacingS = 6.0;
+  static const spacingXL = 32.0;
+  static const spacingL = 16.0;
+  static const spacingM = 8.0;
+  static const spacingS = 4.0;
   static const spacingXS = 2.0;
 
   static const longDuration = 500;
@@ -31,8 +32,24 @@ class CosmosAppTheme {
   static const elevationS = 4.0;
 
   static ThemeData buildAppTheme() {
+    const colorScheme = ColorScheme(
+      primary: CosmosColors.darkBg,
+      primaryVariant: CosmosColors.lightSurface,
+      secondary: CosmosColors.darkBg,
+      secondaryVariant: CosmosColors.lightBg,
+      surface: CosmosColors.lightSurface,
+      background: CosmosColors.lightBg,
+      error: CosmosColors.error,
+      onPrimary: CosmosColors.onDarkText,
+      onSecondary: CosmosColors.onDarkText,
+      onSurface: CosmosColors.onLightText,
+      onBackground: CosmosColors.onLightText,
+      onError: CosmosColors.onDarkText,
+      brightness: Brightness.light,
+    );
     return ThemeData(
       brightness: Brightness.light,
+      textTheme: buildTextTheme(colorScheme),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: CosmosColors.lightBg,
@@ -49,21 +66,7 @@ class CosmosAppTheme {
       scaffoldBackgroundColor: CosmosColors.lightBg,
       disabledColor: CosmosColors.lightInactive,
       dividerColor: CosmosColors.lightDivider,
-      colorScheme: const ColorScheme(
-        primary: CosmosColors.darkBg,
-        primaryVariant: CosmosColors.lightSurface,
-        secondary: CosmosColors.darkBg,
-        secondaryVariant: CosmosColors.lightBg,
-        surface: CosmosColors.lightSurface,
-        background: CosmosColors.lightBg,
-        error: CosmosColors.error,
-        onPrimary: CosmosColors.onDarkText,
-        onSecondary: CosmosColors.onDarkText,
-        onSurface: CosmosColors.onLightText,
-        onBackground: CosmosColors.onLightText,
-        onError: CosmosColors.onDarkText,
-        brightness: Brightness.light,
-      ),
+      colorScheme: colorScheme,
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
@@ -96,8 +99,24 @@ class CosmosAppTheme {
   }
 
   static ThemeData buildDarkAppTheme() {
+    const colorScheme = ColorScheme(
+      primary: CosmosColors.darkBg,
+      primaryVariant: CosmosColors.darkSurface,
+      secondary: CosmosColors.lightBg,
+      secondaryVariant: CosmosColors.lightBg,
+      surface: CosmosColors.darkSurface,
+      background: CosmosColors.darkBg,
+      error: CosmosColors.error,
+      onPrimary: CosmosColors.onDarkText,
+      onSecondary: CosmosColors.onLightText,
+      onSurface: CosmosColors.onDarkText,
+      onBackground: CosmosColors.onDarkText,
+      onError: CosmosColors.onLightText,
+      brightness: Brightness.dark,
+    );
     return ThemeData(
       brightness: Brightness.dark,
+      textTheme: buildTextTheme(colorScheme),
       scaffoldBackgroundColor: CosmosColors.darkBg,
       disabledColor: CosmosColors.darkInactive,
       dividerColor: CosmosColors.darkDivider,
@@ -111,21 +130,7 @@ class CosmosAppTheme {
           color: CosmosColors.onDarkText,
         ),
       ),
-      colorScheme: const ColorScheme(
-        primary: CosmosColors.darkBg,
-        primaryVariant: CosmosColors.darkSurface,
-        secondary: CosmosColors.lightBg,
-        secondaryVariant: CosmosColors.lightBg,
-        surface: CosmosColors.darkSurface,
-        background: CosmosColors.darkBg,
-        error: CosmosColors.error,
-        onPrimary: CosmosColors.onDarkText,
-        onSecondary: CosmosColors.onLightText,
-        onSurface: CosmosColors.onDarkText,
-        onBackground: CosmosColors.onDarkText,
-        onError: CosmosColors.onLightText,
-        brightness: Brightness.dark,
-      ),
+      colorScheme: colorScheme,
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(),
       ),
@@ -157,6 +162,11 @@ class CosmosAppTheme {
     );
   }
 }
+
+TextTheme buildTextTheme(ColorScheme colorScheme) => TextTheme(
+      headline2: CosmosTextTheme.title2Bold.copyWith(color: colorScheme.onSurface),
+      caption: CosmosTextTheme.copy0Normal.copyWith(color: colorScheme.onSurface.withOpacity(0.6)),
+    );
 
 class CosmosColors {
   static const lightBg = Color(0xFFFFFFFF);
