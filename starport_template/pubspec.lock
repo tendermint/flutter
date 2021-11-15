@@ -42,7 +42,7 @@ packages:
       name: asn1lib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   async:
     dependency: transitive
     description:
@@ -139,7 +139,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: starport-redesign
-      resolved-ref: "5be93e55bfff2b98bdb0ecc76e2c30ec3960b925"
+      resolved-ref: c7fd889366bdaa2fc825f1d68feb0aa43bb77849
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +148,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "5be93e55bfff2b98bdb0ecc76e2c30ec3960b925"
+      resolved-ref: c7fd889366bdaa2fc825f1d68feb0aa43bb77849
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -473,7 +473,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "5be93e55bfff2b98bdb0ecc76e2c30ec3960b925"
+      resolved-ref: c7fd889366bdaa2fc825f1d68feb0aa43bb77849
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

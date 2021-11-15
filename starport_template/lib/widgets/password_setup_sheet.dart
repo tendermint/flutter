@@ -1,5 +1,5 @@
 import 'package:cosmos_ui_components/components/template/cosmos_password_field.dart';
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class PasswordSetupSheet extends StatefulWidget {
@@ -22,15 +22,15 @@ class _PasswordSetupSheetState extends State<PasswordSetupSheet> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: CosmosAppTheme.spacingM),
+        padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingM),
         child: Column(
           children: [
-            const SizedBox(height: CosmosAppTheme.spacingL),
+            SizedBox(height: CosmosTheme.of(context).spacingL),
             TextFormField(
               decoration: const InputDecoration(hintText: "Name"),
               onChanged: (value) => setState(() => name = value),
             ),
-            const SizedBox(height: CosmosAppTheme.spacingM),
+            SizedBox(height: CosmosTheme.of(context).spacingM),
             CosmosPasswordField(
               onPasswordUpdated: (value) => setState(() => password = value),
             ),
