@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 
 abstract class PlainDataStore {
-
   Future<Either<CredentialsStorageFailure, Unit>> savePlainText({
     required String key,
     required String? value,

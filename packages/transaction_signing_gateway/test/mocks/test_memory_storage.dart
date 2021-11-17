@@ -21,7 +21,6 @@ class TestPlainStore implements PlainDataStore {
     // TODO: implement savePlainText
     throw UnimplementedError();
   }
-
 }
 
 class TestSecureStore implements SecureDataStore {
@@ -36,5 +35,4 @@ class TestSecureStore implements SecureDataStore {
     // TODO: implement saveSecureText
     throw UnimplementedError();
   }
-
 }
