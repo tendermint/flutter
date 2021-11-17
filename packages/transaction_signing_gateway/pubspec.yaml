@@ -33,8 +33,8 @@ dev_dependencies:
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
-dependency_overrides:
-  cosmos_utils:
-    path: ../cosmos_utils
-
+#dependency_overrides:
+#  cosmos_utils:
+#    path: ../cosmos_utils
+#
 flutter:

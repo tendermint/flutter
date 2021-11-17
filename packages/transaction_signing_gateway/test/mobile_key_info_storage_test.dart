@@ -4,7 +4,7 @@ import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 import 'mocks/private_wallet_credentials_mock.dart';
-import 'mocks/test_memory_storage.dart';
+import 'mocks/test_memory_store.dart';
 
 void main() {
   group("MobileKeyInfoStorage", () {
@@ -37,8 +37,8 @@ void main() {
     );
     final storage = CosmosKeyInfoStorage(
       serializers: [TestPrivateCredentialsSerializer()],
-      secureDataStore: TestSecureStore(),
-      plainDataStore: TestPlainStore(),
+      secureDataStore: TestMemoryStore(),
+      plainDataStore: TestMemoryStore(),
     );
     //
     test("save and retrieve creds", () async {
