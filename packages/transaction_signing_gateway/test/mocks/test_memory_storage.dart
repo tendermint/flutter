@@ -1,68 +1,40 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
+import 'package:transaction_signing_gateway/storage/data_store.dart';
 
-class TestMemoryStorage implements FlutterSecureStorage {
-  final Map<String, String> _store = {};
-
+class TestPlainStore implements PlainDataStore {
   @override
-  Future<bool> containsKey({
-    required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    return _store.containsKey(key);
+  Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText() {
+    // TODO: implement readAllPlainText
+    throw UnimplementedError();
   }
 
   @override
-  Future<void> delete({
-    required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    _store.remove(key);
+  Future<Either<CredentialsStorageFailure, String?>> readPlainText({required String key}) {
+    // TODO: implement readPlainText
+    throw UnimplementedError();
   }
 
   @override
-  Future<void> deleteAll({
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    _store.clear();
+  Future<Either<CredentialsStorageFailure, Unit>> savePlainText({required String key, required String? value}) {
+    // TODO: implement savePlainText
+    throw UnimplementedError();
+  }
+
+}
+
+class TestSecureStore implements SecureDataStore {
+  @override
+  Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) {
+    // TODO: implement readSecureText
+    throw UnimplementedError();
   }
 
   @override
-  Future<String?> read({
-    required String key,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    return _store[key];
+  Future<Either<CredentialsStorageFailure, Unit>> saveSecureText({required String key, required String? value}) {
+    // TODO: implement saveSecureText
+    throw UnimplementedError();
   }
 
-  @override
-  Future<Map<String, String>> readAll({
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    return Map.unmodifiable(_store);
-  }
-
-  @override
-  Future<void> write({
-    required String key,
-    required String? value,
-    IOSOptions? iOptions = IOSOptions.defaultOptions,
-    AndroidOptions? aOptions,
-    LinuxOptions? lOptions,
-  }) async {
-    if (value == null) {
-      _store.remove(key);
-    } else {
-      _store[key] = value;
-    }
-  }
 }

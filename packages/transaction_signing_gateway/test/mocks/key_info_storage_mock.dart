@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
-import 'package:transaction_signing_gateway/key_info_storage.dart';
+import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
