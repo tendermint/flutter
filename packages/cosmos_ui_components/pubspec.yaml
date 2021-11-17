@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  string_to_hex: ^0.2.2
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git
