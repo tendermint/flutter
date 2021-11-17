@@ -16,7 +16,7 @@ class CosmosBalancesListView extends StatelessWidget {
     return ListView(
       children: list
           .mapIndexed(
-            (index, balance) => BalanceCard(
+            (index, balance) => CosmosBalanceCard(
               denomText: balance.denomText,
               amountDisplayText: balance.amountDisplayText,
               onTransferPressed: () {

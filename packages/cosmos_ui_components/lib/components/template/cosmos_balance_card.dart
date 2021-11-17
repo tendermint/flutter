@@ -1,43 +1,50 @@
-import 'dart:math';
-
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
-class BalanceCard extends StatelessWidget {
+// TODO: Add a parameter for icon
+class CosmosBalanceCard extends StatelessWidget {
   final String denomText;
   final String amountDisplayText;
   final VoidCallback? onTransferPressed;
 
-  const BalanceCard({
+  const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
     required this.onTransferPressed,
   });
 
-  // TODO: Remove these icons during refactor
-  // ignore: avoid_field_initializers_in_const_classes
-  final List<Widget> icons = const [
-    Icon(Icons.wifi_tethering),
-    Icon(Icons.workspaces_filled),
-    Icon(Icons.workspaces_filled),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: CosmosTheme.of(context).elevationS,
-      child: ListTile(
-        title: Text(denomText),
-        subtitle: Text(amountDisplayText),
-        // TODO: Fix this during refactor
-        leading: icons[Random().nextInt(2)],
-        trailing: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
+    return ListTile(
+      title: Text(
+        denomText,
+        // TODO use `CosmosTheme.of(context).textStyles.title0Medium` when implemented
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
+      // TODO: Replace with icons from the API
+      leading: CircleAvatar(
+        backgroundColor: Colors.grey[300],
+        child: Text(denomText[0].toUpperCase()),
+      ),
+      trailing: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            amountDisplayText,
+            // TODO use `CosmosTheme.of(context).textStyles.title1Medium` when implemented
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: CosmosTheme.of(context).fontSizeS,
+            ),
           ),
-          onPressed: onTransferPressed,
-          child: const Text('Transfer'),
-        ),
+          Text(
+            denomText,
+            style: TextStyle(
+              fontSize: CosmosTheme.of(context).fontSizeS,
+            ),
+          ),
+        ],
       ),
     );
   }
