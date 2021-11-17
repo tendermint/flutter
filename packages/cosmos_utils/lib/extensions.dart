@@ -24,9 +24,9 @@ extension AsyncEither<L, R> on Future<Either<L, R>> {
     return (await this).map(responseMapper);
   }
 
-  Future<Either<L, R>> doOn<R2>({
-    R2 Function(L fail)? fail,
-    R2 Function(R success)? success,
+  Future<Either<L, R>> doOn({
+    void Function(L fail)? fail,
+    void Function(R success)? success,
   }) async {
     try {
       (await this).fold(fail ?? (_) {}, success ?? (_) {});
