@@ -1,7 +1,6 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
-import 'package:transaction_signing_gateway/key_info_storage.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
@@ -13,6 +12,7 @@ import 'package:transaction_signing_gateway/model/wallet_derivation_failure.dart
 import 'package:transaction_signing_gateway/model/wallet_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -35,7 +35,12 @@ class TransactionSigningGateway {
   })  : _signers = List.unmodifiable(signers ?? []),
         _broadcasters = List.unmodifiable(broadcasters ?? []),
         _derivators = List.unmodifiable(derivators ?? [AlanWalletDerivator()]),
-        _infoStorage = infoStorage ?? MobileKeyInfoStorage(serializers: [AlanCredentialsSerializer()]),
+        _infoStorage = infoStorage ??
+            CosmosKeyInfoStorage(
+              serializers: [AlanCredentialsSerializer()],
+              plainDataStore: SharedPrefsPlainDataStore(),
+              secureDataStore: FlutterSecureStorageDataStore(),
+            ),
         _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();
 
   /// Stores the passed-in wallet credentials securely on the device.
