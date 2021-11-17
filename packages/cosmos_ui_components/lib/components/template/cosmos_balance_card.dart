@@ -2,12 +2,12 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 // TODO: Add a parameter for icon
-class BalanceCard extends StatelessWidget {
+class CosmosBalanceCard extends StatelessWidget {
   final String denomText;
   final String amountDisplayText;
   final VoidCallback? onTransferPressed;
 
-  const BalanceCard({
+  const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
     required this.onTransferPressed,
@@ -18,6 +18,7 @@ class BalanceCard extends StatelessWidget {
     return ListTile(
       title: Text(
         denomText,
+        // TODO use `CosmosTheme.of(context).textStyles.title0Medium` when implemented
         style: const TextStyle(fontWeight: FontWeight.w600),
       ),
       // TODO: Replace with icons from the API
@@ -31,6 +32,7 @@ class BalanceCard extends StatelessWidget {
         children: [
           Text(
             amountDisplayText,
+            // TODO use `CosmosTheme.of(context).textStyles.title1Medium` when implemented
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: CosmosTheme.of(context).fontSizeS,
