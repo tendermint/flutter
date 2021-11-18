@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/material.dart';
 
 class GradientAvatar extends StatelessWidget {
   final String stringKey;

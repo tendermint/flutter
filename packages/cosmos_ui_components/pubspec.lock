@@ -68,8 +68,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_utils"
-      ref: starport-redesign
-      resolved-ref: c7fd889366bdaa2fc825f1d68feb0aa43bb77849
+      ref: gradient_avatar
+      resolved-ref: "9b0bd16aa851db7797463037486b48c2fb4d4c61"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
