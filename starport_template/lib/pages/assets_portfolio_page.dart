@@ -94,7 +94,6 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                                     CosmosBalanceCard(
                                       denomText: balance.denom.text.toUpperCase(),
                                       amountDisplayText: formatAmount(balance.amount.value.toDouble()),
-                                      onTransferPressed: () => _transferPressed(balance),
                                     ),
                                     SizedBox(height: CosmosTheme.of(context).spacingL),
                                     SizedBox(height: CosmosTheme.of(context).spacingM),
@@ -156,27 +155,29 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     );
   }
 
-  void _transferPressed(Balance balance) {
-    final denom = Denom(balance.denom.text);
-    _openSendMoneySheet(denom);
-  }
+  // TODO: To be used when implementing send money
+
+  // void _transferPressed(Balance balance) {
+  //   final denom = Denom(balance.denom.text);
+  //   _openSendMoneySheet(denom);
+  // }
+
+  // Future<void> _openSendMoneySheet(Denom denom) async {
+  //   final result = await showModalBottomSheet(
+  //     context: context,
+  //     builder: (context) => SafeArea(
+  //       child: SendMoneySheet(
+  //         denom: denom,
+  //         walletInfo: widget.walletInfo,
+  //       ),
+  //     ),
+  //   );
+  //   if (result == true) {
+  //     StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+  //   }
+  // }
 
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
-  }
-
-  Future<void> _openSendMoneySheet(Denom denom) async {
-    final result = await showModalBottomSheet(
-      context: context,
-      builder: (context) => SafeArea(
-        child: SendMoneySheet(
-          denom: denom,
-          walletInfo: widget.walletInfo,
-        ),
-      ),
-    );
-    if (result == true) {
-      StarportApp.walletsStore.getBalances(widget.walletInfo.address);
-    }
   }
 }

@@ -10,6 +10,8 @@ import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/send_money_sheet.dart';
 
+// TODO: Remove this aftert [AssetsPortfolioPage] is finalized
+
 class WalletDetailsPage extends StatefulWidget {
   final WalletInfo walletInfo;
 
@@ -58,7 +60,6 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                             (balance) => CosmosBalanceCard(
                               denomText: balance.denom.text,
                               amountDisplayText: balance.amount.value.toString(),
-                              onTransferPressed: () => _transferPressed(balance),
                             ),
                           )
                           .toList(),
