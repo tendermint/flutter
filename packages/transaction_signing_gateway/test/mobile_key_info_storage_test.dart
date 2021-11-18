@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:transaction_signing_gateway/mobile/mobile_key_info_storage.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 import 'mocks/private_wallet_credentials_mock.dart';
-import 'mocks/test_memory_storage.dart';
+import 'mocks/test_memory_store.dart';
 
 void main() {
   group("MobileKeyInfoStorage", () {
@@ -35,9 +35,10 @@ void main() {
       ),
       mnemonic: mnemonic,
     );
-    final storage = MobileKeyInfoStorage(
-      storage: TestMemoryStorage(),
+    final storage = CosmosKeyInfoStorage(
       serializers: [TestPrivateCredentialsSerializer()],
+      secureDataStore: TestMemoryStore(),
+      plainDataStore: TestMemoryStore(),
     );
     //
     test("save and retrieve creds", () async {
