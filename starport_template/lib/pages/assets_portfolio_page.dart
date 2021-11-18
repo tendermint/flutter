@@ -37,7 +37,6 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     _fetchWalletBalances();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,17 +50,20 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: CosmosTheme.of(context).spacingL,
-                          bottom: CosmosTheme.of(context).spacingL,
-                        ),
+                        padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: GradientAvatar(stringKey: widget.walletInfo.address),
+                          child: SizedBox(
+                            height: 35,
+                            child: GradientAvatar(stringKey: widget.walletInfo.address),
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: CosmosTheme.of(context).spacingL),
+                        padding: EdgeInsets.only(
+                          left: CosmosTheme.of(context).spacingL,
+                          top: CosmosTheme.of(context).spacingM,
+                        ),
                         child: Row(
                           children: [
                             Text(
@@ -71,6 +73,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
+                            SizedBox(width: CosmosTheme.of(context).spacingM),
                             Icon(
                               Icons.arrow_downward_sharp,
                               size: CosmosTheme.of(context).fontSizeXL,
@@ -78,17 +81,24 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                           ],
                         ),
                       ),
+                      SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
-                      Padding(padding: EdgeInsets.only(top: CosmosTheme.of(context).spacingXL)),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      SizedBox(height: CosmosTheme.of(context).spacingL),
+                      SizedBox(height: CosmosTheme.of(context).spacingM),
+                      SingleChildScrollView(
                         child: Column(
                           children: balancesList
                               .map(
-                                (balance) => CosmosBalanceCard(
-                                  denomText: balance.denom.text.toUpperCase(),
-                                  amountDisplayText: formatAmount(balance.amount.value.toDouble()),
-                                  onTransferPressed: () => _transferPressed(balance),
+                                (balance) => Column(
+                                  children: [
+                                    CosmosBalanceCard(
+                                      denomText: balance.denom.text.toUpperCase(),
+                                      amountDisplayText: formatAmount(balance.amount.value.toDouble()),
+                                      onTransferPressed: () => _transferPressed(balance),
+                                    ),
+                                    SizedBox(height: CosmosTheme.of(context).spacingL),
+                                    SizedBox(height: CosmosTheme.of(context).spacingM),
+                                  ],
                                 ),
                               )
                               .toList(),
@@ -97,7 +107,10 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: CosmosTheme.of(context).spacingL,
+                      vertical: CosmosTheme.of(context).spacingXL,
+                    ),
                     child: Row(
                       children: [
                         Expanded(
@@ -118,6 +131,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                       ],
                     ),
                   ),
+                  // const SizedBox(height: 16),
                   if (isSendMoneyLoading)
                     const Padding(
                       padding: EdgeInsets.only(top: 8.0),

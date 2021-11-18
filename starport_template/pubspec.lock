@@ -145,8 +145,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: starport-redesign
-      resolved-ref: aa4a8afc5dbdec281907b661c920c21e8511777e
+      ref: assets_portfolio
+      resolved-ref: a2b02b62e4547ee04ce60e9a8618b89bef5e61ed
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
