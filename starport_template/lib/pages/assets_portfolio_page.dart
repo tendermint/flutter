@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/cosmos_elevated_button.dart';
+import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_wallets_list_view.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';

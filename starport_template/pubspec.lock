@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
+  biometric_storage:
+    dependency: transitive
+    description:
+      name: biometric_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   bip39:
     dependency: transitive
     description:
@@ -139,7 +146,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: starport-redesign
-      resolved-ref: "8cab3ccc584fe0767e6a99ea412ed2ac6588cd15"
+      resolved-ref: aa4a8afc5dbdec281907b661c920c21e8511777e
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -148,7 +155,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "8cab3ccc584fe0767e6a99ea412ed2ac6588cd15"
+      resolved-ref: aa4a8afc5dbdec281907b661c920c21e8511777e
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -208,6 +215,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  ffi:
+    dependency: transitive
+    description:
+      name: ffi
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   file:
     dependency: transitive
     description:
@@ -234,15 +248,62 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   flutter_secure_storage:
     dependency: transitive
     description:
       name: flutter_secure_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.1"
+    version: "5.0.2"
+  flutter_secure_storage_linux:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  flutter_secure_storage_macos:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  flutter_secure_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  flutter_secure_storage_web:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  flutter_secure_storage_windows:
+    dependency: transitive
+    description:
+      name: flutter_secure_storage_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -330,6 +391,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.2"
+  local_auth:
+    dependency: transitive
+    description:
+      name: local_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.8"
   logging:
     dependency: transitive
     description:
@@ -372,6 +440,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  path_provider_linux:
+    dependency: transitive
+    description:
+      name: path_provider_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.2"
+  path_provider_platform_interface:
+    dependency: transitive
+    description:
+      name: path_provider_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
+  path_provider_windows:
+    dependency: transitive
+    description:
+      name: path_provider_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   pedantic:
     dependency: transitive
     description:
@@ -379,6 +468,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
+  platform:
+    dependency: transitive
+    description:
+      name: platform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   pointycastle:
     dependency: transitive
     description:
@@ -386,6 +489,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.4.0"
+  process:
+    dependency: transitive
+    description:
+      name: process
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.4"
   protobuf:
     dependency: transitive
     description:
@@ -414,6 +524,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  shared_preferences:
+    dependency: transitive
+    description:
+      name: shared_preferences
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.8"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
+  shared_preferences_macos:
+    dependency: transitive
+    description:
+      name: shared_preferences_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -473,7 +625,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "8cab3ccc584fe0767e6a99ea412ed2ac6588cd15"
+      resolved-ref: aa4a8afc5dbdec281907b661c920c21e8511777e
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -505,6 +657,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.0"
+  xdg_directories:
+    dependency: transitive
+    description:
+      name: xdg_directories
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   yaml:
     dependency: transitive
     description:
@@ -514,4 +680,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=2.0.5"
+  flutter: ">=2.5.0"
