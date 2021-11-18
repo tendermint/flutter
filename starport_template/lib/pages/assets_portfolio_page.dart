@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/widgets/send_money_sheet.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
   final WalletInfo walletInfo;
