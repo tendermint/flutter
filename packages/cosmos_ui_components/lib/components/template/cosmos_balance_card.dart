@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 class CosmosBalanceCard extends StatelessWidget {
   final String denomText;
   final String amountDisplayText;
-  final VoidCallback? onTransferPressed;
 
   const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
-    required this.onTransferPressed,
   });
 
   @override
