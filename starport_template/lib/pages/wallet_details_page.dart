@@ -55,7 +55,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                     child: Column(
                       children: balancesList
                           .map(
-                            (balance) => BalanceCard(
+                            (balance) => CosmosBalanceCard(
                               denomText: balance.denom.text,
                               amountDisplayText: balance.amount.value.toString(),
                               onTransferPressed: () => _transferPressed(balance),

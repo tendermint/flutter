@@ -12,10 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   equatable: ^2.0.3
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^5.0.0
+  biometric_storage: ^3.0.1
   encrypt: ^5.0.1
   alan: ^0.40.2+1
   uuid: ^3.0.5
+  local_auth: ^1.1.8
+  shared_preferences: ^2.0.8
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git
@@ -28,4 +31,10 @@ dev_dependencies:
   lint: 1.7.2
   mockito: 5.0.14
 
+## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
+## it points to the location of the checked out tendermint/flutter repository
+#dependency_overrides:
+#  cosmos_utils:
+#    path: ../cosmos_utils
+#
 flutter:
