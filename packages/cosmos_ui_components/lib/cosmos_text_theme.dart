@@ -17,10 +17,23 @@ abstract class CosmosTextTheme {
         height: 1.625,
       );
 
+  static TextStyle get copyMinus1Normal => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w400,
+        fontSize: 13,
+        height: 1.645,
+      );
+
   static TextStyle get elevatedButton => const TextStyle(
         fontFamily: fontInter,
         fontWeight: FontWeight.w500,
         fontSize: 16,
+      );
+
+  static TextStyle get titleSans2Bold => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w700,
+        fontSize: 28,
       );
 
   factory CosmosTextTheme._() => throw UnsupportedError("Not meant to be instantiated");

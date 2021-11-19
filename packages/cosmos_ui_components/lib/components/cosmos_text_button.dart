@@ -7,14 +7,22 @@ class CosmosTextButton extends StatelessWidget {
   final VoidCallback? onTap;
   final String text;
   final Widget? suffixIcon;
+  final Widget? leadingIcon;
   final double height;
+  final TextStyle? textStyle;
+  final Color? color;
+  final double? iconTopSpacing;
 
   const CosmosTextButton({
     Key? key,
     this.onTap,
     this.text = "",
     this.suffixIcon,
+    this.leadingIcon,
     this.height = defaultHeight,
+    this.textStyle,
+    this.iconTopSpacing,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -24,17 +32,28 @@ class CosmosTextButton extends StatelessWidget {
       style: TextButton.styleFrom(
         fixedSize: Size.fromHeight(height),
         shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        onSurface: color,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (leadingIcon != null) ...[
+            Padding(
+              padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
+              child: leadingIcon,
+            ),
+            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingM),
+          ],
           Text(
             text,
-            style: CosmosTextTheme.elevatedButton,
+            style: textStyle ?? CosmosTextTheme.elevatedButton,
           ),
           if (suffixIcon != null) ...[
-            SizedBox(width: CosmosTheme.of(context).spacingS),
-            suffixIcon!,
+            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingS),
+            Padding(
+              padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
+              child: suffixIcon,
+            ),
           ],
         ],
       ),
