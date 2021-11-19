@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/widgets/send_money_sheet.dart';
+
+// TODO: Remove this aftert [AssetsPortfolioPage] is finalized
 
 class WalletDetailsPage extends StatefulWidget {
   final WalletInfo walletInfo;
@@ -58,7 +58,6 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                             (balance) => CosmosBalanceCard(
                               denomText: balance.denom.text,
                               amountDisplayText: balance.amount.value.toString(),
-                              onTransferPressed: () => _transferPressed(balance),
                             ),
                           )
                           .toList(),
@@ -88,27 +87,29 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     );
   }
 
-  void _transferPressed(Balance balance) {
-    final denom = Denom(balance.denom.text);
-    _openSendMoneySheet(denom);
-  }
-
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
   }
 
-  Future<void> _openSendMoneySheet(Denom denom) async {
-    final result = await showModalBottomSheet(
-      context: context,
-      builder: (context) => SafeArea(
-        child: SendMoneySheet(
-          denom: denom,
-          walletInfo: widget.walletInfo,
-        ),
-      ),
-    );
-    if (result == true) {
-      StarportApp.walletsStore.getBalances(widget.walletInfo.address);
-    }
-  }
+// TODO: Remove these functions after [AssetsPortfolioPage] is finalized
+
+// void _transferPressed(Balance balance) {
+//   final denom = Denom(balance.denom.text);
+//   _openSendMoneySheet(denom);
+// }
+
+// Future<void> _openSendMoneySheet(Denom denom) async {
+//   final result = await showModalBottomSheet(
+//     context: context,
+//     builder: (context) => SafeArea(
+//       child: SendMoneySheet(
+//         denom: denom,
+//         walletInfo: widget.walletInfo,
+//       ),
+//     ),
+//   );
+//   if (result == true) {
+//     StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+//   }
+// }
 }
