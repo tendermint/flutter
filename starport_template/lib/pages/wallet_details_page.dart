@@ -87,27 +87,29 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
     );
   }
 
-  // void _transferPressed(Balance balance) {
-  //   final denom = Denom(balance.denom.text);
-  //   _openSendMoneySheet(denom);
-  // }
-
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
   }
 
-  // Future<void> _openSendMoneySheet(Denom denom) async {
-  //   final result = await showModalBottomSheet(
-  //     context: context,
-  //     builder: (context) => SafeArea(
-  //       child: SendMoneySheet(
-  //         denom: denom,
-  //         walletInfo: widget.walletInfo,
-  //       ),
-  //     ),
-  //   );
-  //   if (result == true) {
-  //     StarportApp.walletsStore.getBalances(widget.walletInfo.address);
-  //   }
-  // }
+// TODO: Remove these functions after [AssetsPortfolioPage] is finalized
+
+// void _transferPressed(Balance balance) {
+//   final denom = Denom(balance.denom.text);
+//   _openSendMoneySheet(denom);
+// }
+
+// Future<void> _openSendMoneySheet(Denom denom) async {
+//   final result = await showModalBottomSheet(
+//     context: context,
+//     builder: (context) => SafeArea(
+//       child: SendMoneySheet(
+//         denom: denom,
+//         walletInfo: widget.walletInfo,
+//       ),
+//     ),
+//   );
+//   if (result == true) {
+//     StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+//   }
+// }
 }
