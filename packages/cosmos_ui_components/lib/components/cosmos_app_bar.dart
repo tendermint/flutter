@@ -39,5 +39,5 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(116);
+  Size get preferredSize => const Size.fromHeight(114);
 }
