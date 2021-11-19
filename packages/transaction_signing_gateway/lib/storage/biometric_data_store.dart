@@ -38,7 +38,7 @@ class BiometricDataStore implements SecureDataStore {
     required String key,
   }) async =>
       _readMap().flatMap(
-            (keysMap) async => right(keysMap[key]),
+        (keysMap) async => right(keysMap[key]),
       );
 
   @override
@@ -47,11 +47,10 @@ class BiometricDataStore implements SecureDataStore {
     required String? value,
   }) async =>
       _readMap().flatMap(
-            (map) async =>
-            _writeMap({
-              ...map,
-              key: value,
-            }),
+        (map) async => _writeMap({
+          ...map,
+          key: value,
+        }),
       );
 
   Future<Either<CredentialsStorageFailure, Map<String, String?>>> _readMap() async {
@@ -65,7 +64,9 @@ class BiometricDataStore implements SecureDataStore {
     }
   }
 
-  Future<Either<CredentialsStorageFailure, Unit>> _writeMap(Map<String, String?> map,) async {
+  Future<Either<CredentialsStorageFailure, Unit>> _writeMap(
+    Map<String, String?> map,
+  ) async {
     try {
       final mapString = await compute(_encodeMap, map);
       final result = await _getStorageFile() //
@@ -111,14 +112,11 @@ class BiometricDataStore implements SecureDataStore {
   }
 }
 
-Map<String, String?> _decodeMap(String json) =>
-    (json
-        .trim()
-        .isEmpty
+Map<String, String?> _decodeMap(String json) => (json.trim().isEmpty
         ? //
-    <String, dynamic>{}
+        <String, dynamic>{}
         : jsonDecode(json) as Map<String, dynamic>? ?? <String, dynamic>{})
-        .cast();
+    .cast();
 
 String _encodeMap(Map<String, String?> map) => jsonEncode(map);
 
