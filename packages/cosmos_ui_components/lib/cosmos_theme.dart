@@ -42,7 +42,7 @@ class CosmosThemeData extends Equatable {
   static const defaultMediumDuration = 300;
   static const defaultShortDuration = 150;
 
-  static const defaultRadiusL = 20.0;
+  static const defaultRadiusL = 30.0;
   static const defaultRadiusM = 10.0;
   static const defaultRadiusS = 4.0;
 
@@ -128,7 +128,7 @@ class CosmosColorsData extends Equatable {
   static const lightCardBg = Color(0x08000000);
   static const onLightText = Color(0xFF000000);
   static const lightInactive = Color(0x2C000000);
-  static const lightDivider = Color(0x17000000);
+  static const lightDivider = Color(0x1A000000);
   static const lightSurface = Color(0xFFFFFFFF);
 
   static const darkBg = Color(0xFF000000);
@@ -141,12 +141,14 @@ class CosmosColorsData extends Equatable {
   final Color inactive;
   final Color divider;
   final Color onBackground;
+  final Color background;
   final Color cardBackground;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
     this.divider = lightDivider,
     this.onBackground = onLightText,
+    this.background = lightBg,
     this.cardBackground = lightCardBg,
   });
 

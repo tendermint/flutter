@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/components/cosmos_text_button.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class CosmosBackButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class CosmosBackButton extends StatelessWidget {
       iconTopSpacing: 2,
       leadingIcon: Image.asset(
         "assets/images/big-arrow-left.png",
-        package: "cosmos_ui_components",
+        package: packageName,
         width: 32,
         height: 32,
         scale: 1,
