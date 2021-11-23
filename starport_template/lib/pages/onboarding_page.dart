@@ -41,17 +41,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       "Welcome to your first blockchain-powered mobile app.",
                       style: Theme.of(context).textTheme.headline2,
                     ),
-                    SizedBox(height: theme.spacingL),
+                     SizedBox(height: theme.spacingL),
                     Text(
                       "Access your wallet for alicechain/1.",
                       style: Theme.of(context).textTheme.caption,
                     ),
-                    SizedBox(height: theme.spacingXL),
+                     SizedBox(height: theme.spacingXL),
                     CosmosElevatedButton(
                       text: "Create account",
                       onTap: _onTapCreateAccount,
                     ),
-                    SizedBox(height: theme.spacingM),
+                     SizedBox(height: theme.spacingM),
                     CosmosTextButton(
                       text: "Import account",
                       onTap: _onTapImportAccount,
