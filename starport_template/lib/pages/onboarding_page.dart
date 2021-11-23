@@ -19,45 +19,48 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset("assets/images/welcome-bg.png", fit: BoxFit.cover),
-          ),
-          SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width + 24,
-                  ),
-                  Text(
-                    "Welcome to your first blockchain-powered mobile app.",
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                  const SizedBox(height: 18),
-                  Text(
-                    "Access your wallet for alicechain/1.",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                  const SizedBox(height: 38),
-                  CosmosElevatedButton(
-                    text: "Create account",
-                    onTap: _onTapCreateAccount,
-                  ),
-                  const SizedBox(height: 10),
-                  CosmosTextButton(
-                    text: "Import account",
-                    onTap: _onTapImportAccount,
-                  ),
-                ],
+    return AnimatedSwitcher(
+      duration: const MediumDuration(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset("assets/images/welcome-bg.png", fit: BoxFit.cover),
+            ),
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width + 24,
+                    ),
+                    Text(
+                      "Welcome to your first blockchain-powered mobile app.",
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      "Access your wallet for alicechain/1.",
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    const SizedBox(height: 38),
+                    CosmosElevatedButton(
+                      text: "Create account",
+                      onTap: _onTapCreateAccount,
+                    ),
+                    const SizedBox(height: 10),
+                    CosmosTextButton(
+                      text: "Import account",
+                      onTap: _onTapImportAccount,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
