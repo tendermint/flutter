@@ -30,7 +30,27 @@ dev_dependencies:
 
 
 flutter:
+  assets:
+    - assets/images/
+
   fonts:
     - family: Inter
       fonts:
-        - asset: lib/fonts/inter.ttf
+        - asset: lib/fonts/Inter-Thin.ttf
+          weight: 100
+        - asset: lib/fonts/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: lib/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: lib/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: lib/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: lib/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: lib/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: lib/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: lib/fonts/Inter-Black.ttf
+          weight: 900
