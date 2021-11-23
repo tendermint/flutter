@@ -125,6 +125,7 @@ class CosmosThemeData extends Equatable {
 
 class CosmosColorsData extends Equatable {
   static const lightBg = Color(0xFFFFFFFF);
+  static const lightCardBg = Color(0x08000000);
   static const onLightText = Color(0xFF000000);
   static const lightInactive = Color(0x2C000000);
   static const lightDivider = Color(0x17000000);
@@ -139,10 +140,14 @@ class CosmosColorsData extends Equatable {
   static const error = Color(0xFFE74444);
   final Color inactive;
   final Color divider;
+  final Color onBackground;
+  final Color cardBackground;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
     this.divider = lightDivider,
+    this.onBackground = onLightText,
+    this.cardBackground = lightCardBg,
   });
 
   @override
