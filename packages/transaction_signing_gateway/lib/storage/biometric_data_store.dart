@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:biometric_storage/biometric_storage.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:cosmos_utils/extensions.dart';
 import 'package:cosmos_utils/future_either.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
@@ -11,18 +13,24 @@ class BiometricDataStore implements SecureDataStore {
   BiometricStorageFile? _storageFile;
   final PromptInfo promptInfo;
   final String storageFileName;
+  final StorageFileInitOptions _storageFileInitOptions;
 
   BiometricDataStore({
     this.promptInfo = PromptInfo.defaultValues,
     this.storageFileName = "cosmos_wallet_creds",
-  });
+    StorageFileInitOptions? storageFileInitOptions,
+  }) : _storageFileInitOptions = storageFileInitOptions ?? StorageFileInitOptions();
 
-  Future<BiometricStorageFile> _getStorageFile() async {
-    _storageFile ??= await BiometricStorage().getStorage(
-      storageFileName,
-      promptInfo: promptInfo,
-    );
-    return _storageFile!;
+  /// Convenience helper method to check whether biometric authentication is available on the device
+  Future<Either<BiometricCredentialsStorageFailure, Unit>> authenticateUser() async {
+    return _readMap() //
+        .mapError<BiometricCredentialsStorageFailure>((err) {
+      if (err is BiometricCredentialsStorageFailure) {
+        return err;
+      } else {
+        return BiometricCredentialsStorageFailure.unknown("$err");
+      }
+    }).flatMap((a) async => right(unit));
   }
 
   @override
@@ -46,9 +54,14 @@ class BiometricDataStore implements SecureDataStore {
       );
 
   Future<Either<CredentialsStorageFailure, Map<String, String?>>> _readMap() async {
-    final storageRead = await (await _getStorageFile()).read() ?? "";
-    final map = await compute(_decodeMap, storageRead);
-    return right(map);
+    try {
+      return _getStorageFile() //
+          .flatMap((storageFile) async => right(await storageFile.read() ?? ""))
+          .flatMap((storageRead) async => right(await compute(_decodeMap, storageRead)));
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(CredentialsStorageFailure("$ex"));
+    }
   }
 
   Future<Either<CredentialsStorageFailure, Unit>> _writeMap(
@@ -56,14 +69,90 @@ class BiometricDataStore implements SecureDataStore {
   ) async {
     try {
       final mapString = await compute(_encodeMap, map);
-      (await _getStorageFile()).write(mapString);
-      return right(unit);
+      final result = await _getStorageFile() //
+          .flatMap((file) async => right(await file.write(mapString)))
+          .flatMap((_) async => right(unit));
+      return result;
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Could not write map to secure storage", cause: ex, stack: stack));
+      return left(
+        CredentialsStorageFailure(
+          "Could not write map to secure storage",
+          cause: ex,
+          stack: stack,
+        ),
+      );
+    }
+  }
+
+  Future<Either<CredentialsStorageFailure, BiometricStorageFile>> _getStorageFile() async {
+    if (_storageFile != null) {
+      return right(_storageFile!);
+    }
+    final biometricStorage = BiometricStorage();
+    final canAuthenticate = await biometricStorage.canAuthenticate();
+    switch (canAuthenticate) {
+      case CanAuthenticateResponse.success:
+        _storageFile = await biometricStorage.getStorage(
+          storageFileName,
+          options: _storageFileInitOptions,
+          promptInfo: promptInfo,
+        );
+        return right(_storageFile!);
+      case CanAuthenticateResponse.errorHwUnavailable:
+        return left(BiometricCredentialsStorageFailure.unavailable());
+      case CanAuthenticateResponse.errorNoBiometricEnrolled:
+        return left(BiometricCredentialsStorageFailure.noBiometricEnrolled());
+      case CanAuthenticateResponse.errorNoHardware:
+        return left(BiometricCredentialsStorageFailure.noHardware());
+      case CanAuthenticateResponse.statusUnknown:
+        return left(BiometricCredentialsStorageFailure.unknown());
+      case CanAuthenticateResponse.unsupported:
+        return left(BiometricCredentialsStorageFailure.unsupported());
     }
   }
 }
 
-Map<String, String?> _decodeMap(String json) => jsonDecode(json) as Map<String, String?>? ?? {};
+Map<String, String?> _decodeMap(String json) => (json.trim().isEmpty
+        ? //
+        <String, dynamic>{}
+        : jsonDecode(json) as Map<String, dynamic>? ?? <String, dynamic>{})
+    .cast();
 
 String _encodeMap(Map<String, String?> map) => jsonEncode(map);
+
+enum BiometricCredentialsFailureReason {
+  unsupported,
+  unavailable,
+  noBiometricEnrolled,
+  noHardware,
+  unknown,
+}
+
+class BiometricCredentialsStorageFailure extends CredentialsStorageFailure {
+  final BiometricCredentialsFailureReason reason;
+
+  BiometricCredentialsStorageFailure.unsupported()
+      : reason = BiometricCredentialsFailureReason.unsupported,
+        super("Biometric authentication is unsupported");
+
+  BiometricCredentialsStorageFailure.unavailable()
+      : reason = BiometricCredentialsFailureReason.unavailable,
+        super("Biometric authentication is not available");
+
+  BiometricCredentialsStorageFailure.noBiometricEnrolled()
+      : reason = BiometricCredentialsFailureReason.noBiometricEnrolled,
+        super("Biometric authentication is not enrolled");
+
+  BiometricCredentialsStorageFailure.noHardware()
+      : reason = BiometricCredentialsFailureReason.noHardware,
+        super("Device has no hardware for biometric authentication");
+
+  BiometricCredentialsStorageFailure.unknown([String? message])
+      : reason = BiometricCredentialsFailureReason.unknown,
+        super(message ?? "Biometric authentication is unsupported");
+
+  @override
+  String toString() {
+    return 'BiometricCredentialsStorageFailure{reason: $reason, message: $message}';
+  }
+}
