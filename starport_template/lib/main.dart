@@ -23,6 +23,7 @@ void _buildDependencies() {
     lcdInfo: LCDInfo(host: "http://localhost"),
     grpcInfo: GRPCInfo(host: "http://localhost", port: 9091),
   );
+  StarportApp.biometricDataStore = BiometricDataStore();
   StarportApp.signingGateway = TransactionSigningGateway(
     transactionSummaryUI: NoOpTransactionSummaryUI(),
     signers: [
@@ -33,7 +34,7 @@ void _buildDependencies() {
     ],
     infoStorage: CosmosKeyInfoStorage(
       serializers: [AlanCredentialsSerializer()],
-      secureDataStore: BiometricDataStore(),
+      secureDataStore: StarportApp.biometricDataStore,
       plainDataStore: SharedPrefsPlainDataStore(),
     ),
   );
