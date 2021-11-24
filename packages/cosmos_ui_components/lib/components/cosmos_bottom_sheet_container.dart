@@ -26,3 +26,16 @@ class CosmosBottomSheetContainer extends StatelessWidget {
     );
   }
 }
+
+Future showCosmosBottomSheet(Widget child, BuildContext context, {bool isFullScreen = true}) => showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: true,
+      shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+      builder: (context) => isFullScreen
+          ? SizedBox(
+              height: MediaQuery.of(context).size.height / 1.06,
+              child: CosmosBottomSheetContainer(child: child),
+            )
+          : CosmosBottomSheetContainer(child: child),
+    );
