@@ -51,10 +51,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   Column(
                     children: [
                       _buildGradientAvatar(context),
-                      InkWell(
-                        onTap: _onDropDownTapped,
-                        child: AssetPortfolioHeading(title: selectedWallet.name),
-                      ),
+                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -114,7 +111,11 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   Future<void> _onDropDownTapped() async {
     final wallet = await showModalBottomSheet(
       context: context,
-      builder: (context) => const SafeArea(child: WalletsListSheet()),
+      isScrollControlled: true,
+      enableDrag: true,
+      shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+      builder: (context) =>
+          SizedBox(height: MediaQuery.of(context).size.height / 1.06, child: const WalletsListSheet()),
     ) as WalletPublicInfo?;
 
     if (wallet != null) {
