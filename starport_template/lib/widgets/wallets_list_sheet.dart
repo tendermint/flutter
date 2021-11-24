@@ -36,6 +36,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     //ignore: deprecated_member_use_from_same_package
     return CosmosBottomSheetContainer(
       child: SafeArea(
+        top: false,
         child: Observer(
           builder: (context) => ContentStateSwitcher(
             emptyChild: const EmptyListMessage(
@@ -45,7 +46,6 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
             contentChild: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: CosmosTheme.of(context).spacingM),
                 SizedBox(height: CosmosTheme.of(context).spacingL),
                 CosmosBottomSheetHeader(
                   title: 'Accounts',
@@ -53,7 +53,6 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
                   leading: CosmosTextButton(text: 'Edit', onTap: () {}),
                   actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
-                SizedBox(height: CosmosTheme.of(context).spacingL),
                 _buildMainList(),
                 Padding(
                   padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),

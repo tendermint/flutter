@@ -114,7 +114,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
-        child: const CosmosBottomSheetContainer(child: WalletsListSheet()),
+        child: const WalletsListSheet(),
       ),
     ) as WalletPublicInfo?;
 
