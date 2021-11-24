@@ -32,10 +32,8 @@ Future showCosmosBottomSheet(Widget child, BuildContext context, {bool isFullScr
       isScrollControlled: true,
       enableDrag: true,
       shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
-      builder: (context) => isFullScreen
-          ? SizedBox(
-              height: MediaQuery.of(context).size.height / 1.06,
-              child: CosmosBottomSheetContainer(child: child),
-            )
-          : CosmosBottomSheetContainer(child: child),
+      builder: (context) => SizedBox(
+        height: isFullScreen ? MediaQuery.of(context).size.height / 1.06 : MediaQuery.of(context).size.height / 2,
+        child: CosmosBottomSheetContainer(child: child),
+      ),
     );
