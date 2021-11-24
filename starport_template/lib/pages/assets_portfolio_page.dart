@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
+import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
@@ -107,13 +108,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   }
 
   Future<void> _onDropDownTapped() async {
-    final wallet = await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: true,
-      shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
-      builder: (context) =>
-          SizedBox(height: MediaQuery.of(context).size.height / 1.06, child: const WalletsListSheet()),
+    final wallet = await showCosmosBottomSheet(
+      const WalletsListSheet(),
+      context,
     ) as WalletPublicInfo?;
 
     if (wallet != null) {
