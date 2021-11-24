@@ -59,13 +59,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   Widget _contentUI() {
+    final theme = CosmosTheme.of(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
-          left: CosmosTheme.of(context).spacingL,
-          right: CosmosTheme.of(context).spacingL,
-          top: CosmosTheme.of(context).spacingS,
-          bottom: CosmosTheme.of(context).spacingXL,
+          left: theme.spacingL,
+          right: theme.spacingL,
+          top: theme.spacingS,
+          bottom: theme.spacingXL,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -74,18 +75,18 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
               "If your device is lost or stolen, you will be able to recover your account.",
               style: CosmosTextTheme.copy0Normal,
             ),
-            SizedBox(height: CosmosTheme.of(context).spacingXL),
+            SizedBox(height: theme.spacingXL),
             const InfoCard(text: "We will never ask you to share your recovery phrase."),
-            SizedBox(height: CosmosTheme.of(context).spacingL),
+            SizedBox(height: theme.spacingL),
             const InfoCard(text: "Never share your recovery phrase with anyone, store it securely."),
-            SizedBox(height: CosmosTheme.of(context).spacingL),
+            SizedBox(height: theme.spacingL),
             const InfoCard(
               text: "If you don’t backup your wallet or lose your recovery phrase, "
                   "you will not able to recover your account",
             ),
             const Spacer(),
             CosmosElevatedButton(text: "Back up now", onTap: _onTapBackUpNow),
-            const SizedBox(height: 10),
+            SizedBox(height: theme.spacingM),
             CosmosTextButton(text: "Back up later", onTap: _onTapBackUpLater),
           ],
         ),

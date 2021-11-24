@@ -19,6 +19,7 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return AnimatedSwitcher(
       duration: const MediumDuration(),
       child: Scaffold(
@@ -29,7 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                padding: EdgeInsets.all(theme.spacingL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -40,17 +41,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       "Welcome to your first blockchain-powered mobile app.",
                       style: Theme.of(context).textTheme.headline2,
                     ),
-                    const SizedBox(height: 18),
+                    SizedBox(height: theme.spacingL),
                     Text(
                       "Access your wallet for alicechain/1.",
                       style: Theme.of(context).textTheme.caption,
                     ),
-                    const SizedBox(height: 38),
+                    SizedBox(height: theme.spacingXL),
                     CosmosElevatedButton(
                       text: "Create account",
                       onTap: _onTapCreateAccount,
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: theme.spacingM),
                     CosmosTextButton(
                       text: "Import account",
                       onTap: _onTapImportAccount,
