@@ -71,7 +71,9 @@ class WalletsStore {
       (newWallets) {
         wallets.clear();
         wallets.addAll(newWallets);
-        selectedWallet = wallets.first;
+        if (wallets.isNotEmpty) {
+          selectedWallet = wallets.first;
+        }
       },
     );
     areWalletsLoading = false;
