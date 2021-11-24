@@ -22,7 +22,7 @@ class CosmosWalletListItem extends StatelessWidget {
       onTap: onClicked,
       child: Container(
         padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-        margin: EdgeInsets.symmetric(vertical: CosmosTheme.of(context).spacingM),
+        margin: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL, vertical: CosmosTheme.of(context).spacingM),
         decoration: BoxDecoration(
           borderRadius: CosmosTheme.of(context).borderRadiusM,
           // TODO: This color needs to be fixed. Doesn't match the dark theme.
