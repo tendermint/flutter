@@ -14,14 +14,15 @@ class CosmosAppBarAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: CosmosTheme.of(context).spacingS,
+        horizontal: theme.spacingS,
       ),
       child: CosmosTextButton(
         onTap: onTap,
         text: text,
-        color: Colors.black,
+        color: theme.colors.onBackground,
       ),
     );
   }
