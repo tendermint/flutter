@@ -34,38 +34,34 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
   @override
   Widget build(BuildContext context) {
     //ignore: deprecated_member_use_from_same_package
-    return SafeArea(
-      child: Observer(
-        builder: (context) => ContentStateSwitcher(
-          emptyChild: const EmptyListMessage(
-            message: "No wallets found. Add one.",
-          ),
-          isEmpty: walletInfos.isEmpty,
-          contentChild: Padding(
-            padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: CosmosTheme.of(context).spacingL),
-                SizedBox(height: CosmosTheme.of(context).spacingS),
-                _buildTopActions(),
-                SizedBox(height: CosmosTheme.of(context).spacingXL),
-                SizedBox(height: CosmosTheme.of(context).spacingM),
-                // TODO: Add text styles from `CosmosTheme.of(context)`
-                Text(
-                  'Accounts',
-                  style: TextStyle(fontSize: CosmosTheme.of(context).fontSizeXL, fontWeight: FontWeight.w700),
-                ),
-                SizedBox(height: CosmosTheme.of(context).spacingL),
-                _buildMainList(),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: CosmosTheme.of(context).spacingL),
-                  child: const Divider(),
-                ),
-                SizedBox(height: CosmosTheme.of(context).spacingL),
-                _buildPrimaryBottomActions(context),
-                SizedBox(height: CosmosTheme.of(context).spacingM),
-              ],
+    return CosmosBottomSheetContainer(
+      child: SafeArea(
+        child: Observer(
+          builder: (context) => ContentStateSwitcher(
+            emptyChild: const EmptyListMessage(
+              message: "No wallets found. Add one.",
+            ),
+            isEmpty: walletInfos.isEmpty,
+            contentChild: Padding(
+              padding: EdgeInsets.all(CosmosTheme.of(context).spacingM),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: CosmosTheme.of(context).spacingL),
+                  SizedBox(height: CosmosTheme.of(context).spacingS),
+                  _buildTopActions(),
+                  const CosmosBottomSheetHeader(title: 'Accounts'),
+                  SizedBox(height: CosmosTheme.of(context).spacingL),
+                  _buildMainList(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: CosmosTheme.of(context).spacingL),
+                    child: const Divider(),
+                  ),
+                  SizedBox(height: CosmosTheme.of(context).spacingL),
+                  _buildPrimaryBottomActions(context),
+                  SizedBox(height: CosmosTheme.of(context).spacingM),
+                ],
+              ),
             ),
           ),
         ),
@@ -73,34 +69,47 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     );
   }
 
-  Column _buildPrimaryBottomActions(BuildContext context) {
-    return Column(
-      children: [
-        CosmosCircleTextButton(onTap: () {}, text: 'Create account', icon: Icons.add),
-        SizedBox(height: CosmosTheme.of(context).spacingL),
-        CosmosCircleTextButton(onTap: () {}, text: 'Import account', icon: Icons.arrow_downward_sharp),
-      ],
+  Widget _buildPrimaryBottomActions(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(CosmosTheme.of(context).spacingM),
+      child: Column(
+        children: [
+          CosmosCircleTextButton(onTap: () {}, text: 'Create account', icon: Icons.add),
+          SizedBox(height: CosmosTheme.of(context).spacingL),
+          CosmosCircleTextButton(onTap: () {}, text: 'Import account', icon: Icons.arrow_downward_sharp),
+        ],
+      ),
     );
   }
 
   Expanded _buildMainList() {
     return Expanded(
-      child: CosmosWalletsListView(
-        list: walletInfos,
-        selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-        onClicked: (index) => _walletClicked(index),
+      child: Padding(
+        padding: EdgeInsets.all(CosmosTheme.of(context).spacingM),
+        child: CosmosWalletsListView(
+          list: walletInfos,
+          selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
+          onClicked: (index) => _walletClicked(index),
+        ),
       ),
     );
   }
 
-  Row _buildTopActions() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        // TODO: Add text styles from `CosmosTheme.of(context)`
-        Text('Edit', style: TextStyle(fontWeight: FontWeight.w500)),
-        Text('Close', style: TextStyle(fontWeight: FontWeight.w500)),
-      ],
+  Widget _buildTopActions() {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: CosmosTheme.of(context).spacingM,
+        left: CosmosTheme.of(context).spacingM,
+        right: CosmosTheme.of(context).spacingM,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          // TODO: Add text styles from `CosmosTheme.of(context)`
+          Text('Edit', style: TextStyle(fontWeight: FontWeight.w500)),
+          Text('Close', style: TextStyle(fontWeight: FontWeight.w500)),
+        ],
+      ),
     );
   }
 
