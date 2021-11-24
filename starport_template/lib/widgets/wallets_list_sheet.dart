@@ -93,12 +93,5 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     );
   }
 
-  // TODO: Uncomment this when implementing Send/Receive
-  // void _addWalletClicked() => Navigator.of(context).push(
-  //       MaterialPageRoute(
-  //         builder: (context) => const OnboardingPage(),
-  //       ),
-  //     );
-
   void _walletClicked(int index) => Navigator.of(context).pop(publicInfos[index]);
 }
