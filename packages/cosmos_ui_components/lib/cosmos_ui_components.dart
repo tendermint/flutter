@@ -5,6 +5,9 @@ export 'components/content_state_switcher.dart';
 export 'components/cosmos_app_bar.dart';
 export 'components/cosmos_app_bar_action.dart';
 export 'components/cosmos_back_button.dart';
+export 'components/cosmos_bottom_sheet_container.dart';
+export 'components/cosmos_bottom_sheet_header.dart';
+export 'components/cosmos_checkbox_tile.dart';
 export 'components/cosmos_elevated_button.dart';
 export 'components/cosmos_error_view.dart';
 export 'components/cosmos_outline_button.dart';
@@ -17,3 +20,5 @@ export 'components/template/cosmos_wallet_list_item.dart';
 export 'components/template/cosmos_wallets_list_view.dart';
 export 'cosmos_app_theme.dart';
 export 'utils/durations.dart';
+
+const packageName = "cosmos_ui_components";
