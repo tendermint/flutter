@@ -13,8 +13,6 @@ import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
-  // final WalletInfo walletInfo;
-
   const AssetsPortfolioPage({Key? key}) : super(key: key);
 
   @override

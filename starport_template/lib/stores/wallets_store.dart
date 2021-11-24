@@ -64,14 +64,12 @@ class WalletsStore {
 
   set selectedWallet(WalletPublicInfo val) => Action(() => _selectedWallet.value = val)();
 
-  void addDummyWallet(WalletPublicInfo info) => wallets.add(info);
-
   Future<void> loadWallets() async {
     areWalletsLoading = true;
     (await _transactionSigningGateway.getWalletsList()).fold(
       (fail) => loadWalletsFailure.value = fail,
       (newWallets) {
-        // wallets.clear();
+        wallets.clear();
         wallets.addAll(newWallets);
         selectedWallet = wallets.first;
       },
