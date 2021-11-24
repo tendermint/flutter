@@ -19,7 +19,7 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: assets_portfolio
+      ref: starport-redesign
 
   cosmos_utils:
     git:
@@ -40,15 +40,15 @@ dev_dependencies:
     sdk: flutter
   lint: 1.7.2
 
-dependency_overrides:
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
-  cosmos_utils:
-    path: ../packages/cosmos_utils
-  transaction_signing_gateway:
-    path: ../packages/transaction_signing_gateway
-  cosmos_ui_components:
-    path: ../packages/cosmos_ui_components
+#dependency_overrides:
+#  cosmos_utils:
+#    path: ../packages/cosmos_utils
+#  transaction_signing_gateway:
+#    path: ../packages/transaction_signing_gateway
+#  cosmos_ui_components:
+#    path: ../packages/cosmos_ui_components
 
 flutter:
   uses-material-design: true
