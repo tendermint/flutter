@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "30928f9c1418ee0e907f73ece762c3861f4585a7"
+      resolved-ref: dbf8f782d2804661f4d07f186d84fa31c427e88e
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

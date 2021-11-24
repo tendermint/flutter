@@ -41,5 +41,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need access to FaceID in order to secure your wallet credentials so nobody can steal them</string>
 </dict>
 </plist>

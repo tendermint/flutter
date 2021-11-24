@@ -167,7 +167,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: aa4a8afc5dbdec281907b661c920c21e8511777e
+      resolved-ref: "16bc634e60b9320be74fd9afcb5c31eea82cb3db"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -245,7 +245,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -311,7 +311,7 @@ packages:
       name: googleapis_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.0"
   grpc:
     dependency: transitive
     description:
@@ -514,6 +514,20 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "2.0.9"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
+  shared_preferences_ios:
+    dependency: transitive
+    description:
+      name: shared_preferences_ios
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "2.0.8"
   shared_preferences_linux:
     dependency: transitive
@@ -638,7 +652,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.1"
   xdg_directories:
     dependency: transitive
     description:

@@ -90,7 +90,7 @@ class WalletsStore {
     isBalancesLoading = false;
   }
 
-  Future<void> importAlanWallet(
+  Future<WalletPublicInfo?> importAlanWallet(
     ImportWalletFormData data,
   ) async {
     isWalletImportingError = false;
@@ -114,15 +114,18 @@ class WalletsStore {
               .mapSuccess((_) => credentials),
         );
 
-    result.fold(
+    isWalletImporting = false;
+    return result.fold(
       (fail) {
         logError(fail);
         isWalletImportingError = true;
+        return null;
       },
-      (credentials) => wallets.add(credentials.publicInfo),
+      (credentials) {
+        wallets.add(credentials.publicInfo);
+        return credentials.publicInfo;
+      },
     );
-
-    isWalletImporting = false;
   }
 
   Future<void> sendTokens({
@@ -145,5 +148,21 @@ class WalletsStore {
       isBalancesLoadingError = true;
     }
     isSendMoneyLoading = false;
+  }
+
+  Future<WalletPublicInfo?> createNewWallet() async {
+    final mnemonic = await generateMnemonic();
+    return importAlanWallet(
+      ImportWalletFormData(
+        mnemonic: mnemonic,
+        name: "Wallet ${wallets.length}",
+        password:
+            // we're using `biometric_storage` package to secure the wallet credentials,
+            // thus no need for password, but if you want to add another layer of security.
+            // Feel free to ask user for one, it will be used to encrypt the wallet data
+            // with symmetric encryption
+            "",
+      ),
+    );
   }
 }
