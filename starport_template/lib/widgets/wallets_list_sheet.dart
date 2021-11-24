@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/components/empty_list_message.dart';
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
@@ -43,30 +44,24 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
             isEmpty: walletInfos.isEmpty,
             contentChild: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: CosmosTheme.of(context).spacingM),
-                _buildTopActions(),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingM),
-                    child: Column(
-                      children: [
-                        SizedBox(height: CosmosTheme.of(context).spacingL),
-                        const CosmosBottomSheetHeader(title: 'Accounts'),
-                        SizedBox(height: CosmosTheme.of(context).spacingL),
-                        _buildMainList(),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: CosmosTheme.of(context).spacingL),
-                          child: const Divider(),
-                        ),
-                        SizedBox(height: CosmosTheme.of(context).spacingL),
-                        _buildPrimaryBottomActions(context),
-                        SizedBox(height: CosmosTheme.of(context).spacingM),
-                      ],
-                    ),
-                  ),
+                SizedBox(height: CosmosTheme.of(context).spacingL),
+                CosmosBottomSheetHeader(
+                  title: 'Accounts',
+                  titleTextStyle: CosmosTextTheme.title1Bold,
+                  leading: CosmosTextButton(text: 'Edit', onTap: () {}),
+                  actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
+                SizedBox(height: CosmosTheme.of(context).spacingL),
+                _buildMainList(),
+                Padding(
+                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                  child: const Divider(),
+                ),
+                SizedBox(height: CosmosTheme.of(context).spacingL),
+                _buildPrimaryBottomActions(context),
+                SizedBox(height: CosmosTheme.of(context).spacingM),
               ],
             ),
           ),
@@ -77,13 +72,13 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
 
   Widget _buildPrimaryBottomActions(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(CosmosTheme.of(context).spacingM),
+      padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
       child: Column(
         children: [
           CosmosCircleTextButton(onTap: () {}, text: 'Create account', icon: Icons.add),
           SizedBox(height: CosmosTheme.of(context).spacingL),
           CosmosCircleTextButton(onTap: () {}, text: 'Import account', icon: Icons.arrow_downward_sharp),
-          SizedBox(height: CosmosTheme.of(context).spacingL),
+          // SizedBox(height: CosmosTheme.of(context).spacingL),
         ],
       ),
     );
@@ -91,31 +86,10 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
 
   Expanded _buildMainList() {
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.all(CosmosTheme.of(context).spacingM),
-        child: CosmosWalletsListView(
-          list: walletInfos,
-          selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-          onClicked: (index) => _walletClicked(index),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTopActions() {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: CosmosTheme.of(context).spacingM,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CosmosTextButton(text: 'Edit', onTap: () {}),
-          CosmosTextButton(
-            text: 'Close',
-            onTap: () => Navigator.of(context).pop(),
-          ),
-        ],
+      child: CosmosWalletsListView(
+        list: walletInfos,
+        selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
+        onClicked: (index) => _walletClicked(index),
       ),
     );
   }

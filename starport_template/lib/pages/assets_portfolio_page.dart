@@ -5,6 +5,7 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
@@ -108,9 +109,13 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   }
 
   Future<void> _onDropDownTapped() async {
-    final wallet = await showCosmosBottomSheet(
-      const WalletsListSheet(),
-      context,
+    final wallet = await showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height / 1.06,
+        child: const CosmosBottomSheetContainer(child: WalletsListSheet()),
+      ),
     ) as WalletPublicInfo?;
 
     if (wallet != null) {
