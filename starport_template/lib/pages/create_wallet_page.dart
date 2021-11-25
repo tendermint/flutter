@@ -1,9 +1,12 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/widgets/backup_later_bottom_sheet.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 import 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
 
@@ -107,9 +110,15 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     setState(() => _authenticationResult = result);
   }
 
-  void _onTapAdvanced() {}
+  void _onTapAdvanced() => notImplemented(context);
 
-  void _onTapBackUpNow() {}
+  void _onTapBackUpNow() => notImplemented(context);
 
-  void _onTapBackUpLater() {}
+  void _onTapBackUpLater() => showMaterialModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (context) => BackupLaterBottomSheet(
+          onTapSkipBackup: () => notImplemented(context),
+        ),
+      );
 }
