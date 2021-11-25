@@ -8,6 +8,7 @@ export 'components/cosmos_back_button.dart';
 export 'components/cosmos_bottom_sheet_container.dart';
 export 'components/cosmos_bottom_sheet_header.dart';
 export 'components/cosmos_checkbox_tile.dart';
+export 'components/cosmos_circle_text_button.dart';
 export 'components/cosmos_elevated_button.dart';
 export 'components/cosmos_error_view.dart';
 export 'components/cosmos_outline_button.dart';

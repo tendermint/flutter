@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class AssetPortfolioHeading extends StatelessWidget {
   final String title;
+  final VoidCallback onTap;
 
-  const AssetPortfolioHeading({Key? key, required this.title}) : super(key: key);
+  const AssetPortfolioHeading({Key? key, required this.title, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,7 @@ class AssetPortfolioHeading extends StatelessWidget {
       child: Row(
         children: [
           Text(title, style: TextStyle(fontSize: CosmosTheme.of(context).fontSizeXL, fontWeight: FontWeight.w700)),
-          SizedBox(width: CosmosTheme.of(context).spacingM),
-          // TODO: Add onPressed method on drop down tap
-          Icon(Icons.arrow_downward_sharp, size: CosmosTheme.of(context).fontSizeXL)
+          IconButton(icon: Icon(Icons.arrow_downward_sharp, size: CosmosTheme.of(context).fontSizeXL), onPressed: onTap)
         ],
       ),
     );

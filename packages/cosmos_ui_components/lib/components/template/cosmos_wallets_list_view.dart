@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 class CosmosWalletsListView extends StatelessWidget {
   final List<WalletInfo> list;
+  final WalletInfo selectedWallet;
   final void Function(int) onClicked;
 
   const CosmosWalletsListView({
     Key? key,
     required this.list,
+    required this.selectedWallet,
     required this.onClicked,
   }) : super(key: key);
 
@@ -20,6 +22,7 @@ class CosmosWalletsListView extends StatelessWidget {
             (index, wallet) => CosmosWalletListItem(
               name: wallet.name,
               address: wallet.address,
+              isSelected: selectedWallet.address == wallet.address,
               onClicked: () => onClicked(index),
             ),
           )

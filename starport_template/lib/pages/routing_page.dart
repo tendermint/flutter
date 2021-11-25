@@ -1,7 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/onboarding_page.dart';
-import 'package:starport_template/pages/wallets_list_page.dart';
 import 'package:starport_template/starport_app.dart';
 
 class RoutingPage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _RoutingPageState extends State<RoutingPage> {
       if (store.wallets.isEmpty) {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingPage()));
       } else {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const WalletsListPage()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()));
       }
     }
   }
