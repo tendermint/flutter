@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
 import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_header.dart';
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,7 @@ class _BackupLaterBottomSheetState extends State<BackupLaterBottomSheet> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CosmosBottomSheetHeader(
-                title: "Back up later",
-              ),
+              CosmosBottomSheetHeader(title: "Back up later", titleTextStyle: CosmosTextTheme.title1Bold),
               SizedBox(height: theme.spacingXL),
               CosmosCheckboxTile(
                 text:
