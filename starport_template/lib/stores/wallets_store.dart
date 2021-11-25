@@ -26,6 +26,8 @@ class WalletsStore {
   final Observable<bool> _isWalletImporting = Observable(false);
   final Observable<bool> _isWalletImportingError = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
+  final Observable<WalletPublicInfo> _selectedWallet =
+      Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
@@ -58,6 +60,10 @@ class WalletsStore {
 
   set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
 
+  WalletPublicInfo get selectedWallet => _selectedWallet.value;
+
+  set selectedWallet(WalletPublicInfo val) => Action(() => _selectedWallet.value = val)();
+
   Future<void> loadWallets() async {
     areWalletsLoading = true;
     (await _transactionSigningGateway.getWalletsList()).fold(
@@ -65,6 +71,9 @@ class WalletsStore {
       (newWallets) {
         wallets.clear();
         wallets.addAll(newWallets);
+        if (wallets.isNotEmpty) {
+          selectedWallet = wallets.first;
+        }
       },
     );
     areWalletsLoading = false;
