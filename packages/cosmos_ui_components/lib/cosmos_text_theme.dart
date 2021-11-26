@@ -43,5 +43,11 @@ abstract class CosmosTextTheme {
         fontSize: 28,
       );
 
+  static TextStyle get actionSheet => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+      );
+
   factory CosmosTextTheme._() => throw UnsupportedError("Not meant to be instantiated");
 }
