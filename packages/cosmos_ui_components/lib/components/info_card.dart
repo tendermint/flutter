@@ -34,7 +34,7 @@ class InfoCard extends StatelessWidget {
                 height: 8,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CosmosTheme.of(context).colors.onBackground,
+                  color: CosmosTheme.of(context).colors.text,
                 ),
               ),
             ),

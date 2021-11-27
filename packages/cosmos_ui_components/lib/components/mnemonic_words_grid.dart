@@ -20,24 +20,16 @@ class CosmosMnemonicWordsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.extent(
-      physics: physics,
-      maxCrossAxisExtent: 150,
-      shrinkWrap: true,
-      childAspectRatio: 3,
+    return Wrap(
+      spacing: CosmosTheme.of(context).spacingM,
+      runSpacing: CosmosTheme.of(context).spacingM,
       children: mnemonicWords //
           .mapIndexed(
-            (index, word) => Padding(
-              padding: EdgeInsets.only(
-                top: CosmosTheme.of(context).spacingS,
-                left: CosmosTheme.of(context).spacingS,
-              ),
-              child: MnemonicChoiceChip(
-                index: index,
-                word: word,
-                showIndex: showIndices,
-                onTap: onTapWord == null ? null : () => onTapWord!.call(index),
-              ),
+            (index, word) => MnemonicChoiceChip(
+              index: index,
+              word: word,
+              showIndex: showIndices,
+              onTap: onTapWord == null ? null : () => onTapWord!.call(index),
             ),
           )
           .toList(),

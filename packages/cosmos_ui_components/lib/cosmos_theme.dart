@@ -130,6 +130,9 @@ class CosmosColorsData extends Equatable {
   static const lightInactive = Color(0x2C000000);
   static const lightDivider = Color(0x1A000000);
   static const lightSurface = Color(0xFFFFFFFF);
+  static const lightLink = Color(0xFF094EFD);
+  static const lightChip = Color(0xFFF0F0F0);
+  static const lightPositive = Color(0xFF008223);
 
   static const darkBg = Color(0xFF000000);
   static const darkInactive = Color(0x2CFFFFFF);
@@ -140,20 +143,26 @@ class CosmosColorsData extends Equatable {
   static const error = Color(0xFFE74444);
   final Color inactive;
   final Color divider;
-  final Color onBackground;
+  final Color text;
   final Color background;
   final Color cardBackground;
   final Color actionSheetPositive;
   final Color actionSheetDestructive;
+  final Color chipBackground;
+  final Color positiveText;
+  final Color link;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
     this.divider = lightDivider,
-    this.onBackground = onLightText,
+    this.text = onLightText,
     this.background = lightBg,
     this.cardBackground = lightCardBg,
     this.actionSheetPositive = Colors.lightBlue,
     this.actionSheetDestructive = error,
+    this.chipBackground = lightChip,
+    this.link = lightLink,
+    this.positiveText = lightPositive,
   });
 
   @override
