@@ -646,7 +646,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "987dc63bd3f809f330c9927b6ec52ec9cf7c5abc"
+      resolved-ref: "6274eb7939845738bf1a56f6f7f6b476427fb431"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
