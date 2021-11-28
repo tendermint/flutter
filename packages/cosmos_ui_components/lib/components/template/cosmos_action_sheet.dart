@@ -48,7 +48,7 @@ Future<T?> _showCupertinoBottomSheet<T>(
   List<CosmosActionSheetItem> actions,
   VoidCallback? cancelAction,
 ) {
-  final defaultTextStyle = CosmosTextTheme.actionSheet;
+  final defaultTextStyle = CosmosTextTheme.actionSheetItem;
   return showCupertinoModalPopup(
     context: context,
     builder: (BuildContext buildContext) {
@@ -61,17 +61,21 @@ Future<T?> _showCupertinoBottomSheet<T>(
               onPressed: action.onPressed,
               child: Text(
                 action.text,
-                style: defaultTextStyle.copyWith(color: action.isCriticalAction ? Colors.red : Colors.lightBlue),
+                style: defaultTextStyle.copyWith(
+                  color: action.isCriticalAction
+                      ? CosmosTheme.of(context).colors.actionSheetDestructive
+                      : CosmosTheme.of(context).colors.actionSheetPositive,
+                ),
               ),
             ),
           );
         }).toList(),
         cancelButton: CupertinoActionSheetAction(
           onPressed: cancelAction ?? () => Navigator.of(buildContext).pop(),
-          child: DefaultTextStyle(
-            style: defaultTextStyle.copyWith(color: Colors.lightBlue),
+          child: Text(
+            'Cancel',
+            style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetPositive),
             textAlign: TextAlign.center,
-            child: const Text('Cancel'),
           ),
         ),
       );
@@ -85,7 +89,7 @@ Future<T?> _showMaterialBottomSheet<T>(
   List<CosmosActionSheetItem> actions,
   VoidCallback? cancelAction,
 ) {
-  final defaultTextStyle = CosmosTextTheme.actionSheet;
+  final defaultTextStyle = CosmosTextTheme.actionSheetItem;
   return showModalBottomSheet<T>(
     context: context,
     elevation: 0,
@@ -97,50 +101,46 @@ Future<T?> _showMaterialBottomSheet<T>(
       ),
     ),
     builder: (BuildContext buildContext) {
-      final screenHeight = MediaQuery.of(context).size.height;
-      return ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: screenHeight - (screenHeight / 10),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (title != null) ...[
-                Padding(
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (title != null) ...[
+              Padding(
+                padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                child: Center(child: title),
+              ),
+            ],
+            ...actions.map<Widget>((action) {
+              return InkWell(
+                onTap: action.onPressed,
+                child: Padding(
                   padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                  child: Center(child: title),
-                ),
-              ],
-              ...actions.map<Widget>((action) {
-                return InkWell(
-                  onTap: action.onPressed,
-                  child: Padding(
-                    padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                    child: Text(
-                      action.text,
-                      textAlign: TextAlign.center,
-                      style: action.isCriticalAction ? defaultTextStyle.copyWith(color: Colors.red) : defaultTextStyle,
-                    ),
+                  child: Text(
+                    action.text,
+                    textAlign: TextAlign.center,
+                    style: action.isCriticalAction
+                        ? defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive)
+                        : defaultTextStyle,
                   ),
-                );
-              }).toList(),
-              InkWell(
-                onTap: cancelAction ?? () => Navigator.of(buildContext).pop(),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                    child: DefaultTextStyle(
-                      style: defaultTextStyle.copyWith(color: Colors.lightBlue),
-                      textAlign: TextAlign.center,
-                      child: const Text('Cancel'),
-                    ),
+                ),
+              );
+            }).toList(),
+            InkWell(
+              onTap: cancelAction ?? () => Navigator.of(buildContext).pop(),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                  child: DefaultTextStyle(
+                    style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive),
+                    textAlign: TextAlign.center,
+                    child: const Text('Cancel'),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     },

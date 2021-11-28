@@ -43,7 +43,7 @@ abstract class CosmosTextTheme {
         fontSize: 28,
       );
 
-  static TextStyle get actionSheet => const TextStyle(
+  static TextStyle get actionSheetItem => const TextStyle(
         fontFamily: fontInter,
         fontWeight: FontWeight.w400,
         fontSize: 20,
