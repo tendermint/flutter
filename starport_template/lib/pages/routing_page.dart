@@ -25,11 +25,14 @@ class _RoutingPageState extends State<RoutingPage> {
       if (!mounted) {
         return;
       }
-      Navigator.of(context).pop();
       if (store.wallets.isEmpty) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OnboardingPage()));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const OnboardingPage()),
+        );
       } else {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        );
       }
     }
   }

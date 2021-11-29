@@ -1,4 +1,5 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_wallet_form_data.dart';
@@ -25,7 +26,10 @@ class WalletsStore {
   final Observable<bool> _isBalancesLoading = Observable(false);
   final Observable<bool> _isWalletImporting = Observable(false);
   final Observable<bool> _isWalletImportingError = Observable(false);
+  final Observable<bool> _isMnemonicCreatingError = Observable(false);
+  final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
+
   final Observable<WalletPublicInfo> _selectedWallet =
       Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
   final ObservableList<Balance> balancesList = ObservableList();
@@ -55,6 +59,14 @@ class WalletsStore {
   bool get isWalletImportingError => _isWalletImportingError.value;
 
   set isWalletImportingError(bool val) => Action(() => _isWalletImportingError.value = val)();
+
+  bool get isMnemonicCreatingError => _isMnemonicCreatingError.value;
+
+  set isMnemonicCreatingError(bool val) => Action(() => _isMnemonicCreatingError.value = val)();
+
+  bool get isMnemonicCreating => _isMnemonicCreating.value;
+
+  set isMnemonicCreating(bool val) => Action(() => _isMnemonicCreating.value = val)();
 
   bool get isWalletImporting => _isWalletImporting.value;
 
@@ -93,10 +105,12 @@ class WalletsStore {
   }
 
   Future<WalletPublicInfo?> importAlanWallet(
-    ImportWalletFormData data,
-  ) async {
+    ImportWalletFormData data, {
+    VoidCallback? onWalletCreationStarted,
+  }) async {
     isWalletImportingError = false;
     isWalletImporting = true;
+    onWalletCreationStarted?.call();
     final result = await _transactionSigningGateway
         .deriveWallet(
           walletDerivationInfo: AlanWalletDerivationInfo(
@@ -125,6 +139,9 @@ class WalletsStore {
       },
       (credentials) {
         wallets.add(credentials.publicInfo);
+        if (selectedWallet.publicAddress.isEmpty) {
+          selectedWallet = wallets.first;
+        }
         return credentials.publicInfo;
       },
     );
@@ -152,8 +169,14 @@ class WalletsStore {
     isSendMoneyLoading = false;
   }
 
-  Future<WalletPublicInfo?> createNewWallet() async {
-    final mnemonic = await generateMnemonic();
+  Future<WalletPublicInfo?> createNewWallet({
+    VoidCallback? onMnemonicGenerationStarted,
+    VoidCallback? onWalletCreationStarted,
+  }) async {
+    final mnemonic = await createMnemonic(onMnemonicGenerationStarted);
+    if (mnemonic == null) {
+      return null;
+    }
     return importAlanWallet(
       ImportWalletFormData(
         mnemonic: mnemonic,
@@ -165,6 +188,22 @@ class WalletsStore {
             // with symmetric encryption
             "",
       ),
+      onWalletCreationStarted: onWalletCreationStarted,
     );
+  }
+
+  Future<String?> createMnemonic([VoidCallback? onMnemonicGenerationStarted]) async {
+    isMnemonicCreatingError = false;
+    isMnemonicCreating = true;
+    String? mnemonic;
+    onMnemonicGenerationStarted?.call();
+    try {
+      mnemonic = await generateMnemonic();
+    } catch (ex, stack) {
+      logError(ex, stack);
+      isMnemonicCreatingError = true;
+    }
+    isMnemonicCreating = false;
+    return mnemonic;
   }
 }

@@ -5,6 +5,7 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/backup_later_bottom_sheet.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
@@ -20,9 +21,25 @@ class CreateWalletPage extends StatefulWidget {
 class _CreateWalletPageState extends State<CreateWalletPage> {
   Either<BiometricCredentialsStorageFailure, Unit>? _authenticationResult;
 
-  bool get isLoading => _authenticationResult == null;
+  bool get isLoading =>
+      _authenticationResult == null ||
+      StarportApp.walletsStore.isMnemonicCreating ||
+      StarportApp.walletsStore.isWalletImporting;
+
+  bool get isError =>
+      _authenticationResult?.isLeft() == true ||
+      StarportApp.walletsStore.isMnemonicCreatingError ||
+      StarportApp.walletsStore.isWalletImportingError;
 
   bool get isAuthenticating => _authenticationResult == null;
+
+  bool get isMnemonicCreating => StarportApp.walletsStore.isMnemonicCreating;
+
+  bool get isWalletImporting => StarportApp.walletsStore.isWalletImporting;
+
+  bool get isMnemonicCreatingError => StarportApp.walletsStore.isMnemonicCreatingError;
+
+  bool get isWalletImportingError => StarportApp.walletsStore.isWalletImportingError;
 
   @override
   void initState() {
@@ -36,9 +53,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       body: ContentStateSwitcher(
         isLoading: isLoading,
         errorChild: _errorUI(),
-        isError: _authenticationResult?.isRight() == false,
+        isError: isError,
         loadingChild: LoadingSplash(
-          text: isAuthenticating ? 'Authenticating..' : 'Creating a recovery phrase..',
+          text: isAuthenticating
+              ? 'Authenticating..'
+              : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating wallet..'),
         ),
         contentChild: Scaffold(
           body: _contentUI(),
@@ -118,7 +137,20 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         context: context,
         backgroundColor: Colors.transparent,
         builder: (context) => BackupLaterBottomSheet(
-          onTapSkipBackup: () => notImplemented(context),
+          onTapSkipBackup: () => _createWallet(),
         ),
       );
+
+  Future<void> _createWallet() async {
+    await StarportApp.walletsStore.createNewWallet(
+      onMnemonicGenerationStarted: () => setState(() {}),
+      onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
+    );
+    if (mounted) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        (route) => false,
+      );
+    }
+  }
 }
