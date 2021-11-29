@@ -140,7 +140,7 @@ class CosmosColorsData extends Equatable {
   static const onDarkText = Color(0xFFFFFFFF);
   static const darkDivider = Color(0x17FFFFFF);
   static const error = Color(0xFFE74444);
-  
+
   final Color inactive;
   final Color divider;
   final Color text;
@@ -167,15 +167,15 @@ class CosmosColorsData extends Equatable {
 
   @override
   List<Object?> get props => [
-    inactive,
-    divider,
-    text,
-    background,
-    cardBackground,
-    actionSheetPositive,
-    actionSheetDestructive,
-    chipBackground,
-    link,
-    positiveText,
-  ];
+        inactive,
+        divider,
+        text,
+        background,
+        cardBackground,
+        actionSheetPositive,
+        actionSheetDestructive,
+        chipBackground,
+        link,
+        positiveText,
+      ];
 }
