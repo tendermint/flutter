@@ -20,7 +20,7 @@ class LoadingSplash extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircularProgressIndicator(
-                color: CosmosTheme.of(context).colors.onBackground,
+                color: CosmosTheme.of(context).colors.text,
               ),
               SizedBox(height: CosmosTheme.of(context).spacingL),
               Text(
