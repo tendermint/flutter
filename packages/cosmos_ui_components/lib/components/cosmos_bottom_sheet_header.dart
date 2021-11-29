@@ -23,7 +23,7 @@ class CosmosBottomSheetHeader extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: CosmosTheme.of(context).spacingL),
+        SizedBox(height: CosmosTheme.of(context).spacingXXL),
         if (leading != null || actions != null)
           Padding(
             padding: EdgeInsets.only(right: theme.spacingM),
