@@ -143,6 +143,8 @@ class CosmosColorsData extends Equatable {
   final Color onBackground;
   final Color background;
   final Color cardBackground;
+  final Color actionSheetPositive;
+  final Color actionSheetDestructive;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
@@ -150,6 +152,8 @@ class CosmosColorsData extends Equatable {
     this.onBackground = onLightText,
     this.background = lightBg,
     this.cardBackground = lightCardBg,
+    this.actionSheetPositive = Colors.lightBlue,
+    this.actionSheetDestructive = error,
   });
 
   @override
