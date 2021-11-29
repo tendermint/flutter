@@ -11,37 +11,25 @@ class CosmosBottomSheetContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final maxHeight = screenHeight - (screenHeight / 10);
     final theme = CosmosTheme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.elliptical(
-            theme.radiusL,
-            theme.radiusL * 1.1,
-          ),
-        ),
-        color: theme.colors.background,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: maxHeight,
       ),
-      child: child,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.elliptical(
+              theme.radiusL,
+              theme.radiusL * 1.1,
+            ),
+          ),
+          color: theme.colors.background,
+        ),
+        child: child,
+      ),
     );
   }
 }
-
-// TODO: Commenting it for now but can be used if the spacing problem for `showMaterialModalBottomSheet` persists
-// Future showCosmosBottomSheet(Widget child, BuildContext context, {bool isFullScreen = true}) => showModalBottomSheet(
-//       context: context,
-//       isScrollControlled: true,
-//       enableDrag: true,
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.vertical(
-//           top: Radius.elliptical(
-//             CosmosTheme.of(context).radiusL,
-//             CosmosTheme.of(context).radiusL * 1.1,
-//           ),
-//         ),
-//       ),
-//       builder: (context) => SizedBox(
-//         height: isFullScreen ? MediaQuery.of(context).size.height / 1.06 : MediaQuery.of(context).size.height / 2,
-//         child: CosmosBottomSheetContainer(child: child),
-//       ),
-//     );
