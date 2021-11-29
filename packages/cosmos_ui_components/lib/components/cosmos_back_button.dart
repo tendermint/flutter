@@ -25,7 +25,7 @@ class CosmosBackButton extends StatelessWidget {
         width: 32,
         height: 32,
         scale: 1,
-        color: CosmosTheme.of(context).colors.onBackground,
+        color: CosmosTheme.of(context).colors.text,
       ),
     );
   }

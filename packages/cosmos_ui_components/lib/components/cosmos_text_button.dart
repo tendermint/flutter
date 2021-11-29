@@ -46,7 +46,10 @@ class CosmosTextButton extends StatelessWidget {
           ],
           Text(
             text,
-            style: textStyle ?? CosmosTextTheme.elevatedButton,
+            style: textStyle ??
+                CosmosTextTheme.elevatedButton.copyWith(
+                  color: color,
+                ),
           ),
           if (suffixIcon != null) ...[
             if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingS),
