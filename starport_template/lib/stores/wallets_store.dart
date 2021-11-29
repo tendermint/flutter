@@ -29,6 +29,7 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreatingError = Observable(false);
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
+  final Observable<bool> _isEditingAccountList = Observable(false);
 
   final Observable<WalletPublicInfo> _selectedWallet =
       Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
@@ -71,6 +72,10 @@ class WalletsStore {
   bool get isWalletImporting => _isWalletImporting.value;
 
   set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
+
+  bool get isEditingAccountList => _isEditingAccountList.value;
+
+  set isEditingAccountList(bool val) => Action(() => _isEditingAccountList.value = val)();
 
   WalletPublicInfo get selectedWallet => _selectedWallet.value;
 

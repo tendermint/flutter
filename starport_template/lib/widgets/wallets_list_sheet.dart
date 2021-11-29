@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/components/empty_list_message.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
@@ -31,6 +30,8 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       )
       .toList();
 
+  bool get isEditingAccountList => StarportApp.walletsStore.isEditingAccountList;
+
   @override
   Widget build(BuildContext context) {
     //ignore: deprecated_member_use_from_same_package
@@ -50,7 +51,12 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
                 CosmosBottomSheetHeader(
                   title: 'Accounts',
                   titleTextStyle: CosmosTextTheme.title1Bold,
-                  leading: CosmosTextButton(text: 'Edit', onTap: () {}),
+                  leading: CosmosTextButton(
+                    text: isEditingAccountList ? 'Done' : 'Edit',
+                    onTap: () {
+                      StarportApp.walletsStore.isEditingAccountList = !isEditingAccountList;
+                    },
+                  ),
                   actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
                 _buildMainList(),
