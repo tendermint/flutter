@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,56 +92,53 @@ Future<T?> _showMaterialBottomSheet<T>(
 ) {
   final defaultTextStyle = CosmosTextTheme.actionSheetItem;
   return showModalBottomSheet<T>(
+    backgroundColor: Colors.transparent,
     context: context,
     elevation: 0,
     isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-    ),
     builder: (BuildContext buildContext) {
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (title != null) ...[
-              Padding(
-                padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                child: Center(child: title),
+      return CosmosBottomSheetContainer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (title != null) ...[
+                Padding(
+                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                  child: Center(child: title),
+                ),
+              ],
+              ...actions.map<Widget>((action) {
+                return InkWell(
+                  onTap: action.onPressed,
+                  child: Padding(
+                    padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                    child: Text(
+                      action.text,
+                      textAlign: TextAlign.center,
+                      style: action.isCriticalAction
+                          ? defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive)
+                          : defaultTextStyle,
+                    ),
+                  ),
+                );
+              }).toList(),
+              InkWell(
+                onTap: cancelAction ?? () => Navigator.of(buildContext).pop(),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
+                    child: DefaultTextStyle(
+                      style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive),
+                      textAlign: TextAlign.center,
+                      child: const Text('Cancel'),
+                    ),
+                  ),
+                ),
               ),
             ],
-            ...actions.map<Widget>((action) {
-              return InkWell(
-                onTap: action.onPressed,
-                child: Padding(
-                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                  child: Text(
-                    action.text,
-                    textAlign: TextAlign.center,
-                    style: action.isCriticalAction
-                        ? defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive)
-                        : defaultTextStyle,
-                  ),
-                ),
-              );
-            }).toList(),
-            InkWell(
-              onTap: cancelAction ?? () => Navigator.of(buildContext).pop(),
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                  child: DefaultTextStyle(
-                    style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive),
-                    textAlign: TextAlign.center,
-                    child: const Text('Cancel'),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       );
     },
