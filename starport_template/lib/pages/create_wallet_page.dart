@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/pages/back_up_wallet_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/backup_later_bottom_sheet.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
@@ -20,6 +21,8 @@ class CreateWalletPage extends StatefulWidget {
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
   Either<BiometricCredentialsStorageFailure, Unit>? _authenticationResult;
+
+  String? _mnemonic;
 
   bool get isLoading =>
       _authenticationResult == null ||
@@ -49,8 +52,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ContentStateSwitcher(
+    return Material(
+      child: ContentStateSwitcher(
         isLoading: isLoading,
         errorChild: _errorUI(),
         isError: isError,
@@ -131,7 +134,18 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   void _onTapAdvanced() => notImplemented(context);
 
-  void _onTapBackUpNow() => notImplemented(context);
+  Future<void> _onTapBackUpNow() async {
+    _mnemonic ??= await StarportApp.walletsStore.createMnemonic();
+    final mnemonic = _mnemonic;
+    if (mnemonic == null) {
+      return;
+    }
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => BackUpWalletPage(mnemonic: mnemonic)),
+      );
+    }
+  }
 
   void _onTapBackUpLater() => showMaterialModalBottomSheet(
         context: context,

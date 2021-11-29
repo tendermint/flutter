@@ -22,7 +22,7 @@ class CosmosAppBarAction extends StatelessWidget {
       child: CosmosTextButton(
         onTap: onTap,
         text: text,
-        color: theme.colors.onBackground,
+        color: theme.colors.text,
       ),
     );
   }

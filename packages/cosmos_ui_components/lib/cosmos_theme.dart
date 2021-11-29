@@ -32,6 +32,7 @@ class CosmosTheme extends InheritedWidget {
 class CosmosThemeData extends Equatable {
   static const offWhite = Color(0xFFF2F2F2);
 
+  static const defaultSpacingXXL = 40.0;
   static const defaultSpacingXL = 32.0;
   static const defaultSpacingL = 16.0;
   static const defaultSpacingM = 8.0;
@@ -56,6 +57,7 @@ class CosmosThemeData extends Equatable {
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
   static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
 
+  final double spacingXXL;
   final double spacingXL;
   final double spacingL;
   final double spacingM;
@@ -78,6 +80,7 @@ class CosmosThemeData extends Equatable {
   final CosmosColorsData colors;
 
   const CosmosThemeData({
+    this.spacingXXL = defaultSpacingXXL,
     this.spacingXL = defaultSpacingXL,
     this.spacingL = defaultSpacingL,
     this.spacingM = defaultSpacingM,
@@ -102,6 +105,7 @@ class CosmosThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
+        spacingXXL,
         spacingXL,
         spacingL,
         spacingM,
@@ -130,32 +134,52 @@ class CosmosColorsData extends Equatable {
   static const lightInactive = Color(0x2C000000);
   static const lightDivider = Color(0x1A000000);
   static const lightSurface = Color(0xFFFFFFFF);
+  static const lightLink = Color(0xFF094EFD);
+  static const lightChip = Color(0xFFF0F0F0);
+  static const lightPositive = Color(0xFF008223);
 
   static const darkBg = Color(0xFF000000);
   static const darkInactive = Color(0x2CFFFFFF);
   static const darkSurface = Color(0xFF171717);
   static const onDarkText = Color(0xFFFFFFFF);
   static const darkDivider = Color(0x17FFFFFF);
-
   static const error = Color(0xFFE74444);
+
   final Color inactive;
   final Color divider;
-  final Color onBackground;
+  final Color text;
   final Color background;
   final Color cardBackground;
   final Color actionSheetPositive;
   final Color actionSheetDestructive;
+  final Color chipBackground;
+  final Color positiveText;
+  final Color link;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
     this.divider = lightDivider,
-    this.onBackground = onLightText,
+    this.text = onLightText,
     this.background = lightBg,
     this.cardBackground = lightCardBg,
     this.actionSheetPositive = Colors.lightBlue,
     this.actionSheetDestructive = error,
+    this.chipBackground = lightChip,
+    this.link = lightLink,
+    this.positiveText = lightPositive,
   });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        inactive,
+        divider,
+        text,
+        background,
+        cardBackground,
+        actionSheetPositive,
+        actionSheetDestructive,
+        chipBackground,
+        link,
+        positiveText,
+      ];
 }
