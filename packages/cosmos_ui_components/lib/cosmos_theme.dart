@@ -32,6 +32,7 @@ class CosmosTheme extends InheritedWidget {
 class CosmosThemeData extends Equatable {
   static const offWhite = Color(0xFFF2F2F2);
 
+  static const defaultSpacingXXL = 40.0;
   static const defaultSpacingXL = 32.0;
   static const defaultSpacingL = 16.0;
   static const defaultSpacingM = 8.0;
@@ -56,6 +57,7 @@ class CosmosThemeData extends Equatable {
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
   static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
 
+  final double spacingXXL;
   final double spacingXL;
   final double spacingL;
   final double spacingM;
@@ -78,6 +80,7 @@ class CosmosThemeData extends Equatable {
   final CosmosColorsData colors;
 
   const CosmosThemeData({
+    this.spacingXXL = defaultSpacingXXL,
     this.spacingXL = defaultSpacingXL,
     this.spacingL = defaultSpacingL,
     this.spacingM = defaultSpacingM,
@@ -102,6 +105,7 @@ class CosmosThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
+        spacingXXL,
         spacingXL,
         spacingL,
         spacingM,
