@@ -49,5 +49,19 @@ abstract class CosmosTextTheme {
         fontSize: 20,
       );
 
+  static TextStyle get smallCaption => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w600,
+        fontSize: 8,
+        height: 1.31,
+      );
+
+  static TextStyle get labelS => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w600,
+        fontSize: 13,
+        height: 1.23,
+      );
+
   factory CosmosTextTheme._() => throw UnsupportedError("Not meant to be instantiated");
 }

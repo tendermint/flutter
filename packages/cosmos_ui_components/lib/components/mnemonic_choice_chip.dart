@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,37 +18,29 @@ class MnemonicChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    const lightInactive = CosmosColorsData.lightInactive;
-    const lightDivider = CosmosColorsData.lightDivider;
     return InkWell(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(CosmosTheme.of(context).radiusS)),
-          border: Border.all(
-            color: lightInactive.withOpacity(word.isEmpty ? lightInactive.opacity / 2 : lightInactive.opacity),
-          ),
-          color: lightDivider.withOpacity(word.isEmpty ? lightDivider.opacity / 2 : lightDivider.opacity),
+          borderRadius: BorderRadius.all(Radius.circular(CosmosTheme.of(context).radiusM)),
+          color: CosmosTheme.of(context).colors.chipBackground,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: CosmosTheme.of(context).spacingS,
-            vertical: CosmosTheme.of(context).spacingXS,
+          padding: EdgeInsets.only(
+            left: CosmosTheme.of(context).spacingM,
+            right: CosmosTheme.of(context).spacingL,
+            top: CosmosTheme.of(context).spacingM,
+            bottom: CosmosTheme.of(context).spacingM,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (showIndex) ...[
-                Text(
-                  "$index",
-                  style: textTheme.bodyText1,
-                ),
-                SizedBox(width: CosmosTheme.of(context).spacingS),
+                _indexText(context, index),
               ],
               Text(
                 word,
-                style: textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
+                style: CosmosTextTheme.labelS,
               ),
             ],
           ),
@@ -55,4 +48,24 @@ class MnemonicChoiceChip extends StatelessWidget {
       ),
     );
   }
+
+  Widget _indexText(BuildContext context, int index) => Padding(
+        padding: EdgeInsets.only(right: CosmosTheme.of(context).spacingM),
+        child: Container(
+          width: 18,
+          height: 18,
+          decoration: BoxDecoration(
+            color: CosmosTheme.of(context).colors.text,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              "${index + 1}",
+              style: CosmosTextTheme.smallCaption.copyWith(
+                color: CosmosTheme.of(context).colors.chipBackground,
+              ),
+            ),
+          ),
+        ),
+      );
 }
