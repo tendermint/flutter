@@ -25,15 +25,15 @@ class CosmosWalletsListView extends StatelessWidget {
         children: list
             .mapIndexed(
               (index, wallet) => CosmosWalletListItem(
-            name: wallet.name,
-            address: wallet.address,
-            isSelected: selectedWallet.address == wallet.address,
-            onClicked: () => onClicked(index),
-            isEditing: isEditing,
-            onEditIconPressed: (address) =>
-                onEditIconPressed(list.firstWhere((element) => element.address == address)),
-          ),
-        )
+                name: wallet.name,
+                address: wallet.address,
+                isSelected: selectedWallet.address == wallet.address,
+                onClicked: () => onClicked(index),
+                isEditing: isEditing,
+                onEditIconPressed: (address) =>
+                    onEditIconPressed(list.firstWhere((element) => element.address == address)),
+              ),
+            )
             .toList(),
       ),
     );
