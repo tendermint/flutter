@@ -22,8 +22,8 @@ class CosmosBottomSheetContainer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.elliptical(
-              theme.radiusL,
-              theme.radiusL * 1.1,
+              theme.radiusXL,
+              theme.radiusXL * 1.1,
             ),
           ),
           color: theme.colors.background,
