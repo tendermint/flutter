@@ -120,10 +120,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   Widget _errorUI() {
-    return const Material(
-      child: Center(
-        child: Text("Error!"),
-      ),
+    return const Center(
+      child: Text("Error!"),
     );
   }
 
