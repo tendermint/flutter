@@ -57,6 +57,12 @@ class TransactionSigningGateway {
         password: password,
       );
 
+  /// Updates the public details of the wallet using [PlainDataStore]
+  Future<Either<CredentialsStorageFailure, Unit>> updateWalletPublicInfo({
+    required WalletPublicInfo info,
+  }) =>
+      _infoStorage.updatePublicWalletInfo(info: info);
+
   /// Signs the passed [transaction].
   ///
   /// This function triggers the entire signing flow, where a transaction summary is first shown to the user.

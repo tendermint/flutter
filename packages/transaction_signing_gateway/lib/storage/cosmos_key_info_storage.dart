@@ -167,4 +167,27 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
     final privateCreds = await getPrivateCredentials(walletLookupKey);
     return right(privateCreds.isRight());
   }
+
+  @override
+  Future<Either<CredentialsStorageFailure, Unit>> updatePublicWalletInfo({required WalletPublicInfo info}) async {
+    try {
+      final publicInfoKey = _publicInfoKey(
+        chainId: info.chainId,
+        walletId: info.walletId,
+      );
+
+      return _plainDataStore.readPlainText(key: publicInfoKey).flatMap((walletInfo) async {
+        if (walletInfo == null) {
+          return left(const CredentialsStorageFailure("Wallet not found"));
+        }
+
+        final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(info));
+        await _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
+
+        return right(unit);
+      });
+    } catch (e) {
+      return left(CredentialsStorageFailure("$e"));
+    }
+  }
 }
