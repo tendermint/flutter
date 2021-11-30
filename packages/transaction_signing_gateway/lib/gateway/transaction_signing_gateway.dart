@@ -57,7 +57,7 @@ class TransactionSigningGateway {
         password: password,
       );
 
-  /// Updates the public details of the wallet using [PlainDataStore]
+  /// Updates the public details of the wallet
   Future<Either<CredentialsStorageFailure, Unit>> updateWalletPublicInfo({
     required WalletPublicInfo info,
   }) =>

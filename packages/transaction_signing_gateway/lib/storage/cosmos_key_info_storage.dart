@@ -182,9 +182,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         }
 
         final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(info));
-        await _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
-
-        return right(unit);
+        return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
       });
     } catch (e, stack) {
       logError(e, stack);
