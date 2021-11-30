@@ -72,7 +72,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   CosmosAppBar _appBar() {
     return CosmosAppBar(
-      leading: const CosmosBackButton(text: "Back"),
+      leading: const CosmosBackButton(),
       title: "Back up your account",
       actions: [
         CosmosAppBarAction(
