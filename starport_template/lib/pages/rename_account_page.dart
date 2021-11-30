@@ -121,7 +121,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
           height: 17,
           width: 17,
           child: CircleAvatar(
-            backgroundColor: theme.colors.clearButtonBg,
+            backgroundColor: theme.colors.divider,
             foregroundColor: theme.colors.background,
             child: InkWell(
               onTap: () {
