@@ -186,7 +186,8 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
 
         return right(unit);
       });
-    } catch (e) {
+    } catch (e, stack) {
+      logError(e, stack);
       return left(CredentialsStorageFailure("$e"));
     }
   }
