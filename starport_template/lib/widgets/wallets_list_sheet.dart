@@ -6,6 +6,7 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:starport_template/pages/rename_account_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
@@ -34,6 +35,12 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       .toList();
 
   bool get isEditingAccountList => StarportApp.walletsStore.isEditingAccountList;
+
+  @override
+  void initState() {
+    super.initState();
+    StarportApp.walletsStore.isEditingAccountList = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +109,12 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
           showCosmosActionSheet(
             context: context,
             actions: [
-              CosmosActionSheetItem(text: 'Rename Account', onPressed: () {}),
+              CosmosActionSheetItem(
+                text: 'Rename Account',
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RenameAccountPage()));
+                },
+              ),
               CosmosActionSheetItem(text: 'Delete Account', onPressed: () {}, isCriticalAction: true),
             ],
             title: Text(walletInfo.name),
@@ -280,10 +292,11 @@ class CosmosCircleTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: CosmosTheme.of(context).spacingL,
-        vertical: CosmosTheme.of(context).spacingM,
+        horizontal: theme.spacingL,
+        vertical: theme.spacingM,
       ),
       child: InkWell(
         onTap: isEnabled ? onTap : null,
@@ -294,12 +307,12 @@ class CosmosCircleTextButton extends StatelessWidget {
               maxRadius: 12,
               minRadius: 12,
               // TODO: Pick up these colors from `CosmosTheme.of(context).colors`
-              backgroundColor: isEnabled ? Colors.black : Colors.grey[200],
+              backgroundColor: isEnabled ? Colors.black : theme.colors.inactive,
               foregroundColor: Colors.white,
-              child: Icon(icon, size: CosmosTheme.of(context).fontSizeM),
+              child: Icon(icon, size: theme.fontSizeM),
             ),
-            SizedBox(width: CosmosTheme.of(context).spacingL),
-            Text(text, style: isEnabled ? null : TextStyle(color: Colors.grey[200])),
+            SizedBox(width: theme.spacingL),
+            Text(text, style: isEnabled ? null : TextStyle(color: theme.colors.inactive)),
           ],
         ),
       ),
