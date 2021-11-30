@@ -9,7 +9,7 @@ class CosmosBackButton extends StatelessWidget {
 
   const CosmosBackButton({
     Key? key,
-    this.text,
+    this.text = "Back",
     this.onTap,
   }) : super(key: key);
 
