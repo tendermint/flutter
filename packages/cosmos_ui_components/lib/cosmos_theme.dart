@@ -43,7 +43,8 @@ class CosmosThemeData extends Equatable {
   static const defaultMediumDuration = 300;
   static const defaultShortDuration = 150;
 
-  static const defaultRadiusL = 30.0;
+  static const defaultRadiusXL = 30.0;
+  static const defaultRadiusL = 12.0;
   static const defaultRadiusM = 10.0;
   static const defaultRadiusS = 4.0;
 
@@ -54,6 +55,7 @@ class CosmosThemeData extends Equatable {
   static const defaultFontSizeXXL = 40.0;
   static const defaultElevationS = 4.0;
 
+  static const defaultBorderRadiusL = BorderRadius.all(Radius.circular(defaultRadiusL));
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
   static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
 
@@ -66,6 +68,7 @@ class CosmosThemeData extends Equatable {
   final int longDuration;
   final int mediumDuration;
   final int shortDuration;
+  final double radiusXL;
   final double radiusL;
   final double radiusM;
   final double radiusS;
@@ -76,6 +79,7 @@ class CosmosThemeData extends Equatable {
   final double fontSizeXXL;
   final double elevationS;
   final BorderRadius borderRadiusM;
+  final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
 
@@ -89,6 +93,7 @@ class CosmosThemeData extends Equatable {
     this.longDuration = defaultLongDuration,
     this.mediumDuration = defaultMediumDuration,
     this.shortDuration = defaultShortDuration,
+    this.radiusXL = defaultRadiusXL,
     this.radiusL = defaultRadiusL,
     this.radiusM = defaultRadiusM,
     this.radiusS = defaultRadiusS,
@@ -97,6 +102,7 @@ class CosmosThemeData extends Equatable {
     this.fontSizeL = defaultFontSizeL,
     this.fontSizeXL = defaultFontSizeXL,
     this.fontSizeXXL = defaultFontSizeXXL,
+    this.borderRadiusL = defaultBorderRadiusL,
     this.borderRadiusM = defaultBorderRadiusM,
     this.borderRadiusS = defaultBorderRadiusS,
     this.elevationS = defaultElevationS,
@@ -114,7 +120,7 @@ class CosmosThemeData extends Equatable {
         longDuration,
         mediumDuration,
         shortDuration,
-        radiusL,
+        radiusXL,
         radiusM,
         radiusS,
         fontSizeS,
