@@ -112,7 +112,8 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
               CosmosActionSheetItem(
                 text: 'Rename Account',
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RenameAccountPage()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => RenameAccountPage(accountName: walletInfo.name)));
                 },
               ),
               CosmosActionSheetItem(text: 'Delete Account', onPressed: () {}, isCriticalAction: true),
