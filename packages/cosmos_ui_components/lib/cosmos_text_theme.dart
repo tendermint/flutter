@@ -63,5 +63,11 @@ abstract class CosmosTextTheme {
         height: 1.23,
       );
 
+  static TextStyle get labelM => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+      );
+
   factory CosmosTextTheme._() => throw UnsupportedError("Not meant to be instantiated");
 }

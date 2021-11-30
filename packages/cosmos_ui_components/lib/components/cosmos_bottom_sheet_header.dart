@@ -19,14 +19,14 @@ class CosmosBottomSheetHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isExtended = leading != null || actions != null;
     final theme = CosmosTheme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: CosmosTheme.of(context).spacingXXL),
-        if (leading != null || actions != null)
+        if (isExtended)
           Padding(
-            padding: EdgeInsets.only(right: theme.spacingM),
+            padding: EdgeInsets.only(right: theme.spacingM, top: theme.spacingL),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -42,7 +42,10 @@ class CosmosBottomSheetHeader extends StatelessWidget {
               ],
             ),
           ),
-        SizedBox(height: theme.spacingM),
+        if (isExtended)
+          Column(children: [SizedBox(height: theme.spacingM), SizedBox(height: theme.spacingL)])
+        else
+          SizedBox(height: theme.spacingXXL),
         Padding(
           padding: EdgeInsets.only(left: theme.spacingM),
           child: Row(
