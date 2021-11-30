@@ -146,7 +146,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: rename-wallet
-      resolved-ref: "44d60defc52b1242037991dd7a456aab965a381a"
+      resolved-ref: efbd9f77a24cee82369b2a53df2b76140c834834
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
