@@ -3,6 +3,7 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/pages/repeat_mnemonic_page.dart';
 import 'package:starport_template/widgets/copy_to_clipboard_button.dart';
 
 class BackUpWalletPage extends StatefulWidget {
@@ -23,8 +24,8 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ContentStateSwitcher(
+    return Material(
+      child: ContentStateSwitcher(
         contentChild: Scaffold(
           body: _contentUI(),
           appBar: _appBar(),
@@ -35,7 +36,7 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
 
   CosmosAppBar _appBar() {
     return CosmosAppBar(
-      leading: const CosmosBackButton(text: "Back"),
+      leading: const CosmosBackButton(),
       title: "Your recovery phrase",
       actions: [
         CosmosAppBarAction(
@@ -99,7 +100,11 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
     );
   }
 
-  void _onTapContinue() => notImplemented(context);
+  void _onTapContinue() => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => RepeatMnemonicPage(mnemonic: widget.mnemonic),
+        ),
+      );
 
   void _onTapConfirmCheckbox() => setState(
         () => _confirmChecked = !_confirmChecked,
