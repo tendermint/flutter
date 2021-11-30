@@ -15,6 +15,10 @@ abstract class KeyInfoStorage {
     required String password,
   });
 
+  Future<Either<CredentialsStorageFailure, Unit>> updatePublicWalletInfo({
+    required WalletPublicInfo info,
+  });
+
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList();
 
   Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(WalletLookupKey walletLookupKey);
