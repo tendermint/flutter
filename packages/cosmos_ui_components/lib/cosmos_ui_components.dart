@@ -11,6 +11,7 @@ export 'components/cosmos_checkbox_tile.dart';
 export 'components/cosmos_circle_text_button.dart';
 export 'components/cosmos_elevated_button.dart';
 export 'components/cosmos_error_view.dart';
+export 'components/cosmos_mnemonic_confirm_view.dart';
 export 'components/cosmos_outline_button.dart';
 export 'components/cosmos_text_button.dart';
 export 'components/empty_list_message.dart';
@@ -20,6 +21,7 @@ export 'components/mnemonic_words_grid.dart';
 export 'components/template/cosmos_wallet_list_item.dart';
 export 'components/template/cosmos_wallets_list_view.dart';
 export 'cosmos_app_theme.dart';
+export 'cosmos_theme.dart';
 export 'utils/durations.dart';
 
 const packageName = "cosmos_ui_components";

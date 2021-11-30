@@ -24,7 +24,7 @@ class BalanceHeading extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: Colors.blueGrey,
-              borderRadius: BorderRadius.circular(CosmosTheme.of(context).radiusL),
+              borderRadius: BorderRadius.circular(CosmosTheme.of(context).radiusXL),
             ),
             child: Text(
               'Cosmos',
