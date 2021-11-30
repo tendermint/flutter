@@ -32,7 +32,7 @@ class MnemonicChoiceChip extends StatelessWidget {
         splashColor: effectiveStyle.textColor?.withOpacity(0.3),
         onTap: onTap,
         child: DottedBorder(
-          dashPattern: (effectiveStyle.dottedBorder ?? false) ? [2,4] : [1,0],
+          dashPattern: (effectiveStyle.dottedBorder ?? false) ? [2, 4] : [1, 0],
           color: effectiveStyle.borderColor ?? Colors.transparent,
           strokeWidth: effectiveStyle.borderWidth ?? 0.0,
           radius: radius,
