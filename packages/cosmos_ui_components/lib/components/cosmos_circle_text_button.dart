@@ -5,13 +5,11 @@ class CosmosCircleTextButton extends StatelessWidget {
   final String text;
   final String asset;
   final VoidCallback? onTap;
-  final IconData icon;
 
   const CosmosCircleTextButton({
     Key? key,
     required this.text,
     required this.asset,
-    required this.icon,
     this.onTap,
   }) : super(key: key);
 
