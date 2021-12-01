@@ -9,7 +9,7 @@ class CosmosImageButton extends StatelessWidget {
   const CosmosImageButton({
     Key? key,
     required this.asset,
-    required this.onTap,
+    this.onTap,
     this.height = 24,
     this.width = 24,
   }) : super(key: key);
