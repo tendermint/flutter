@@ -42,10 +42,7 @@ class CosmosBottomSheetHeader extends StatelessWidget {
               ],
             ),
           ),
-        if (isExtended)
-          Column(children: [SizedBox(height: theme.spacingM), SizedBox(height: theme.spacingL)])
-        else
-          SizedBox(height: theme.spacingXXL),
+        SizedBox(height: isExtended ? theme.spacingXL : theme.spacingXXXL),
         Padding(
           padding: EdgeInsets.only(left: theme.spacingM),
           child: Row(

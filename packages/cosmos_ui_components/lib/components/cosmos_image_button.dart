@@ -1,11 +1,13 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
-class CosmosWalletEditButton extends StatelessWidget {
+class CosmosImageButton extends StatelessWidget {
+  final String assetUrl;
   final VoidCallback onPressed;
 
-  const CosmosWalletEditButton({
+  const CosmosImageButton({
     Key? key,
+    required this.assetUrl,
     required this.onPressed,
   }) : super(key: key);
 
@@ -21,11 +23,7 @@ class CosmosWalletEditButton extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: CosmosTheme.of(context).colors.text, width: 2),
           ),
-          child: CircleAvatar(
-            backgroundColor: CosmosTheme.of(context).colors.background,
-            foregroundColor: CosmosTheme.of(context).colors.text,
-            child: const Icon(Icons.more_horiz, size: 16),
-          ),
+          child: Image.asset(assetUrl),
         ),
       ),
     );

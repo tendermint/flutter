@@ -20,12 +20,19 @@ class CosmosTextField extends StatefulWidget {
 }
 
 class _CosmosTextFieldState extends State<CosmosTextField> {
-  final TextEditingController controller = TextEditingController();
+  late TextEditingController controller;
 
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController();
     controller.text = widget.text;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -37,22 +44,14 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       maxLength: widget.maxLength,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-        border: const UnderlineInputBorder(),
+        border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
         counterText: '',
-        suffix: SizedBox(
-          height: 17,
-          width: 17,
-          child: CircleAvatar(
-            backgroundColor: theme.colors.divider,
-            foregroundColor: theme.colors.background,
-            child: InkWell(
-              onTap: () {
-                controller.clear();
-                widget.onChanged('');
-              },
-              child: const Icon(Icons.clear, size: 12),
-            ),
-          ),
+        suffix: InkWell(
+          onTap: () {
+            controller.clear();
+            widget.onChanged('');
+          },
+          child: SizedBox(height: 17, width: 17, child: Image.asset('assets/images/cross.png')),
         ),
       ),
     );

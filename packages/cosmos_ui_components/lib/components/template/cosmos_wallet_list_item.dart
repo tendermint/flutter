@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/components/cosmos_wallet_edit_button.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
@@ -8,9 +7,8 @@ class CosmosWalletListItem extends StatelessWidget {
   final String name;
   final String address;
   final bool isSelected;
-  final bool isEditing;
   final VoidCallback onClicked;
-  final Function(String) onEditIconPressed;
+  final Widget? suffix;
 
   const CosmosWalletListItem({
     Key? key,
@@ -18,8 +16,7 @@ class CosmosWalletListItem extends StatelessWidget {
     required this.address,
     required this.isSelected,
     required this.onClicked,
-    required this.isEditing,
-    required this.onEditIconPressed,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -49,13 +46,10 @@ class CosmosWalletListItem extends StatelessWidget {
                     children: [
                       SizedBox(height: 32, child: GradientAvatar(stringKey: address)),
                       SizedBox(width: theme.spacingM),
-                      Text(name, style: CosmosTextTheme.labelM),
+                      Text(name, style: CosmosTextTheme.title0Medium),
                     ],
                   ),
-                  if (isEditing)
-                    CosmosWalletEditButton(onPressed: () => onEditIconPressed(address))
-                  else if (isSelected)
-                    const Icon(Icons.check_circle_outline),
+                  if (suffix != null) suffix!,
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/components/cosmos_image_button.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class CosmosWalletsListView extends StatelessWidget {
     required this.list,
     required this.selectedWallet,
     required this.onClicked,
-    required this.isEditing,
+    this.isEditing = false,
     required this.onEditIconPressed,
   }) : super(key: key);
 
@@ -29,9 +30,11 @@ class CosmosWalletsListView extends StatelessWidget {
                 address: wallet.address,
                 isSelected: selectedWallet.address == wallet.address,
                 onClicked: () => onClicked(index),
-                isEditing: isEditing,
-                onEditIconPressed: (address) =>
-                    onEditIconPressed(list.firstWhere((element) => element.address == address)),
+                suffix: isEditing
+                    ? CosmosImageButton(assetUrl: 'assets/images/more.png', onPressed: () => onEditIconPressed(wallet))
+                    : selectedWallet.address == wallet.address
+                        ? CosmosImageButton(assetUrl: 'assets/images/check.png', onPressed: () {})
+                        : null,
               ),
             )
             .toList(),
