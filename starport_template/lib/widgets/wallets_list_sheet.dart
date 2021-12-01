@@ -76,16 +76,14 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
                 ),
                 SizedBox(height: theme.spacingL),
                 CosmosCircleTextButton(
-                  onTap: () {},
+                  onTap: isEditingAccountList ? null : () {},
                   text: 'Create account',
                   icon: Icons.add,
-                  isEnabled: !isEditingAccountList,
                 ),
                 CosmosCircleTextButton(
-                  onTap: () {},
+                  onTap: isEditingAccountList ? null : () {},
                   text: 'Import account',
                   icon: Icons.arrow_downward_sharp,
-                  isEnabled: !isEditingAccountList,
                 ),
                 SizedBox(height: theme.spacingL),
               ],
