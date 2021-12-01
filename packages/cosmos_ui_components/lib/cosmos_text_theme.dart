@@ -17,6 +17,12 @@ abstract class CosmosTextTheme {
         height: 1.27,
       );
 
+  static TextStyle get title0Medium => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+      );
+
   static TextStyle get copy0Normal => const TextStyle(
         fontFamily: fontInter,
         fontWeight: FontWeight.w400,

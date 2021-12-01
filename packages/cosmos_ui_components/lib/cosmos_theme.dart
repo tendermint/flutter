@@ -32,8 +32,9 @@ class CosmosTheme extends InheritedWidget {
 class CosmosThemeData extends Equatable {
   static const offWhite = Color(0xFFF2F2F2);
 
-  static const defaultSpacingXXL = 40.0;
-  static const defaultSpacingXL = 32.0;
+  static const defaultSpacingXXXL = 40.0;
+  static const defaultSpacingXXL = 32.0;
+  static const defaultSpacingXL = 24.0;
   static const defaultSpacingL = 16.0;
   static const defaultSpacingM = 8.0;
   static const defaultSpacingS = 4.0;
@@ -59,6 +60,7 @@ class CosmosThemeData extends Equatable {
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
   static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
 
+  final double spacingXXXL;
   final double spacingXXL;
   final double spacingXL;
   final double spacingL;
@@ -84,6 +86,7 @@ class CosmosThemeData extends Equatable {
   final CosmosColorsData colors;
 
   const CosmosThemeData({
+    this.spacingXXXL = defaultSpacingXXXL,
     this.spacingXXL = defaultSpacingXXL,
     this.spacingXL = defaultSpacingXL,
     this.spacingL = defaultSpacingL,
@@ -111,8 +114,8 @@ class CosmosThemeData extends Equatable {
 
   @override
   List<Object?> get props => [
+        spacingXXXL,
         spacingXXL,
-        spacingXL,
         spacingL,
         spacingM,
         spacingS,
@@ -143,6 +146,8 @@ class CosmosColorsData extends Equatable {
   static const lightLink = Color(0xFF094EFD);
   static const lightChip = Color(0xFFF0F0F0);
   static const lightPositive = Color(0xFF008223);
+  static const lightGrey = Color(0x54000000);
+  static const lightBorder = Color(0xFFC6C6C8);
 
   static const darkBg = Color(0xFF000000);
   static const darkInactive = Color(0x2CFFFFFF);
@@ -161,6 +166,7 @@ class CosmosColorsData extends Equatable {
   final Color chipBackground;
   final Color positiveText;
   final Color link;
+  final Color inputBorder;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
@@ -173,6 +179,7 @@ class CosmosColorsData extends Equatable {
     this.chipBackground = lightChip,
     this.link = lightLink,
     this.positiveText = lightPositive,
+    this.inputBorder = lightBorder,
   });
 
   @override
@@ -187,5 +194,6 @@ class CosmosColorsData extends Equatable {
         chipBackground,
         link,
         positiveText,
+        inputBorder,
       ];
 }
