@@ -28,7 +28,18 @@ class CosmosCircleTextButton extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            SizedBox(height: 24, width: 24, child: Image.asset(asset)),
+            SizedBox(
+              height: 24,
+              width: 24,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  asset,
+                  color: isEnabled ? null : theme.colors.inactive,
+                  colorBlendMode: BlendMode.dstATop,
+                ),
+              ),
+            ),
             SizedBox(width: theme.spacingL),
             Text(text, style: isEnabled ? null : TextStyle(color: theme.colors.inactive)),
           ],
