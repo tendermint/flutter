@@ -31,9 +31,9 @@ class CosmosWalletsListView extends StatelessWidget {
                 isSelected: selectedWallet.address == wallet.address,
                 onClicked: () => onClicked(index),
                 suffix: isEditing
-                    ? CosmosImageButton(assetUrl: 'assets/images/more.png', onPressed: () => onEditIconPressed(wallet))
+                    ? CosmosImageButton(asset: 'assets/images/more.png', onTap: () => onEditIconPressed(wallet))
                     : selectedWallet.address == wallet.address
-                        ? CosmosImageButton(assetUrl: 'assets/images/check.png', onPressed: () {})
+                        ? const CosmosImageButton(asset: 'assets/images/check.png', onTap: null)
                         : null,
               ),
             )

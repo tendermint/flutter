@@ -34,8 +34,7 @@ class CosmosWalletListItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: theme.borderRadiusM,
-              // TODO: This color needs to be fixed. Doesn't match the dark theme.
-              border: Border.all(color: isSelected ? Colors.black12 : Colors.transparent),
+              border: Border.all(color: isSelected ? theme.colors.divider : Colors.transparent),
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: theme.spacingM),

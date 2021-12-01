@@ -1,30 +1,27 @@
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class CosmosImageButton extends StatelessWidget {
-  final String assetUrl;
-  final VoidCallback onPressed;
+  final String asset;
+  final double height;
+  final double width;
+  final VoidCallback? onTap;
 
   const CosmosImageButton({
     Key? key,
-    required this.assetUrl,
-    required this.onPressed,
+    required this.asset,
+    required this.onTap,
+    this.height = 24,
+    this.width = 24,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onPressed(),
+      onTap: onTap,
       child: SizedBox(
-        height: 24,
-        width: 24,
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: CosmosTheme.of(context).colors.text, width: 2),
-          ),
-          child: Image.asset(assetUrl),
-        ),
+        height: height,
+        width: width,
+        child: Image.asset(asset),
       ),
     );
   }
