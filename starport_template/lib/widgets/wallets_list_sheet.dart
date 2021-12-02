@@ -1,9 +1,11 @@
 import 'package:cosmos_ui_components/components/empty_list_message.dart';
+import 'package:cosmos_ui_components/components/template/cosmos_action_sheet.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:starport_template/pages/rename_account_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
@@ -31,8 +33,11 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       )
       .toList();
 
+  bool isEditingAccountList = false;
+
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     //ignore: deprecated_member_use_from_same_package
     return CosmosBottomSheetContainer(
       child: SafeArea(
@@ -46,39 +51,36 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
             contentChild: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: CosmosTheme.of(context).spacingL),
                 CosmosBottomSheetHeader(
                   title: 'Accounts',
                   titleTextStyle: CosmosTextTheme.title1Bold,
-                  leading: CosmosTextButton(text: 'Edit', onTap: () {}),
+                  leading: CosmosTextButton(
+                    text: isEditingAccountList ? 'Done' : 'Edit',
+                    onTap: () => setState(() {
+                      isEditingAccountList = !isEditingAccountList;
+                    }),
+                  ),
                   actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
+                SizedBox(height: theme.spacingXL),
                 _buildMainList(),
-                Padding(
-                  padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-                  child: const Divider(),
+                const CosmosDivider(),
+                SizedBox(height: theme.spacingL),
+                CosmosCircleTextButton(
+                  onTap: isEditingAccountList ? null : () {},
+                  text: 'Create account',
+                  asset: 'assets/images/plus_circle.png',
                 ),
-                SizedBox(height: CosmosTheme.of(context).spacingL),
-                _buildPrimaryBottomActions(context),
-                SizedBox(height: CosmosTheme.of(context).spacingM),
+                CosmosCircleTextButton(
+                  onTap: isEditingAccountList ? null : () {},
+                  text: 'Import account',
+                  asset: 'assets/images/arrow_down_circle.png',
+                ),
+                SizedBox(height: theme.spacingL),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildPrimaryBottomActions(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-      child: Column(
-        children: [
-          CosmosCircleTextButton(onTap: () {}, text: 'Create account', asset: '',),
-          SizedBox(height: CosmosTheme.of(context).spacingL),
-          CosmosCircleTextButton(onTap: () {}, text: 'Import account', asset: '',),
-          // SizedBox(height: CosmosTheme.of(context).spacingL),
-        ],
       ),
     );
   }
@@ -88,7 +90,24 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       child: CosmosWalletsListView(
         list: walletInfos,
         selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-        onClicked: (index) => _walletClicked(index), onEditIconPressed: (info) {},
+        onClicked: (index) => _walletClicked(index),
+        isEditing: isEditingAccountList,
+        onEditIconPressed: (walletInfo) {
+          showCosmosActionSheet(
+            context: context,
+            actions: [
+              CosmosActionSheetItem(
+                text: 'Rename Account',
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => RenameAccountPage(accountName: walletInfo.name)));
+                },
+              ),
+              CosmosActionSheetItem(text: 'Delete Account', onPressed: () {}, isCriticalAction: true),
+            ],
+            title: Text(walletInfo.name),
+          );
+        },
       ),
     );
   }
