@@ -10,6 +10,7 @@ class CosmosElevatedButton extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final double height;
+  final double? contentPadding;
 
   const CosmosElevatedButton({
     Key? key,
@@ -18,6 +19,7 @@ class CosmosElevatedButton extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.height = defaultHeight,
+    this.contentPadding,
   }) : super(key: key);
 
   @override
@@ -34,14 +36,14 @@ class CosmosElevatedButton extends StatelessWidget {
         children: [
           if (prefixIcon != null) ...[
             prefixIcon!,
-            SizedBox(width: CosmosTheme.of(context).spacingM),
+            SizedBox(width: contentPadding ?? CosmosTheme.of(context).spacingS),
           ],
           Text(
             text,
             style: CosmosTextTheme.elevatedButton,
           ),
           if (suffixIcon != null) ...[
-            SizedBox(width: CosmosTheme.of(context).spacingM),
+            SizedBox(width: contentPadding ?? CosmosTheme.of(context).spacingS),
             suffixIcon!,
           ],
         ],

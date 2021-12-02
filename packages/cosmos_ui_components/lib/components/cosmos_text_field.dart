@@ -28,6 +28,7 @@ class CosmosTextField extends StatefulWidget {
 
 class _CosmosTextFieldState extends State<CosmosTextField> {
   late TextEditingController controller;
+  bool isTextEmpty = false;
 
   @override
   void initState() {
@@ -52,7 +53,10 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       keyboardType: widget.keyboardType,
       onChanged: (value) {
         widget.onChanged(value);
-        setState(() {});
+        if (value.isEmpty == isTextEmpty) {
+          setState(() {});
+          isTextEmpty = !isTextEmpty;
+        }
       },
       decoration: InputDecoration(
         border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
