@@ -15,12 +15,12 @@ class RenameAccountPage extends StatefulWidget {
 }
 
 class _RenameAccountPageState extends State<RenameAccountPage> {
-  String get accountName => StarportApp.walletsStore.accountName;
+  late String accountName;
 
   @override
   void initState() {
     super.initState();
-    StarportApp.walletsStore.accountName = widget.accountName;
+    accountName = widget.accountName;
   }
 
   @override
@@ -48,7 +48,8 @@ class _RenameAccountPageState extends State<RenameAccountPage> {
                     child: CosmosTextField(
                       text: accountName,
                       onChanged: (value) {
-                        StarportApp.walletsStore.accountName = value;
+                        accountName = value;
+                        setState(() {});
                       },
                     ),
                   ),

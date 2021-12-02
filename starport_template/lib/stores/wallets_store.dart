@@ -28,21 +28,15 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreatingError = Observable(false);
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
-  final Observable<bool> _isEditingAccountList = Observable(false);
   final Observable<bool> _isRenamingWallet = Observable(false);
   final Observable<bool> _isRenamingWalletSuccessful = Observable(false);
 
   final Observable<WalletPublicInfo> _selectedWallet =
       Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
-  final Observable<String> _accountName = Observable('');
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
-
-  String get accountName => _accountName.value;
-
-  set accountName(String val) => Action(() => _accountName.value = val)();
 
   bool get areWalletsLoading => _areWalletsLoading.value;
 
@@ -87,10 +81,6 @@ class WalletsStore {
   bool get isWalletImporting => _isWalletImporting.value;
 
   set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
-
-  bool get isEditingAccountList => _isEditingAccountList.value;
-
-  set isEditingAccountList(bool val) => Action(() => _isEditingAccountList.value = val)();
 
   WalletPublicInfo get selectedWallet => _selectedWallet.value;
 

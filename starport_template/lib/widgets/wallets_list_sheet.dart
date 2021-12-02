@@ -32,13 +32,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       )
       .toList();
 
-  bool get isEditingAccountList => StarportApp.walletsStore.isEditingAccountList;
-
-  @override
-  void initState() {
-    super.initState();
-    StarportApp.walletsStore.isEditingAccountList = false;
-  }
+  bool isEditingAccountList = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +55,9 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
                   titleTextStyle: CosmosTextTheme.title2Bold,
                   leading: CosmosTextButton(
                     text: isEditingAccountList ? 'Done' : 'Edit',
-                    onTap: () => StarportApp.walletsStore.isEditingAccountList = !isEditingAccountList,
+                    onTap: () => setState(() {
+                      isEditingAccountList = !isEditingAccountList;
+                    }),
                   ),
                   actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
