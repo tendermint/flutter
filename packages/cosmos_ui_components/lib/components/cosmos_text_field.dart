@@ -63,8 +63,8 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         hintText: widget.hint,
         hintStyle: CosmosTextTheme.copy0Normal,
         counterText: '',
-        suffixIcon: controller.text.isNotEmpty ? null : widget.suffix,
-        suffix: widget.suffix != null ? (controller.text.isNotEmpty ? _buildClearButton() : null) : _buildClearButton(),
+        suffixIcon: controller.text.isEmpty ? widget.suffix : null,
+        suffix: widget.suffix == null ? _buildClearButton() : (controller.text.isEmpty ? null : _buildClearButton()),
       ),
     );
   }
@@ -73,7 +73,6 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
     return InkWell(
       onTap: () {
         controller.clear();
-        widget.onChanged('');
         setState(() {});
       },
       child: SizedBox(
