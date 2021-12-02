@@ -53,7 +53,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
               children: [
                 CosmosBottomSheetHeader(
                   title: 'Accounts',
-                  titleTextStyle: CosmosTextTheme.title1Bold,
+                  titleTextStyle: CosmosTextTheme.title2Bold,
                   leading: CosmosTextButton(
                     text: isEditingAccountList ? 'Done' : 'Edit',
                     onTap: () => setState(() {
