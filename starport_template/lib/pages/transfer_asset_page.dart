@@ -1,13 +1,25 @@
-import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/pages/sign_transaction_page.dart' as temp;
 import 'package:starport_template/widgets/balance_card_list.dart';
 
-class TransferAssetPage extends StatelessWidget {
+class TransferAssetPage extends StatefulWidget {
   final Balance balance;
 
   const TransferAssetPage({Key? key, required this.balance}) : super(key: key);
+
+  @override
+  State<TransferAssetPage> createState() => _TransferAssetPageState();
+}
+
+class _TransferAssetPageState extends State<TransferAssetPage> {
+  double amount = 0.0;
+  double fee = 0.0;
+  String walletAddress = '';
+
+  bool get isTransferValidated => amount != 0.0 && walletAddress.isNotEmpty && fee != 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -15,111 +27,99 @@ class TransferAssetPage extends StatelessWidget {
     return Scaffold(
       appBar: CosmosAppBar(
         leading: const CosmosBackButton(),
-        title: 'Transfer ${balance.denom.text}',
+        title: 'Transfer ${widget.balance.denom.text}',
       ),
       body: Column(
         children: [
           SizedBox(height: theme.spacingXXXL),
           CosmosBalanceCard(
-            denomText: balance.denom.text,
-            amountDisplayText: balance.amount.displayText,
+            denomText: widget.balance.denom.text,
+            amountDisplayText: widget.balance.amount.displayText,
             isListTileType: true,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
-            child: Column(
-              children: [
-                CosmosTextField(
-                  onChanged: (value) {},
-                  hint: "Enter receiver's wallet address",
-                  suffix: CosmosTextButton(onTap: () {}, text: 'Paste', color: CosmosTheme.of(context).colors.link),
-                  // maxLength: null,
-                ),
-                CosmosTextField(
-                  onChanged: (value) {},
-                  hint: '0 ${balance.denom.text.toUpperCase()}',
-                ),
-              ],
+          SizedBox(height: theme.spacingXXL),
+          _buildTextFields(theme, context),
+          const Spacer(),
+          _buildFooterButton(theme),
+        ],
+      ),
+    );
+  }
+
+  SafeArea _buildFooterButton(CosmosThemeData theme) {
+    return SafeArea(
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+              child: temp.CosmosElevatedButton(
+                text: 'Continue',
+                onTap: isTransferValidated ? _navigateToSignTransaction : null,
+              ),
             ),
           ),
         ],
       ),
     );
   }
-}
 
-class CosmosTextField extends StatefulWidget {
-  final String text;
-  final String hint;
-  final Function(String) onChanged;
-  final int? maxLines;
-  final int maxLength;
-  final Widget? suffix;
-
-  const CosmosTextField({
-    Key? key,
-    required this.onChanged,
-    this.maxLength = 50,
-    this.text = '',
-    this.maxLines,
-    this.suffix,
-    this.hint = '',
-  }) : super(key: key);
-
-  @override
-  State<CosmosTextField> createState() => _CosmosTextFieldState();
-}
-
-class _CosmosTextFieldState extends State<CosmosTextField> {
-  late TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController();
-    controller.text = widget.text;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = CosmosTheme.of(context);
-    return TextField(
-      controller: controller,
-      maxLines: widget.maxLines,
-      maxLength: widget.maxLength,
-      onChanged: (value) {
-        widget.onChanged(value);
-        setState(() {});
-      },
-      decoration: InputDecoration(
-        border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
-        hintText: widget.hint,
-        hintStyle: CosmosTextTheme.copy0Normal,
-        counterText: '',
-        suffixIcon: controller.text.isNotEmpty ? null : widget.suffix,
-        suffix: widget.suffix != null ? (controller.text.isNotEmpty ? buildInkWell() : null) : buildInkWell(),
+  void _navigateToSignTransaction() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => temp.SignTransactionPage(
+          transaction: Transaction(amount: amount, fee: fee, sendToAddress: walletAddress),
+          balance: widget.balance,
+        ),
       ),
     );
   }
 
-  InkWell buildInkWell() {
-    return InkWell(
-      onTap: () {
-        controller.clear();
-        widget.onChanged('');
-        setState(() {});
-      },
-      child: SizedBox(
-        height: 17,
-        width: 17,
-        child: Image.asset('assets/images/cross.png', package: packageName),
+  Padding _buildTextFields(CosmosThemeData theme, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+      child: Column(
+        children: [
+          temp.CosmosTextField(
+            onChanged: (value) {
+              walletAddress = value;
+              setState(() {});
+            },
+            hint: "Enter receiver's wallet address",
+            suffix: CosmosTextButton(onTap: () {}, text: 'Paste', color: CosmosTheme.of(context).colors.link),
+          ),
+          SizedBox(height: theme.spacingL),
+          temp.CosmosTextField(
+            onChanged: (value) {
+              amount = _validateAmount(value);
+              setState(() {});
+            },
+            keyboardType: TextInputType.number,
+            hint: '0 ${widget.balance.denom.text.toUpperCase()}',
+          ),
+          SizedBox(height: theme.spacingL),
+          temp.CosmosTextField(
+            onChanged: (value) {
+              fee = _validateAmount(value);
+              setState(() {});
+            },
+            keyboardType: TextInputType.number,
+            hint: 'Transaction fee',
+          ),
+        ],
       ),
     );
+  }
+
+  double _validateAmount(String value) {
+    if (value.isEmpty) {
+      return 0.0;
+    }
+    final _amount = double.tryParse(value);
+    if (_amount != null) {
+      return _amount;
+    } else {
+      return 0.0;
+    }
   }
 }
