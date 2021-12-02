@@ -88,7 +88,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       child: CosmosWalletsListView(
         list: walletInfos,
         selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-        onClicked: (index) => _walletClicked(index),
+        onClicked: (index) => _walletClicked(index), onEditIconPressed: (info) {},
       ),
     );
   }
