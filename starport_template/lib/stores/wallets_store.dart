@@ -20,7 +20,6 @@ class WalletsStore {
   WalletsStore(this._transactionSigningGateway, this.baseEnv);
 
   final Observable<bool> _areWalletsLoading = Observable(false);
-
   final Observable<bool> _isSendMoneyLoading = Observable(false);
   final Observable<bool> _isSendMoneyError = Observable(false);
   final Observable<bool> _isBalancesLoading = Observable(false);
@@ -29,16 +28,27 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreatingError = Observable(false);
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
+  final Observable<bool> _isRenamingWallet = Observable(false);
+  final Observable<bool> _isRenamingWalletSuccessful = Observable(false);
 
   final Observable<WalletPublicInfo> _selectedWallet =
       Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
+  final Observable<CredentialsStorageFailure?> renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
 
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+
+  bool get isRenamingWallet => _isRenamingWallet.value;
+
+  set isRenamingWallet(bool val) => Action(() => _isRenamingWallet.value = val)();
+
+  bool get isRenamingWalletSuccessful => _isRenamingWalletSuccessful.value;
+
+  set isRenamingWalletSuccessful(bool val) => Action(() => _isRenamingWalletSuccessful.value = val)();
 
   bool get isSendMoneyError => _isSendMoneyError.value;
 
@@ -79,7 +89,7 @@ class WalletsStore {
   Future<void> loadWallets() async {
     areWalletsLoading = true;
     (await _transactionSigningGateway.getWalletsList()).fold(
-      (fail) => loadWalletsFailure.value = fail,
+      (fail) => Action(() => loadWalletsFailure.value = fail)(),
       (newWallets) {
         wallets.clear();
         wallets.addAll(newWallets);
@@ -89,6 +99,23 @@ class WalletsStore {
       },
     );
     areWalletsLoading = false;
+  }
+
+  Future<void> renameWallet(String name) async {
+    isRenamingWallet = true;
+    (await _transactionSigningGateway.updateWalletPublicInfo(
+      info: WalletPublicInfo(
+        chainId: selectedWallet.chainId,
+        name: name,
+        walletId: selectedWallet.walletId,
+        publicAddress: selectedWallet.publicAddress,
+      ),
+    ))
+        .fold(
+      (fail) => Action(() => renameWalletFailure.value = fail)(),
+      (success) => isRenamingWalletSuccessful = true,
+    );
+    isRenamingWallet = false;
   }
 
   Future<void> getBalances(String walletAddress) async {
