@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CosmosImageButton extends StatelessWidget {
   final String asset;
+  final String? package;
   final double height;
   final double width;
   final VoidCallback? onTap;
@@ -10,6 +11,7 @@ class CosmosImageButton extends StatelessWidget {
     Key? key,
     required this.asset,
     this.onTap,
+    this.package,
     this.height = 24,
     this.width = 24,
   }) : super(key: key);
@@ -21,7 +23,7 @@ class CosmosImageButton extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: width,
-        child: Image.asset(asset),
+        child: Image.asset(asset, package: package),
       ),
     );
   }
