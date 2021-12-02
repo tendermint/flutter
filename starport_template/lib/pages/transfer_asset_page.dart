@@ -2,7 +2,7 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/transaction.dart';
-import 'package:starport_template/pages/sign_transaction_page.dart' as temp;
+import 'package:starport_template/pages/sign_transaction_page.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 
 class TransferAssetPage extends StatefulWidget {
@@ -46,28 +46,10 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     );
   }
 
-  SafeArea _buildFooterButton(CosmosThemeData theme) {
-    return SafeArea(
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
-              child: temp.CosmosElevatedButton(
-                text: 'Continue',
-                onTap: isTransferValidated ? _navigateToSignTransaction : null,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _navigateToSignTransaction() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => temp.SignTransactionPage(
+        builder: (context) => SignTransactionPage(
           transaction: Transaction(amount: amount, fee: fee, sendToAddress: walletAddress),
           balance: widget.balance,
         ),
@@ -80,7 +62,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
       padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
       child: Column(
         children: [
-          temp.CosmosTextField(
+          CosmosTextField(
             onChanged: (value) {
               walletAddress = value;
               setState(() {});
@@ -89,7 +71,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
             suffix: CosmosTextButton(onTap: () {}, text: 'Paste', color: CosmosTheme.of(context).colors.link),
           ),
           SizedBox(height: theme.spacingL),
-          temp.CosmosTextField(
+          CosmosTextField(
             onChanged: (value) {
               amount = _validateAmount(value);
               setState(() {});
@@ -98,7 +80,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
             hint: '0 ${widget.balance.denom.text.toUpperCase()}',
           ),
           SizedBox(height: theme.spacingL),
-          temp.CosmosTextField(
+          CosmosTextField(
             onChanged: (value) {
               fee = _validateAmount(value);
               setState(() {});
@@ -121,5 +103,23 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     } else {
       return 0.0;
     }
+  }
+
+  SafeArea _buildFooterButton(CosmosThemeData theme) {
+    return SafeArea(
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+              child: CosmosElevatedButton(
+                text: 'Continue',
+                onTap: isTransferValidated ? _navigateToSignTransaction : null,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

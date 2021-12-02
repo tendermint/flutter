@@ -1,4 +1,5 @@
 // import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
+import 'package:cosmos_ui_components/components/cosmos_token_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_utils/amount_formatter.dart';
@@ -61,14 +62,7 @@ class CosmosBalanceCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      height: 33,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                        child: Text(denomText[0].toUpperCase()),
-                      ),
-                    ),
+                    CosmosTokenAvatar(text: denomText),
                     SizedBox(width: CosmosTheme.of(context).spacingM),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +73,7 @@ class CosmosBalanceCard extends StatelessWidget {
                         ),
                         if (isListTileType)
                           Text(
-                            '$amountDisplayText ${denomText.toUpperCase()} available',
+                            '$amountDisplayText ${denomText.toUpperCase()}',
                             style: CosmosTextTheme.copyMinus1Normal,
                           ),
                       ],

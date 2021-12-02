@@ -42,23 +42,27 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingL),
           _buildTransactionFee(theme),
           const Spacer(),
-          SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CosmosElevatedButton(
-                      text: 'Tap to sign',
-                      prefixIcon: Image.asset('assets/images/face_id.png'),
-                      onTap: () {},
-                    ),
-                  ),
-                ],
+          _buildFooterButton(theme),
+        ],
+      ),
+    );
+  }
+
+  SafeArea _buildFooterButton(CosmosThemeData theme) {
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+        child: Row(
+          children: [
+            Expanded(
+              child: CosmosElevatedButton(
+                text: 'Tap to sign',
+                prefixIcon: Image.asset('assets/images/face_id.png'),
+                onTap: () {},
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
