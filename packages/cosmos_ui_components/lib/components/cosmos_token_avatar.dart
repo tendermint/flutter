@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class CosmosTokenAvatar extends StatelessWidget {
@@ -7,11 +8,12 @@ class CosmosTokenAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return SizedBox(
       height: 32,
       child: CircleAvatar(
-        backgroundColor: Colors.grey[300],
-        foregroundColor: Colors.black,
+        backgroundColor: theme.colors.avatarBg,
+        foregroundColor: theme.colors.text,
         child: Text(text[0].toUpperCase()),
       ),
     );
