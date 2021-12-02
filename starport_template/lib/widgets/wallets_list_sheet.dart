@@ -74,9 +74,9 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
       child: Column(
         children: [
-          CosmosCircleTextButton(onTap: () {}, text: 'Create account', icon: Icons.add),
+          CosmosCircleTextButton(onTap: () {}, text: 'Create account', asset: '',),
           SizedBox(height: CosmosTheme.of(context).spacingL),
-          CosmosCircleTextButton(onTap: () {}, text: 'Import account', icon: Icons.arrow_downward_sharp),
+          CosmosCircleTextButton(onTap: () {}, text: 'Import account', asset: '',),
           // SizedBox(height: CosmosTheme.of(context).spacingL),
         ],
       ),

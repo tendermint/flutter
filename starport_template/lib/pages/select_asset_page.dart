@@ -2,6 +2,7 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/pages/transfer_asset_page.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 
 class SelectAssetPage extends StatelessWidget {
@@ -16,7 +17,12 @@ class SelectAssetPage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: CosmosTheme.of(context).spacingXXL),
-          BalanceCardList(balancesList: balancesList),
+          BalanceCardList(
+            balancesList: balancesList,
+            onItemTapped: (balance) {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransferAssetPage(balance: balance)));
+            },
+          ),
         ],
       ),
     );
