@@ -51,7 +51,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
             controller.clear();
             widget.onChanged('');
           },
-          child: SizedBox(height: 17, width: 17, child: Image.asset('assets/images/cross.png')),
+          child: SizedBox(height: 17, width: 17, child: Image.asset('assets/images/cross.png', package: packageName)),
         ),
       ),
     );
