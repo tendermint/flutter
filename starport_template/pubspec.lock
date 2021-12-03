@@ -145,8 +145,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: starport-redesign
-      resolved-ref: a935522cccb7d05e25af3a55ed3c6d489a6feeea
+      ref: fix--balance-card
+      resolved-ref: "9bc35a4d33ae4058a37ac5e1dd9704f0577deee6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -502,7 +502,7 @@ packages:
       name: platform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   plugin_platform_interface:
     dependency: transitive
     description:
