@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class CosmosBalanceCard extends StatelessWidget {
   final String denomText;
   final String amountDisplayText;
+  final String secondaryText;
   final VoidCallback? onTap;
   final bool isListTileType;
 
@@ -13,6 +14,7 @@ class CosmosBalanceCard extends StatelessWidget {
     required this.denomText,
     required this.amountDisplayText,
     this.isListTileType = false,
+    this.secondaryText = 'available',
     this.onTap,
   });
 
@@ -52,7 +54,7 @@ class CosmosBalanceCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(amountDisplayText, style: CosmosTextTheme.labelS),
-                  Text('available ${denomText.toUpperCase()}', style: CosmosTextTheme.copyMinus1Normal),
+                  Text('$secondaryText ${denomText.toUpperCase()}', style: CosmosTextTheme.copyMinus1Normal),
                 ],
               ),
           ],
