@@ -1,18 +1,22 @@
 import 'dart:math';
 
 import 'package:cosmos_ui_components/components/mnemonic_words_grid.dart';
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosMnemonicConfirmView extends StatefulWidget {
   final List<String> mnemonicWords;
   final void Function(List<String> selectedWords) onSelectedWordsChanged;
+  final String invalidOrderText;
 
   const CosmosMnemonicConfirmView({
     Key? key,
     required this.mnemonicWords,
     required this.onSelectedWordsChanged,
+    this.invalidOrderText = "Invalid order",
   }) : super(key: key);
 
   @override
@@ -22,6 +26,9 @@ class CosmosMnemonicConfirmView extends StatefulWidget {
 class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
   late List<String> _shuffledWords;
   final _usedWords = <String>[];
+
+  bool get _showInvalidOrderError =>
+      widget.mnemonicWords.length == _usedWords.length && !listEquals(_usedWords, widget.mnemonicWords);
 
   @override
   void initState() {
@@ -55,20 +62,25 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
                         minWidth: double.infinity,
                         minHeight: 40,
                       ),
-                      child: CosmosMnemonicWordsGrid(
-                        itemStyle: (_) => MnemonicChoiceChipStyle(
-                          backgroundColor: theme.colors.text,
-                          textColor: theme.colors.background,
-                          indexBackgroundColor: theme.colors.background,
-                          indexTextColor: theme.colors.text,
-                        ),
-                        mnemonicWords: _usedWords,
-                        onTapWord: (index) => setState(
-                          () {
-                            _usedWords.removeAt(index);
-                            widget.onSelectedWordsChanged([..._usedWords]);
-                          },
-                        ),
+                      child: Column(
+                        children: [
+                          CosmosMnemonicWordsGrid(
+                            itemStyle: (_) => MnemonicChoiceChipStyle(
+                              backgroundColor: theme.colors.text,
+                              textColor: theme.colors.background,
+                              indexBackgroundColor: theme.colors.background,
+                              indexTextColor: theme.colors.text,
+                            ),
+                            mnemonicWords: _usedWords,
+                            onTapWord: (index) => setState(
+                              () {
+                                _usedWords.removeAt(index);
+                                widget.onSelectedWordsChanged([..._usedWords]);
+                              },
+                            ),
+                          ),
+                          if (_showInvalidOrderError) _invalidIndicator(context),
+                        ],
                       ),
                     ),
                   ),
@@ -77,9 +89,7 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
             ),
           ),
         ),
-        SizedBox(
-          height: CosmosTheme.of(context).spacingL,
-        ),
+        SizedBox(height: CosmosTheme.of(context).spacingL),
         _AvailableWordsGrid(
           mnemonicWords: _shuffledWords,
           usedWords: _usedWords,
@@ -89,6 +99,24 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
           }),
         ),
       ],
+    );
+  }
+
+  Widget _invalidIndicator(BuildContext context) {
+    final theme = CosmosTheme.of(context);
+    return Padding(
+      padding: EdgeInsets.only(top: theme.spacingL, bottom: theme.spacingM),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/icon_invalid.png", package: packageName),
+          SizedBox(width: theme.spacingM),
+          Text(
+            widget.invalidOrderText,
+            style: CosmosTextTheme.labelS.copyWith(color: theme.colors.error),
+          )
+        ],
+      ),
     );
   }
 }
