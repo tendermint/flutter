@@ -35,6 +35,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           CosmosBalanceCard(
             denomText: widget.balance.denom.text,
             amountDisplayText: widget.balance.amount.displayText,
+            secondaryText: 'available ${widget.balance.denom.text.toUpperCase()}',
             isListTileType: true,
           ),
           SizedBox(height: theme.spacingXXL),
