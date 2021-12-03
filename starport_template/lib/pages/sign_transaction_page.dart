@@ -6,11 +6,11 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/entities/transaction.dart';
-import 'package:starport_template/widgets/sign_transaction_item.dart';
+import 'package:starport_template/entities/msg_send_transaction.dart';
+import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
 class SignTransactionPage extends StatelessWidget {
-  final Transaction transaction;
+  final MsgSendTransaction transaction;
   final Balance balance;
 
   const SignTransactionPage({Key? key, required this.transaction, required this.balance}) : super(key: key);
@@ -28,11 +28,11 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingXXL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          SignTransactionItem(text: 'Send', amount: transaction.amount, balance: balance),
+          SignTransactionTabViewItem(text: 'Send', amount: transaction.amount, balance: balance),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          SignTransactionItem(
+          SignTransactionTabViewItem(
             text: 'Recipient will get',
             amount: transaction.amount - transaction.fee,
             balance: balance,

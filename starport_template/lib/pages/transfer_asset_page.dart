@@ -1,7 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/sign_transaction_page.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 
@@ -50,7 +50,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SignTransactionPage(
-          transaction: Transaction(amount: amount, fee: fee, sendToAddress: walletAddress),
+          transaction: MsgSendTransaction(amount: amount, fee: fee, recipient: walletAddress),
           balance: widget.balance,
         ),
       ),

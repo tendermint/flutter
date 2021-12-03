@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -60,7 +61,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   StarportButtonBar(
-                    onReceivePressed: () {},
+                    onReceivePressed: () => notImplemented(context),
                     onSendPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));

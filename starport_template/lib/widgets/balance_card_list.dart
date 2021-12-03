@@ -1,5 +1,6 @@
 // import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
 import 'package:cosmos_ui_components/components/cosmos_token_avatar.dart';
+import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_utils/amount_formatter.dart';
@@ -8,9 +9,9 @@ import 'package:starport_template/entities/balance.dart';
 
 class BalanceCardList extends StatelessWidget {
   final List<Balance> balancesList;
-  final Function(Balance)? onItemTapped;
+  final Function(Balance)? onTapItem;
 
-  const BalanceCardList({Key? key, required this.balancesList, this.onItemTapped}) : super(key: key);
+  const BalanceCardList({Key? key, required this.balancesList, this.onTapItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class BalanceCardList extends StatelessWidget {
                   CosmosBalanceCard(
                     denomText: balance.denom.text.toUpperCase(),
                     amountDisplayText: formatAmount(balance.amount.value.toDouble()),
-                    onTap: onItemTapped == null ? null : () => onItemTapped!(balance),
+                    onTap: onTapItem == null ? null : () => onTapItem!(balance),
                   ),
                   SizedBox(height: CosmosTheme.of(context).spacingL),
                   SizedBox(height: CosmosTheme.of(context).spacingM),

@@ -19,7 +19,7 @@ class SelectAssetPage extends StatelessWidget {
           SizedBox(height: CosmosTheme.of(context).spacingXXL),
           BalanceCardList(
             balancesList: balancesList,
-            onItemTapped: (balance) {
+            onTapItem: (balance) {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransferAssetPage(balance: balance)));
             },
           ),

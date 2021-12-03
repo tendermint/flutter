@@ -3,8 +3,8 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
 
-class SignTransactionItem extends StatelessWidget {
-  const SignTransactionItem({
+class SignTransactionTabViewItem extends StatelessWidget {
+  const SignTransactionTabViewItem({
     Key? key,
     required this.text,
     required this.balance,
@@ -24,13 +24,10 @@ class SignTransactionItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(text, style: CosmosTextTheme.titleS),
-          Row(
-            children: [
-              Text('${amount.toString()} ${balance.denom.text.toUpperCase()}', style: CosmosTextTheme.title1Medium),
-              SizedBox(width: theme.spacingL),
-              CosmosTokenAvatar(text: balance.denom.text),
-            ],
-          ),
+          const Spacer(),
+          Text('${amount.toString()} ${balance.denom.text.toUpperCase()}', style: CosmosTextTheme.title1Medium),
+          SizedBox(width: theme.spacingL),
+          CosmosTokenAvatar(text: balance.denom.text),
         ],
       ),
     );
