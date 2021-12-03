@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
