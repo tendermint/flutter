@@ -145,8 +145,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: fix--balance-card
-      resolved-ref: "028b05a7dd8d53109c743415cb4a1e897d767f55"
+      ref: starport-redesign
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -155,7 +155,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "450cf1a851bf92c1c20a6b6be81bca82891c385f"
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -186,7 +186,7 @@ packages:
       name: dartz
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1"
   decimal:
     dependency: "direct main"
     description:
@@ -667,7 +667,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "450cf1a851bf92c1c20a6b6be81bca82891c385f"
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
