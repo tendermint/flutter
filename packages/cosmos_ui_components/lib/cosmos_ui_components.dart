@@ -23,6 +23,7 @@ export 'components/empty_list_message.dart';
 export 'components/info_card.dart';
 export 'components/mnemonic_choice_chip.dart';
 export 'components/mnemonic_words_grid.dart';
+export 'components/template/cosmos_balance_card.dart';
 export 'components/template/cosmos_wallet_list_item.dart';
 export 'components/template/cosmos_wallets_list_view.dart';
 export 'cosmos_app_theme.dart';
