@@ -155,7 +155,8 @@ class CosmosColorsData extends Equatable {
   static const darkSurface = Color(0xFF171717);
   static const onDarkText = Color(0xFFFFFFFF);
   static const darkDivider = Color(0x17FFFFFF);
-  static const error = Color(0xFFE74444);
+  static const iosError = Color(0xFFE74444);
+  static const defaultError = Color(0xFFFF3D56);
 
   final Color inactive;
   final Color divider;
@@ -169,6 +170,7 @@ class CosmosColorsData extends Equatable {
   final Color link;
   final Color inputBorder;
   final Color avatarBg;
+  final Color error;
 
   const CosmosColorsData({
     this.inactive = lightInactive,
@@ -177,12 +179,13 @@ class CosmosColorsData extends Equatable {
     this.background = lightBg,
     this.cardBackground = lightCardBg,
     this.actionSheetPositive = Colors.lightBlue,
-    this.actionSheetDestructive = error,
+    this.actionSheetDestructive = iosError,
     this.chipBackground = lightChip,
     this.link = lightLink,
     this.positiveText = lightPositive,
     this.inputBorder = lightBorder,
     this.avatarBg = silver,
+    this.error = defaultError,
   });
 
   @override
@@ -199,5 +202,6 @@ class CosmosColorsData extends Equatable {
         positiveText,
         inputBorder,
         avatarBg,
+        error,
       ];
 }
