@@ -13,8 +13,8 @@ class CosmosBalanceCard extends StatelessWidget {
   const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
+    required this.secondaryText,
     this.isListTileType = false,
-    this.secondaryText = 'available',
     this.onTap,
   });
 
@@ -54,7 +54,7 @@ class CosmosBalanceCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(amountDisplayText, style: CosmosTextTheme.labelS),
-                  Text('$secondaryText ${denomText.toUpperCase()}', style: CosmosTextTheme.copyMinus1Normal),
+                  Text(secondaryText, style: CosmosTextTheme.copyMinus1Normal),
                 ],
               ),
           ],

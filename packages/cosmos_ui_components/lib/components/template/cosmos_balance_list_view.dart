@@ -19,6 +19,7 @@ class CosmosBalancesListView extends StatelessWidget {
             (index, balance) => CosmosBalanceCard(
               denomText: balance.denomText,
               amountDisplayText: balance.amountDisplayText,
+              secondaryText: 'available ${balance.denomText.toUpperCase()}',
             ),
           )
           .toList(),
