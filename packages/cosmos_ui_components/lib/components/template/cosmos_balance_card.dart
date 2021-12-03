@@ -13,7 +13,7 @@ class CosmosBalanceCard extends StatelessWidget {
   const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
-    required this.secondaryText,
+    this.secondaryText = '',
     this.isListTileType = false,
     this.onTap,
   });
