@@ -58,6 +58,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                             (balance) => CosmosBalanceCard(
                               denomText: balance.denom.text,
                               amountDisplayText: balance.amount.value.toString(),
+                              secondaryText: 'available ${balance.denom.text.toUpperCase()}',
                             ),
                           )
                           .toList(),
