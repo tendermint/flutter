@@ -146,7 +146,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: starport-redesign
-      resolved-ref: "53963bee5506be20a0567020e8c571e60372794c"
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -155,7 +155,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "53963bee5506be20a0567020e8c571e60372794c"
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -186,7 +186,7 @@ packages:
       name: dartz
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1"
   decimal:
     dependency: "direct main"
     description:
@@ -502,7 +502,7 @@ packages:
       name: platform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -530,7 +530,7 @@ packages:
       name: protobuf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   pub_semver:
     dependency: transitive
     description:
@@ -667,7 +667,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "53963bee5506be20a0567020e8c571e60372794c"
+      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

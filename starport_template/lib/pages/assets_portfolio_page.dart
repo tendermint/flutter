@@ -1,11 +1,13 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
@@ -58,7 +60,13 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                       BalanceCardList(balancesList: balancesList),
                     ],
                   ),
-                  StarportButtonBar(onReceivePressed: () {}, onSendPressed: () {}),
+                  StarportButtonBar(
+                    onReceivePressed: () => notImplemented(context),
+                    onSendPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
+                    },
+                  ),
                 ],
               ),
               isLoading: isBalancesLoading,

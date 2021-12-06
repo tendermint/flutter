@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/components/empty_list_message.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_action_sheet.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
@@ -36,8 +37,8 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
 
   @override
   Widget build(BuildContext context) {
-    //ignore: deprecated_member_use_from_same_package
     final theme = CosmosTheme.of(context);
+    //ignore: deprecated_member_use_from_same_package
     return CosmosBottomSheetContainer(
       child: SafeArea(
         top: false,
@@ -61,15 +62,9 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
                   ),
                   actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
                 ),
-                SizedBox(height: theme.spacingL),
+                SizedBox(height: theme.spacingXL),
                 _buildMainList(),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: CosmosTheme.of(context).spacingL,
-                    vertical: CosmosTheme.of(context).spacingM,
-                  ),
-                  child: const Divider(),
-                ),
+                const CosmosDivider(),
                 SizedBox(height: theme.spacingL),
                 CosmosCircleTextButton(
                   onTap: isEditingAccountList ? null : () {},
