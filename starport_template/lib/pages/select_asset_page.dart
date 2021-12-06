@@ -14,16 +14,14 @@ class SelectAssetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CosmosAppBar(leading: CosmosBackButton(), title: 'Select Asset'),
-      body: Column(
-        children: [
-          SizedBox(height: CosmosTheme.of(context).spacingXXL),
-          BalanceCardList(
-            balancesList: balancesList,
-            onTapItem: (balance) {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransferAssetPage(balance: balance)));
-            },
-          ),
-        ],
+      body: Padding(
+        padding: EdgeInsets.only(top: CosmosTheme.of(context).spacingXXL),
+        child: BalanceCardList(
+          balancesList: balancesList,
+          onTapItem: (balance) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransferAssetPage(balance: balance)));
+          },
+        ),
       ),
     );
   }
