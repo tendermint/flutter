@@ -18,9 +18,9 @@ MnemonicValidationError? validateMnemonic(String mnemonic) {
     return MnemonicValidationError.MnemonicEmpty;
   } else if (!RegExp("^[a-zA-Z ]+\$").hasMatch(mnemonic)) {
     return MnemonicValidationError.InvalidCharacter;
-  } else if (![12,24].contains(mnemonic.splitToWords().length)) {
+  } else if (![12, 24].contains(mnemonic.splitToWords().length)) {
     return MnemonicValidationError.WrongNumberOfWords;
-  } else if(!bip39.validateMnemonic(mnemonic)) {
+  } else if (!bip39.validateMnemonic(mnemonic)) {
     return MnemonicValidationError.Unknown;
   }
   return null;

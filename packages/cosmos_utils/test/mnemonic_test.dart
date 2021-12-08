@@ -7,11 +7,13 @@ void main() {
     expect(validateMnemonic("invalid character!"), MnemonicValidationError.InvalidCharacter);
     expect(validateMnemonic(""), MnemonicValidationError.MnemonicEmpty);
     expect(
-      validateMnemonic("pink later snow hire pill message improve jeans supply reflect wave right silent inflict fiction riot hurdle belt awkward zero direct will giant dose"),
+      validateMnemonic(
+          "pink later snow hire pill message improve jeans supply reflect wave right silent inflict fiction riot hurdle belt awkward zero direct will giant dose"),
       MnemonicValidationError.Unknown,
     );
     expect(
-      validateMnemonic("later pink snow hire pill message improve jeans supply reflect wave right silent inflict fiction riot hurdle belt awkward zero direct will giant dose"),
+      validateMnemonic(
+          "later pink snow hire pill message improve jeans supply reflect wave right silent inflict fiction riot hurdle belt awkward zero direct will giant dose"),
       null,
     );
     expect(
