@@ -44,6 +44,14 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   }
 
   @override
+  void didUpdateWidget(covariant CosmosTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.text != controller.text) {
+      controller.text = widget.text;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return TextField(
