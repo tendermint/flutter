@@ -50,11 +50,6 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
     }
   }
 
-  void setText(String text) {
-    controller.text = text;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
