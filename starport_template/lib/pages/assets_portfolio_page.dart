@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -10,7 +11,6 @@ import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
-import 'package:starport_template/widgets/receive_money_sheet.dart';
 import 'package:starport_template/widgets/starport_button_bar.dart';
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
@@ -61,7 +61,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   StarportButtonBar(
-                    onReceivePressed: () => _onReceivePressed(),
+                    onReceivePressed: () => notImplemented(context),
                     onSendPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
@@ -89,6 +89,28 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     );
   }
 
+  // TODO: To be used when implementing send money
+
+  // void _transferPressed(Balance balance) {
+  //   final denom = Denom(balance.denom.text);
+  //   _openSendMoneySheet(denom);
+  // }
+
+  // Future<void> _openSendMoneySheet(Denom denom) async {
+  //   final result = await showModalBottomSheet(
+  //     context: context,
+  //     builder: (context) => SafeArea(
+  //       child: SendMoneySheet(
+  //         denom: denom,
+  //         walletInfo: widget.walletInfo,
+  //       ),
+  //     ),
+  //   );
+  //   if (result == true) {
+  //     StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+  //   }
+  // }
+
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
@@ -107,16 +129,5 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       StarportApp.walletsStore.selectedWallet = wallet;
       _fetchWalletBalances();
     }
-  }
-
-  void _onReceivePressed() {
-    showMaterialModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => SizedBox(
-        height: MediaQuery.of(context).size.height / 1.06,
-        child: ReceiveMoneySheet(walletInfo: StarportApp.walletsStore.selectedWallet),
-      ),
-    );
   }
 }
