@@ -108,19 +108,15 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
     return Future.value(serializer.toJson(walletCredentials))
         .flatMap((jsonMap) async => right(await compute(jsonEncode, jsonMap)))
         .flatMap((jsonString) async {
-          final encrypted = _cipher.encrypt(password: password, data: jsonString);
-          return _secureDataStore.saveSecureText(key: credsKey, value: encrypted);
-        })
-        .flatMap(
-            (_) {
-              return _plainDataStore.savePlainText(key: serializerKey, value: walletCredentials.serializerIdentifier);
-            })
-        .flatMap((_) {
-          return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
-        })
-        .map((_) {
-          return right(unit);
-        });
+      final encrypted = _cipher.encrypt(password: password, data: jsonString);
+      return _secureDataStore.saveSecureText(key: credsKey, value: encrypted);
+    }).flatMap((_) {
+      return _plainDataStore.savePlainText(key: serializerKey, value: walletCredentials.serializerIdentifier);
+    }).flatMap((_) {
+      return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
+    }).map((_) {
+      return right(unit);
+    });
   }
 
   @override
@@ -130,15 +126,12 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
           try {
             final infos = storageMap.keys //
                 .where((element) {
-                  return _isPublicInfoKey(element);
-                })
-                .map((key) {
-                  return jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>;
-                })
-                .map((json) {
-                  return WalletPublicInfoSerializer.fromMap(json);
-                })
-                .toList();
+              return _isPublicInfoKey(element);
+            }).map((key) {
+              return jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>;
+            }).map((json) {
+              return WalletPublicInfoSerializer.fromMap(json);
+            }).toList();
             return right(infos);
           } catch (e) {
             return left(CredentialsStorageFailure("$e"));

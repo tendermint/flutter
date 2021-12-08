@@ -18,9 +18,11 @@ class BiometricDataStore implements SecureDataStore {
     this.promptInfo = PromptInfo.defaultValues,
     this.storageFileName = "cosmos_wallet_creds",
     StorageFileInitOptions? storageFileInitOptions,
-  }) : _storageFileInitOptions = storageFileInitOptions ?? StorageFileInitOptions(
-    authenticationValidityDurationSeconds: 1,// so that consecutive writes after reads won't ask for auth twice.
-  );
+  }) : _storageFileInitOptions = storageFileInitOptions ??
+            StorageFileInitOptions(
+              authenticationValidityDurationSeconds:
+                  1, // so that consecutive writes after reads won't ask for auth twice.
+            );
 
   /// Convenience helper method to check whether biometric authentication is available on the device
   Future<Either<BiometricCredentialsStorageFailure, Unit>> authenticateUser() async {
@@ -54,9 +56,9 @@ class BiometricDataStore implements SecureDataStore {
       _readMap().flatMap(
         (map) async {
           return _writeMap({
-          ...map,
-          key: value,
-        });
+            ...map,
+            key: value,
+          });
         },
       );
 
@@ -64,12 +66,11 @@ class BiometricDataStore implements SecureDataStore {
     try {
       return _getStorageFile() //
           .flatMap((storageFile) async {
-            final fileRead = await storageFile.read();
-            return right(fileRead ?? "");
-          })
-          .flatMap((storageRead) async {
-            return right(await compute(_decodeMap, storageRead));
-          });
+        final fileRead = await storageFile.read();
+        return right(fileRead ?? "");
+      }).flatMap((storageRead) async {
+        return right(await compute(_decodeMap, storageRead));
+      });
     } catch (ex, stack) {
       logError(ex, stack);
       return left(CredentialsStorageFailure("$ex"));
@@ -83,11 +84,10 @@ class BiometricDataStore implements SecureDataStore {
       final mapString = await compute(_encodeMap, map);
       final result = await _getStorageFile() //
           .flatMap((file) async {
-            return right(await file.write(mapString));
-          })
-          .flatMap((_) async {
-            return right(unit);
-          });
+        return right(await file.write(mapString));
+      }).flatMap((_) async {
+        return right(unit);
+      });
       return result;
     } catch (ex, stack) {
       return left(
