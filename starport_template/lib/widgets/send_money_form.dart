@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,8 @@ class SendMoneyForm extends StatefulWidget {
 }
 
 class _SendMoneyFormState extends State<SendMoneyForm> {
+  String text = '';
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -29,8 +32,13 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
         children: [
           CosmosTextField(
             onChanged: (value) => widget.onAddressChanged(value),
+            text: text,
             hint: "Enter receiver's wallet address",
-            isClipBoardType: true,
+            suffix: CosmosTextButton(
+              onTap: () => FlutterClipboard.paste().then((value) => setState(() => text = value)),
+              text: 'Paste',
+              color: CosmosTheme.of(context).colors.link,
+            ),
           ),
           SizedBox(height: theme.spacingL),
           CosmosTextField(
