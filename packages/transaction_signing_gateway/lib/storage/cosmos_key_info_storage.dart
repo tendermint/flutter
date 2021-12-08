@@ -107,19 +107,16 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
     final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(walletCredentials.publicInfo));
     return Future.value(serializer.toJson(walletCredentials))
         .flatMap((jsonMap) async => right(await compute(jsonEncode, jsonMap)))
-        .flatMap(
-      (jsonString) async {
-        try {
-          final encrypted = _cipher.encrypt(password: password, data: jsonString);
-          await _secureDataStore.saveSecureText(key: credsKey, value: encrypted);
-          await _plainDataStore.savePlainText(key: serializerKey, value: walletCredentials.serializerIdentifier);
-          await _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
-          return right(unit);
-        } catch (e) {
-          return left(CredentialsStorageFailure("$e"));
-        }
-      },
-    );
+        .flatMap((jsonString) async {
+      final encrypted = _cipher.encrypt(password: password, data: jsonString);
+      return _secureDataStore.saveSecureText(key: credsKey, value: encrypted);
+    }).flatMap((_) {
+      return _plainDataStore.savePlainText(key: serializerKey, value: walletCredentials.serializerIdentifier);
+    }).flatMap((_) {
+      return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
+    }).map((_) {
+      return right(unit);
+    });
   }
 
   @override
@@ -128,10 +125,13 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         (storageMap) async {
           try {
             final infos = storageMap.keys //
-                .where((element) => _isPublicInfoKey(element))
-                .map((key) => jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>)
-                .map((json) => WalletPublicInfoSerializer.fromMap(json))
-                .toList();
+                .where((element) {
+              return _isPublicInfoKey(element);
+            }).map((key) {
+              return jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>;
+            }).map((json) {
+              return WalletPublicInfoSerializer.fromMap(json);
+            }).toList();
             return right(infos);
           } catch (e) {
             return left(CredentialsStorageFailure("$e"));
