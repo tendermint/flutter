@@ -44,7 +44,7 @@ class _RoutingPageState extends State<RoutingPage> {
         isLoading: StarportApp.walletsStore.areWalletsLoading,
         isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
         errorChild: const CosmosErrorView(
-          title: "Something went wrong",
+          title: "Something went wrong.",
           message: "We had problems retrieving wallets from secure storage.",
         ),
         contentChild: const SizedBox(),
