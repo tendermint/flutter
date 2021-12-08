@@ -6,13 +6,10 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
-import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class SignTransactionPage extends StatelessWidget {
   final MsgSendTransaction transaction;
