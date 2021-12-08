@@ -113,6 +113,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             CosmosElevatedButton(text: "Back up now", onTap: _onTapBackUpNow),
             SizedBox(height: theme.spacingM),
             CosmosTextButton(text: "Back up later", onTap: _onTapBackUpLater),
+            const MinimalBottomSpacer(),
           ],
         ),
       ),

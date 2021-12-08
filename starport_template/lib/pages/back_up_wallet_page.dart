@@ -93,7 +93,8 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
             CosmosElevatedButton(
               text: "Continue",
               onTap: _confirmChecked ? _onTapContinue : null,
-            )
+            ),
+            const MinimalBottomSpacer(),
           ],
         ),
       ),

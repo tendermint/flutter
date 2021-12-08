@@ -117,6 +117,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
     await StarportApp.walletsStore.importAlanWallet(
       ImportWalletFormData(
         name: 'Wallet ${StarportApp.walletsStore.wallets.length}',
+        //TODO create separate method that will use empty password for biometric or ask the user for one otherwise
         password: "",
         mnemonic: widget.mnemonic,
       ),
