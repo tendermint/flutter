@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class CosmosTextField extends StatefulWidget {
   final int? maxLines;
   final int maxLength;
   final Widget? suffix;
+  final bool isClipBoardType;
   final TextInputType? keyboardType;
 
   const CosmosTextField({
@@ -20,6 +22,7 @@ class CosmosTextField extends StatefulWidget {
     this.suffix,
     this.hint = '',
     this.keyboardType,
+    this.isClipBoardType = false,
   }) : super(key: key);
 
   @override
@@ -43,6 +46,11 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
     controller.dispose();
   }
 
+  void setText(String text) {
+    controller.text = text;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -64,7 +72,11 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         hintStyle: CosmosTextTheme.copy0Normal,
         counterText: '',
         suffixIcon: controller.text.isEmpty ? widget.suffix : null,
-        suffix: widget.suffix == null ? _buildClearButton() : (controller.text.isEmpty ? null : _buildClearButton()),
+        suffix: widget.suffix == null
+            ? (widget.isClipBoardType
+                ? (controller.text.isEmpty ? _buildPasteButton() : _buildClearButton())
+                : _buildClearButton())
+            : (controller.text.isEmpty ? null : _buildClearButton()),
       ),
     );
   }
@@ -82,4 +94,10 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       ),
     );
   }
+
+  Widget _buildPasteButton() => CosmosTextButton(
+        onTap: () => FlutterClipboard.paste().then((value) => setState(() => controller.text = value)),
+        text: 'Paste',
+        color: CosmosTheme.of(context).colors.link,
+      );
 }
