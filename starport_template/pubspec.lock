@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: text-field-update
-      resolved-ref: ec56e3e7aa06411ffb40aa8858fdc5848338e689
+      resolved-ref: bcf733371f456a4f8c70e57eb91b5192443bba9a
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
