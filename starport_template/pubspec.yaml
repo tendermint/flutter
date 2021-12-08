@@ -20,7 +20,7 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: starport-redesign
+      ref: text-field-update
 
   cosmos_utils:
     git:
