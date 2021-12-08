@@ -10,3 +10,25 @@ extension MnemonicWords on String {
       .where((element) => element.isNotEmpty)
       .toList();
 }
+
+/// Checks validity of [mnemonic] string and returns detailed error, if any.
+/// Returns null if no error detected
+MnemonicValidationError? validateMnemonic(String mnemonic) {
+  if (mnemonic.isEmpty) {
+    return MnemonicValidationError.MnemonicEmpty;
+  } else if (!RegExp("^[a-zA-Z ]+\$").hasMatch(mnemonic)) {
+    return MnemonicValidationError.InvalidCharacter;
+  } else if (![12,24].contains(mnemonic.splitToWords().length)) {
+    return MnemonicValidationError.WrongNumberOfWords;
+  } else if(!bip39.validateMnemonic(mnemonic)) {
+    return MnemonicValidationError.Unknown;
+  }
+  return null;
+}
+
+enum MnemonicValidationError {
+  MnemonicEmpty,
+  InvalidCharacter,
+  WrongNumberOfWords,
+  Unknown,
+}
