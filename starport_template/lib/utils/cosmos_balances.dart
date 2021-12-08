@@ -16,6 +16,9 @@ class CosmosBalances {
     final uri = '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress';
     final response = await http.get(Uri.parse(uri));
     final map = jsonDecode(response.body) as Map<String, dynamic>;
+    if (map['balances'] == null) {
+      return [];
+    }
     final list = map['balances'] as List<dynamic>;
 
     return list
