@@ -30,6 +30,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
           CosmosTextField(
             onChanged: (value) => widget.onAddressChanged(value),
             hint: "Enter receiver's wallet address",
+            isClipBoardType: true,
           ),
           SizedBox(height: theme.spacingL),
           CosmosTextField(
