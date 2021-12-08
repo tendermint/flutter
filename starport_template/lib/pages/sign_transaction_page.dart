@@ -5,9 +5,14 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
+import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
+import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class SignTransactionPage extends StatelessWidget {
   final MsgSendTransaction transaction;
@@ -28,27 +33,27 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingXXL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          SignTransactionTabViewItem(text: 'Send', amount: transaction.amount, balance: balance),
+          SignTransactionTabViewItem(text: 'Send', amount: transaction.amount.value.toDouble(), balance: balance),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
           SignTransactionTabViewItem(
             text: 'Recipient will get',
-            amount: transaction.amount - transaction.fee,
+            amount: transaction.amount.value.toDouble() - transaction.fee,
             balance: balance,
           ),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          _buildTransactionFee(theme),
+          _transactionFee(theme),
           const Spacer(),
-          _buildFooterButton(theme),
+          _footerButton(theme, context),
         ],
       ),
     );
   }
 
-  SafeArea _buildFooterButton(CosmosThemeData theme) {
+  SafeArea _footerButton(CosmosThemeData theme, BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
@@ -58,7 +63,25 @@ class SignTransactionPage extends StatelessWidget {
               child: CosmosElevatedButton(
                 text: 'Tap to sign',
                 prefixIcon: Image.asset('assets/images/face_id.png'),
-                onTap: () {},
+                onTap: () async {
+                  await showMaterialModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => SizedBox(
+                      height: MediaQuery.of(context).size.height / 2.24,
+                      child: const AssetsTransferSheet(),
+                    ),
+                  );
+                  // StarportApp.walletsStore.sendTokens(
+                  //   info: StarportApp.walletsStore.selectedWallet,
+                  //   balance: Balance(
+                  //     amount: transaction.amount,
+                  //     denom: balance.denom,
+                  //   ),
+                  //   toAddress: transaction.recipient,
+                  //   password: '',
+                  // );
+                },
               ),
             ),
           ],
@@ -67,7 +90,7 @@ class SignTransactionPage extends StatelessWidget {
     );
   }
 
-  Padding _buildTransactionFee(CosmosThemeData theme) {
+  Padding _transactionFee(CosmosThemeData theme) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
       child: Row(

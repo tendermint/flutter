@@ -1,7 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
-class SendMoneyForm extends StatelessWidget {
+class SendMoneyForm extends StatefulWidget {
   final Function(String) onAddressChanged;
   final Function(String) onAmountChanged;
   final Function(String) onFeeChanged;
@@ -16,6 +16,11 @@ class SendMoneyForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SendMoneyForm> createState() => _SendMoneyFormState();
+}
+
+class _SendMoneyFormState extends State<SendMoneyForm> {
+  @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Padding(
@@ -23,21 +28,14 @@ class SendMoneyForm extends StatelessWidget {
       child: Column(
         children: [
           CosmosTextField(
-            onChanged: (value) => onAddressChanged(value),
+            onChanged: (value) => widget.onAddressChanged(value),
             hint: "Enter receiver's wallet address",
-            suffix: CosmosTextButton(onTap: () {}, text: 'Paste', color: CosmosTheme.of(context).colors.link),
           ),
           SizedBox(height: theme.spacingL),
           CosmosTextField(
-            onChanged: (value) => onAmountChanged(value),
+            onChanged: (value) => widget.onAmountChanged(value),
             keyboardType: TextInputType.number,
-            hint: '0 ${denomText.toUpperCase()}',
-          ),
-          SizedBox(height: theme.spacingL),
-          CosmosTextField(
-            onChanged: (value) => onFeeChanged(value),
-            keyboardType: TextInputType.number,
-            hint: 'Transaction fee',
+            hint: '0 ${widget.denomText.toUpperCase()}',
           ),
         ],
       ),

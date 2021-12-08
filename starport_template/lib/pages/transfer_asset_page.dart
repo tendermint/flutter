@@ -1,8 +1,12 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
+import 'package:starport_template/pages/custom_fee_page.dart';
 import 'package:starport_template/pages/sign_transaction_page.dart';
+import 'package:starport_template/utils/amount_validator.dart';
 import 'package:starport_template/widgets/send_money_form.dart';
 
 class TransferAssetPage extends StatefulWidget {
@@ -16,7 +20,7 @@ class TransferAssetPage extends StatefulWidget {
 
 class _TransferAssetPageState extends State<TransferAssetPage> {
   double amount = 0.0;
-  double fee = 0.0;
+  double fee = 0.02;
   String walletAddress = '';
 
   bool get isTransferValidated => amount != 0.0 && walletAddress.isNotEmpty && fee != 0.0;
@@ -45,15 +49,17 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
               setState(() {});
             },
             onAmountChanged: (value) {
-              amount = _validateAmount(value);
+              amount = validateAmount(value);
               setState(() {});
             },
             onFeeChanged: (value) {
-              fee = _validateAmount(value);
+              fee = validateAmount(value);
               setState(() {});
             },
             denomText: widget.balance.denom.text,
           ),
+          SizedBox(height: theme.spacingXL),
+          _customFee(theme),
           const Spacer(),
           _footerButton(theme),
         ],
@@ -61,16 +67,29 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     );
   }
 
-  double _validateAmount(String value) {
-    if (value.isEmpty) {
-      return 0.0;
-    }
-    final _amount = double.tryParse(value);
-    if (_amount != null) {
-      return _amount;
-    } else {
-      return 0.0;
-    }
+  Widget _customFee(CosmosThemeData theme) {
+    return InkWell(
+      onTap: () async {
+        fee = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CustomFeePage(denomText: widget.balance.denom.text, initialFee: fee),
+              ),
+            ) as double? ??
+            0.0;
+        setState(() {});
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+        child: Row(
+          children: [
+            Text('Fees', style: CosmosTextTheme.copy0Normal),
+            const Spacer(),
+            Text('${fee.toString()} AKT'),
+            Image.asset('assets/images/arrow_right.png'),
+          ],
+        ),
+      ),
+    );
   }
 
   SafeArea _footerButton(CosmosThemeData theme) {
@@ -95,7 +114,11 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SignTransactionPage(
-          transaction: MsgSendTransaction(amount: amount, fee: fee, recipient: walletAddress),
+          transaction: MsgSendTransaction(
+            amount: Amount.fromString(amount.toString()),
+            fee: fee,
+            recipient: walletAddress,
+          ),
           balance: widget.balance,
         ),
       ),

@@ -30,6 +30,7 @@ class WalletsStore {
   final Observable<bool> _isBalancesLoadingError = Observable(false);
   final Observable<bool> _isRenamingWallet = Observable(false);
   final Observable<bool> _isRenamingWalletSuccessful = Observable(false);
+  final Observable<bool> _isSendingMoney = Observable(false);
 
   final Observable<WalletPublicInfo> _selectedWallet =
       Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
@@ -41,6 +42,10 @@ class WalletsStore {
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+
+  bool get isSendingMoney => _isSendingMoney.value;
+
+  set isSendingMoney(bool val) => Action(() => _isSendingMoney.value = val)();
 
   bool get isRenamingWallet => _isRenamingWallet.value;
 
