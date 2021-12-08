@@ -196,7 +196,7 @@ class WalletsStore {
       );
     } catch (ex, stack) {
       logError(ex, stack);
-      isBalancesLoadingError = true;
+      isSendMoneyError = true;
     }
     isSendMoneyLoading = false;
   }

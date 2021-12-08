@@ -152,8 +152,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: text-field-update
-      resolved-ref: bcf733371f456a4f8c70e57eb91b5192443bba9a
+      ref: starport-redesign
+      resolved-ref: "089322bfb34c43407aaa9c5649b37a88bd99fe09"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: bf44fef7a1117bc0742ab6fc0d97733eef669e6e
+      resolved-ref: "089322bfb34c43407aaa9c5649b37a88bd99fe09"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -674,7 +674,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: bf44fef7a1117bc0742ab6fc0d97733eef669e6e
+      resolved-ref: "089322bfb34c43407aaa9c5649b37a88bd99fe09"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

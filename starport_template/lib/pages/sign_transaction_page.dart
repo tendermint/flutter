@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
+import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
@@ -61,23 +63,28 @@ class SignTransactionPage extends StatelessWidget {
                 text: 'Tap to sign',
                 prefixIcon: Image.asset('assets/images/face_id.png'),
                 onTap: () async {
-                  await showMaterialModalBottomSheet(
+                  StarportApp.walletsStore.sendTokens(
+                    info: StarportApp.walletsStore.selectedWallet,
+                    balance: Balance(
+                      amount: transaction.amount,
+                      denom: balance.denom,
+                    ),
+                    toAddress: transaction.recipient,
+                    password: '',
+                  );
+                  showMaterialModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
                     builder: (context) => SizedBox(
                       height: MediaQuery.of(context).size.height / 2.24,
-                      child: const AssetsTransferSheet(),
+                      child: AssetsTransferSheet(
+                        onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+                          (Route<dynamic> route) => false,
+                        ),
+                      ),
                     ),
                   );
-                  // StarportApp.walletsStore.sendTokens(
-                  //   info: StarportApp.walletsStore.selectedWallet,
-                  //   balance: Balance(
-                  //     amount: transaction.amount,
-                  //     denom: balance.denom,
-                  //   ),
-                  //   toAddress: transaction.recipient,
-                  //   password: '',
-                  // );
                 },
               ),
             ),
