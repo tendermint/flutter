@@ -30,7 +30,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(theme.spacingL),
+                padding: EdgeInsets.only(
+                  left: theme.spacingL,
+                  top: theme.spacingL,
+                  right: theme.spacingL,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -56,6 +60,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       text: "Import account",
                       onTap: _onTapImportAccount,
                     ),
+                    const MinimalBottomSpacer(),
                   ],
                 ),
               ),

@@ -23,6 +23,7 @@ export 'components/cosmos_warning_box.dart';
 export 'components/empty_list_message.dart';
 export 'components/info_card.dart';
 export 'components/minimal_bottom_spacer.dart';
+export 'components/minimal_bottom_spacer.dart';
 export 'components/mnemonic_choice_chip.dart';
 export 'components/mnemonic_words_grid.dart';
 export 'components/modals/cosmos_action_sheet.dart';
