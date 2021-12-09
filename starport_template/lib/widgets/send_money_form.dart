@@ -30,7 +30,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
         children: [
           CosmosTextField(
             onChanged: (value) => widget.onAddressChanged(value),
-            text: text,
+            initialText: text,
             hint: "Enter receiver's wallet address",
             suffix: CosmosTextButton(
               onTap: _onTapPaste,
@@ -49,5 +49,8 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
     );
   }
 
-  Future<void> _onTapPaste() => FlutterClipboard.paste().then((value) => setState(() => text = value));
+  Future<void> _onTapPaste() async {
+    final value = await FlutterClipboard.paste();
+    setState(() => text = value);
+  }
 }

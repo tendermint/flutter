@@ -39,7 +39,7 @@ class _CustomFeePageState extends State<CustomFeePage> {
           child: Column(
             children: [
               CosmosTextField(
-                text: fee.toString(),
+                initialText: fee.toString(),
                 onChanged: _onFeeChanged,
                 hint: '0 ${widget.denomText.toUpperCase()}',
               ),
@@ -48,7 +48,7 @@ class _CustomFeePageState extends State<CustomFeePage> {
                 children: [
                   Expanded(
                     child: CosmosElevatedButton(
-                      onTap: _onTapSave,
+                      onTap: fee == 0.0 ? null : _onTapSave,
                       text: 'Save',
                     ),
                   )
@@ -61,7 +61,7 @@ class _CustomFeePageState extends State<CustomFeePage> {
     );
   }
 
-  void _onTapSave() => fee == 0.0 ? null : () => Navigator.of(context).pop(fee);
+  void _onTapSave() => Navigator.of(context).pop(fee);
 
   void _onFeeChanged(String value) {
     fee = validateAmount(value);
