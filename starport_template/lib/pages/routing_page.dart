@@ -25,7 +25,7 @@ class _RoutingPageState extends State<RoutingPage> {
       if (!mounted) {
         return;
       }
-      if (store.wallets.isNotEmpty) {
+      if (store.wallets.isEmpty) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const OnboardingPage()),
         );
