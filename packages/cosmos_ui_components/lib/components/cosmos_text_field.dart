@@ -70,6 +70,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         }
       },
       decoration: InputDecoration(
+        counterText: widget.maxLength == null ? null : '',
         border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
         hintText: widget.hint,
         hintStyle: CosmosTextTheme.copy0Normal.copyWith(
