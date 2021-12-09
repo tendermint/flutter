@@ -145,8 +145,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: starport-redesign
-      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
+      ref: text-field-update
+      resolved-ref: "1cf22aa7fd0285b11c14ea665ce5408f3f18f9c3"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -155,7 +155,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
+      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -200,7 +200,7 @@ packages:
       name: dotted_border
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+1"
+    version: "2.0.0+2"
   encrypt:
     dependency: transitive
     description:
@@ -460,14 +460,14 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1+1"
+    version: "1.0.0"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "1.0.0"
   path_provider_linux:
     dependency: transitive
     description:
@@ -667,7 +667,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: cbcbd115913b9b9efa2b6080e3269eee43a43ba0
+      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
