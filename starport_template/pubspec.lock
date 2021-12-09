@@ -145,8 +145,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: text-field-update
-      resolved-ref: "1cf22aa7fd0285b11c14ea665ce5408f3f18f9c3"
+      ref: starport-redesign
+      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
