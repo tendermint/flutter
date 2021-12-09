@@ -4,21 +4,23 @@ import 'package:flutter/material.dart';
 
 class CosmosTextField extends StatefulWidget {
   final String text;
-  final String hint;
   final Function(String) onChanged;
   final int? maxLines;
-  final int maxLength;
+  final int? minLines;
+  final int? maxLength;
+  final String? hint;
   final Widget? suffix;
   final TextInputType? keyboardType;
 
   const CosmosTextField({
     Key? key,
     required this.onChanged,
-    this.maxLength = 50,
+    this.maxLength,
     this.text = '',
     this.maxLines,
+    this.minLines,
     this.suffix,
-    this.hint = '',
+    this.hint,
     this.keyboardType,
   }) : super(key: key);
 
@@ -58,6 +60,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       controller: controller,
       maxLines: widget.maxLines,
       maxLength: widget.maxLength,
+      minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       onChanged: (value) {
         widget.onChanged(value);
@@ -67,11 +70,12 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         }
       },
       decoration: InputDecoration(
+        counterText: widget.maxLength == null ? null : '',
         border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
         hintText: widget.hint,
-        hintStyle: CosmosTextTheme.copy0Normal,
-        counterText: '',
-        suffixIcon: controller.text.isEmpty ? widget.suffix : null,
+        hintStyle: CosmosTextTheme.copy0Normal.copyWith(
+          color: theme.colors.text.withOpacity(0.67),
+        ),
         suffix: widget.suffix == null ? _buildClearButton() : (controller.text.isEmpty ? null : _buildClearButton()),
       ),
     );
