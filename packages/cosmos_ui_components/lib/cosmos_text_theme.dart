@@ -57,6 +57,13 @@ abstract class CosmosTextTheme {
         fontSize: 16,
       );
 
+  static TextStyle get titleSans0Normal => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        height: 1.3,
+      );
+
   static TextStyle get titleSans2Bold => const TextStyle(
         fontFamily: fontInter,
         fontWeight: FontWeight.w700,

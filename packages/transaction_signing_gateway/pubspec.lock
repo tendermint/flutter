@@ -167,7 +167,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "61806ad2972d7d196ee92e3ff3b8470fd4b9fd79"
+      resolved-ref: c1791b5543923dd7b36a1ca053b01d9797da9d1d
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -191,7 +191,7 @@ packages:
       name: dartz
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1"
   encrypt:
     dependency: "direct main"
     description:
@@ -465,7 +465,7 @@ packages:
       name: platform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -493,7 +493,7 @@ packages:
       name: protobuf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   pub_semver:
     dependency: transitive
     description:
