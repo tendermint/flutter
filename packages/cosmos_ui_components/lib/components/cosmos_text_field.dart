@@ -3,7 +3,7 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
 class CosmosTextField extends StatefulWidget {
-  final String text;
+  final String initialText;
   final Function(String) onChanged;
   final int? maxLines;
   final int? minLines;
@@ -11,17 +11,19 @@ class CosmosTextField extends StatefulWidget {
   final String? hint;
   final Widget? suffix;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
 
   const CosmosTextField({
     Key? key,
     required this.onChanged,
     this.maxLength,
-    this.text = '',
+    this.initialText = '',
     this.maxLines,
     this.minLines,
     this.suffix,
     this.hint,
     this.keyboardType,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -35,22 +37,17 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
-    controller.text = widget.text;
+    controller = widget.controller ?? TextEditingController();
+    controller.text = widget.initialText;
   }
 
   @override
   void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
-
-  @override
-  void didUpdateWidget(covariant CosmosTextField oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.text != controller.text) {
-      controller.text = widget.text;
+    if (widget.controller == null) {
+      // it's a controller created internally by the CosmosTextField, thus we'll take care of disposing it properly here
+      controller.dispose();
     }
+    super.dispose();
   }
 
   @override
