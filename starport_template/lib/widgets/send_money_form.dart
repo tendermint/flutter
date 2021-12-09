@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 class SendMoneyForm extends StatefulWidget {
   final Function(String) onAddressChanged;
   final Function(String) onAmountChanged;
-  final Function(String) onFeeChanged;
   final String denomText;
 
   const SendMoneyForm({
     Key? key,
     required this.onAddressChanged,
     required this.onAmountChanged,
-    required this.onFeeChanged,
     required this.denomText,
   }) : super(key: key);
 
@@ -35,7 +33,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
             text: text,
             hint: "Enter receiver's wallet address",
             suffix: CosmosTextButton(
-              onTap: () => FlutterClipboard.paste().then((value) => setState(() => text = value)),
+              onTap: _onTapPaste,
               text: 'Paste',
               color: CosmosTheme.of(context).colors.link,
             ),
@@ -50,4 +48,6 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
       ),
     );
   }
+
+  Future<void> _onTapPaste() => FlutterClipboard.paste().then((value) => setState(() => text = value));
 }

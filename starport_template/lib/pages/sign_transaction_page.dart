@@ -19,6 +19,8 @@ class SignTransactionPage extends StatelessWidget {
 
   const SignTransactionPage({Key? key, required this.transaction, required this.balance}) : super(key: key);
 
+  double get recipientGetsAmount => transaction.amount.value.toDouble() - transaction.fee;
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -32,13 +34,17 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingXXL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          SignTransactionTabViewItem(text: 'Send', amount: transaction.amount.value.toDouble(), balance: balance),
+          SignTransactionTabViewItem(
+            text: 'Send',
+            amount: transaction.amount.value.toDouble(),
+            balance: balance,
+          ),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
           SignTransactionTabViewItem(
             text: 'Recipient will get',
-            amount: transaction.amount.value.toDouble() - transaction.fee,
+            amount: recipientGetsAmount,
             balance: balance,
           ),
           SizedBox(height: theme.spacingL),
@@ -62,33 +68,40 @@ class SignTransactionPage extends StatelessWidget {
               child: CosmosElevatedButton(
                 text: 'Tap to sign',
                 prefixIcon: Image.asset('assets/images/face_id.png'),
-                onTap: () async {
-                  StarportApp.walletsStore.sendTokens(
-                    info: StarportApp.walletsStore.selectedWallet,
-                    balance: Balance(
-                      amount: transaction.amount,
-                      denom: balance.denom,
-                    ),
-                    toAddress: transaction.recipient,
-                    password: '',
-                  );
-                  showMaterialModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => SizedBox(
-                      height: MediaQuery.of(context).size.height / 2.24,
-                      child: AssetsTransferSheet(
-                        onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
-                          (Route<dynamic> route) => false,
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                onTap: () => _onTapSign(context),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _onTapSign(BuildContext context) {
+    StarportApp.walletsStore.sendTokens(
+      info: StarportApp.walletsStore.selectedWallet,
+      balance: Balance(
+        amount: transaction.amount,
+        denom: balance.denom,
+      ),
+      toAddress: transaction.recipient,
+      // TODO: create separate method that will use empty password for biometric or ask the user for one otherwise
+      password: '',
+    );
+    _showAssetsTransferSheet(context);
+  }
+
+  void _showAssetsTransferSheet(BuildContext context) {
+    showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height / 2.24,
+        child: AssetsTransferSheet(
+          onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+            (Route<dynamic> route) => false,
+          ),
         ),
       ),
     );

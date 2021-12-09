@@ -39,6 +39,8 @@ class WalletsStore {
   final Observable<CredentialsStorageFailure?> renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
 
+  double get defaultFee => 0.02;
+
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();

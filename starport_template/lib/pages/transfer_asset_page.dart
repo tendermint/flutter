@@ -6,6 +6,7 @@ import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/custom_fee_page.dart';
 import 'package:starport_template/pages/sign_transaction_page.dart';
+import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/utils/amount_validator.dart';
 import 'package:starport_template/widgets/send_money_form.dart';
 
@@ -20,7 +21,7 @@ class TransferAssetPage extends StatefulWidget {
 
 class _TransferAssetPageState extends State<TransferAssetPage> {
   double amount = 0.0;
-  double fee = 0.02;
+  double fee = StarportApp.walletsStore.defaultFee;
   String walletAddress = '';
 
   bool get isTransferValidated => amount != 0.0 && walletAddress.isNotEmpty && fee != 0.0;
@@ -52,10 +53,6 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
               amount = validateAmount(value);
               setState(() {});
             },
-            onFeeChanged: (value) {
-              fee = validateAmount(value);
-              setState(() {});
-            },
             denomText: widget.balance.denom.text,
           ),
           SizedBox(height: theme.spacingXL),
@@ -69,15 +66,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
 
   Widget _customFee(CosmosThemeData theme) {
     return InkWell(
-      onTap: () async {
-        fee = await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CustomFeePage(denomText: widget.balance.denom.text, initialFee: fee),
-              ),
-            ) as double? ??
-            0.0;
-        setState(() {});
-      },
+      onTap: _onTapFee,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
         child: Row(
@@ -90,6 +79,16 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _onTapFee() async {
+    fee = await Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CustomFeePage(denomText: widget.balance.denom.text, initialFee: fee),
+          ),
+        ) as double? ??
+        0.0;
+    setState(() {});
   }
 
   SafeArea _footerButton(CosmosThemeData theme) {

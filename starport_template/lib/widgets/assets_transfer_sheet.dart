@@ -18,6 +18,8 @@ class AssetsTransferSheet extends StatefulWidget {
 }
 
 class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
+  bool get isLoading => StarportApp.walletsStore.isSendMoneyLoading;
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -27,7 +29,7 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
           return SafeArea(
             top: false,
             child: ContentStateSwitcher(
-              isLoading: StarportApp.walletsStore.isSendMoneyLoading,
+              isLoading: isLoading,
               loadingChild: Column(
                 children: [
                   SizedBox(height: theme.spacingXXXL),
@@ -56,10 +58,7 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                       children: [
                         Expanded(
                           child: CosmosElevatedButton(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              widget.onTapDone();
-                            },
+                            onTap: widget.onTapDone,
                             text: 'Done',
                           ),
                         )
