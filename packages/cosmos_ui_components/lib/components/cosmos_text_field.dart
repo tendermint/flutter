@@ -42,6 +42,15 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   }
 
   @override
+  void dispose() {
+    if (widget.controller == null) {
+      // it's a controller created internally by the CosmosTextField, thus we'll take care of disposing it properly here
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return TextField(
