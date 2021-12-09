@@ -40,7 +40,7 @@ class _WalletNamePageState extends State<WalletNamePage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: theme.spacingL, vertical: theme.spacingM),
               child: CosmosTextField(
-                text: name,
+                initialText: name,
                 maxLength: 50,
                 onChanged: _onNameChanged,
               ),
