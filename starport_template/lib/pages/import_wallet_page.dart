@@ -40,7 +40,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CosmosTextField(
-                      text: _mnemonic,
+                      initialText: _mnemonic,
                       onChanged: _onTextChanged,
                       maxLines: 10,
                       minLines: 4,

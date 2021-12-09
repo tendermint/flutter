@@ -146,7 +146,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: starport-redesign
-      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
+      resolved-ref: "149f44476d2ff6a898efe38aa4c470ec21c710d1"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -155,7 +155,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
+      resolved-ref: "149f44476d2ff6a898efe38aa4c470ec21c710d1"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -667,7 +667,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: "80281c4209313cce59facfe039cad42f081827ee"
+      resolved-ref: "149f44476d2ff6a898efe38aa4c470ec21c710d1"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
