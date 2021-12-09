@@ -63,18 +63,24 @@ class BiometricDataStore implements SecureDataStore {
       );
 
   Future<Either<CredentialsStorageFailure, Map<String, String?>>> _readMap() async {
-    try {
-      return _getStorageFile() //
-          .flatMap((storageFile) async {
-        final fileRead = await storageFile.read();
-        return right(fileRead ?? "");
-      }).flatMap((storageRead) async {
-        return right(await compute(_decodeMap, storageRead));
-      });
-    } catch (ex, stack) {
+    return _getStorageFile() //
+        .flatMap((storageFile) async {
+      final fileRead = await storageFile.read();
+      return right(fileRead ?? "");
+    }).flatMap((storageRead) async {
+      return right(await compute(_decodeMap, storageRead));
+    }).catchError((ex, stack) {
       logError(ex, stack);
-      return left(CredentialsStorageFailure("$ex"));
-    }
+      return Future.value(
+        left<CredentialsStorageFailure, Map<String, String?>>(
+          CredentialsStorageFailure(
+            "Error while reading biometric storage data",
+            cause: ex,
+            stack: stack,
+          ),
+        ),
+      );
+    });
   }
 
   Future<Either<CredentialsStorageFailure, Unit>> _writeMap(
@@ -87,7 +93,17 @@ class BiometricDataStore implements SecureDataStore {
         return right(await file.write(mapString));
       }).flatMap((_) async {
         return right(unit);
-      });
+      }).catchError(
+        (ex, stack) => Future.value(
+          left<CredentialsStorageFailure, Unit>(
+            CredentialsStorageFailure(
+              "Error while writing data to Biometric storage",
+              cause: ex,
+              stack: stack,
+            ),
+          ),
+        ),
+      );
       return result;
     } catch (ex, stack) {
       return left(
