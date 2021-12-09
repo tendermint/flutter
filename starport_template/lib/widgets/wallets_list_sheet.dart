@@ -104,23 +104,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
           selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
           onClicked: (index) => _walletClicked(index),
           isEditing: isEditingAccountList,
-          onEditIconPressed: (walletInfo) {
-            showCosmosActionSheet(
-              context: context,
-              actions: [
-                CosmosModalAction(
-                  text: 'Rename Account',
-                  onPressed: () => _onTapRenameAccount(walletInfo),
-                ),
-                CosmosModalAction(
-                  text: 'Delete Account',
-                  onPressed: () => notImplemented(context),
-                  isCriticalAction: true,
-                ),
-              ],
-              title: Text(walletInfo.name),
-            );
-          },
+          onEditIconPressed: _onEditIconPressed,
         ),
       ),
     );
@@ -161,4 +145,22 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
   }
 
   void _walletClicked(int index) => Navigator.of(context).pop(publicInfos[index]);
+
+  void _onEditIconPressed(WalletInfo walletInfo) {
+    showCosmosActionSheet(
+      context: context,
+      actions: [
+        CosmosModalAction(
+          text: 'Rename Account',
+          onPressed: () => _onTapRenameAccount(walletInfo),
+        ),
+        CosmosModalAction(
+          text: 'Delete Account',
+          onPressed: () => notImplemented(context),
+          isCriticalAction: true,
+        ),
+      ],
+      title: Text(walletInfo.name),
+    );
+  }
 }
