@@ -20,6 +20,21 @@ class SendMoneyForm extends StatefulWidget {
 
 class _SendMoneyFormState extends State<SendMoneyForm> {
   String text = '';
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +44,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
       child: Column(
         children: [
           CosmosTextField(
+            controller: controller,
             onChanged: (value) => widget.onAddressChanged(value),
             initialText: text,
             hint: "Enter receiver's wallet address",
@@ -51,6 +67,6 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
 
   Future<void> _onTapPaste() async {
     final value = await FlutterClipboard.paste();
-    setState(() => text = value);
+    setState(() => controller.text = value);
   }
 }
