@@ -3,6 +3,7 @@ import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.da
 import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_header.dart';
 import 'package:cosmos_ui_components/components/cosmos_text_button.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
+import 'package:cosmos_ui_components/components/minimal_bottom_spacer.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_utils/address_parser.dart';
@@ -65,7 +66,7 @@ class ReceiveMoneySheet extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: theme.spacingXXXL)
+          MinimalBottomSpacer(padding: theme.spacingXXXL)
         ],
       ),
     );
