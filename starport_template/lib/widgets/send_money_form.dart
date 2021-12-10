@@ -1,19 +1,38 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
-class SendMoneyForm extends StatelessWidget {
+class SendMoneyForm extends StatefulWidget {
   final Function(String) onAddressChanged;
   final Function(String) onAmountChanged;
-  final Function(String) onFeeChanged;
   final String denomText;
 
   const SendMoneyForm({
     Key? key,
     required this.onAddressChanged,
     required this.onAmountChanged,
-    required this.onFeeChanged,
     required this.denomText,
   }) : super(key: key);
+
+  @override
+  State<SendMoneyForm> createState() => _SendMoneyFormState();
+}
+
+class _SendMoneyFormState extends State<SendMoneyForm> {
+  String text = '';
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +42,29 @@ class SendMoneyForm extends StatelessWidget {
       child: Column(
         children: [
           CosmosTextField(
-            onChanged: (value) => onAddressChanged(value),
+            controller: controller,
+            onChanged: widget.onAddressChanged,
+            initialText: text,
             hint: "Enter receiver's wallet address",
-            suffix: CosmosTextButton(onTap: () {}, text: 'Paste', color: CosmosTheme.of(context).colors.link),
+            suffix: CosmosTextButton(
+              onTap: _onTapPaste,
+              text: 'Paste',
+              color: CosmosTheme.of(context).colors.link,
+            ),
           ),
           SizedBox(height: theme.spacingL),
           CosmosTextField(
-            onChanged: (value) => onAmountChanged(value),
+            onChanged: (value) => widget.onAmountChanged(value),
             keyboardType: TextInputType.number,
-            hint: '0 ${denomText.toUpperCase()}',
-          ),
-          SizedBox(height: theme.spacingL),
-          CosmosTextField(
-            onChanged: (value) => onFeeChanged(value),
-            keyboardType: TextInputType.number,
-            hint: 'Transaction fee',
+            hint: '0 ${widget.denomText.toUpperCase()}',
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _onTapPaste() async {
+    final value = await FlutterClipboard.paste();
+    setState(() => controller.text = value);
   }
 }
