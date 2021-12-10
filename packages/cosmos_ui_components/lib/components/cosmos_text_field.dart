@@ -73,7 +73,9 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         hintStyle: CosmosTextTheme.copy0Normal.copyWith(
           color: theme.colors.text.withOpacity(0.67),
         ),
-        suffix: widget.suffix == null ? _buildClearButton() : (controller.text.isEmpty ? null : _buildClearButton()),
+        suffix: widget.suffix == null
+            ? _buildClearButton()
+            : (controller.text.isEmpty ? widget.suffix : _buildClearButton()),
       ),
     );
   }
