@@ -49,7 +49,7 @@ class ReceiveMoneySheet extends StatelessWidget {
           const Spacer(),
           CosmosTextButton(
             text: 'Share',
-            onTap: () => Share.share(convertedAddress),
+            onTap: _onTapShare,
             textStyle: CosmosTextTheme.elevatedButton.copyWith(color: theme.colors.link),
             suffixIcon: Image.asset('assets/images/share.png'),
           ),
@@ -59,7 +59,7 @@ class ReceiveMoneySheet extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => FlutterClipboard.copy(convertedAddress),
+                    onPressed: _onTapCopyAddress,
                     child: const Text('Copy address'),
                   ),
                 )
@@ -71,8 +71,10 @@ class ReceiveMoneySheet extends StatelessWidget {
       ),
     );
   }
+
+  void _onTapCopyAddress() => FlutterClipboard.copy(convertedAddress);
+
+  void _onTapShare() => Share.share(convertedAddress);
 }
 
-String maskAddress(String address) {
-  return '${address.substring(0, 9)}...${address.substring(address.length - 4)}';
-}
+String maskAddress(String address) => '${address.substring(0, 9)}...${address.substring(address.length - 4)}';
