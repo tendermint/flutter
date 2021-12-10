@@ -24,14 +24,12 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = TextEditingController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     controller.dispose();
   }
@@ -45,7 +43,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
         children: [
           CosmosTextField(
             controller: controller,
-            onChanged: (value) => widget.onAddressChanged(value),
+            onChanged: widget.onAddressChanged,
             initialText: text,
             hint: "Enter receiver's wallet address",
             suffix: CosmosTextButton(
