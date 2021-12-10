@@ -29,26 +29,28 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
   final Observable<bool> _isRenamingWallet = Observable(false);
-  final Observable<bool> _isRenamingWalletSuccessful = Observable(false);
+  final Observable<bool> _isSendingMoney = Observable(false);
 
-  final Observable<WalletPublicInfo> _selectedWallet =
-      Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
-  final Observable<CredentialsStorageFailure?> renameWalletFailure = Observable(null);
+  final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
+
+  int? get selectedWalletIndex => _selectedWalletIndex.value;
+
+  double get defaultFee => 0.02;
 
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
 
+  bool get isSendingMoney => _isSendingMoney.value;
+
+  set isSendingMoney(bool val) => Action(() => _isSendingMoney.value = val)();
+
   bool get isRenamingWallet => _isRenamingWallet.value;
 
   set isRenamingWallet(bool val) => Action(() => _isRenamingWallet.value = val)();
-
-  bool get isRenamingWalletSuccessful => _isRenamingWalletSuccessful.value;
-
-  set isRenamingWalletSuccessful(bool val) => Action(() => _isRenamingWalletSuccessful.value = val)();
 
   bool get isSendMoneyError => _isSendMoneyError.value;
 
@@ -82,9 +84,21 @@ class WalletsStore {
 
   set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
 
-  WalletPublicInfo get selectedWallet => _selectedWallet.value;
+  CredentialsStorageFailure? get renameWalletFailure => _renameWalletFailure.value;
 
-  set selectedWallet(WalletPublicInfo val) => Action(() => _selectedWallet.value = val)();
+  set renameWalletFailure(CredentialsStorageFailure? val) => Action(() => _renameWalletFailure.value = val)();
+
+  WalletPublicInfo get selectedWallet {
+    final index = _selectedWalletIndex.value;
+    if (index == null) {
+      return const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: '');
+    }
+    return wallets[index];
+  }
+
+  final Observable<int?> _selectedWalletIndex = Observable(null);
+
+  set selectedWalletIndex(int? value) => Action(() => _selectedWalletIndex.value = value)();
 
   Future<void> loadWallets() async {
     areWalletsLoading = true;
@@ -94,7 +108,7 @@ class WalletsStore {
         wallets.clear();
         wallets.addAll(newWallets);
         if (wallets.isNotEmpty) {
-          selectedWallet = wallets.first;
+          selectedWalletIndex = 0;
         }
       },
     );
@@ -103,17 +117,16 @@ class WalletsStore {
 
   Future<void> renameWallet(String name) async {
     isRenamingWallet = true;
+    final newInfo = selectedWallet.copyWith(name: name);
     (await _transactionSigningGateway.updateWalletPublicInfo(
-      info: WalletPublicInfo(
-        chainId: selectedWallet.chainId,
-        name: name,
-        walletId: selectedWallet.walletId,
-        publicAddress: selectedWallet.publicAddress,
-      ),
+      info: newInfo,
     ))
         .fold(
-      (fail) => Action(() => renameWalletFailure.value = fail)(),
-      (success) => isRenamingWalletSuccessful = true,
+      (fail) => Action(() => renameWalletFailure = fail)(),
+      (success) {
+        final index = wallets.indexWhere((it) => it.walletId == newInfo.walletId);
+        wallets[index] = newInfo;
+      },
     );
     isRenamingWallet = false;
   }
@@ -140,22 +153,27 @@ class WalletsStore {
     onWalletCreationStarted?.call();
     final result = await _transactionSigningGateway
         .deriveWallet(
-          walletDerivationInfo: AlanWalletDerivationInfo(
-            walletAlias: data.name,
-            networkInfo: baseEnv.networkInfo,
-            mnemonic: data.mnemonic,
-            chainId: chainId,
-          ),
+      walletDerivationInfo: AlanWalletDerivationInfo(
+        walletAlias: data.name,
+        networkInfo: baseEnv.networkInfo,
+        mnemonic: data.mnemonic,
+        chainId: chainId,
+      ),
+    )
+        .mapError<dynamic>((fail) {
+      return fail;
+    }).flatMap(
+      (credentials) {
+        return _transactionSigningGateway
+            .storeWalletCredentials(
+          credentials: credentials,
+          password: data.password,
         )
-        .mapError<dynamic>((fail) => fail)
-        .flatMap(
-          (credentials) => _transactionSigningGateway
-              .storeWalletCredentials(
-                credentials: credentials,
-                password: data.password,
-              )
-              .mapSuccess((_) => credentials),
-        );
+            .mapSuccess((_) {
+          return credentials;
+        });
+      },
+    );
 
     isWalletImporting = false;
     return result.fold(
@@ -167,7 +185,7 @@ class WalletsStore {
       (credentials) {
         wallets.add(credentials.publicInfo);
         if (selectedWallet.publicAddress.isEmpty) {
-          selectedWallet = wallets.first;
+          selectedWalletIndex = 0;
         }
         return credentials.publicInfo;
       },
@@ -191,7 +209,7 @@ class WalletsStore {
       );
     } catch (ex, stack) {
       logError(ex, stack);
-      isBalancesLoadingError = true;
+      isSendMoneyError = true;
     }
     isSendMoneyLoading = false;
   }
@@ -232,5 +250,13 @@ class WalletsStore {
     }
     isMnemonicCreating = false;
     return mnemonic;
+  }
+
+  void selectWallet(WalletPublicInfo wallet) {
+    try {
+      selectedWalletIndex = wallets.indexWhere((element) => element.walletId == wallet.walletId);
+    } catch (ex, stack) {
+      logError(ex, stack);
+    }
   }
 }

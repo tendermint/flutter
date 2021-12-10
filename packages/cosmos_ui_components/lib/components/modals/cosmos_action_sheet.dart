@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
+import 'package:cosmos_ui_components/components/modals/cosmos_modal_action.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 Future<T?> showCosmosActionSheet<T>({
   required BuildContext context,
   Widget? title,
-  required List<CosmosActionSheetItem> actions,
+  required List<CosmosModalAction> actions,
   VoidCallback? cancelAction,
 }) async {
   return _show<T>(
@@ -23,7 +24,7 @@ Future<T?> showCosmosActionSheet<T>({
 Future<T?> _show<T>(
   BuildContext context,
   Widget? title,
-  List<CosmosActionSheetItem> actions,
+  List<CosmosModalAction> actions,
   VoidCallback? cancelAction,
 ) {
   if (Platform.isIOS) {
@@ -46,7 +47,7 @@ Future<T?> _show<T>(
 Future<T?> _showCupertinoBottomSheet<T>(
   BuildContext context,
   Widget? title,
-  List<CosmosActionSheetItem> actions,
+  List<CosmosModalAction> actions,
   VoidCallback? cancelAction,
 ) {
   final defaultTextStyle = CosmosTextTheme.actionSheetItem;
@@ -87,7 +88,7 @@ Future<T?> _showCupertinoBottomSheet<T>(
 Future<T?> _showMaterialBottomSheet<T>(
   BuildContext context,
   Widget? title,
-  List<CosmosActionSheetItem> actions,
+  List<CosmosModalAction> actions,
   VoidCallback? cancelAction,
 ) {
   final defaultTextStyle = CosmosTextTheme.actionSheetItem;
@@ -143,12 +144,4 @@ Future<T?> _showMaterialBottomSheet<T>(
       );
     },
   );
-}
-
-class CosmosActionSheetItem {
-  final String text;
-  final VoidCallback onPressed;
-  final bool isCriticalAction;
-
-  CosmosActionSheetItem({required this.text, required this.onPressed, this.isCriticalAction = false});
 }

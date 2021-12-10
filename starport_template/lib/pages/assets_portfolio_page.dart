@@ -104,7 +104,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     ) as WalletPublicInfo?;
 
     if (wallet != null) {
-      StarportApp.walletsStore.selectedWallet = wallet;
+      StarportApp.walletsStore.selectWallet(wallet);
       _fetchWalletBalances();
     }
   }

@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: "61806ad2972d7d196ee92e3ff3b8470fd4b9fd79"
+      resolved-ref: "149f44476d2ff6a898efe38aa4c470ec21c710d1"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -86,14 +86,14 @@ packages:
       name: dartz
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1"
   dotted_border:
     dependency: "direct main"
     description:
       name: dotted_border
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+1"
+    version: "2.0.0+2"
   equatable:
     dependency: transitive
     description:
@@ -173,14 +173,14 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1+1"
+    version: "1.0.0"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "1.0.0"
   pointycastle:
     dependency: transitive
     description:
