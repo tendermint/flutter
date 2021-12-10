@@ -5,8 +5,12 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
+import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
 class SignTransactionPage extends StatelessWidget {
@@ -14,6 +18,8 @@ class SignTransactionPage extends StatelessWidget {
   final Balance balance;
 
   const SignTransactionPage({Key? key, required this.transaction, required this.balance}) : super(key: key);
+
+  double get recipientGetsAmount => transaction.amount.value.toDouble() - transaction.fee;
 
   @override
   Widget build(BuildContext context) {
@@ -28,27 +34,31 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingXXL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          SignTransactionTabViewItem(text: 'Send', amount: transaction.amount, balance: balance),
-          SizedBox(height: theme.spacingL),
-          const CosmosDivider(),
-          SizedBox(height: theme.spacingL),
           SignTransactionTabViewItem(
-            text: 'Recipient will get',
-            amount: transaction.amount - transaction.fee,
+            text: 'Send',
+            amount: transaction.amount.value.toDouble(),
             balance: balance,
           ),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
           SizedBox(height: theme.spacingL),
-          _buildTransactionFee(theme),
+          SignTransactionTabViewItem(
+            text: 'Recipient will get',
+            amount: recipientGetsAmount,
+            balance: balance,
+          ),
+          SizedBox(height: theme.spacingL),
+          const CosmosDivider(),
+          SizedBox(height: theme.spacingL),
+          _transactionFee(theme),
           const Spacer(),
-          _buildFooterButton(theme),
+          _footerButton(theme, context),
         ],
       ),
     );
   }
 
-  SafeArea _buildFooterButton(CosmosThemeData theme) {
+  SafeArea _footerButton(CosmosThemeData theme, BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
@@ -58,7 +68,7 @@ class SignTransactionPage extends StatelessWidget {
               child: CosmosElevatedButton(
                 text: 'Tap to sign',
                 prefixIcon: Image.asset('assets/images/face_id.png'),
-                onTap: () {},
+                onTap: () => _onTapSign(context),
               ),
             ),
           ],
@@ -67,7 +77,37 @@ class SignTransactionPage extends StatelessWidget {
     );
   }
 
-  Padding _buildTransactionFee(CosmosThemeData theme) {
+  void _onTapSign(BuildContext context) {
+    StarportApp.walletsStore.sendTokens(
+      info: StarportApp.walletsStore.selectedWallet,
+      balance: Balance(
+        amount: transaction.amount,
+        denom: balance.denom,
+      ),
+      toAddress: transaction.recipient,
+      // TODO: create separate method that will use empty password for biometric or ask the user for one otherwise
+      password: '',
+    );
+    _showAssetsTransferSheet(context);
+  }
+
+  void _showAssetsTransferSheet(BuildContext context) {
+    showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height / 2.24,
+        child: AssetsTransferSheet(
+          onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+            (Route<dynamic> route) => false,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding _transactionFee(CosmosThemeData theme) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
       child: Row(

@@ -29,6 +29,8 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
   final Observable<bool> _isRenamingWallet = Observable(false);
+  final Observable<bool> _isSendingMoney = Observable(false);
+
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
@@ -36,9 +38,15 @@ class WalletsStore {
 
   int? get selectedWalletIndex => _selectedWalletIndex.value;
 
+  double get defaultFee => 0.02;
+
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+
+  bool get isSendingMoney => _isSendingMoney.value;
+
+  set isSendingMoney(bool val) => Action(() => _isSendingMoney.value = val)();
 
   bool get isRenamingWallet => _isRenamingWallet.value;
 
@@ -201,7 +209,7 @@ class WalletsStore {
       );
     } catch (ex, stack) {
       logError(ex, stack);
-      isBalancesLoadingError = true;
+      isSendMoneyError = true;
     }
     isSendMoneyLoading = false;
   }

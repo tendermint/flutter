@@ -27,7 +27,7 @@ class BaseEnv {
 
 String get envLcdPort => const String.fromEnvironment('LCD_PORT', defaultValue: '1317');
 
-String get envGrpcPort => const String.fromEnvironment('GRPC_PORT', defaultValue: '9091');
+String get envGrpcPort => const String.fromEnvironment('GRPC_PORT', defaultValue: '9090');
 
 String get envLcdUrl => String.fromEnvironment(
       'LCD_URL',

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alan/alan.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
@@ -20,8 +22,8 @@ void main() {
 void _buildDependencies() {
   StarportApp.networkInfo = NetworkInfo(
     bech32Hrp: 'cosmos',
-    lcdInfo: LCDInfo(host: "http://localhost"),
-    grpcInfo: GRPCInfo(host: "http://localhost", port: 9091),
+    lcdInfo: LCDInfo(host: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost'),
+    grpcInfo: GRPCInfo(host: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost'),
   );
   StarportApp.biometricDataStore = BiometricDataStore();
   StarportApp.signingGateway = TransactionSigningGateway(
