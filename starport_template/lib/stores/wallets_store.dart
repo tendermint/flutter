@@ -29,11 +29,8 @@ class WalletsStore {
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
   final Observable<bool> _isRenamingWallet = Observable(false);
-  final Observable<bool> _isRenamingWalletSuccessful = Observable(false);
   final Observable<bool> _isSendingMoney = Observable(false);
 
-  final Observable<WalletPublicInfo> _selectedWallet =
-      Observable(const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: ''));
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
