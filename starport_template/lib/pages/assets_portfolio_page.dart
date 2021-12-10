@@ -61,7 +61,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   StarportButtonBar(
-                    onReceivePressed: () => _onReceivePressed(),
+                    onReceivePressed: _onReceivePressed,
                     onSendPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
