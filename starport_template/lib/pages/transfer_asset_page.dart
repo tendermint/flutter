@@ -59,6 +59,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           _customFee(theme),
           const Spacer(),
           _footerButton(theme),
+          SizedBox(height: theme.spacingXL),
         ],
       ),
     );
