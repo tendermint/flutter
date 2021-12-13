@@ -1,6 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
-import 'package:cosmos_ui_components/models/transaction.dart';
 import 'package:cosmos_ui_components/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,17 @@ class TransactionHistoryCard extends StatelessWidget {
   const TransactionHistoryCard({
     Key? key,
     required this.isOutgoing,
-    required this.transaction,
+    required this.transactionType,
+    required this.date,
+    required this.amountText,
+    required this.denomText,
   }) : super(key: key);
 
   final bool isOutgoing;
-  final Transaction transaction;
+  final String transactionType;
+  final DateTime date;
+  final String amountText;
+  final String denomText;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +37,12 @@ class TransactionHistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    transaction.type.toString().split('.')[1],
+                    transactionType,
                     style: CosmosTextTheme.labelS,
                   ),
                   SizedBox(height: theme.spacingXS),
                   Text(
-                    formatDate(transaction.date, DateFormatEnum.ShortUIDateDay),
+                    formatDate(date, DateFormatEnum.ShortUIDateDay),
                     style: CosmosTextTheme.copyMinus1Normal,
                   ),
                 ],
@@ -47,12 +52,12 @@ class TransactionHistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '${isOutgoing ? '-' : '+'} ${transaction.balance.amountDisplayText}',
+                    '${isOutgoing ? '-' : '+'} $amountText',
                     style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : Colors.green),
                   ),
                   SizedBox(height: theme.spacingXS),
                   Text(
-                    transaction.balance.denomText.toUpperCase(),
+                    denomText.toUpperCase(),
                     style: CosmosTextTheme.copyMinus1Normal,
                   )
                 ],

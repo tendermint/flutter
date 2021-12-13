@@ -32,7 +32,6 @@ export 'components/modals/cosmos_modal_action.dart';
 export 'components/template/cosmos_balance_card.dart';
 export 'components/template/cosmos_wallet_list_item.dart';
 export 'components/template/cosmos_wallets_list_view.dart';
-export 'components/template/transaction_history_list.dart';
 export 'cosmos_app_theme.dart';
 export 'cosmos_theme.dart';
 export 'utils/durations.dart';
