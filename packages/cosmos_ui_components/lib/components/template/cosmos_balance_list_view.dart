@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
+import 'package:cosmos_ui_components/models/balance.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -25,14 +26,4 @@ class CosmosBalancesListView extends StatelessWidget {
           .toList(),
     );
   }
-}
-
-class Balance {
-  final String denomText;
-  final String amountDisplayText;
-
-  Balance({
-    required this.denomText,
-    required this.amountDisplayText,
-  });
 }
