@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: transaction-history-components
-      resolved-ref: "0db2d6863858ed6cfbd76298aec0492e1a51c5a1"
+      resolved-ref: c86376fec92bfa0b7a2a952adb12311ad2ec3582
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
