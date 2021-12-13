@@ -3,6 +3,7 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/import_wallet_form_data.dart';
+import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
@@ -120,6 +121,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
         //TODO create separate method that will use empty password for biometric or ask the user for one otherwise
         password: "",
         mnemonic: widget.mnemonic,
+        additionalData: WalletAdditionalData(isBackedUp: true),
       ),
       onWalletCreationStarted: () => setState(() {}),
     );
