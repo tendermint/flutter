@@ -8,10 +8,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/transaction.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/utils/date_formatter.dart';
-import 'package:starport_template/utils/group_by_extension.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/back_up_account_card.dart';
+import 'package:starport_template/widgets/transaction_history_list.dart' as th;
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
@@ -60,7 +59,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       child: Observer(
         builder: (context) {
           return ContentStateSwitcher(
-            contentChild: TransactionHistoryList(transactionsList: transactionsList),
+            contentChild: th.TransactionHistoryList(transactionsList: transactionsList),
             isLoading: isLoading,
           );
         },
@@ -134,133 +133,5 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       StarportApp.walletsStore.selectWallet(wallet);
       StarportApp.walletsStore.getTransactionHistory();
     }
-  }
-}
-
-TextStyle get title1Bold => const TextStyle(
-      fontFamily: "Inter",
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      height: 1.3,
-    );
-
-class TransactionHistoryList extends StatefulWidget {
-  final List<Transaction> transactionsList;
-
-  const TransactionHistoryList({Key? key, required this.transactionsList}) : super(key: key);
-
-  @override
-  _TransactionHistoryListState createState() => _TransactionHistoryListState();
-}
-
-class _TransactionHistoryListState extends State<TransactionHistoryList> {
-  late Map<String, List<Transaction>> groupedHistory = {};
-
-  @override
-  void initState() {
-    super.initState();
-    groupedHistory.addAll(widget.transactionsList.groupBy((m) => formatDate(m.date, DateFormatEnum.GroupByMonthYear)));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: groupedHistory.keys.map((groupedMonthYear) {
-        final transactionsList = groupedHistory[groupedMonthYear] ?? [];
-        return SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TransactionHistoryGroupTitle(title: groupedMonthYear),
-              ...transactionsList
-                  .map(
-                    (transaction) => TransactionHistoryCard(
-                      transaction: transaction,
-                      isOutgoing: transaction.type == TransactionType.Send,
-                    ),
-                  )
-                  .toList()
-            ],
-          ),
-        );
-      }).toList(),
-    );
-  }
-}
-
-class TransactionHistoryCard extends StatelessWidget {
-  const TransactionHistoryCard({
-    Key? key,
-    required this.isOutgoing,
-    required this.transaction,
-  }) : super(key: key);
-
-  final bool isOutgoing;
-  final Transaction transaction;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = CosmosTheme.of(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: theme.spacingL, vertical: theme.spacingM),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                isOutgoing ? 'assets/images/send_icon.png' : 'assets/images/receive_icon.png',
-              ),
-              SizedBox(width: theme.spacingL),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    transaction.type.toString().split('.')[1],
-                    style: CosmosTextTheme.labelS,
-                  ),
-                  SizedBox(height: theme.spacingXS),
-                  Text(
-                    formatDate(transaction.date, DateFormatEnum.ShortUIDateDay),
-                    style: CosmosTextTheme.copyMinus1Normal,
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '${isOutgoing ? '-' : '+'} ${transaction.amount.displayText}',
-                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : Colors.green),
-                  ),
-                  SizedBox(height: theme.spacingXS),
-                  Text(
-                    transaction.denom.text.toUpperCase(),
-                    style: CosmosTextTheme.copyMinus1Normal,
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TransactionHistoryGroupTitle extends StatelessWidget {
-  final String title;
-
-  const TransactionHistoryGroupTitle({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-      child: Text(title.split('-')[0], style: title1Bold),
-    );
   }
 }

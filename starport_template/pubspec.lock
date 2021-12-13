@@ -152,8 +152,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: starport-redesign
-      resolved-ref: "917266551b0ce8c0f830ab024297c994f2d84707"
+      ref: transaction-history-components
+      resolved-ref: "4bf9a20f4fadb1f88acfab56b32a58337b061360"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
