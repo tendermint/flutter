@@ -53,6 +53,7 @@ class SignTransactionPage extends StatelessWidget {
           _transactionFee(theme),
           const Spacer(),
           _footerButton(theme, context),
+          MinimalBottomSpacer(padding: theme.spacingXXL)
         ],
       ),
     );

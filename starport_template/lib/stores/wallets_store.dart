@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_wallet_form_data.dart';
+import 'package:starport_template/entities/transaction.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
+import 'package:starport_template/utils/cosmos_transaction_history.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivation_info.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
@@ -20,6 +22,8 @@ class WalletsStore {
   WalletsStore(this._transactionSigningGateway, this.baseEnv);
 
   final Observable<bool> _areWalletsLoading = Observable(false);
+  final Observable<bool> _isTransactionHistoryLoading = Observable(false);
+  final Observable<bool> _isTransactionHistoryError = Observable(false);
   final Observable<bool> _isSendMoneyLoading = Observable(false);
   final Observable<bool> _isSendMoneyError = Observable(false);
   final Observable<bool> _isBalancesLoading = Observable(false);
@@ -32,6 +36,7 @@ class WalletsStore {
   final Observable<bool> _isSendingMoney = Observable(false);
 
   final ObservableList<Balance> balancesList = ObservableList();
+  final ObservableList<Transaction> transactionsList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
@@ -43,6 +48,14 @@ class WalletsStore {
   bool get areWalletsLoading => _areWalletsLoading.value;
 
   set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+
+  bool get isTransactionHistoryLoading => _isTransactionHistoryLoading.value;
+
+  set isTransactionHistoryLoading(bool val) => Action(() => _isTransactionHistoryLoading.value = val)();
+
+  bool get isTransactionHistoryError => _isTransactionHistoryError.value;
+
+  set isTransactionHistoryError(bool val) => Action(() => _isTransactionHistoryError.value = val)();
 
   bool get isSendingMoney => _isSendingMoney.value;
 
@@ -258,5 +271,19 @@ class WalletsStore {
     } catch (ex, stack) {
       logError(ex, stack);
     }
+  }
+
+  Future<void> getTransactionHistory() async {
+    transactionsList.clear();
+    isTransactionHistoryLoading = true;
+    try {
+      transactionsList.addAll(
+        await CosmosTransactionHistory(baseEnv).getTransactionHistory(selectedWallet.publicAddress),
+      );
+    } catch (ex, stack) {
+      logError(ex, stack);
+      isTransactionHistoryError = true;
+    }
+    isTransactionHistoryLoading = false;
   }
 }
