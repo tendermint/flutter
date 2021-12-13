@@ -10,7 +10,7 @@ import 'package:starport_template/entities/transaction.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/back_up_account_card.dart';
-import 'package:starport_template/widgets/transaction_history_list.dart' as th;
+import 'package:starport_template/widgets/transaction_history_list.dart';
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
@@ -59,7 +59,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       child: Observer(
         builder: (context) {
           return ContentStateSwitcher(
-            contentChild: th.TransactionHistoryList(transactionsList: transactionsList),
+            contentChild: TransactionHistoryList(transactionsList: transactionsList),
             isLoading: isLoading,
           );
         },
