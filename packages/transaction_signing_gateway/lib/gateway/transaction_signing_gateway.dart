@@ -51,6 +51,7 @@ class TransactionSigningGateway {
   Future<Either<CredentialsStorageFailure, Unit>> storeWalletCredentials({
     required PrivateWalletCredentials credentials,
     required String password,
+    String? additionalData,
   }) =>
       _infoStorage.savePrivateCredentials(
         walletCredentials: credentials,
