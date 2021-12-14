@@ -29,4 +29,14 @@ class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCre
         publicInfo,
         mnemonic,
       ];
+
+  AlanPrivateWalletCredentials copyWith({
+    String? mnemonic,
+    WalletPublicInfo? publicInfo,
+  }) {
+    return AlanPrivateWalletCredentials(
+      mnemonic: mnemonic ?? this.mnemonic,
+      publicInfo: publicInfo ?? this.publicInfo,
+    );
+  }
 }
