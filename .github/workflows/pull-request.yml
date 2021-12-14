@@ -35,7 +35,7 @@ jobs:
       - name: transaction_signing_gateway - check codestyle
         working-directory: packages/transaction_signing_gateway
         if: env.changes_transaction_signing_gateway == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: transaction_signing_gateway - dart analysis
         working-directory: packages/transaction_signing_gateway
@@ -83,7 +83,7 @@ jobs:
       - name: cosmos_utils - check codestyle
         working-directory: packages/cosmos_utils
         if: env.changes_cosmos_utils == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +
 
       - name: cosmos_utils - dart analysis
         working-directory: packages/cosmos_utils
