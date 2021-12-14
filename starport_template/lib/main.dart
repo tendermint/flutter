@@ -17,7 +17,7 @@ import 'package:transaction_signing_gateway/storage/shared_prefs_plain_data_stor
 
 void main() {
   _buildDependencies();
-  runApp(StarportApp());
+  runApp(const StarportApp());
 }
 
 void _buildDependencies() {

@@ -2,6 +2,7 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart' hide State;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
@@ -15,7 +16,7 @@ class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
 
   @override
-  _CreateWalletPageState createState() => _CreateWalletPageState();
+  State<CreateWalletPage> createState() => _CreateWalletPageState();
 }
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
@@ -29,7 +30,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       StarportApp.walletsStore.isWalletImporting;
 
   bool get isError =>
-      _authenticationResult?.isLeft() == true ||
+      _authenticationResult?.isLeft() ?? false ||
       StarportApp.walletsStore.isMnemonicCreatingError ||
       StarportApp.walletsStore.isWalletImportingError;
 
@@ -72,11 +73,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   CosmosAppBar _appBar() {
     return CosmosAppBar(
       leading: const CosmosBackButton(),
-      title: "Back up your account",
+      title: 'Back up your account',
       actions: [
         CosmosAppBarAction(
           onTap: _onTapAdvanced,
-          text: "Advanced",
+          text: 'Advanced',
         ),
       ],
     );
@@ -96,22 +97,22 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "If your device is lost or stolen, you will be able to recover your account.",
+              'If your device is lost or stolen, you will be able to recover your account.',
               style: CosmosTextTheme.copy0Normal,
             ),
             SizedBox(height: theme.spacingXL),
-            const InfoCard(text: "We will never ask you to share your recovery phrase."),
+            const InfoCard(text: 'We will never ask you to share your recovery phrase.'),
             SizedBox(height: theme.spacingL),
-            const InfoCard(text: "Never share your recovery phrase with anyone, store it securely."),
+            const InfoCard(text: 'Never share your recovery phrase with anyone, store it securely.'),
             SizedBox(height: theme.spacingL),
             const InfoCard(
-              text: "If you don’t backup your wallet or lose your recovery phrase, "
-                  "you will not able to recover your account",
+              text: 'If you don’t backup your wallet or lose your recovery phrase, '
+                  'you will not able to recover your account',
             ),
             const Spacer(),
-            CosmosElevatedButton(text: "Back up now", onTap: _onTapBackUpNow),
+            CosmosElevatedButton(text: 'Back up now', onTap: _onTapBackUpNow),
             SizedBox(height: theme.spacingM),
-            CosmosTextButton(text: "Back up later", onTap: _onTapBackUpLater),
+            CosmosTextButton(text: 'Back up later', onTap: _onTapBackUpLater),
             const MinimalBottomSpacer(),
           ],
         ),
@@ -121,7 +122,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   Widget _errorUI() {
     return const Center(
-      child: Text("Error!"),
+      child: Text('Error!'),
     );
   }
 
@@ -139,7 +140,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       return;
     }
     if (mounted) {
-      Navigator.of(context).pushReplacement(
+      await Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => BackUpWalletPage(mnemonic: mnemonic)),
       );
     }
@@ -160,10 +161,23 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
     );
     if (mounted) {
-      Navigator.of(context).pushAndRemoveUntil(
+      await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
         (route) => false,
       );
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('isMnemonicCreatingError', isMnemonicCreatingError))
+      ..add(DiagnosticsProperty<bool>('isMnemonicCreating', isMnemonicCreating))
+      ..add(DiagnosticsProperty<bool>('isWalletImporting', isWalletImporting))
+      ..add(DiagnosticsProperty<bool>('isLoading', isLoading))
+      ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
+      ..add(DiagnosticsProperty<bool>('isWalletImportingError', isWalletImportingError))
+      ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 }

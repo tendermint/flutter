@@ -1,11 +1,10 @@
+// ignore_for_file: do_not_use_environment
+
 import 'dart:io';
 
 import 'package:alan/alan.dart';
 
 class BaseEnv {
-  final NetworkInfo networkInfo;
-  final String baseApiUrl;
-
   BaseEnv({
     String? lcdUrl,
     String? grpcUrl,
@@ -22,7 +21,10 @@ class BaseEnv {
             port: int.parse(grpcPort ?? envGrpcPort),
           ),
         ),
-        baseApiUrl = "${lcdUrl ?? envLcdUrl}:${lcdPort ?? envLcdPort}";
+        baseApiUrl = '${lcdUrl ?? envLcdUrl}:${lcdPort ?? envLcdPort}';
+  final NetworkInfo networkInfo;
+
+  final String baseApiUrl;
 }
 
 String get envLcdPort => const String.fromEnvironment('LCD_PORT', defaultValue: '1317');

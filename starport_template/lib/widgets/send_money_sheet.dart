@@ -2,6 +2,7 @@ import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/cosmos_elevated_button.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_password_field.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_wallets_list_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:starport_template/entities/amount.dart';
@@ -12,17 +13,25 @@ import 'package:starport_template/stores/wallets_store.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class SendMoneySheet extends StatefulWidget {
+  const SendMoneySheet({
+    required this.denom,
+    required this.walletInfo,
+    Key? key,
+  }) : super(key: key);
+
   final Denom denom;
   final WalletInfo walletInfo;
 
-  const SendMoneySheet({
-    Key? key,
-    required this.denom,
-    required this.walletInfo,
-  }) : super(key: key);
+  @override
+  State<SendMoneySheet> createState() => _SendMoneySheetState();
 
   @override
-  _SendMoneySheetState createState() => _SendMoneySheetState();
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<Denom>('denom', denom))
+      ..add(DiagnosticsProperty<WalletInfo>('walletInfo', walletInfo));
+  }
 }
 
 class _SendMoneySheetState extends State<SendMoneySheet> {
@@ -90,5 +99,14 @@ class _SendMoneySheetState extends State<SendMoneySheet> {
       return;
     }
     Navigator.of(context).pop(true);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('toAddress', toAddress))
+      ..add(StringProperty('amount', amount))
+      ..add(StringProperty('password', password));
   }
 }

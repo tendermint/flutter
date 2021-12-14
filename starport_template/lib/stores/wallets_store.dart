@@ -12,11 +12,15 @@ import 'package:transaction_signing_gateway/model/credentials_storage_failure.da
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class WalletsStore {
-  static const chainId = "my_starport_chain";
-  final TransactionSigningGateway _transactionSigningGateway;
-  final BaseEnv baseEnv;
+  WalletsStore(
+    this._transactionSigningGateway,
+    this.baseEnv,
+  );
 
-  WalletsStore(this._transactionSigningGateway, this.baseEnv);
+  static const chainId = 'my_starport_chain';
+  final TransactionSigningGateway _transactionSigningGateway;
+
+  final BaseEnv baseEnv;
 
   final Observable<bool> _areWalletsLoading = Observable(false);
   final Observable<bool> _isSendMoneyLoading = Observable(false);
@@ -109,8 +113,9 @@ class WalletsStore {
     (await _transactionSigningGateway.getWalletsList()).fold(
       (fail) => Action(() => loadWalletsFailure.value = fail)(),
       (newWallets) {
-        wallets.clear();
-        wallets.addAll(newWallets);
+        wallets
+          ..clear()
+          ..addAll(newWallets);
         if (wallets.isNotEmpty) {
           selectedWalletIndex = 0;
         }
@@ -139,8 +144,9 @@ class WalletsStore {
     isBalancesLoadingError = false;
     isBalancesLoading = true;
     try {
-      balancesList.clear();
-      balancesList.addAll(await CosmosBalances(baseEnv).getBalances(walletAddress));
+      balancesList
+        ..clear()
+        ..addAll(await CosmosBalances(baseEnv).getBalances(walletAddress));
     } catch (error, stack) {
       logError(error, stack);
       isBalancesLoadingError = true;
@@ -236,14 +242,14 @@ class WalletsStore {
     return importAlanWallet(
       ImportWalletFormData(
         mnemonic: mnemonic,
-        name: "Wallet ${wallets.length}",
+        name: 'Wallet ${wallets.length}',
         additionalData: WalletAdditionalData(isBackedUp: isBackedUp),
         password:
             // we're using `biometric_storage` package to secure the wallet credentials,
             // thus no need for password, but if you want to add another layer of security.
             // Feel free to ask user for one, it will be used to encrypt the wallet data
             // with symmetric encryption
-            "",
+            '',
       ),
       onWalletCreationStarted: onWalletCreationStarted,
     );

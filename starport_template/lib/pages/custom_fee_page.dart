@@ -1,20 +1,33 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/utils/amount_validator.dart';
 
 class CustomFeePage extends StatefulWidget {
+  const CustomFeePage({
+    required this.denomText,
+    this.initialFee,
+    Key? key,
+  }) : super(key: key);
+
   final String denomText;
   final double? initialFee;
 
-  const CustomFeePage({Key? key, required this.denomText, this.initialFee}) : super(key: key);
-
   @override
   State<CustomFeePage> createState() => _CustomFeePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('initialFee', initialFee))
+      ..add(StringProperty('denomText', denomText));
+  }
 }
 
 class _CustomFeePageState extends State<CustomFeePage> {
-  double fee = 0.0;
+  double fee = 0;
 
   @override
   void initState() {
@@ -62,5 +75,11 @@ class _CustomFeePageState extends State<CustomFeePage> {
   void _onFeeChanged(String value) {
     fee = validateAmount(value);
     setState(() {});
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('fee', fee));
   }
 }

@@ -43,7 +43,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: 1.7.2
+  lint: 1.8.1
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository

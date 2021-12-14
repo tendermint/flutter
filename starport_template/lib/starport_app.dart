@@ -9,6 +9,10 @@ import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.
 import 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
 
 class StarportApp extends StatelessWidget {
+  const StarportApp({
+    Key? key,
+  }) : super(key: key);
+
   static late TransactionSigningGateway signingGateway;
   static late WalletsStore walletsStore;
   static late TransactionsStore transactionsStore;

@@ -1,14 +1,15 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LoadingSplash extends StatelessWidget {
-  final String text;
-
   const LoadingSplash({
-    Key? key,
     required this.text,
+    Key? key,
   }) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -33,5 +34,11 @@ class LoadingSplash extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('text', text));
   }
 }

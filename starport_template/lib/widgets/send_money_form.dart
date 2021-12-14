@@ -1,21 +1,31 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SendMoneyForm extends StatefulWidget {
+  const SendMoneyForm({
+    required this.onAddressChanged,
+    required this.onAmountChanged,
+    required this.denomText,
+    Key? key,
+  }) : super(key: key);
+
   final Function(String) onAddressChanged;
   final Function(String) onAmountChanged;
   final String denomText;
 
-  const SendMoneyForm({
-    Key? key,
-    required this.onAddressChanged,
-    required this.onAmountChanged,
-    required this.denomText,
-  }) : super(key: key);
-
   @override
   State<SendMoneyForm> createState() => _SendMoneyFormState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<Function(String p1)>.has('onAddressChanged', onAddressChanged))
+      ..add(ObjectFlagProperty<Function(String p1)>.has('onAmountChanged', onAmountChanged))
+      ..add(StringProperty('denomText', denomText));
+  }
 }
 
 class _SendMoneyFormState extends State<SendMoneyForm> {
@@ -66,5 +76,13 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
   Future<void> _onTapPaste() async {
     final value = await FlutterClipboard.paste();
     setState(() => controller.text = value);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('text', text))
+      ..add(DiagnosticsProperty<TextEditingController>('controller', controller));
   }
 }

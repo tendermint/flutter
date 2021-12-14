@@ -9,9 +9,9 @@ import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class TokenSender {
-  TransactionSigningGateway transactionSigningGateway;
-
   TokenSender(this.transactionSigningGateway);
+
+  TransactionSigningGateway transactionSigningGateway;
 
   Future<void> sendCosmosMoney(
     WalletPublicInfo info,
@@ -50,7 +50,7 @@ class TokenSender {
         );
     result.fold(
       (fail) => throw fail as Object,
-      (hash) => debugPrint("new TX hash: $hash"),
+      (hash) => debugPrint('new TX hash: $hash'),
     );
   }
 }

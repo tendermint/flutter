@@ -8,9 +8,9 @@ import 'package:starport_template/model/balance_json.dart';
 import 'package:starport_template/utils/base_env.dart';
 
 class CosmosBalances {
-  BaseEnv baseEnv;
-
   CosmosBalances(this.baseEnv);
+
+  BaseEnv baseEnv;
 
   Future<List<Balance>> getBalances(String walletAddress) async {
     final uri = '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress';
