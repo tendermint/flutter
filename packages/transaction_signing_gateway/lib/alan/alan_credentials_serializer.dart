@@ -7,32 +7,32 @@ import 'package:transaction_signing_gateway/model/private_wallet_credentials_ser
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
-  static const id = "AlanCredentialsSerializer";
+  static const id = 'AlanCredentialsSerializer';
 
-  static const _chainIdKey = "chain_id";
-  static const _mnemonicKey = "mnemonic";
-  static const _walletIdKey = "walletId";
+  static const _chainIdKey = 'chain_id';
+  static const _mnemonicKey = 'mnemonic';
+  static const _walletIdKey = 'walletId';
 
-  static const _nameKey = "name";
-  static const _publicAddressKey = "publicAddress";
+  static const _nameKey = 'name';
+  static const _publicAddressKey = 'publicAddress';
 
   @override
   Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(Map<String, dynamic> json) {
     try {
       return right(
         AlanPrivateWalletCredentials(
-          mnemonic: json[_mnemonicKey] as String? ?? "",
+          mnemonic: json[_mnemonicKey] as String? ?? '',
           publicInfo: WalletPublicInfo(
-            name: json[_nameKey] as String? ?? "",
-            publicAddress: json[_publicAddressKey] as String? ?? "",
-            walletId: json[_walletIdKey] as String? ?? "",
-            chainId: json[_chainIdKey] as String? ?? "",
+            name: json[_nameKey] as String? ?? '',
+            publicAddress: json[_publicAddressKey] as String? ?? '',
+            walletId: json[_walletIdKey] as String? ?? '',
+            chainId: json[_chainIdKey] as String? ?? '',
           ),
         ),
       );
     } catch (e, stack) {
-      debugPrint("$e\n$stack");
-      return left(CredentialsStorageFailure("Could not parse wallet credentials: $e"));
+      debugPrint('$e\n$stack');
+      return left(CredentialsStorageFailure('Could not parse wallet credentials: $e'));
     }
   }
 
@@ -44,7 +44,7 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
     if (credentials is! AlanPrivateWalletCredentials) {
       return left(
         CredentialsStorageFailure(
-          "Passed credentials are not of type $AlanPrivateWalletCredentials. actual: $credentials",
+          'Passed credentials are not of type $AlanPrivateWalletCredentials. actual: $credentials',
         ),
       );
     }

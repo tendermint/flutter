@@ -1,9 +1,10 @@
 class CredentialsStorageFailure {
+  const CredentialsStorageFailure(this.message, {this.cause, this.stack});
+
   final String message;
   final dynamic cause;
-  final dynamic stack;
 
-  const CredentialsStorageFailure(this.message, {this.cause, this.stack});
+  final dynamic stack;
 
   @override
   String toString() {

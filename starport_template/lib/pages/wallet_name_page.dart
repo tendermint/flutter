@@ -1,7 +1,5 @@
-import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class WalletNamePage extends StatefulWidget {
   final String name;
