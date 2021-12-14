@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/components/modals/cosmos_modal_action.dart';
 import 'package:cosmos_ui_components/components/modals/platform_check.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/cupertino.dart' as cupertino;

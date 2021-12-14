@@ -1,7 +1,3 @@
-import 'package:cosmos_ui_components/components/cosmos_app_bar.dart';
-import 'package:cosmos_ui_components/components/cosmos_back_button.dart';
-import 'package:cosmos_ui_components/components/cosmos_elevated_button.dart';
-import 'package:cosmos_ui_components/components/cosmos_text_field.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
