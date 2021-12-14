@@ -38,7 +38,10 @@ class TransactionHistoryCard extends StatelessWidget {
                 children: [
                   Text(transactionType, style: CosmosTextTheme.labelS),
                   SizedBox(height: theme.spacingXS),
-                  Text(formatDate(date, DateFormatEnum.shortUIDateDay), style: CosmosTextTheme.copyMinus1Normal),
+                  Text(
+                    formatDate(date, DateFormatEnum.shortUIDateDay),
+                    style: CosmosTextTheme.copyMinus1Normal,
+                  ),
                 ],
               ),
               const Spacer(),
@@ -47,7 +50,7 @@ class TransactionHistoryCard extends StatelessWidget {
                 children: [
                   Text(
                     '${isOutgoing ? '-' : '+'} $amountText',
-                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : theme.colors.brightText),
+                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : theme.colors.positiveText),
                   ),
                   SizedBox(height: theme.spacingXS),
                   Text(denomText.toUpperCase(), style: CosmosTextTheme.copyMinus1Normal)
