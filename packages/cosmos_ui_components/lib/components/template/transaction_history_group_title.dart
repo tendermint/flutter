@@ -1,14 +1,15 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class TransactionHistoryGroupTitle extends StatelessWidget {
-  final String title;
-
   const TransactionHistoryGroupTitle({
-    Key? key,
     required this.title,
+    Key? key,
   }) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -16,5 +17,11 @@ class TransactionHistoryGroupTitle extends StatelessWidget {
       padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
       child: Text(title, style: CosmosTextTheme.title0Bold),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('title', title));
   }
 }

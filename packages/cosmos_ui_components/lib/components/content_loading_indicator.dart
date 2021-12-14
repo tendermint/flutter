@@ -1,13 +1,14 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ContentLoadingIndicator extends StatelessWidget {
-  final String message;
-
   const ContentLoadingIndicator({
     Key? key,
-    this.message = "",
+    this.message = '',
   }) : super(key: key);
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -21,5 +22,11 @@ class ContentLoadingIndicator extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('message', message));
   }
 }

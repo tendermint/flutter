@@ -1,12 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EmptyListMessage extends StatelessWidget {
-  final String message;
-
   const EmptyListMessage({
-    Key? key,
     required this.message,
+    Key? key,
   }) : super(key: key);
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -16,5 +17,11 @@ class EmptyListMessage extends StatelessWidget {
         style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.grey),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('message', message));
   }
 }

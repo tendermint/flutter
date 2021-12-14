@@ -1,8 +1,15 @@
 import 'package:cosmos_ui_components/cosmos_app_theme.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosTheme extends InheritedWidget {
+  const CosmosTheme({
+    required Widget child,
+    this.themeData = const CosmosThemeData(),
+    Key? key,
+  }) : super(key: key, child: child);
+
   final CosmosThemeData themeData;
 
   static CosmosThemeData of(BuildContext context) {
@@ -19,17 +26,43 @@ class CosmosTheme extends InheritedWidget {
   //ignore: deprecated_member_use_from_same_package
   static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
-  const CosmosTheme({
-    Key? key,
-    this.themeData = const CosmosThemeData(),
-    required Widget child,
-  }) : super(key: key, child: child);
-
   @override
   bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
+  }
 }
 
 class CosmosThemeData extends Equatable {
+  const CosmosThemeData({
+    this.spacingXXXL = defaultSpacingXXXL,
+    this.spacingXXL = defaultSpacingXXL,
+    this.spacingXL = defaultSpacingXL,
+    this.spacingL = defaultSpacingL,
+    this.spacingM = defaultSpacingM,
+    this.spacingS = defaultSpacingS,
+    this.spacingXS = defaultSpacingXS,
+    this.longDuration = defaultLongDuration,
+    this.mediumDuration = defaultMediumDuration,
+    this.shortDuration = defaultShortDuration,
+    this.radiusXL = defaultRadiusXL,
+    this.radiusL = defaultRadiusL,
+    this.radiusM = defaultRadiusM,
+    this.radiusS = defaultRadiusS,
+    this.fontSizeS = defaultFontSizeS,
+    this.fontSizeM = defaultFontSizeM,
+    this.fontSizeL = defaultFontSizeL,
+    this.fontSizeXL = defaultFontSizeXL,
+    this.fontSizeXXL = defaultFontSizeXXL,
+    this.borderRadiusL = defaultBorderRadiusL,
+    this.borderRadiusM = defaultBorderRadiusM,
+    this.borderRadiusS = defaultBorderRadiusS,
+    this.elevationS = defaultElevationS,
+    this.colors = const CosmosColorsData(),
+  });
+
   static const offWhite = Color(0xFFF2F2F2);
 
   static const defaultSpacingXXXL = 40.0;
@@ -85,33 +118,6 @@ class CosmosThemeData extends Equatable {
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
 
-  const CosmosThemeData({
-    this.spacingXXXL = defaultSpacingXXXL,
-    this.spacingXXL = defaultSpacingXXL,
-    this.spacingXL = defaultSpacingXL,
-    this.spacingL = defaultSpacingL,
-    this.spacingM = defaultSpacingM,
-    this.spacingS = defaultSpacingS,
-    this.spacingXS = defaultSpacingXS,
-    this.longDuration = defaultLongDuration,
-    this.mediumDuration = defaultMediumDuration,
-    this.shortDuration = defaultShortDuration,
-    this.radiusXL = defaultRadiusXL,
-    this.radiusL = defaultRadiusL,
-    this.radiusM = defaultRadiusM,
-    this.radiusS = defaultRadiusS,
-    this.fontSizeS = defaultFontSizeS,
-    this.fontSizeM = defaultFontSizeM,
-    this.fontSizeL = defaultFontSizeL,
-    this.fontSizeXL = defaultFontSizeXL,
-    this.fontSizeXXL = defaultFontSizeXXL,
-    this.borderRadiusL = defaultBorderRadiusL,
-    this.borderRadiusM = defaultBorderRadiusM,
-    this.borderRadiusS = defaultBorderRadiusS,
-    this.elevationS = defaultElevationS,
-    this.colors = const CosmosColorsData(),
-  });
-
   @override
   List<Object?> get props => [
         spacingXXXL,
@@ -137,6 +143,22 @@ class CosmosThemeData extends Equatable {
 }
 
 class CosmosColorsData extends Equatable {
+  const CosmosColorsData({
+    this.inactive = lightInactive,
+    this.divider = lightDivider,
+    this.text = onLightText,
+    this.background = lightBg,
+    this.cardBackground = lightCardBg,
+    this.actionSheetPositive = Colors.lightBlue,
+    this.actionSheetDestructive = iosError,
+    this.chipBackground = lightChip,
+    this.link = lightLink,
+    this.positiveText = lightPositive,
+    this.inputBorder = lightBorder,
+    this.avatarBg = silver,
+    this.error = defaultError,
+  });
+
   static const lightBg = Color(0xFFFFFFFF);
   static const lightCardBg = Color(0x08000000);
   static const onLightText = Color(0xFF000000);
@@ -171,22 +193,6 @@ class CosmosColorsData extends Equatable {
   final Color inputBorder;
   final Color avatarBg;
   final Color error;
-
-  const CosmosColorsData({
-    this.inactive = lightInactive,
-    this.divider = lightDivider,
-    this.text = onLightText,
-    this.background = lightBg,
-    this.cardBackground = lightCardBg,
-    this.actionSheetPositive = Colors.lightBlue,
-    this.actionSheetDestructive = iosError,
-    this.chipBackground = lightChip,
-    this.link = lightLink,
-    this.positiveText = lightPositive,
-    this.inputBorder = lightBorder,
-    this.avatarBg = silver,
-    this.error = defaultError,
-  });
 
   @override
   List<Object?> get props => [

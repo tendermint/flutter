@@ -1,21 +1,23 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosBalanceCard extends StatelessWidget {
-  final String denomText;
-  final String amountDisplayText;
-  final String secondaryText;
-  final VoidCallback? onTap;
-  final bool isListTileType;
-
   const CosmosBalanceCard({
     required this.denomText,
     required this.amountDisplayText,
     this.secondaryText = '',
     this.isListTileType = false,
     this.onTap,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  final String denomText;
+  final String amountDisplayText;
+  final String secondaryText;
+  final VoidCallback? onTap;
+  final bool isListTileType;
 
   @override
   Widget build(BuildContext context) {
@@ -60,5 +62,16 @@ class CosmosBalanceCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('amountDisplayText', amountDisplayText))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
+      ..add(StringProperty('secondaryText', secondaryText))
+      ..add(DiagnosticsProperty<bool>('isListTileType', isListTileType))
+      ..add(StringProperty('denomText', denomText));
   }
 }
