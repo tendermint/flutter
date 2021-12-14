@@ -20,6 +20,7 @@ export 'components/cosmos_text_field.dart';
 export 'components/cosmos_token_avatar.dart';
 export 'components/cosmos_warning_box.dart';
 export 'components/empty_list_message.dart';
+export 'components/gradient_avatar.dart';
 export 'components/info_card.dart';
 export 'components/minimal_bottom_spacer.dart';
 export 'components/minimal_bottom_spacer.dart';
