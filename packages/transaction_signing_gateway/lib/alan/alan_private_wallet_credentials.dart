@@ -5,19 +5,19 @@ import 'package:transaction_signing_gateway/model/private_wallet_credentials.dar
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCredentials {
+  const AlanPrivateWalletCredentials({
+    required this.mnemonic,
+    required this.publicInfo,
+  });
+
   @override
   final String mnemonic;
 
   @override
   final WalletPublicInfo publicInfo;
 
-  const AlanPrivateWalletCredentials({
-    required this.mnemonic,
-    required this.publicInfo,
-  });
-
   alan.Wallet alanWallet(alan.NetworkInfo networkInfo) => alan.Wallet.derive(
-        mnemonic.split(" "),
+        mnemonic.split(' '),
         networkInfo,
       );
 

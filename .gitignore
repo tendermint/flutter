@@ -45,7 +45,8 @@ app_component.config.dart
 router.gr.dart
 lib/generated
 .fvm
-!.fvm/fvm_config.json
+!**/.fvm/fvm_config.json
+
 report.xml
 
 ##### INTELLIJ

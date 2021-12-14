@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/components/mnemonic_choice_chip.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';

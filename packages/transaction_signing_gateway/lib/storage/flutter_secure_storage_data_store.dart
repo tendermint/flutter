@@ -4,11 +4,11 @@ import 'package:transaction_signing_gateway/model/credentials_storage_failure.da
 import 'package:transaction_signing_gateway/storage/data_store.dart';
 
 class FlutterSecureStorageDataStore implements SecureDataStore {
-  final FlutterSecureStorage _store;
-
   FlutterSecureStorageDataStore({
     FlutterSecureStorage? storage,
   }) : _store = storage ?? const FlutterSecureStorage();
+
+  final FlutterSecureStorage _store;
 
   @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) async {

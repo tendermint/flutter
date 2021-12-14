@@ -5,15 +5,16 @@ import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 
 class UnsignedAlanTransaction extends Equatable implements UnsignedTransaction {
-  final List<GeneratedMessage> messages;
-  final String memo;
-  final Fee? fee;
-
   const UnsignedAlanTransaction({
     required this.messages,
-    this.memo = "",
+    this.memo = '',
     this.fee,
   });
+
+  final List<GeneratedMessage> messages;
+  final String memo;
+
+  final Fee? fee;
 
   @override
   List<Object?> get props => [
@@ -24,9 +25,9 @@ class UnsignedAlanTransaction extends Equatable implements UnsignedTransaction {
 }
 
 class SignedAlanTransaction extends Equatable implements SignedTransaction {
-  final Tx signedTransaction;
-
   const SignedAlanTransaction({required this.signedTransaction});
+
+  final Tx signedTransaction;
 
   @override
   List<Object?> get props => [signedTransaction];

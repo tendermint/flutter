@@ -21,7 +21,7 @@ jobs:
           echo "changes_cosmos_utils=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_utils && echo "false" || echo "true")" >> $GITHUB_ENV
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.5.1'
+          flutter-version: '2.8.0'
 
       ###########################################################################################
       ## TRANSACTION_SIGNING_GATEWAY
@@ -35,7 +35,7 @@ jobs:
       - name: transaction_signing_gateway - check codestyle
         working-directory: packages/transaction_signing_gateway
         if: env.changes_transaction_signing_gateway == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: transaction_signing_gateway - dart analysis
         working-directory: packages/transaction_signing_gateway
@@ -59,7 +59,7 @@ jobs:
       - name: cosmos_ui_components - check codestyle
         working-directory: packages/cosmos_ui_components
         if: env.changes_cosmos_ui_components == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: cosmos_ui_components - dart analysis
         working-directory: packages/cosmos_ui_components
@@ -83,7 +83,7 @@ jobs:
       - name: cosmos_utils - check codestyle
         working-directory: packages/cosmos_utils
         if: env.changes_cosmos_utils == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +
 
       - name: cosmos_utils - dart analysis
         working-directory: packages/cosmos_utils
@@ -108,7 +108,7 @@ jobs:
       - name: starport_template - check codestyle
         working-directory: starport_template
         if: env.changes_starport_template == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: starport_template - dart analysis
         working-directory: starport_template

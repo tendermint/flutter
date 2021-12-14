@@ -10,9 +10,7 @@ import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/cosmos_transaction_history.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivation_info.dart';
-import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class WalletsStore {

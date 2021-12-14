@@ -16,7 +16,7 @@ extension MnemonicWords on String {
 MnemonicValidationError? validateMnemonic(String mnemonic) {
   if (mnemonic.isEmpty) {
     return MnemonicValidationError.MnemonicEmpty;
-  } else if (!RegExp("^[a-zA-Z ]+\$").hasMatch(mnemonic)) {
+  } else if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(mnemonic)) {
     return MnemonicValidationError.InvalidCharacter;
   } else if (![12, 24].contains(mnemonic.splitToWords().length)) {
     return MnemonicValidationError.WrongNumberOfWords;

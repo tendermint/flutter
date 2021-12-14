@@ -19,7 +19,7 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
         ),
       );
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Error while reading all plain text data", cause: ex, stack: stack));
+      return left(CredentialsStorageFailure('Error while reading all plain text data', cause: ex, stack: stack));
     }
   }
 
