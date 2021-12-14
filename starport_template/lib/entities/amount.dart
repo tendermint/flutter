@@ -1,7 +1,6 @@
 import 'package:decimal/decimal.dart';
 
 class Amount {
-
   const Amount(this.value);
 
   Amount.fromString(String string) : value = Decimal.parse(string);

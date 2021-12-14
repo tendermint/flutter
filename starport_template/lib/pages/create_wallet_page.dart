@@ -30,9 +30,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       StarportApp.walletsStore.isWalletImporting;
 
   bool get isError =>
-      _authenticationResult?.isLeft() ?? false ||
-      StarportApp.walletsStore.isMnemonicCreatingError ||
-      StarportApp.walletsStore.isWalletImportingError;
+      _authenticationResult?.isLeft() ??
+      false || StarportApp.walletsStore.isMnemonicCreatingError || StarportApp.walletsStore.isWalletImportingError;
 
   bool get isAuthenticating => _authenticationResult == null;
 
