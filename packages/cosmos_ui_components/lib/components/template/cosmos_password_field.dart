@@ -7,7 +7,7 @@ class CosmosPasswordField extends StatefulWidget {
     this.helperText = 'This password will be used to recover your account every time you log in to the app',
     this.hintText = 'Enter password',
     Key? key,
-  }): super(key: key);
+  }) : super(key: key);
 
   final Function(String) onPasswordUpdated;
   final String? helperText;
