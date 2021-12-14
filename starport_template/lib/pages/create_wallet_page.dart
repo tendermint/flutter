@@ -150,12 +150,13 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         context: context,
         backgroundColor: Colors.transparent,
         builder: (context) => BackupLaterBottomSheet(
-          onTapSkipBackup: () => _createWallet(),
+          onTapSkipBackup: () => _createWallet(isBackedUp: false),
         ),
       );
 
-  Future<void> _createWallet() async {
+  Future<void> _createWallet({required bool isBackedUp}) async {
     await StarportApp.walletsStore.createNewWallet(
+      isBackedUp: isBackedUp,
       onMnemonicGenerationStarted: () => setState(() {}),
       onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
     );
