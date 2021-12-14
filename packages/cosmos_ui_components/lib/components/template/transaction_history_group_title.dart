@@ -14,7 +14,7 @@ class TransactionHistoryGroupTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-      child: Text(title.split('-')[0], style: CosmosTextTheme.title0Bold),
+      child: Text(title, style: CosmosTextTheme.title0Bold),
     );
   }
 }

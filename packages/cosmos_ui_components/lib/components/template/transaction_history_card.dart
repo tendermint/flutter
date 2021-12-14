@@ -42,7 +42,7 @@ class TransactionHistoryCard extends StatelessWidget {
                   ),
                   SizedBox(height: theme.spacingXS),
                   Text(
-                    formatDate(date, DateFormatEnum.ShortUIDateDay),
+                    formatDate(date, DateFormatEnum.shortUIDateDay),
                     style: CosmosTextTheme.copyMinus1Normal,
                   ),
                 ],
