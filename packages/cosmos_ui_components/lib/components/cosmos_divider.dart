@@ -15,6 +15,7 @@ class CosmosDivider extends StatelessWidget {
       child: Divider(color: theme.colors.inputBorder),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

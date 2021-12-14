@@ -23,6 +23,7 @@ class MinimalBottomSpacer extends StatelessWidget {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

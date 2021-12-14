@@ -22,6 +22,7 @@ class CosmosTokenAvatar extends StatelessWidget {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
