@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: transaction-history-components
-      resolved-ref: c86376fec92bfa0b7a2a952adb12311ad2ec3582
+      resolved-ref: "253f6e1c56c7be87d38cc94b15f48051831fa216"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -411,7 +411,7 @@ packages:
       name: local_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.8"
+    version: "1.1.9"
   logging:
     dependency: transitive
     description:

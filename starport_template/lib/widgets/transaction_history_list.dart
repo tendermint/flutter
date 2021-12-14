@@ -1,9 +1,7 @@
 import 'package:cosmos_ui_components/components/template/transaction_history_card.dart';
 import 'package:cosmos_ui_components/components/template/transaction_history_group_title.dart';
-import 'package:cosmos_ui_components/cosmos_text_theme.dart';
-import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_ui_components/utils/date_formatter.dart';
-import 'package:cosmos_ui_components/utils/group_by_extension.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/transaction.dart';
 
@@ -35,7 +33,7 @@ class _TransactionHistoryListState extends State<TransactionHistoryList> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TransactionHistoryGroupTitle(title: groupedMonthYear),
+                TransactionHistoryGroupTitle(title: groupedMonthYear.split('-')[0]),
                 ...transactionsList
                     .map(
                       (transaction) => TransactionHistoryCard(
