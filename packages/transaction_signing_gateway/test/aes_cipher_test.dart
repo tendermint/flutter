@@ -2,17 +2,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:transaction_signing_gateway/encrypt/aes_cipher.dart';
 
 void main() {
-  group("AesCipher", () {
-    const password = "coolPassword123!";
-    const testData = "this is test data";
+  group('AesCipher', () {
+    const password = 'coolPassword123!';
+    const testData = 'this is test data';
     final cipher = AESCipher();
 
-    test("encrypting and decrypting works", () async {
+    test('encrypting and decrypting works', () async {
       final encrypted = cipher.encrypt(password: password, data: testData);
       final decrypted = cipher.decrypt(password: password, encryptedData: encrypted);
       expect(testData, decrypted);
     });
-    test("encrypting same data yields different result each time", () async {
+    test('encrypting same data yields different result each time', () async {
       final cipher = AESCipher();
 
       final en1 = cipher.encrypt(password: password, data: testData);

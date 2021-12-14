@@ -39,6 +39,6 @@ class AlanWalletDerivator implements WalletDerivator {
 }
 
 alan.Wallet _deriveWalletSync(AlanWalletDerivationInfo derivationInfo) => alan.Wallet.derive(
-      derivationInfo.mnemonic.split(" "),
+      derivationInfo.mnemonic.split(' '),
       derivationInfo.networkInfo,
     );

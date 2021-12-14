@@ -13,32 +13,33 @@ abstract class TransactionSigningFailure {
 }
 
 class TransactionSignerNotFoundFailure implements TransactionSigningFailure {
+  const TransactionSignerNotFoundFailure();
+
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.noTransactionSignerFound;
-
-  const TransactionSignerNotFoundFailure();
 }
 
 class UserDeclinedTransactionSignerFailure implements TransactionSigningFailure {
+  const UserDeclinedTransactionSignerFailure();
+
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.userDeclined;
-
-  const UserDeclinedTransactionSignerFailure();
 }
 
 class InvalidPasswordTransactionSignerFailure implements TransactionSigningFailure {
+  const InvalidPasswordTransactionSignerFailure();
+
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.invalidPassword;
-
-  const InvalidPasswordTransactionSignerFailure();
 }
 
 class StorageProblemSigningFailure implements TransactionSigningFailure {
+  const StorageProblemSigningFailure(this.failure);
+
   final CredentialsStorageFailure failure;
+
   @override
   TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsStorageFailure;
-
-  const StorageProblemSigningFailure(this.failure);
 
   @override
   String toString() {

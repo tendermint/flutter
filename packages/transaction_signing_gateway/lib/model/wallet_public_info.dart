@@ -1,6 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class WalletPublicInfo extends Equatable {
+  const WalletPublicInfo({
+    required this.name,
+    required this.publicAddress,
+    required this.walletId,
+    required this.chainId,
+    this.additionalData,
+  });
+
   /// a user-specified name to distinguish different wallets
   final String name;
 
@@ -20,14 +28,6 @@ class WalletPublicInfo extends Equatable {
 
   /// optional additional data stored in an insecure way
   final String? additionalData;
-
-  const WalletPublicInfo({
-    required this.name,
-    required this.publicAddress,
-    required this.walletId,
-    required this.chainId,
-    this.additionalData,
-  });
 
   @override
   List<Object?> get props => [
