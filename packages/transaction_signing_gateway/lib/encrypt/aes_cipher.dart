@@ -6,7 +6,7 @@ class AESCipher implements Cipher {
   String decrypt({required String password, required String encryptedData}) {
     final bundle = _EncryptedBundle.fromString(encryptedData);
     if (bundle == null) {
-      throw ArgumentError("encrypted data has wrong format");
+      throw ArgumentError('encrypted data has wrong format');
     }
     final encrypter = _fromPassword(password: password, salt: bundle.salt);
     return encrypter.decrypt(
@@ -38,16 +38,17 @@ class AESCipher implements Cipher {
 }
 
 class _EncryptedBundle {
-  static const _delimiter = "|";
-  final IV iv;
-  final IV salt;
-  final Encrypted encryptedData;
-
   _EncryptedBundle({
     required this.iv,
     required this.salt,
     required this.encryptedData,
   });
+
+  static const _delimiter = '|';
+  final IV iv;
+  final IV salt;
+
+  final Encrypted encryptedData;
 
   static _EncryptedBundle? fromString(String str) {
     final split = str.split(_delimiter);
@@ -62,5 +63,5 @@ class _EncryptedBundle {
     }
   }
 
-  String get string => "${iv.base64}$_delimiter${salt.base64}$_delimiter${encryptedData.base64}";
+  String get string => '${iv.base64}$_delimiter${salt.base64}$_delimiter${encryptedData.base64}';
 }

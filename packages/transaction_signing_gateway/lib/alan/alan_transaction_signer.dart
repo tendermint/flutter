@@ -10,9 +10,9 @@ import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 import 'package:transaction_signing_gateway/transaction_signer.dart';
 
 class AlanTransactionSigner implements TransactionSigner {
-  final NetworkInfo _networkInfo;
-
   AlanTransactionSigner(this._networkInfo);
+
+  final NetworkInfo _networkInfo;
 
   @override
   bool canSign(UnsignedTransaction unsignedTransaction) => unsignedTransaction is UnsignedAlanTransaction;
@@ -23,10 +23,10 @@ class AlanTransactionSigner implements TransactionSigner {
     required UnsignedTransaction transaction,
   }) async {
     if (transaction is! UnsignedAlanTransaction) {
-      return left(AlanTransactionSigningFailure("passed transaction is not $UnsignedAlanTransaction"));
+      return left(AlanTransactionSigningFailure('passed transaction is not $UnsignedAlanTransaction'));
     }
     if (privateCredentials is! AlanPrivateWalletCredentials) {
-      return left(AlanTransactionSigningFailure("passed privateCredentials is not $AlanPrivateWalletCredentials"));
+      return left(AlanTransactionSigningFailure('passed privateCredentials is not $AlanPrivateWalletCredentials'));
     }
 
     try {
@@ -39,16 +39,16 @@ class AlanTransactionSigner implements TransactionSigner {
       );
       return right(SignedAlanTransaction(signedTransaction: signedTrans));
     } catch (e, stack) {
-      debugPrint("$e\n$stack");
+      debugPrint('$e\n$stack');
       return left(AlanTransactionSigningFailure(e));
     }
   }
 }
 
 class AlanTransactionSigningFailure extends TransactionSigningFailure {
-  final Object cause;
-
   AlanTransactionSigningFailure(this.cause);
+
+  final Object cause;
 
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.unknown;

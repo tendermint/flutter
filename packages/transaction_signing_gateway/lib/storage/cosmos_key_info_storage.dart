@@ -16,12 +16,6 @@ import 'package:transaction_signing_gateway/storage/data_store.dart';
 import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 
 class CosmosKeyInfoStorage implements KeyInfoStorage {
-  static const _publicKeySuffix = ":public";
-  final List<PrivateWalletCredentialsSerializer> serializers;
-  final SecureDataStore _secureDataStore;
-  final PlainDataStore _plainDataStore;
-  final Cipher _cipher;
-
   CosmosKeyInfoStorage({
     required this.serializers,
     required SecureDataStore secureDataStore,
@@ -30,6 +24,13 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
   })  : _secureDataStore = secureDataStore,
         _plainDataStore = plainDataStore,
         _cipher = cipher ?? AESCipher();
+
+  static const _publicKeySuffix = ':public';
+  final List<PrivateWalletCredentialsSerializer> serializers;
+  final SecureDataStore _secureDataStore;
+  final PlainDataStore _plainDataStore;
+
+  final Cipher _cipher;
 
   @override
   Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials(
@@ -55,10 +56,10 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
           final data = tuple.value1;
           final serializer = tuple.value2;
           if (data == null) {
-            return left(CredentialsStorageFailure("Could not find credentials for $walletLookupKey"));
+            return left(CredentialsStorageFailure('Could not find credentials for $walletLookupKey'));
           }
           if (serializer == null) {
-            return left(CredentialsStorageFailure("Could not find proper deserializer for $walletLookupKey"));
+            return left(CredentialsStorageFailure('Could not find proper deserializer for $walletLookupKey'));
           }
 
           try {
@@ -66,20 +67,20 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
             final json = await compute(jsonDecode, decrypted) as Map<String, dynamic>;
             return serializer.fromJson(json);
           } catch (error) {
-            return left(const CredentialsStorageFailure("invalid password"));
+            return left(const CredentialsStorageFailure('invalid password'));
           }
         },
       ).doOn(
-        fail: (fail) => logError(fail),
+        fail: logError,
       );
 
-  String _credentialsKey({required String chainId, required String walletId}) => "$chainId:$walletId";
+  String _credentialsKey({required String chainId, required String walletId}) => '$chainId:$walletId';
 
-  String _publicInfoKey({required String chainId, required String walletId}) => "$chainId:$walletId$_publicKeySuffix";
+  String _publicInfoKey({required String chainId, required String walletId}) => '$chainId:$walletId$_publicKeySuffix';
 
   bool _isPublicInfoKey(String key) => key.endsWith(_publicKeySuffix);
 
-  String _serializerIdKey({required String chainId, required String walletId}) => "$chainId:$walletId:serializer";
+  String _serializerIdKey({required String chainId, required String walletId}) => '$chainId:$walletId:serializer';
 
   @override
   Future<Either<CredentialsStorageFailure, Unit>> savePrivateCredentials({
@@ -89,7 +90,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
     final serializer = _findSerializer(walletCredentials);
     if (serializer == null) {
       return left(
-        CredentialsStorageFailure("Could not find proper serializer for ${walletCredentials.runtimeType}"),
+        CredentialsStorageFailure('Could not find proper serializer for ${walletCredentials.runtimeType}'),
       );
     }
     final credsKey = _credentialsKey(
@@ -125,16 +126,15 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         (storageMap) async {
           try {
             final infos = storageMap.keys //
-                .where((element) {
-              return _isPublicInfoKey(element);
-            }).map((key) {
-              return jsonDecode(storageMap[key] ?? "") as Map<String, dynamic>;
-            }).map((json) {
-              return WalletPublicInfoSerializer.fromMap(json);
-            }).toList();
+                .where(_isPublicInfoKey)
+                .map((key) {
+                  return jsonDecode(storageMap[key] ?? '') as Map<String, dynamic>;
+                })
+                .map(WalletPublicInfoSerializer.fromMap)
+                .toList();
             return right(infos);
           } catch (e) {
-            return left(CredentialsStorageFailure("$e"));
+            return left(CredentialsStorageFailure('$e'));
           }
         },
       );
@@ -178,7 +178,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
 
       return _plainDataStore.readPlainText(key: publicInfoKey).flatMap((walletInfo) async {
         if (walletInfo == null) {
-          return left(const CredentialsStorageFailure("Wallet not found"));
+          return left(const CredentialsStorageFailure('Wallet not found'));
         }
 
         final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(info));
@@ -186,7 +186,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
       });
     } catch (e, stack) {
       logError(e, stack);
-      return left(CredentialsStorageFailure("$e"));
+      return left(CredentialsStorageFailure('$e'));
     }
   }
 }
