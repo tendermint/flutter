@@ -6,6 +6,11 @@ import 'package:transaction_signing_gateway/model/private_wallet_credentials_ser
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCredentials {
+  const PrivateWalletCredentialsMock({
+    required this.mnemonic,
+    required this.publicInfo,
+  });
+
   @override
   final String mnemonic;
 
@@ -14,11 +19,6 @@ class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCre
 
   @override
   String get serializerIdentifier => TestPrivateCredentialsSerializer.sIdentifier;
-
-  const PrivateWalletCredentialsMock({
-    required this.mnemonic,
-    required this.publicInfo,
-  });
 
   @override
   List<Object?> get props => [
@@ -29,7 +29,7 @@ class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCre
 }
 
 class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerializer {
-  static const String sIdentifier = "TestPrivateCredentialsSerializer";
+  static const String sIdentifier = 'TestPrivateCredentialsSerializer';
 
   @override
   Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(
@@ -48,7 +48,7 @@ class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerial
         ),
       );
     } catch (e) {
-      return left(CredentialsStorageFailure("could not parse json:\n$json"));
+      return left(CredentialsStorageFailure('could not parse json:\n$json'));
     }
   }
 

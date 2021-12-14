@@ -1,5 +1,4 @@
 import 'package:alan/alan.dart';
-import 'package:alan/transactions/sender/tx_sender.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
@@ -10,9 +9,9 @@ import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 
 class AlanTransactionBroadcaster implements TransactionBroadcaster {
-  final NetworkInfo _networkInfo;
-
   AlanTransactionBroadcaster(this._networkInfo);
+
+  final NetworkInfo _networkInfo;
 
   @override
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
@@ -23,7 +22,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
       return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
     }
     if (privateWalletCredentials is! AlanPrivateWalletCredentials) {
-      return left(AlanTransactionBroadcastingFailure("passed privateCredentials is not $AlanPrivateWalletCredentials"));
+      return left(AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateWalletCredentials'));
     }
     final txSender = TxSender.fromNetworkInfo(_networkInfo);
     final response =
@@ -41,9 +40,9 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
 }
 
 class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure {
-  final Object cause;
-
   AlanTransactionBroadcastingFailure(this.cause);
+
+  final Object cause;
 
   @override
   String toString() {

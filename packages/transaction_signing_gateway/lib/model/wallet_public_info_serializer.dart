@@ -1,12 +1,12 @@
-import "package:transaction_signing_gateway/model/wallet_public_info.dart";
+import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 //ignore: avoid_classes_with_only_static_members
 class WalletPublicInfoSerializer {
-  static const _nameKey = "name";
-  static const _chainIdKey = "chain_id";
-  static const _publicAddressKey = "public_address";
-  static const _walletIdKey = "wallet_Id";
-  static const _additionalDataKey = "additional_data";
+  static const _nameKey = 'name';
+  static const _chainIdKey = 'chain_id';
+  static const _publicAddressKey = 'public_address';
+  static const _walletIdKey = 'wallet_Id';
+  static const _additionalDataKey = 'additional_data';
 
   static WalletPublicInfo fromMap(Map<String, dynamic> map) {
     return WalletPublicInfo(

@@ -3,29 +3,18 @@ import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
-import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
-import 'package:transaction_signing_gateway/model/unsigned_transaction.dart';
 import 'package:transaction_signing_gateway/model/wallet_derivation_failure.dart';
 import 'package:transaction_signing_gateway/model/wallet_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
-import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
-import 'package:transaction_signing_gateway/transaction_signer.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/wallet_derivator.dart';
 
 class TransactionSigningGateway {
-  final List<TransactionSigner> _signers;
-  final List<TransactionBroadcaster> _broadcasters;
-  final List<WalletDerivator> _derivators;
-  final KeyInfoStorage _infoStorage;
-  final TransactionSummaryUI _transactionSummaryUI;
-
   TransactionSigningGateway({
     List<TransactionSigner>? signers,
     List<TransactionBroadcaster>? broadcasters,
@@ -42,6 +31,13 @@ class TransactionSigningGateway {
               secureDataStore: FlutterSecureStorageDataStore(),
             ),
         _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();
+
+  final List<TransactionSigner> _signers;
+  final List<TransactionBroadcaster> _broadcasters;
+  final List<WalletDerivator> _derivators;
+  final KeyInfoStorage _infoStorage;
+
+  final TransactionSummaryUI _transactionSummaryUI;
 
   /// Stores the passed-in wallet credentials securely on the device.
   ///
@@ -115,16 +111,16 @@ class TransactionSigningGateway {
 
   TransactionSigner _findCapableSigner(UnsignedTransaction transaction) => _signers.firstWhere(
         (element) => element.canSign(transaction),
-        orElse: () => NotFoundTransactionSigner(),
+        orElse: NotFoundTransactionSigner.new,
       );
 
   TransactionBroadcaster _findCapableBroadcaster(SignedTransaction transaction) => _broadcasters.firstWhere(
         (element) => element.canBroadcast(transaction),
-        orElse: () => NotFoundBroadcaster(),
+        orElse: NotFoundBroadcaster.new,
       );
 
   WalletDerivator _findCapableDerivator(WalletDerivationInfo walletDerivationInfo) => _derivators.firstWhere(
         (element) => element.canDerive(walletDerivationInfo),
-        orElse: () => NotFoundDerivator(),
+        orElse: NotFoundDerivator.new,
       );
 }

@@ -12,11 +12,11 @@ typedef KeyInfoRetriever = Future<Either<CredentialsStorageFailure, PrivateWalle
 );
 
 class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
-  KeyInfoRetriever keyInfoRetriever;
-
   KeyInfoStorageMock({
     KeyInfoRetriever? retriever,
-  }) : keyInfoRetriever = retriever ?? ((_, __, ___) async => left(const CredentialsStorageFailure("not implemented")));
+  }) : keyInfoRetriever = retriever ?? ((_, __, ___) async => left(const CredentialsStorageFailure('not implemented')));
+
+  KeyInfoRetriever keyInfoRetriever;
 
   @override
   Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials(
@@ -31,7 +31,7 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
           {},
         ),
         returnValue: Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>>.value(
-          left(const CredentialsStorageFailure("not mocked")),
+          left(const CredentialsStorageFailure('not mocked')),
         ),
       ) as Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>>;
 }

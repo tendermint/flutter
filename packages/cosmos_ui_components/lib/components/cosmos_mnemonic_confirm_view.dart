@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cosmos_ui_components/components/mnemonic_words_grid.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';

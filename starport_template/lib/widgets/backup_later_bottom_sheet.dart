@@ -1,7 +1,4 @@
-import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
-import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_header.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
-import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 
