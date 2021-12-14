@@ -3,6 +3,13 @@ import 'package:flutter/cupertino.dart';
 abstract class CosmosTextTheme {
   static const String fontInter = "Inter";
 
+  static TextStyle get title0Bold => const TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w700,
+        fontSize: 16,
+        height: 1.3,
+      );
+
   static TextStyle get title1Bold => const TextStyle(
         fontFamily: fontInter,
         fontWeight: FontWeight.w700,

@@ -18,11 +18,15 @@ class WalletPublicInfo extends Equatable {
   /// "ethereum", "atom", "akash", "foo" or "bar" :)
   final String chainId;
 
+  /// optional additional data stored in an insecure way
+  final String? additionalData;
+
   const WalletPublicInfo({
     required this.name,
     required this.publicAddress,
     required this.walletId,
     required this.chainId,
+    this.additionalData,
   });
 
   @override
@@ -31,6 +35,7 @@ class WalletPublicInfo extends Equatable {
         publicAddress,
         walletId,
         chainId,
+        additionalData,
       ];
 
   WalletPublicInfo copyWith({
@@ -38,19 +43,14 @@ class WalletPublicInfo extends Equatable {
     String? publicAddress,
     String? walletId,
     String? chainId,
+    String? additionalData,
   }) {
-    if ((name == null || identical(name, this.name)) &&
-        (publicAddress == null || identical(publicAddress, this.publicAddress)) &&
-        (walletId == null || identical(walletId, this.walletId)) &&
-        (chainId == null || identical(chainId, this.chainId))) {
-      return this;
-    }
-
     return WalletPublicInfo(
       name: name ?? this.name,
       publicAddress: publicAddress ?? this.publicAddress,
       walletId: walletId ?? this.walletId,
       chainId: chainId ?? this.chainId,
+      additionalData: additionalData ?? this.additionalData,
     );
   }
 }

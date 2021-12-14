@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_wallet_form_data.dart';
 import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/cosmos_transaction_history.dart';
@@ -163,7 +164,6 @@ class WalletsStore {
   }) async {
     isWalletImportingError = false;
     isWalletImporting = true;
-    onWalletCreationStarted?.call();
     final result = await _transactionSigningGateway
         .deriveWallet(
       walletDerivationInfo: AlanWalletDerivationInfo(
@@ -179,9 +179,16 @@ class WalletsStore {
       (credentials) {
         return _transactionSigningGateway
             .storeWalletCredentials(
-          credentials: credentials,
-          password: data.password,
-        )
+              credentials: credentials,
+              password: data.password,
+            )
+            .flatMap(
+              (_) => _transactionSigningGateway.updateWalletPublicInfo(
+                info: credentials.publicInfo.copyWith(
+                  additionalData: data.additionalData.toJsonString(),
+                ),
+              ),
+            )
             .mapSuccess((_) {
           return credentials;
         });
@@ -228,6 +235,7 @@ class WalletsStore {
   }
 
   Future<WalletPublicInfo?> createNewWallet({
+    required bool isBackedUp,
     VoidCallback? onMnemonicGenerationStarted,
     VoidCallback? onWalletCreationStarted,
   }) async {
@@ -239,6 +247,7 @@ class WalletsStore {
       ImportWalletFormData(
         mnemonic: mnemonic,
         name: "Wallet ${wallets.length}",
+        additionalData: WalletAdditionalData(isBackedUp: isBackedUp),
         password:
             // we're using `biometric_storage` package to secure the wallet credentials,
             // thus no need for password, but if you want to add another layer of security.

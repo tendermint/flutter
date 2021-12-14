@@ -6,6 +6,7 @@ class WalletPublicInfoSerializer {
   static const _chainIdKey = "chain_id";
   static const _publicAddressKey = "public_address";
   static const _walletIdKey = "wallet_Id";
+  static const _additionalDataKey = "additional_data";
 
   static WalletPublicInfo fromMap(Map<String, dynamic> map) {
     return WalletPublicInfo(
@@ -13,6 +14,7 @@ class WalletPublicInfoSerializer {
       publicAddress: map[_publicAddressKey] as String,
       walletId: map[_walletIdKey] as String,
       chainId: map[_chainIdKey] as String,
+      additionalData: map[_additionalDataKey] as String?,
     );
   }
 
@@ -22,6 +24,7 @@ class WalletPublicInfoSerializer {
       _publicAddressKey: info.publicAddress,
       _walletIdKey: info.walletId,
       _chainIdKey: info.chainId,
+      _additionalDataKey: info.additionalData,
     };
   }
 }
