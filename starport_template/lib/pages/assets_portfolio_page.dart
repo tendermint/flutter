@@ -96,10 +96,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     );
   }
 
-  Future<void> _onTapAvatar(BuildContext context) async {
-    await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TransactionHistoryPage()));
-    StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
-  }
+  void _onTapAvatar(BuildContext context) =>
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TransactionHistoryPage()));
 
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
@@ -117,7 +115,6 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
-      _fetchWalletBalances();
     }
   }
 

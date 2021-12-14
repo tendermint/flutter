@@ -6,8 +6,12 @@ class AssetPortfolioHeading extends StatelessWidget {
   final VoidCallback onTap;
   final bool isCentered;
 
-  const AssetPortfolioHeading({Key? key, required this.title, required this.onTap, this.isCentered = false})
-      : super(key: key);
+  const AssetPortfolioHeading({
+    Key? key,
+    required this.title,
+    required this.onTap,
+    this.isCentered = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

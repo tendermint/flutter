@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_wallet_form_data.dart';
-import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
-import 'package:starport_template/utils/cosmos_transaction_history.dart';
+import 'package:starport_template/utils/cosmos_transaction_history_loader.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
@@ -35,7 +35,7 @@ class WalletsStore {
   final Observable<bool> _isSendingMoney = Observable(false);
 
   final ObservableList<Balance> balancesList = ObservableList();
-  final ObservableList<Transaction> transactionsList = ObservableList();
+  final ObservableList<TransactionHistoryItem> transactionsList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
@@ -110,7 +110,10 @@ class WalletsStore {
 
   final Observable<int?> _selectedWalletIndex = Observable(null);
 
-  set selectedWalletIndex(int? value) => Action(() => _selectedWalletIndex.value = value)();
+  set selectedWalletIndex(int? value) {
+    Action(() => _selectedWalletIndex.value = value)();
+    getBalances(selectedWallet.publicAddress);
+  }
 
   Future<void> loadWallets() async {
     areWalletsLoading = true;
@@ -281,12 +284,11 @@ class WalletsStore {
   }
 
   Future<void> getTransactionHistory() async {
-    transactionsList.clear();
     isTransactionHistoryLoading = true;
     try {
-      transactionsList.addAll(
-        await CosmosTransactionHistory(baseEnv).getTransactionHistory(selectedWallet.publicAddress),
-      );
+      final list = await CosmosTransactionHistoryLoader(baseEnv).getTransactionHistory(selectedWallet.publicAddress);
+      transactionsList.clear();
+      transactionsList.addAll(list);
     } catch (ex, stack) {
       logError(ex, stack);
       isTransactionHistoryError = true;

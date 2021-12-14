@@ -3,10 +3,10 @@ import 'package:cosmos_ui_components/components/template/transaction_history_gro
 import 'package:cosmos_ui_components/utils/date_formatter.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/transaction_history_item.dart';
 
 class TransactionHistoryList extends StatefulWidget {
-  final List<Transaction> transactionsList;
+  final List<TransactionHistoryItem> transactionsList;
 
   const TransactionHistoryList({Key? key, required this.transactionsList}) : super(key: key);
 
@@ -15,7 +15,7 @@ class TransactionHistoryList extends StatefulWidget {
 }
 
 class _TransactionHistoryListState extends State<TransactionHistoryList> {
-  late Map<String, List<Transaction>> groupedHistory = {};
+  late Map<String, List<TransactionHistoryItem>> groupedHistory = {};
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _TransactionHistoryListState extends State<TransactionHistoryList> {
                 ...transactionsList
                     .map(
                       (transaction) => TransactionHistoryCard(
-                        transactionType: transaction.type.toString().split('.')[1],
+                        transactionType: transaction.transactionType,
                         denomText: transaction.denom.text,
                         amountText: transaction.amount.displayText,
                         date: transaction.date,

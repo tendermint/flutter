@@ -1,19 +1,19 @@
 import 'package:starport_template/model/tx_json.dart';
 
-class TxResponse {
-  TxResponse({
+class TxResponseJson {
+  TxResponseJson({
     required this.txhash,
     required this.tx,
     required this.timestamp,
   });
 
   String txhash;
-  Tx tx;
+  TxJson tx;
   DateTime timestamp;
 
-  factory TxResponse.fromJson(Map<String, dynamic> json) => TxResponse(
+  factory TxResponseJson.fromJson(Map<String, dynamic> json) => TxResponseJson(
         txhash: json["txhash"] as String? ?? '',
-        tx: Tx.fromJson(json["tx"] as Map<String, dynamic>),
+        tx: TxJson.fromJson(json["tx"] as Map<String, dynamic>),
         timestamp: DateTime.parse(json["timestamp"] as String),
       );
 }

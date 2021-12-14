@@ -1,16 +1,13 @@
-import 'package:cosmos_ui_components/components/cosmos_image_button.dart';
-import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
-import 'package:starport_template/widgets/back_up_account_card.dart';
 import 'package:starport_template/widgets/transaction_history_list.dart';
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -27,7 +24,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
 
   bool get isLoading => StarportApp.walletsStore.isTransactionHistoryLoading;
 
-  List<Transaction> get transactionsList => StarportApp.walletsStore.transactionsList;
+  List<TransactionHistoryItem> get transactionsList => StarportApp.walletsStore.transactionsList;
 
   @override
   void initState() {
@@ -47,7 +44,14 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
             _gradientAvatar(context),
             AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped, isCentered: true),
             _textButtonRow(context, theme),
-            if (!selectedWallet.data.isBackedUp) const BackupAccountCard(),
+            if (!selectedWallet.data.isBackedUp)
+              Padding(
+                padding: EdgeInsets.all(theme.spacingL),
+                child: CosmosWarningBox(
+                  text: 'Back up your account',
+                  suffix: Image.asset('assets/images/arrow_right.png'),
+                ),
+              ),
             _transactionHistory(),
           ],
         ),

@@ -6,16 +6,18 @@ enum TransactionType {
   Send,
 }
 
-class Transaction {
+class TransactionHistoryItem {
   final TransactionType type;
   final DateTime date;
   final Amount amount;
   final Denom denom;
 
-  Transaction({
+  TransactionHistoryItem({
     required this.denom,
     required this.amount,
     required this.date,
     required this.type,
   });
+
+  String get transactionType => type.toString().split('.')[1];
 }
