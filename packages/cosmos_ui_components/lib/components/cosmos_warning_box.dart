@@ -6,12 +6,14 @@ class CosmosWarningBox extends StatelessWidget {
   final String text;
   final String? asset;
   final String? package;
+  final Widget? suffix;
 
   const CosmosWarningBox({
     Key? key,
     required this.text,
     this.asset,
     this.package,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -35,6 +37,8 @@ class CosmosWarningBox extends StatelessWidget {
             ),
             SizedBox(width: theme.spacingL),
             Text(text, style: CosmosTextTheme.copyMinus1Normal),
+            if (suffix != null) const Spacer(),
+            if (suffix != null) suffix!,
           ],
         ),
       ),
