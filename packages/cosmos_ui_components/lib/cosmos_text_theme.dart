@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 abstract class CosmosTextTheme {
-  static const String fontInter = "Inter";
+  factory CosmosTextTheme._() => throw UnsupportedError('Not meant to be instantiated');
+
+  static const String fontInter = 'Inter';
 
   static TextStyle get title0Bold => const TextStyle(
-        fontFamily: "Inter",
+        fontFamily: 'Inter',
         fontWeight: FontWeight.w700,
         fontSize: 16,
         height: 1.3,
@@ -25,14 +27,14 @@ abstract class CosmosTextTheme {
       );
 
   static TextStyle get titleS => const TextStyle(
-        fontFamily: "Inter",
+        fontFamily: 'Inter',
         fontWeight: FontWeight.w700,
         fontSize: 13,
         height: 1.23,
       );
 
   static TextStyle get title1Medium => const TextStyle(
-        fontFamily: "Inter",
+        fontFamily: 'Inter',
         fontWeight: FontWeight.w600,
         fontSize: 21,
         height: 1.287,
@@ -96,6 +98,4 @@ abstract class CosmosTextTheme {
         fontSize: 13,
         height: 1.23,
       );
-
-  factory CosmosTextTheme._() => throw UnsupportedError("Not meant to be instantiated");
 }

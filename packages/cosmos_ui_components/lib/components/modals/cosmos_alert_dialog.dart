@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/components/modals/platform_check.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 typedef DialogBuilder = CosmosAlertDialog Function(BuildContext);
@@ -21,11 +22,6 @@ Future<T?> showCosmosAlertDialog<T>({
 }
 
 class CosmosAlertDialog extends StatelessWidget {
-  final OSProvider osProvider;
-  final String? title;
-  final String? message;
-  final List<CosmosModalAction> actions;
-
   const CosmosAlertDialog({
     Key? key,
     this.osProvider = defaultOSProvider,
@@ -33,6 +29,11 @@ class CosmosAlertDialog extends StatelessWidget {
     this.message,
     this.actions = const [],
   }) : super(key: key);
+
+  final OSProvider osProvider;
+  final String? title;
+  final String? message;
+  final List<CosmosModalAction> actions;
 
   @override
   Widget build(BuildContext context) {
@@ -77,4 +78,14 @@ class CosmosAlertDialog extends StatelessWidget {
             )
             .toList(),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<OSProvider>.has('osProvider', osProvider))
+      ..add(IterableProperty<CosmosModalAction>('actions', actions))
+      ..add(StringProperty('title', title))
+      ..add(StringProperty('message', message));
+  }
 }

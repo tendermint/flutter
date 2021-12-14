@@ -7,19 +7,33 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosMnemonicConfirmView extends StatefulWidget {
+  const CosmosMnemonicConfirmView({
+    required this.mnemonicWords,
+    required this.onSelectedWordsChanged,
+    this.invalidOrderText = 'Invalid order',
+    Key? key,
+  }) : super(key: key);
+
   final List<String> mnemonicWords;
   final void Function(List<String> selectedWords) onSelectedWordsChanged;
   final String invalidOrderText;
 
-  const CosmosMnemonicConfirmView({
-    Key? key,
-    required this.mnemonicWords,
-    required this.onSelectedWordsChanged,
-    this.invalidOrderText = "Invalid order",
-  }) : super(key: key);
-
   @override
   State<CosmosMnemonicConfirmView> createState() => _CosmosMnemonicConfirmViewState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<String>('mnemonicWords', mnemonicWords))
+      ..add(
+        ObjectFlagProperty<void Function(List<String> selectedWords)>.has(
+          'onSelectedWordsChanged',
+          onSelectedWordsChanged,
+        ),
+      )
+      ..add(StringProperty('invalidOrderText', invalidOrderText));
+  }
 }
 
 class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
@@ -108,7 +122,7 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/icon_invalid.png", package: packageName),
+          Image.asset('assets/images/icon_invalid.png', package: packageName),
           SizedBox(width: theme.spacingM),
           Text(
             widget.invalidOrderText,
@@ -121,16 +135,16 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
 }
 
 class _AvailableWordsGrid extends StatelessWidget {
-  final List<String> usedWords;
-  final List<String> mnemonicWords;
-  final void Function(String) onTapWord;
-
   const _AvailableWordsGrid({
-    Key? key,
     required this.mnemonicWords,
     required this.usedWords,
     required this.onTapWord,
+    Key? key,
   }) : super(key: key);
+
+  final List<String> usedWords;
+  final List<String> mnemonicWords;
+  final void Function(String) onTapWord;
 
   @override
   Widget build(BuildContext context) {
@@ -158,5 +172,14 @@ class _AvailableWordsGrid extends StatelessWidget {
         },
       ).toList(),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<String>('mnemonicWords', mnemonicWords))
+      ..add(IterableProperty<String>('usedWords', usedWords))
+      ..add(ObjectFlagProperty<void Function(String p1)>.has('onTapWord', onTapWord));
   }
 }

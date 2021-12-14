@@ -1,17 +1,18 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosCircleTextButton extends StatelessWidget {
-  final String text;
-  final String asset;
-  final VoidCallback? onTap;
-
   const CosmosCircleTextButton({
-    Key? key,
     required this.text,
     required this.asset,
     this.onTap,
+    Key? key,
   }) : super(key: key);
+
+  final String text;
+  final String asset;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,5 +31,14 @@ class CosmosCircleTextButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('asset', asset))
+      ..add(StringProperty('text', text))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
   }
 }
