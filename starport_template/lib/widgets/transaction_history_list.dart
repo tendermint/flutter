@@ -20,7 +20,7 @@ class _TransactionHistoryListState extends State<TransactionHistoryList> {
   @override
   void initState() {
     super.initState();
-    groupedHistory.addAll(widget.transactionsList.groupBy((m) => formatDate(m.date, DateFormatEnum.GroupByMonthYear)));
+    groupedHistory.addAll(widget.transactionsList.groupBy((m) => formatDate(m.date, DateFormatEnum.groupByMonthYear)));
   }
 
   @override
