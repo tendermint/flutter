@@ -2,12 +2,12 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/material.dart';
 
 class CosmosBottomSheetContainer extends StatelessWidget {
-  final Widget child;
-
   const CosmosBottomSheetContainer({
-    Key? key,
     required this.child,
+    Key? key,
   }) : super(key: key);
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

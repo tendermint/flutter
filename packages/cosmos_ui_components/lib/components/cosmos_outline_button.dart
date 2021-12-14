@@ -1,17 +1,18 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosOutlineButton extends StatelessWidget {
-  final VoidCallback? onTap;
-  final String text;
-  final Widget? suffixIcon;
-
   const CosmosOutlineButton({
     Key? key,
     this.onTap,
-    this.text = "",
+    this.text = '',
     this.suffixIcon,
   }) : super(key: key);
+
+  final VoidCallback? onTap;
+  final String text;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -28,5 +29,13 @@ class CosmosOutlineButton extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
+      ..add(StringProperty('text', text));
   }
 }

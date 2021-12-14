@@ -1,8 +1,22 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosTextField extends StatefulWidget {
+  const CosmosTextField({
+    required this.onChanged,
+    this.maxLength,
+    this.initialText = '',
+    this.maxLines,
+    this.minLines,
+    this.suffix,
+    this.hint,
+    this.keyboardType,
+    this.controller,
+    Key? key,
+  }) : super(key: key);
+
   final String initialText;
   final Function(String) onChanged;
   final int? maxLines;
@@ -13,21 +27,22 @@ class CosmosTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextEditingController? controller;
 
-  const CosmosTextField({
-    Key? key,
-    required this.onChanged,
-    this.maxLength,
-    this.initialText = '',
-    this.maxLines,
-    this.minLines,
-    this.suffix,
-    this.hint,
-    this.keyboardType,
-    this.controller,
-  }) : super(key: key);
-
   @override
   State<CosmosTextField> createState() => _CosmosTextFieldState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('maxLines', maxLines))
+      ..add(IntProperty('maxLength', maxLength))
+      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
+      ..add(StringProperty('initialText', initialText))
+      ..add(IntProperty('minLines', minLines))
+      ..add(ObjectFlagProperty<Function(String p1)>.has('onChanged', onChanged))
+      ..add(DiagnosticsProperty<TextEditingController?>('controller', controller))
+      ..add(StringProperty('hint', hint));
+  }
 }
 
 class _CosmosTextFieldState extends State<CosmosTextField> {
@@ -92,5 +107,13 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         child: Image.asset('assets/images/cross.png', package: packageName),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<TextEditingController>('controller', controller))
+      ..add(DiagnosticsProperty<bool>('isTextEmpty', isTextEmpty));
   }
 }

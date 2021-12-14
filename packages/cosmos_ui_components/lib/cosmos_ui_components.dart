@@ -36,4 +36,4 @@ export 'cosmos_app_theme.dart';
 export 'cosmos_theme.dart';
 export 'utils/durations.dart';
 
-const packageName = "cosmos_ui_components";
+const packageName = 'cosmos_ui_components';

@@ -1,23 +1,24 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MnemonicChoiceChip extends StatelessWidget {
-  final int index;
-  final String word;
-  final bool showIndex;
-  final VoidCallback? onTap;
-  final MnemonicChoiceChipStyle? style;
-
   const MnemonicChoiceChip({
-    Key? key,
     required this.index,
     required this.word,
     this.showIndex = true,
     this.onTap,
     this.style,
+    Key? key,
   }) : super(key: key);
+
+  final int index;
+  final String word;
+  final bool showIndex;
+  final VoidCallback? onTap;
+  final MnemonicChoiceChipStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class MnemonicChoiceChip extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "${index + 1}",
+              '${index + 1}',
               style: CosmosTextTheme.smallCaption.copyWith(
                 color: style.indexTextColor,
               ),
@@ -83,18 +84,20 @@ class MnemonicChoiceChip extends StatelessWidget {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('index', index))
+      ..add(DiagnosticsProperty<bool>('showIndex', showIndex))
+      ..add(StringProperty('word', word))
+      ..add(DiagnosticsProperty<MnemonicChoiceChipStyle?>('style', style))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+  }
 }
 
 class MnemonicChoiceChipStyle {
-  final Color? borderColor;
-  final double? borderWidth;
-  final double? borderRadius;
-  final bool? dottedBorder;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final Color? indexBackgroundColor;
-  final Color? indexTextColor;
-
   MnemonicChoiceChipStyle({
     this.borderColor,
     this.borderWidth,
@@ -118,6 +121,15 @@ class MnemonicChoiceChipStyle {
       borderRadius: CosmosTheme.of(context).radiusM,
     );
   }
+
+  final Color? borderColor;
+  final double? borderWidth;
+  final double? borderRadius;
+  final bool? dottedBorder;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? indexBackgroundColor;
+  final Color? indexTextColor;
 
   MnemonicChoiceChipStyle mergeWith(MnemonicChoiceChipStyle? other) {
     if (other == null) {

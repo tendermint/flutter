@@ -1,21 +1,22 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosBottomSheetHeader extends StatelessWidget {
-  final String title;
-  final TextStyle titleTextStyle;
-  final Widget? leading;
-  final Widget? leadingIcon;
-  final List<Widget>? actions;
-
   const CosmosBottomSheetHeader({
-    Key? key,
     required this.title,
     required this.titleTextStyle,
     this.leading,
     this.actions,
     this.leadingIcon,
+    Key? key,
   }) : super(key: key);
+
+  final String title;
+  final TextStyle titleTextStyle;
+  final Widget? leading;
+  final Widget? leadingIcon;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -54,5 +55,13 @@ class CosmosBottomSheetHeader extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('title', title))
+      ..add(DiagnosticsProperty<TextStyle>('titleTextStyle', titleTextStyle));
   }
 }
