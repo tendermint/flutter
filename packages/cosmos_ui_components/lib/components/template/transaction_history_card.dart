@@ -28,23 +28,17 @@ class TransactionHistoryCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                isOutgoing ? 'assets/images/send_icon.png' : 'assets/images/receive_icon.png',
-                package: packageName,
+              RotatedBox(
+                quarterTurns: isOutgoing ? 2 : 0,
+                child: Image.asset('assets/images/receive_icon.png', package: packageName),
               ),
               SizedBox(width: theme.spacingL),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    transactionType,
-                    style: CosmosTextTheme.labelS,
-                  ),
+                  Text(transactionType, style: CosmosTextTheme.labelS),
                   SizedBox(height: theme.spacingXS),
-                  Text(
-                    formatDate(date, DateFormatEnum.shortUIDateDay),
-                    style: CosmosTextTheme.copyMinus1Normal,
-                  ),
+                  Text(formatDate(date, DateFormatEnum.shortUIDateDay), style: CosmosTextTheme.copyMinus1Normal),
                 ],
               ),
               const Spacer(),
@@ -53,13 +47,10 @@ class TransactionHistoryCard extends StatelessWidget {
                 children: [
                   Text(
                     '${isOutgoing ? '-' : '+'} $amountText',
-                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : Colors.green),
+                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : theme.colors.brightText),
                   ),
                   SizedBox(height: theme.spacingXS),
-                  Text(
-                    denomText.toUpperCase(),
-                    style: CosmosTextTheme.copyMinus1Normal,
-                  )
+                  Text(denomText.toUpperCase(), style: CosmosTextTheme.copyMinus1Normal)
                 ],
               )
             ],
