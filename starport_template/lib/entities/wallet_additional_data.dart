@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
+
 class WalletAdditionalData {
   final bool isBackedUp;
 
@@ -20,4 +22,9 @@ class WalletAdditionalData {
   }
 
   String toJsonString() => jsonEncode(toJson());
+}
+
+extension AdditionalDataParsing on WalletPublicInfo {
+  WalletAdditionalData get data =>
+      WalletAdditionalData.fromJson(jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/transaction.dart';
+import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/back_up_account_card.dart';
@@ -46,7 +47,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
             _gradientAvatar(context),
             AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped, isCentered: true),
             _textButtonRow(context, theme),
-            const BackupAccountCard(),
+            if (!selectedWallet.data.isBackedUp) const BackupAccountCard(),
             _transactionHistory(),
           ],
         ),
