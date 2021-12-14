@@ -59,7 +59,7 @@ jobs:
       - name: cosmos_ui_components - check codestyle
         working-directory: packages/cosmos_ui_components
         if: env.changes_cosmos_ui_components == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: cosmos_ui_components - dart analysis
         working-directory: packages/cosmos_ui_components
@@ -108,7 +108,7 @@ jobs:
       - name: starport_template - check codestyle
         working-directory: starport_template
         if: env.changes_starport_template == 'true'
-        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dartfmt -l 120 --dry-run --set-exit-if-changed {} +;
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 {} +;
 
       - name: starport_template - dart analysis
         working-directory: starport_template
