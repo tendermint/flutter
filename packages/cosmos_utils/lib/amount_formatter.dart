@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-String formatAmount(double amount, {String locale = "en_US", String symbol = '\$'}) => amount >= 10000
+String formatAmount(double amount, {String locale = 'en_US', String symbol = r'$'}) => amount >= 10000
     ? NumberFormat.compactCurrency(
         symbol: symbol,
         locale: locale,
