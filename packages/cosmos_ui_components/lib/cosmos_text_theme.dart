@@ -107,9 +107,9 @@ abstract class CosmosTextTheme {
       );
 
   static TextStyle get headingM => const TextStyle(
-    fontFamily: fontInter,
-    fontWeight: FontWeight.w700,
-    fontSize: 38,
-    height: 1.26,
-  );
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w700,
+        fontSize: 38,
+        height: 1.26,
+      );
 }
