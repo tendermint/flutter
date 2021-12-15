@@ -1,18 +1,21 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosWarningBox extends StatelessWidget {
-  final String text;
-  final String? asset;
-  final String? package;
-
   const CosmosWarningBox({
-    Key? key,
     required this.text,
     this.asset,
     this.package,
+    this.suffix,
+    Key? key,
   }) : super(key: key);
+
+  final String text;
+  final String? asset;
+  final String? package;
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +28,9 @@ class CosmosWarningBox extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 2.0),
+              padding: const EdgeInsets.only(top: 2),
               child: Image.asset(
-                asset ?? "assets/images/icon_warning.png",
+                asset ?? 'assets/images/icon_warning.png',
                 package: package ?? (asset == null ? packageName : null),
                 width: 16,
                 fit: BoxFit.contain,
@@ -35,9 +38,22 @@ class CosmosWarningBox extends StatelessWidget {
             ),
             SizedBox(width: theme.spacingL),
             Text(text, style: CosmosTextTheme.copyMinus1Normal),
+            if (suffix != null) ...[
+              const Spacer(),
+              suffix!,
+            ]
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('text', text))
+      ..add(StringProperty('package', package))
+      ..add(StringProperty('asset', asset));
   }
 }

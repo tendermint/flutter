@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 
 Future<T?> showCosmosActionSheet<T>({
   required BuildContext context,
-  Widget? title,
   required List<CosmosModalAction> actions,
+  Widget? title,
   VoidCallback? cancelAction,
 }) async {
   return _show<T>(
@@ -53,7 +53,7 @@ Future<T?> _showCupertinoBottomSheet<T>(
   final defaultTextStyle = CosmosTextTheme.actionSheetItem;
   return showCupertinoModalPopup(
     context: context,
-    builder: (BuildContext buildContext) {
+    builder: (buildContext) {
       return CupertinoActionSheet(
         title: title,
         actions: actions.map((action) {
@@ -97,7 +97,7 @@ Future<T?> _showMaterialBottomSheet<T>(
     context: context,
     elevation: 0,
     isScrollControlled: true,
-    builder: (BuildContext buildContext) {
+    builder: (buildContext) {
       return CosmosBottomSheetContainer(
         child: SingleChildScrollView(
           child: Column(

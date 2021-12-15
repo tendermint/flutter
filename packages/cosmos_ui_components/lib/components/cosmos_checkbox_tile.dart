@@ -1,18 +1,19 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosCheckboxTile extends StatelessWidget {
-  final String text;
-  final VoidCallback onTap;
-  final bool checked;
-
   const CosmosCheckboxTile({
-    Key? key,
     required this.text,
     required this.onTap,
     required this.checked,
+    Key? key,
   }) : super(key: key);
+
+  final String text;
+  final VoidCallback onTap;
+  final bool checked;
 
   @override
   Widget build(BuildContext context) {
@@ -60,5 +61,14 @@ class CosmosCheckboxTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap))
+      ..add(StringProperty('text', text))
+      ..add(DiagnosticsProperty<bool>('checked', checked));
   }
 }

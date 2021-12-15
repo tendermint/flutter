@@ -1,8 +1,19 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosElevatedButton extends StatelessWidget {
+  const CosmosElevatedButton({
+    Key? key,
+    this.onTap,
+    this.text = '',
+    this.suffixIcon,
+    this.prefixIcon,
+    this.height = defaultHeight,
+    this.contentPadding,
+  }) : super(key: key);
+
   static const defaultHeight = 50.0;
 
   final VoidCallback? onTap;
@@ -11,16 +22,6 @@ class CosmosElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
   final double height;
   final double? contentPadding;
-
-  const CosmosElevatedButton({
-    Key? key,
-    this.onTap,
-    this.text = "",
-    this.suffixIcon,
-    this.prefixIcon,
-    this.height = defaultHeight,
-    this.contentPadding,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,5 +50,15 @@ class CosmosElevatedButton extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('contentPadding', contentPadding))
+      ..add(DoubleProperty('height', height))
+      ..add(StringProperty('text', text))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
   }
 }

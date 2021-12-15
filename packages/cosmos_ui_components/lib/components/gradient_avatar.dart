@@ -1,10 +1,14 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class GradientAvatar extends StatelessWidget {
-  final String stringKey;
+  const GradientAvatar({
+    required this.stringKey,
+    Key? key,
+  }) : super(key: key);
 
-  const GradientAvatar({Key? key, required this.stringKey}) : super(key: key);
+  final String stringKey;
 
   @override
   Widget build(BuildContext context) {
@@ -17,5 +21,11 @@ class GradientAvatar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('stringKey', stringKey));
   }
 }

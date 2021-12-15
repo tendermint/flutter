@@ -1,23 +1,24 @@
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosWalletListItem extends StatelessWidget {
-  final String name;
-  final String address;
-  final bool isSelected;
-  final VoidCallback onClicked;
-  final Widget? suffix;
-
   const CosmosWalletListItem({
-    Key? key,
     required this.name,
     required this.address,
     required this.isSelected,
     required this.onClicked,
     this.suffix,
+    Key? key,
   }) : super(key: key);
+
+  final String name;
+  final String address;
+  final bool isSelected;
+  final VoidCallback onClicked;
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -57,5 +58,15 @@ class CosmosWalletListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('name', name))
+      ..add(DiagnosticsProperty<bool>('isSelected', isSelected))
+      ..add(ObjectFlagProperty<VoidCallback>.has('onClicked', onClicked))
+      ..add(StringProperty('address', address));
   }
 }

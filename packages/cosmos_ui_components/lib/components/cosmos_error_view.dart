@@ -1,11 +1,12 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosErrorView extends StatelessWidget {
   const CosmosErrorView({
-    Key? key,
     required this.title,
     required this.message,
+    Key? key,
   }) : super(key: key);
 
   final String title;
@@ -28,5 +29,13 @@ class CosmosErrorView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('title', title))
+      ..add(StringProperty('message', message));
   }
 }

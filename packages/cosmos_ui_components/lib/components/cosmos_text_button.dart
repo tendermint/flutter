@@ -1,9 +1,23 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CosmosTextButton extends StatelessWidget {
+  const CosmosTextButton({
+    Key? key,
+    this.onTap,
+    this.text = '',
+    this.suffixIcon,
+    this.leadingIcon,
+    this.height = defaultHeight,
+    this.textStyle,
+    this.iconTopSpacing,
+    this.color,
+  }) : super(key: key);
+
   static const defaultHeight = 50.0;
+
   final VoidCallback? onTap;
   final String text;
   final Widget? suffixIcon;
@@ -12,18 +26,6 @@ class CosmosTextButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Color? color;
   final double? iconTopSpacing;
-
-  const CosmosTextButton({
-    Key? key,
-    this.onTap,
-    this.text = "",
-    this.suffixIcon,
-    this.leadingIcon,
-    this.height = defaultHeight,
-    this.textStyle,
-    this.iconTopSpacing,
-    this.color,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,5 +63,17 @@ class CosmosTextButton extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('iconTopSpacing', iconTopSpacing))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
+      ..add(ColorProperty('color', color))
+      ..add(StringProperty('text', text))
+      ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
+      ..add(DoubleProperty('height', height));
   }
 }
