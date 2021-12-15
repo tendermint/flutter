@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   dotted_border: ^2.0.0+2
+  pinput: ^1.2.2
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git

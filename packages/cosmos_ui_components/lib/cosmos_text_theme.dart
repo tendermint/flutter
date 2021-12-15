@@ -98,4 +98,18 @@ abstract class CosmosTextTheme {
         fontSize: 13,
         height: 1.23,
       );
+
+  static TextStyle get labelL => const TextStyle(
+        fontFamily: fontInter,
+        fontWeight: FontWeight.w600,
+        fontSize: 21,
+        height: 1.52,
+      );
+
+  static TextStyle get headingM => const TextStyle(
+    fontFamily: fontInter,
+    fontWeight: FontWeight.w700,
+    fontSize: 38,
+    height: 1.26,
+  );
 }
