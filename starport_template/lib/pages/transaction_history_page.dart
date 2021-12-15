@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
@@ -8,6 +9,7 @@ import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
+import 'package:starport_template/widgets/receive_money_sheet.dart';
 import 'package:starport_template/widgets/transaction_history_list.dart';
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -22,14 +24,16 @@ class TransactionHistoryPage extends StatefulWidget {
 class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
   WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
-  bool get isLoading => StarportApp.walletsStore.isTransactionHistoryLoading;
+  String get walletAddress => selectedWallet.publicAddress;
 
-  List<TransactionHistoryItem> get transactionsList => StarportApp.walletsStore.transactionsList;
+  bool get isLoading => StarportApp.transactionsStore.isTransactionHistoryLoading;
+
+  List<TransactionHistoryItem> get transactionsList => StarportApp.transactionsStore.transactionsList;
 
   @override
   void initState() {
     super.initState();
-    StarportApp.walletsStore.getTransactionHistory();
+    StarportApp.transactionsStore.getTransactionHistory(walletAddress);
   }
 
   @override
@@ -97,7 +101,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       children: [
         CosmosTextButton(
           text: 'Copy address',
-          onTap: () {},
+          onTap: _onTapCopyAddress,
           textStyle: CosmosTextTheme.elevatedButton.copyWith(
             color: CosmosTheme.of(context).colors.link,
           ),
@@ -105,7 +109,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
         SizedBox(width: theme.spacingL),
         CosmosTextButton(
           text: 'Receive',
-          onTap: () {},
+          onTap: _onTapReceive,
           textStyle: CosmosTextTheme.elevatedButton.copyWith(
             color: CosmosTheme.of(context).colors.link,
           ),
@@ -119,7 +123,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       onTap: () {},
       child: Padding(
         padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-        child: SizedBox(height: 48, child: GradientAvatar(stringKey: selectedWallet.publicAddress)),
+        child: SizedBox(height: 48, child: GradientAvatar(stringKey: walletAddress)),
       ),
     );
   }
@@ -136,7 +140,20 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
-      StarportApp.walletsStore.getTransactionHistory();
+      StarportApp.transactionsStore.getTransactionHistory(walletAddress);
     }
+  }
+
+  void _onTapCopyAddress() => FlutterClipboard.copy(walletAddress);
+
+  void _onTapReceive() {
+    showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height / 1.06,
+        child: ReceiveMoneySheet(walletInfo: selectedWallet),
+      ),
+    );
   }
 }

@@ -53,7 +53,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   Column(
                     children: [
                       _gradientAvatar(context),
-                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped),
+                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onTapDropDown),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -62,7 +62,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   StarportButtonBar(
-                    onReceivePressed: _onReceivePressed,
+                    onReceivePressed: _onTapReceive,
                     onSendPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
@@ -103,7 +103,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
 
-  Future<void> _onDropDownTapped() async {
+  Future<void> _onTapDropDown() async {
     final wallet = await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -118,7 +118,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     }
   }
 
-  void _onReceivePressed() {
+  void _onTapReceive() {
     showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
