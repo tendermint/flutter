@@ -3,13 +3,13 @@ import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/denom.dart';
 
 class Balance extends Equatable {
-  final Denom denom;
-  final Amount amount;
-
   const Balance({
     required this.denom,
     required this.amount,
   });
+
+  final Denom denom;
+  final Amount amount;
 
   @override
   String toString() => '$amount $denom';

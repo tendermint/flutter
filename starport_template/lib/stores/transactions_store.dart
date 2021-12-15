@@ -5,10 +5,9 @@ import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_transaction_history_loader.dart';
 
 class TransactionsStore {
-  final BaseEnv baseEnv;
-
   TransactionsStore(this.baseEnv);
 
+  final BaseEnv baseEnv;
   final Observable<bool> _isTransactionHistoryLoading = Observable(false);
   final Observable<bool> _isTransactionHistoryError = Observable(false);
 
@@ -26,8 +25,9 @@ class TransactionsStore {
     isTransactionHistoryLoading = true;
     try {
       final list = await CosmosTransactionHistoryLoader(baseEnv).getTransactionHistory(walletAddress);
-      transactionsList.clear();
-      transactionsList.addAll(list);
+      transactionsList
+        ..clear()
+        ..addAll(list);
     } catch (ex, stack) {
       logError(ex, stack);
       isTransactionHistoryError = true;

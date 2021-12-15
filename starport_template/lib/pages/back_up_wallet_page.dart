@@ -1,20 +1,27 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/repeat_mnemonic_page.dart';
 import 'package:starport_template/widgets/copy_to_clipboard_button.dart';
 
 class BackUpWalletPage extends StatefulWidget {
-  final String mnemonic;
-
   const BackUpWalletPage({
-    Key? key,
     required this.mnemonic,
+    Key? key,
   }) : super(key: key);
+
+  final String mnemonic;
 
   @override
   State<BackUpWalletPage> createState() => _BackUpWalletPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('mnemonic', mnemonic));
+  }
 }
 
 class _BackUpWalletPageState extends State<BackUpWalletPage> {
@@ -36,11 +43,11 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
   CosmosAppBar _appBar() {
     return CosmosAppBar(
       leading: const CosmosBackButton(),
-      title: "Your recovery phrase",
+      title: 'Your recovery phrase',
       actions: [
         CosmosAppBarAction(
           onTap: _onTapAdvanced,
-          text: "Advanced",
+          text: 'Advanced',
         ),
       ],
     );
@@ -59,7 +66,7 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
           children: [
             SizedBox(height: CosmosTheme.of(context).spacingM),
             Text(
-              "Please write down your 24 words in a safe space manually on paper.",
+              'Please write down your 24 words in a safe space manually on paper.',
               style: CosmosTextTheme.copy0Normal,
             ),
             Expanded(
@@ -84,13 +91,13 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
             SizedBox(height: CosmosTheme.of(context).spacingM),
             CosmosCheckboxTile(
               text:
-                  "I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund",
+                  'I have backed up my recovery phrase, I understand that if I lose my recovery phrase, I will lose my fund',
               onTap: _onTapConfirmCheckbox,
               checked: _confirmChecked,
             ),
             SizedBox(height: CosmosTheme.of(context).spacingL),
             CosmosElevatedButton(
-              text: "Continue",
+              text: 'Continue',
               onTap: _confirmChecked ? _onTapContinue : null,
             ),
             const MinimalBottomSpacer(),
@@ -109,4 +116,10 @@ class _BackUpWalletPageState extends State<BackUpWalletPage> {
   void _onTapConfirmCheckbox() => setState(
         () => _confirmChecked = !_confirmChecked,
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<String>('mnemonicWords', mnemonicWords));
+  }
 }

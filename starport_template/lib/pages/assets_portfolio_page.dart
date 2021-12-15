@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -20,7 +21,7 @@ class AssetsPortfolioPage extends StatefulWidget {
   const AssetsPortfolioPage({Key? key}) : super(key: key);
 
   @override
-  _AssetsPortfolioPageState createState() => _AssetsPortfolioPageState();
+  State<AssetsPortfolioPage> createState() => _AssetsPortfolioPageState();
 }
 
 class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
@@ -127,5 +128,16 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
         child: ReceiveMoneySheet(walletInfo: StarportApp.walletsStore.selectedWallet),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet))
+      ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))
+      ..add(DiagnosticsProperty<bool>('isSendMoneyLoading', isSendMoneyLoading))
+      ..add(IterableProperty<Balance>('balancesList', balancesList))
+      ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 }

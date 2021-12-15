@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
@@ -10,10 +11,14 @@ import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
 class SignTransactionPage extends StatelessWidget {
+  const SignTransactionPage({
+    required this.transaction,
+    required this.balance,
+    Key? key,
+  }) : super(key: key);
+
   final MsgSendTransaction transaction;
   final Balance balance;
-
-  const SignTransactionPage({Key? key, required this.transaction, required this.balance}) : super(key: key);
 
   double get recipientGetsAmount => transaction.amount.value.toDouble() - transaction.fee;
 
@@ -97,7 +102,7 @@ class SignTransactionPage extends StatelessWidget {
         child: AssetsTransferSheet(
           onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
-            (Route<dynamic> route) => false,
+            (route) => false,
           ),
         ),
       ),
@@ -118,5 +123,14 @@ class SignTransactionPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction))
+      ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
+      ..add(DiagnosticsProperty<Balance>('balance', balance));
   }
 }

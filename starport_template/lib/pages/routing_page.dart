@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
@@ -8,7 +10,7 @@ class RoutingPage extends StatefulWidget {
   const RoutingPage({Key? key}) : super(key: key);
 
   @override
-  _RoutingPageState createState() => _RoutingPageState();
+  State<RoutingPage> createState() => _RoutingPageState();
 }
 
 class _RoutingPageState extends State<RoutingPage> {
@@ -26,12 +28,16 @@ class _RoutingPageState extends State<RoutingPage> {
         return;
       }
       if (store.wallets.isEmpty) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const OnboardingPage()),
+        unawaited(
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const OnboardingPage()),
+          ),
         );
       } else {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        unawaited(
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+          ),
         );
       }
     }
@@ -44,8 +50,8 @@ class _RoutingPageState extends State<RoutingPage> {
         isLoading: StarportApp.walletsStore.areWalletsLoading,
         isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
         errorChild: const CosmosErrorView(
-          title: "Something went wrong",
-          message: "We had problems retrieving wallets from secure storage.",
+          title: 'Something went wrong',
+          message: 'We had problems retrieving wallets from secure storage.',
         ),
         contentChild: const SizedBox(),
       ),
