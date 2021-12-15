@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/denom.dart';
