@@ -6,7 +6,6 @@ import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/components/minimal_bottom_spacer.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
-import 'package:cosmos_utils/address_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -17,7 +16,7 @@ class ReceiveMoneySheet extends StatelessWidget {
 
   const ReceiveMoneySheet({Key? key, required this.walletInfo}) : super(key: key);
 
-  String get convertedAddress => bech32ToHex(walletInfo.publicAddress);
+  String get walletAddress => walletInfo.publicAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class ReceiveMoneySheet extends StatelessWidget {
             ],
           ),
           SizedBox(height: theme.spacingL),
-          Text(maskAddress(convertedAddress), style: CosmosTextTheme.title1Medium),
+          Text(maskAddress(walletAddress), style: CosmosTextTheme.title1Medium),
           const Spacer(),
           CosmosTextButton(
             text: 'Share',
@@ -72,9 +71,9 @@ class ReceiveMoneySheet extends StatelessWidget {
     );
   }
 
-  void _onTapCopyAddress() => FlutterClipboard.copy(convertedAddress);
+  void _onTapCopyAddress() => FlutterClipboard.copy(walletAddress);
 
-  void _onTapShare() => Share.share(convertedAddress);
+  void _onTapShare() => Share.share(walletAddress);
 }
 
 String maskAddress(String address) => '${address.substring(0, 9)}...${address.substring(address.length - 4)}';

@@ -49,7 +49,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                   ),
                   const Divider(),
                   const Padding(padding: EdgeInsets.only(top: 16)),
-                  BalanceHeading(),
+                  const BalanceHeading(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(

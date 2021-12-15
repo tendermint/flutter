@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:alan/alan.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/stores/transactions_store.dart';
 import 'package:starport_template/stores/wallets_store.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
@@ -42,4 +43,5 @@ void _buildDependencies() {
   );
   StarportApp.baseEnv = BaseEnv();
   StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway, StarportApp.baseEnv);
+  StarportApp.transactionsStore = TransactionsStore(StarportApp.baseEnv);
 }

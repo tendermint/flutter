@@ -7,6 +7,7 @@ import 'package:mobx/mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/pages/select_asset_page.dart';
+import 'package:starport_template/pages/transaction_history_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
@@ -51,8 +52,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                 children: [
                   Column(
                     children: [
-                      _buildGradientAvatar(context),
-                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped),
+                      _gradientAvatar(context),
+                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onTapDropDown),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -61,7 +62,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     ],
                   ),
                   StarportButtonBar(
-                    onReceivePressed: _onReceivePressed,
+                    onReceivePressed: _onTapReceive,
                     onSendPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
@@ -79,21 +80,30 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     );
   }
 
-  Padding _buildGradientAvatar(BuildContext context) {
+  Widget _gradientAvatar(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: SizedBox(height: 35, child: GradientAvatar(stringKey: selectedWallet.publicAddress)),
+        child: SizedBox(
+          height: 35,
+          child: InkWell(
+            onTap: () => _onTapAvatar(context),
+            child: GradientAvatar(stringKey: selectedWallet.publicAddress),
+          ),
+        ),
       ),
     );
   }
+
+  void _onTapAvatar(BuildContext context) =>
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TransactionHistoryPage()));
 
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
 
-  Future<void> _onDropDownTapped() async {
+  Future<void> _onTapDropDown() async {
     final wallet = await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -105,11 +115,10 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
-      _fetchWalletBalances();
     }
   }
 
-  void _onReceivePressed() {
+  void _onTapReceive() {
     showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
