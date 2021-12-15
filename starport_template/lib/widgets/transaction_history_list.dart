@@ -2,16 +2,26 @@ import 'package:cosmos_ui_components/components/template/transaction_history_car
 import 'package:cosmos_ui_components/components/template/transaction_history_group_title.dart';
 import 'package:cosmos_ui_components/utils/date_formatter.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
 
 class TransactionHistoryList extends StatefulWidget {
+  const TransactionHistoryList({
+    required this.transactionsList,
+    Key? key,
+  }) : super(key: key);
+
   final List<TransactionHistoryItem> transactionsList;
 
-  const TransactionHistoryList({Key? key, required this.transactionsList}) : super(key: key);
+  @override
+  State<TransactionHistoryList> createState() => _TransactionHistoryListState();
 
   @override
-  _TransactionHistoryListState createState() => _TransactionHistoryListState();
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<TransactionHistoryItem>('transactionsList', transactionsList));
+  }
 }
 
 class _TransactionHistoryListState extends State<TransactionHistoryList> {
@@ -51,5 +61,11 @@ class _TransactionHistoryListState extends State<TransactionHistoryList> {
         },
       ).toList(),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<String, List<TransactionHistoryItem>>>('groupedHistory', groupedHistory));
   }
 }

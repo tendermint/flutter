@@ -102,7 +102,7 @@ class WalletsStore {
   final Observable<int?> _selectedWalletIndex = Observable(null);
 
   set selectedWalletIndex(int? value) {
-    if(selectedWalletIndex != value) {
+    if (selectedWalletIndex != value) {
       Action(() => _selectedWalletIndex.value = value)();
       getBalances(selectedWallet.publicAddress);
     }

@@ -6,7 +6,6 @@ import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/components/minimal_bottom_spacer.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
-import 'package:cosmos_utils/address_parser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -85,7 +84,7 @@ class ReceiveMoneySheet extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<WalletPublicInfo>('walletInfo', walletInfo))
-      ..add(StringProperty('convertedAddress', convertedAddress));
+      ..add(StringProperty('walletAddress', walletAddress));
   }
 }
 

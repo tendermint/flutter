@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/denom.dart';
@@ -7,16 +8,16 @@ import 'package:starport_template/model/tx_response_json.dart';
 import 'package:starport_template/utils/base_env.dart';
 
 class CosmosTransactionHistoryLoader {
-  BaseEnv baseEnv;
-
   CosmosTransactionHistoryLoader(this.baseEnv);
+
+  BaseEnv baseEnv;
 
   Future<List<TransactionHistoryItem>> getTransactionHistory(String walletAddress) async {
     final outGoingTransactions = await _getTransactionResponses(walletAddress, TransactionType.Send);
     final incomingTransactions = await _getTransactionResponses(walletAddress, TransactionType.Receive);
 
-    final list = [...outGoingTransactions, ...incomingTransactions];
-    list.sort((a, b) => b.date.compareTo(a.date));
+    final list = [...outGoingTransactions, ...incomingTransactions] //
+      ..sort((a, b) => b.date.compareTo(a.date));
 
     return list;
   }

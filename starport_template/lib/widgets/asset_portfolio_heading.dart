@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 
 class AssetPortfolioHeading extends StatelessWidget {
   const AssetPortfolioHeading({
-    Key? key,
     required this.title,
     required this.onTap,
     this.isCentered = false,
+    Key? key,
   }) : super(key: key);
 
   final String title;
   final VoidCallback onTap;
   final bool isCentered;
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +33,7 @@ class AssetPortfolioHeading extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap))
-      ..add(StringProperty('title', title));
+      ..add(StringProperty('title', title))
+      ..add(DiagnosticsProperty<bool>('isCentered', isCentered));
   }
 }
