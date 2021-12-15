@@ -33,7 +33,7 @@ class _TransactionHistoryListState extends State<TransactionHistoryList> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TransactionHistoryGroupTitle(title: groupedMonthYear.split('-')[0]),
+                TransactionHistoryGroupTitle(title: extractMonth(groupedMonthYear)),
                 ...transactionsList
                     .map(
                       (transaction) => TransactionHistoryCard(
