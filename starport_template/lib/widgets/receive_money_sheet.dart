@@ -6,15 +6,19 @@ import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/components/minimal_bottom_spacer.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class ReceiveMoneySheet extends StatelessWidget {
-  final WalletPublicInfo walletInfo;
+  const ReceiveMoneySheet({
+    required this.walletInfo,
+    Key? key,
+  }) : super(key: key);
 
-  const ReceiveMoneySheet({Key? key, required this.walletInfo}) : super(key: key);
+  final WalletPublicInfo walletInfo;
 
   String get walletAddress => walletInfo.publicAddress;
 
@@ -74,6 +78,14 @@ class ReceiveMoneySheet extends StatelessWidget {
   void _onTapCopyAddress() => FlutterClipboard.copy(walletAddress);
 
   void _onTapShare() => Share.share(walletAddress);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<WalletPublicInfo>('walletInfo', walletInfo))
+      ..add(StringProperty('walletAddress', walletAddress));
+  }
 }
 
 String maskAddress(String address) => '${address.substring(0, 9)}...${address.substring(address.length - 4)}';

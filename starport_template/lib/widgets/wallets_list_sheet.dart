@@ -1,6 +1,7 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:starport_template/pages/create_wallet_page.dart';
@@ -15,7 +16,7 @@ class WalletsListSheet extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _WalletsListSheetState createState() => _WalletsListSheetState();
+  State<WalletsListSheet> createState() => _WalletsListSheetState();
 }
 
 class _WalletsListSheetState extends State<WalletsListSheet> {
@@ -45,7 +46,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
         child: Observer(
           builder: (context) => ContentStateSwitcher(
             emptyChild: const EmptyListMessage(
-              message: "No wallets found. Add one.",
+              message: 'No wallets found. Add one.',
             ),
             isLoading: StarportApp.walletsStore.isRenamingWallet,
             isEmpty: walletInfos.isEmpty,
@@ -100,7 +101,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
         builder: (context) => CosmosWalletsListView(
           list: walletInfos,
           selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-          onClicked: (index) => _walletClicked(index),
+          onClicked: _walletClicked,
           isEditing: isEditingAccountList,
           onEditIconPressed: _onEditIconPressed,
         ),
@@ -126,14 +127,14 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
   Future<void> _renameWallet(String newName) async {
     await StarportApp.walletsStore.renameWallet(newName);
     if (StarportApp.walletsStore.renameWalletFailure != null) {
-      showCosmosAlertDialog(
+      await showCosmosAlertDialog(
         context: context,
         dialogBuilder: (context) => CosmosAlertDialog(
-          title: "Something went wrong",
-          message: "We had problems renaming your account.",
+          title: 'Something went wrong',
+          message: 'We had problems renaming your account.',
           actions: [
             CosmosModalAction(
-              text: "Ok",
+              text: 'Ok',
               onPressed: () => Navigator.of(context).pop(),
             )
           ],
@@ -160,5 +161,15 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
       ],
       title: Text(walletInfo.name),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('isEditingAccountList', isEditingAccountList))
+      ..add(IterableProperty<WalletInfo>('walletInfos', walletInfos))
+      ..add(IterableProperty<WalletPublicInfo>('publicInfos', publicInfos))
+      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet));
   }
 }

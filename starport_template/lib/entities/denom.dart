@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class Denom extends Equatable {
-  final String text;
-
   const Denom(
     this.text,
   );
+
+  final String text;
 
   @override
   List<Object> get props => [

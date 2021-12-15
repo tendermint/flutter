@@ -1,14 +1,15 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/balance.dart';
 
 class SignTransactionTabViewItem extends StatelessWidget {
   const SignTransactionTabViewItem({
-    Key? key,
     required this.text,
     required this.balance,
     required this.amount,
+    Key? key,
   }) : super(key: key);
 
   final String text;
@@ -31,5 +32,14 @@ class SignTransactionTabViewItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<Balance>('balance', balance))
+      ..add(DoubleProperty('amount', amount))
+      ..add(StringProperty('text', text));
   }
 }

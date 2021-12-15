@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
@@ -11,16 +12,25 @@ import 'package:starport_template/utils/amount_validator.dart';
 import 'package:starport_template/widgets/send_money_form.dart';
 
 class TransferAssetPage extends StatefulWidget {
-  final Balance balance;
+  const TransferAssetPage({
+    required this.balance,
+    Key? key,
+  }) : super(key: key);
 
-  const TransferAssetPage({Key? key, required this.balance}) : super(key: key);
+  final Balance balance;
 
   @override
   State<TransferAssetPage> createState() => _TransferAssetPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Balance>('balance', balance));
+  }
 }
 
 class _TransferAssetPageState extends State<TransferAssetPage> {
-  double amount = 0.0;
+  double amount = 0;
   double fee = StarportApp.walletsStore.defaultFee;
   String walletAddress = '';
 
@@ -123,5 +133,15 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('amount', amount))
+      ..add(StringProperty('walletAddress', walletAddress))
+      ..add(DiagnosticsProperty<bool>('isTransferValidated', isTransferValidated))
+      ..add(DoubleProperty('fee', fee));
   }
 }

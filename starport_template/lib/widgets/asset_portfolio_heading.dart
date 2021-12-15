@@ -1,17 +1,18 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AssetPortfolioHeading extends StatelessWidget {
-  final String title;
-  final VoidCallback onTap;
-  final bool isCentered;
-
   const AssetPortfolioHeading({
-    Key? key,
     required this.title,
     required this.onTap,
     this.isCentered = false,
+    Key? key,
   }) : super(key: key);
+
+  final String title;
+  final VoidCallback onTap;
+  final bool isCentered;
 
   @override
   Widget build(BuildContext context) {
@@ -25,5 +26,14 @@ class AssetPortfolioHeading extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<VoidCallback>.has('onTap', onTap))
+      ..add(StringProperty('title', title))
+      ..add(DiagnosticsProperty<bool>('isCentered', isCentered));
   }
 }

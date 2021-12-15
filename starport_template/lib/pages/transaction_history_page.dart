@@ -2,6 +2,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -18,7 +19,7 @@ class TransactionHistoryPage extends StatefulWidget {
   const TransactionHistoryPage({Key? key}) : super(key: key);
 
   @override
-  _TransactionHistoryPageState createState() => _TransactionHistoryPageState();
+  State<TransactionHistoryPage> createState() => _TransactionHistoryPageState();
 }
 
 class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
@@ -140,7 +141,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
-      StarportApp.transactionsStore.getTransactionHistory(walletAddress);
+      await StarportApp.transactionsStore.getTransactionHistory(walletAddress);
     }
   }
 
@@ -155,5 +156,15 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
         child: ReceiveMoneySheet(walletInfo: selectedWallet),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<TransactionHistoryItem>('transactionsList', transactionsList))
+      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet))
+      ..add(StringProperty('walletAddress', walletAddress))
+      ..add(DiagnosticsProperty<bool>('isLoading', isLoading));
   }
 }

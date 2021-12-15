@@ -2,6 +2,7 @@ import 'package:cosmos_ui_components/components/content_state_switcher.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_balance_card.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_balance_heading.dart';
 import 'package:cosmos_ui_components/components/template/cosmos_wallets_list_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,12 +12,21 @@ import 'package:starport_template/starport_app.dart';
 // TODO: Remove this aftert [AssetsPortfolioPage] is finalized
 
 class WalletDetailsPage extends StatefulWidget {
+  const WalletDetailsPage({
+    required this.walletInfo,
+    Key? key,
+  }) : super(key: key);
+
   final WalletInfo walletInfo;
 
-  const WalletDetailsPage({Key? key, required this.walletInfo}) : super(key: key);
+  @override
+  State<WalletDetailsPage> createState() => _WalletDetailsPageState();
 
   @override
-  _WalletDetailsPageState createState() => _WalletDetailsPageState();
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<WalletInfo>('walletInfo', walletInfo));
+  }
 }
 
 class _WalletDetailsPageState extends State<WalletDetailsPage> {
@@ -51,7 +61,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                   const Padding(padding: EdgeInsets.only(top: 16)),
                   const BalanceHeading(),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       children: balancesList
                           .map(
@@ -66,7 +76,7 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
                   ),
                   if (isSendMoneyLoading)
                     const Padding(
-                      padding: EdgeInsets.only(top: 8.0),
+                      padding: EdgeInsets.only(top: 8),
                       child: Center(
                         child: Text(
                           'Sending money',
@@ -90,6 +100,16 @@ class _WalletDetailsPageState extends State<WalletDetailsPage> {
 
   Future _fetchWalletBalances() async {
     await StarportApp.walletsStore.getBalances(widget.walletInfo.address);
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))
+      ..add(IterableProperty<Balance>('balancesList', balancesList))
+      ..add(DiagnosticsProperty<bool>('isSendMoneyLoading', isSendMoneyLoading))
+      ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 
 // TODO: Remove these functions after [AssetsPortfolioPage] is finalized

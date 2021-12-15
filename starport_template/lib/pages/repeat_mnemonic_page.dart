@@ -9,15 +9,21 @@ import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 
 class RepeatMnemonicPage extends StatefulWidget {
-  final String mnemonic;
-
   const RepeatMnemonicPage({
-    Key? key,
     required this.mnemonic,
+    Key? key,
   }) : super(key: key);
 
+  final String mnemonic;
+
   @override
-  _RepeatMnemonicPageState createState() => _RepeatMnemonicPageState();
+  State<RepeatMnemonicPage> createState() => _RepeatMnemonicPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('mnemonic', mnemonic));
+  }
 }
 
 class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
@@ -58,11 +64,11 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
   CosmosAppBar _appBar() {
     return CosmosAppBar(
       leading: const CosmosBackButton(),
-      title: "Confirm recovery phrase",
+      title: 'Confirm recovery phrase',
       actions: [
         CosmosAppBarAction(
           onTap: _onTapAdvanced,
-          text: "Advanced",
+          text: 'Advanced',
         ),
       ],
     );
@@ -95,7 +101,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
             ),
             SizedBox(height: CosmosTheme.of(context).spacingM),
             CosmosElevatedButton(
-              text: "Create Account",
+              text: 'Create Account',
               onTap: _createButtonEnabled ? _onTapCreateAccount : null,
             )
           ],
@@ -106,7 +112,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
 
   Widget _errorUI() {
     return const Center(
-      child: Text("Error!"),
+      child: Text('Error!'),
     );
   }
 
@@ -119,7 +125,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
       ImportWalletFormData(
         name: 'Wallet ${StarportApp.walletsStore.wallets.length}',
         //TODO create separate method that will use empty password for biometric or ask the user for one otherwise
-        password: "",
+        password: '',
         mnemonic: widget.mnemonic,
         additionalData: WalletAdditionalData(isBackedUp: true),
       ),
@@ -130,7 +136,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
       return;
     }
     if (!_isError) {
-      Navigator.of(context).pushAndRemoveUntil(
+      await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
         (route) => false,
       );

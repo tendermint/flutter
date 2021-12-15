@@ -1,16 +1,26 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:starport_template/starport_app.dart';
 
 class AssetsTransferSheet extends StatefulWidget {
+  const AssetsTransferSheet({
+    required this.onTapDone,
+    Key? key,
+  }) : super(key: key);
+
   final VoidCallback onTapDone;
 
-  const AssetsTransferSheet({Key? key, required this.onTapDone}) : super(key: key);
+  @override
+  State<AssetsTransferSheet> createState() => _AssetsTransferSheetState();
 
   @override
-  _AssetsTransferSheetState createState() => _AssetsTransferSheetState();
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<VoidCallback>.has('onTapDone', onTapDone));
+  }
 }
 
 class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
@@ -68,5 +78,11 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('isLoading', isLoading));
   }
 }

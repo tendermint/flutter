@@ -6,11 +6,11 @@ class TxJson {
     required this.body,
   });
 
+  factory TxJson.fromJson(Map<String, dynamic> json) => TxJson(
+        type: json['@type'] as String? ?? '',
+        body: TxBodyJson.fromJson(json['body'] as Map<String, dynamic>),
+      );
+
   String type;
   TxBodyJson body;
-
-  factory TxJson.fromJson(Map<String, dynamic> json) => TxJson(
-        type: json["@type"] as String? ?? '',
-        body: TxBodyJson.fromJson(json["body"] as Map<String, dynamic>),
-      );
 }

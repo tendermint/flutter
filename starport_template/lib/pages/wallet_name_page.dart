@@ -1,18 +1,27 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class WalletNamePage extends StatefulWidget {
+  const WalletNamePage({
+    required this.name,
+    this.actionTitle = 'Save',
+    Key? key,
+  }) : super(key: key);
+
   final String name;
   final String actionTitle;
 
-  const WalletNamePage({
-    Key? key,
-    required this.name,
-    this.actionTitle = "Save",
-  }) : super(key: key);
-
   @override
   State<WalletNamePage> createState() => _WalletNamePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('name', name))
+      ..add(StringProperty('actionTitle', actionTitle));
+  }
 }
 
 class _WalletNamePageState extends State<WalletNamePage> {
@@ -71,4 +80,10 @@ class _WalletNamePageState extends State<WalletNamePage> {
   void _onNameChanged(String value) => setState(() {
         name = value;
       });
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('name', name));
+  }
 }

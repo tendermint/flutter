@@ -1,13 +1,14 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BackupAccountCard extends StatelessWidget {
-  final VoidCallback? onTap;
-
   const BackupAccountCard({
-    Key? key,
     this.onTap,
+    Key? key,
   }) : super(key: key);
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,5 +33,11 @@ class BackupAccountCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
   }
 }
