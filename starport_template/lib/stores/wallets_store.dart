@@ -97,7 +97,12 @@ class WalletsStore {
 
   final Observable<int?> _selectedWalletIndex = Observable(null);
 
-  set selectedWalletIndex(int? value) => Action(() => _selectedWalletIndex.value = value)();
+  set selectedWalletIndex(int? value) {
+    if(selectedWalletIndex != value) {
+      Action(() => _selectedWalletIndex.value = value)();
+      getBalances(selectedWallet.publicAddress);
+    }
+  }
 
   Future<void> loadWallets() async {
     areWalletsLoading = true;
