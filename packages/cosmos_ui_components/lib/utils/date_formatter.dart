@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 String formatDate(DateTime date, DateFormatEnum dateFormat) => DateFormat(getDateFormat[dateFormat]).format(date);
 
-String getMonthFromGroupedKey(String groupedMonthYear) => groupedMonthYear.split('-')[0];
+String extractMonth(String groupedMonthYear) => groupedMonthYear.split('-')[0];
 
 abstract class DateFormats {
   static const String uiShortDate = 'MMM d';
