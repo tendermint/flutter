@@ -2,6 +2,10 @@ name: Pull Request Worfklow
 
 on: [ pull_request ]
 
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     timeout-minutes: 15
