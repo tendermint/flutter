@@ -123,7 +123,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
 
   Future<void> _onTapCreateAccount() async {
     final password = await PasswordPromptPage.promptPassword(context);
-    if(password == null) {
+    if (password == null) {
       return;
     }
     await StarportApp.walletsStore.importAlanWallet(

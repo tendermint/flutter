@@ -111,7 +111,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
         password: password,
       ),
     );
-    if(mounted) {
+    if (mounted) {
       _showAssetsTransferSheet(context);
     }
   }
