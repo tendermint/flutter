@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: starport-redesign
-      resolved-ref: f297902dee709e68fad4fcabf926becd4246b019
+      resolved-ref: fc5f63a78201330274d30946b8e84e49adfd4e25
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: starport-redesign
-      resolved-ref: f297902dee709e68fad4fcabf926becd4246b019
+      resolved-ref: fc5f63a78201330274d30946b8e84e49adfd4e25
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -255,6 +255,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_launcher_icons:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.2"
   flutter_mobx:
     dependency: "direct main"
     description:
@@ -370,6 +377,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   intl:
     dependency: "direct main"
     description:
@@ -510,6 +524,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.4.0"
   pinput:
     dependency: transitive
     description:
@@ -744,7 +765,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: starport-redesign
-      resolved-ref: f297902dee709e68fad4fcabf926becd4246b019
+      resolved-ref: fc5f63a78201330274d30946b8e84e49adfd4e25
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -846,6 +867,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.3.1"
   yaml:
     dependency: transitive
     description:
