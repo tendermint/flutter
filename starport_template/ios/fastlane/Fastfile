@@ -33,7 +33,7 @@ platform :ios do
     print("RELEASE NOTES:\n")
     print(releaseNotes)
 
-    match(type: "adhoc", readonly: true)
+    match(type: "adhoc", readonly: is_ci)
 
     update_code_signing_settings(
       use_automatic_signing: false,
