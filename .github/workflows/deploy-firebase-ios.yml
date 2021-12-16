@@ -32,28 +32,38 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: check for changes in folders
+        run: |
+          echo "changes_starport_template=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
+
       - name: pub get
         working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
         run: flutter pub get
 
       - name: set up ruby
+        if: env.changes_starport_template == 'true'
         uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: prepare fastlane
         working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
         run: |
           gem install bundler
           bundle install
 
       - name: prepare ios build with cosmos testnet
         working-directory: ./starport_template
+        if: env.changes_starport_template == 'true'
         run: |
           flutter build ios --no-codesign --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
 
       - name: deploy firebase iOS
         working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
         run: |
           gem install bundler
           bundle install
