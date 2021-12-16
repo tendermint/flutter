@@ -2,7 +2,7 @@ name: Deploy Firebase - iOS
 
 on:
   push:
-    branches: [ main, starport-redesign, "feature/firebase_release" ]
+    branches: [ main, starport-redesign ]
   workflow_dispatch:
 
 env:
