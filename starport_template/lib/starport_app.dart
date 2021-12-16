@@ -6,7 +6,7 @@ import 'package:starport_template/stores/transactions_store.dart';
 import 'package:starport_template/stores/wallets_store.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
-import 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
+import 'package:transaction_signing_gateway/storage/data_store.dart';
 
 class StarportApp extends StatelessWidget {
   const StarportApp({
@@ -18,7 +18,7 @@ class StarportApp extends StatelessWidget {
   static late TransactionsStore transactionsStore;
   static late BaseEnv baseEnv;
   static late NetworkInfo networkInfo;
-  static late BiometricDataStore biometricDataStore;
+  static late SecureDataStore secureDataStore;
 
   @override
   Widget build(BuildContext context) {

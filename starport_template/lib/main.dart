@@ -11,8 +11,8 @@ import 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.da
 import 'package:transaction_signing_gateway/alan/alan_transaction_signer.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
 import 'package:transaction_signing_gateway/storage/cosmos_key_info_storage.dart';
+import 'package:transaction_signing_gateway/storage/flutter_secure_storage_data_store.dart';
 import 'package:transaction_signing_gateway/storage/shared_prefs_plain_data_store.dart';
 
 void main() {
@@ -26,7 +26,7 @@ void _buildDependencies() {
     lcdInfo: LCDInfo(host: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost'),
     grpcInfo: GRPCInfo(host: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost'),
   );
-  StarportApp.biometricDataStore = BiometricDataStore();
+  StarportApp.secureDataStore = FlutterSecureStorageDataStore();
   StarportApp.signingGateway = TransactionSigningGateway(
     transactionSummaryUI: NoOpTransactionSummaryUI(),
     signers: [
@@ -37,7 +37,7 @@ void _buildDependencies() {
     ],
     infoStorage: CosmosKeyInfoStorage(
       serializers: [AlanCredentialsSerializer()],
-      secureDataStore: StarportApp.biometricDataStore,
+      secureDataStore: StarportApp.secureDataStore,
       plainDataStore: SharedPrefsPlainDataStore(),
     ),
   );
