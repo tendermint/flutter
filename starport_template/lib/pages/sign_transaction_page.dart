@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
@@ -6,11 +8,12 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
-class SignTransactionPage extends StatelessWidget {
+class SignTransactionPage extends StatefulWidget {
   const SignTransactionPage({
     required this.transaction,
     required this.balance,
@@ -20,7 +23,20 @@ class SignTransactionPage extends StatelessWidget {
   final MsgSendTransaction transaction;
   final Balance balance;
 
-  double get recipientGetsAmount => transaction.amount.value.toDouble() - transaction.fee;
+  @override
+  State<SignTransactionPage> createState() => _SignTransactionPageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<Balance>('balance', balance))
+      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+  }
+}
+
+class _SignTransactionPageState extends State<SignTransactionPage> {
+  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +53,8 @@ class SignTransactionPage extends StatelessWidget {
           SizedBox(height: theme.spacingL),
           SignTransactionTabViewItem(
             text: 'Send',
-            amount: transaction.amount.value.toDouble(),
-            balance: balance,
+            amount: widget.transaction.amount.value.toDouble(),
+            balance: widget.balance,
           ),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
@@ -46,7 +62,7 @@ class SignTransactionPage extends StatelessWidget {
           SignTransactionTabViewItem(
             text: 'Recipient will get',
             amount: recipientGetsAmount,
-            balance: balance,
+            balance: widget.balance,
           ),
           SizedBox(height: theme.spacingL),
           const CosmosDivider(),
@@ -79,18 +95,25 @@ class SignTransactionPage extends StatelessWidget {
     );
   }
 
-  void _onTapSign(BuildContext context) {
-    StarportApp.walletsStore.sendTokens(
-      info: StarportApp.walletsStore.selectedWallet,
-      balance: Balance(
-        amount: transaction.amount,
-        denom: balance.denom,
+  Future<void> _onTapSign(BuildContext context) async {
+    final password = await PasswordPromptPage.promptPassword(context);
+    if (password == null) {
+      return;
+    }
+    unawaited(
+      StarportApp.walletsStore.sendTokens(
+        info: StarportApp.walletsStore.selectedWallet,
+        balance: Balance(
+          amount: widget.transaction.amount,
+          denom: widget.balance.denom,
+        ),
+        toAddress: widget.transaction.recipient,
+        password: password,
       ),
-      toAddress: transaction.recipient,
-      // TODO: create separate method that will use empty password for biometric or ask the user for one otherwise
-      password: '',
     );
-    _showAssetsTransferSheet(context);
+    if (mounted) {
+      _showAssetsTransferSheet(context);
+    }
   }
 
   void _showAssetsTransferSheet(BuildContext context) {
@@ -117,7 +140,7 @@ class SignTransactionPage extends StatelessWidget {
         children: [
           Text('Transaction fee', style: CosmosTextTheme.titleS),
           Text(
-            '${transaction.fee.toString()} ${balance.denom.text.toUpperCase()}',
+            '${widget.transaction.fee.toString()} ${widget.balance.denom.text.toUpperCase()}',
             style: CosmosTextTheme.copyMinus1Normal,
           ),
         ],
@@ -129,8 +152,8 @@ class SignTransactionPage extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction))
+      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', widget.transaction))
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
-      ..add(DiagnosticsProperty<Balance>('balance', balance));
+      ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
   }
 }

@@ -231,6 +231,7 @@ class WalletsStore {
   }
 
   Future<WalletPublicInfo?> createNewWallet({
+    required String password,
     required bool isBackedUp,
     VoidCallback? onMnemonicGenerationStarted,
     VoidCallback? onWalletCreationStarted,
@@ -242,14 +243,9 @@ class WalletsStore {
     return importAlanWallet(
       ImportWalletFormData(
         mnemonic: mnemonic,
-        name: 'Wallet ${wallets.length}',
+        name: 'Wallet ${wallets.length + 1}',
         additionalData: WalletAdditionalData(isBackedUp: isBackedUp),
-        password:
-            // we're using `biometric_storage` package to secure the wallet credentials,
-            // thus no need for password, but if you want to add another layer of security.
-            // Feel free to ask user for one, it will be used to encrypt the wallet data
-            // with symmetric encryption
-            '',
+        password: password,
       ),
       onWalletCreationStarted: onWalletCreationStarted,
     );

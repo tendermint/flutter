@@ -1,16 +1,16 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
-import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/back_up_wallet_page.dart';
+import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/utils/user_authenticator.dart';
 import 'package:starport_template/widgets/backup_later_bottom_sheet.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
-import 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
 
 class CreateWalletPage extends StatefulWidget {
   const CreateWalletPage({Key? key}) : super(key: key);
@@ -20,20 +20,21 @@ class CreateWalletPage extends StatefulWidget {
 }
 
 class _CreateWalletPageState extends State<CreateWalletPage> {
-  Either<BiometricCredentialsStorageFailure, Unit>? _authenticationResult;
+  bool? _isAuthenticated;
 
   String? _mnemonic;
 
   bool get isLoading =>
-      _authenticationResult == null ||
+      _isAuthenticated == null ||
       StarportApp.walletsStore.isMnemonicCreating ||
       StarportApp.walletsStore.isWalletImporting;
 
   bool get isError =>
-      _authenticationResult?.isLeft() ??
-      false || StarportApp.walletsStore.isMnemonicCreatingError || StarportApp.walletsStore.isWalletImportingError;
+      !(_isAuthenticated ?? true) ||
+      StarportApp.walletsStore.isMnemonicCreatingError ||
+      StarportApp.walletsStore.isWalletImportingError;
 
-  bool get isAuthenticating => _authenticationResult == null;
+  bool get isAuthenticating => _isAuthenticated == null;
 
   bool get isMnemonicCreating => StarportApp.walletsStore.isMnemonicCreating;
 
@@ -126,8 +127,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   Future<void> _authenticateUser() async {
-    final result = await StarportApp.biometricDataStore.authenticateUser();
-    setState(() => _authenticationResult = result);
+    final result = await UserAuthenticator.authenticateUser();
+    setState(() => _isAuthenticated = result);
   }
 
   void _onTapAdvanced() => notImplemented(context);
@@ -154,7 +155,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       );
 
   Future<void> _createWallet({required bool isBackedUp}) async {
+    final password = await PasswordPromptPage.createPassword(
+      context,
+    );
+    if (password == null) {
+      return;
+    }
     await StarportApp.walletsStore.createNewWallet(
+      password: password,
       isBackedUp: isBackedUp,
       onMnemonicGenerationStarted: () => setState(() {}),
       onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
