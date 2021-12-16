@@ -1,0 +1,72 @@
+name: Deploy Firebase - iOS
+
+on:
+  push:
+    branches: [ main, starport-redesign ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '2.8.0'
+  JAVA_VERSION: '12'
+  RUBY_VERSION: '2.7'
+  ALPHA_IOS_FIREBASE_TESTERS_GROUP: "ios-testers"
+  LC_ALL: en_US.UTF-8
+  MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+  MATCH_APP_ID: ${{ secrets.MATCH_APP_ID }}
+  MATCH_APPLE_USERNAME: ${{ secrets.MATCH_APPLE_USERNAME }}
+  MATCH_TEAM_ID: ${{ secrets.MATCH_TEAM_ID }}
+  MATCH_ITC_TEAM_ID: ${{ secrets.MATCH_ITC_TEAM_ID }}
+  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  ALPHA_IOS_FIREBASE_APP_ID: ${{ secrets.ALPHA_IOS_FIREBASE_APP_ID }}
+  FASTLANE_IOS_CODE_SIGNING_IDENTITY: ${{ secrets.FASTLANE_IOS_CODE_SIGNING_IDENTITY }}
+  MATCH_ADHOC_PROVISIONING_PROFILE: ${{ secrets.MATCH_ADHOC_PROVISIONING_PROFILE }}
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  FIREBASE_PLIST_FILE: ${{ secrets.FIREBASE_PLIST_FILE }}
+  MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+  LANG: en_US.UTF-8
+
+jobs:
+  deploy-ios:
+    timeout-minutes: 30
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: check for changes in folders
+        run: |
+          echo "changes_starport_template=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
+
+      - name: pub get
+        working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
+        run: flutter pub get
+
+      - name: set up ruby
+        if: env.changes_starport_template == 'true'
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+
+      - name: prepare fastlane
+        working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: prepare ios build with cosmos testnet
+        working-directory: ./starport_template
+        if: env.changes_starport_template == 'true'
+        run: |
+          flutter build ios --no-codesign --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
+
+      - name: deploy firebase iOS
+        working-directory: ./starport_template/ios
+        if: env.changes_starport_template == 'true'
+        run: |
+          gem install bundler
+          bundle install
+          bundle exec fastlane deploy_firebase
