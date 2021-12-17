@@ -27,11 +27,9 @@ class BaseEnv {
   final String baseApiUrl;
 }
 
-
 // DO NOT USE String.fromEnvironment without 'const'!!!
 // https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
 String get envLcdPort => const String.fromEnvironment('LCD_PORT', defaultValue: '1317');
-
 
 // DO NOT USE String.fromEnvironment without 'const'!!!
 // https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
