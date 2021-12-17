@@ -23,7 +23,7 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_utils
-      ref: starport-redesign
+      ref: main
 
 dev_dependencies:
   flutter_test:
