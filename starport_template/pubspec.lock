@@ -152,8 +152,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_ui_components"
-      ref: main
-      resolved-ref: a5f3328ffb8bde4c309a47840c6732bd149e8c74
+      ref: setting-components
+      resolved-ref: b7bcfb707e7be8457d765122822215a3bf04e1ab
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
