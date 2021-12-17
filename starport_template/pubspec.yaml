@@ -24,19 +24,19 @@ dependencies:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
-      ref: starport-redesign
+      ref: main
 
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_utils
-      ref: starport-redesign
+      ref: main
 
   transaction_signing_gateway:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/transaction_signing_gateway
-      ref: starport-redesign
+      ref: main
 
   cupertino_icons: 1.0.4
 
