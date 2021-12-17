@@ -27,16 +27,32 @@ class BaseEnv {
   final String baseApiUrl;
 }
 
+
+// DO NOT USE String.fromEnvironment without 'const'!!!
+// https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
 String get envLcdPort => const String.fromEnvironment('LCD_PORT', defaultValue: '1317');
 
+
+// DO NOT USE String.fromEnvironment without 'const'!!!
+// https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
 String get envGrpcPort => const String.fromEnvironment('GRPC_PORT', defaultValue: '9090');
 
-String get envLcdUrl => String.fromEnvironment(
-      'LCD_URL',
-      defaultValue: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost',
-    );
+String get envLcdUrl {
+  // DO NOT USE String.fromEnvironment without 'const'!!!
+  // https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
+  const result = String.fromEnvironment('LCD_URL');
+  if (result.isEmpty) {
+    return Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost';
+  }
+  return result;
+}
 
-String get envGrpcUrl => String.fromEnvironment(
-      'GRPC_URL',
-      defaultValue: Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost',
-    );
+String get envGrpcUrl {
+  // DO NOT USE String.fromEnvironment without 'const'!!!
+  // https://github.com/flutter/flutter/issues/55870#issuecomment-620776138
+  const result = String.fromEnvironment('GRPC_URL');
+  if (result.isEmpty) {
+    return Platform.isAndroid ? 'http://10.0.2.2' : 'http://localhost';
+  }
+  return result;
+}
