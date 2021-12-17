@@ -31,6 +31,8 @@ jobs:
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 10
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -61,7 +63,7 @@ jobs:
         working-directory: ./starport_template
         if: env.changes_starport_template == 'true'
         run: |
-          flutter build ios --no-codesign --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
+          flutter build ios --build-number $GITHUB_RUN_NUMBER --no-codesign --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
 
       - name: deploy firebase iOS
         working-directory: ./starport_template/ios
