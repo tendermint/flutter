@@ -84,7 +84,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0"
   build_config:
     dependency: transitive
     description:
@@ -166,8 +166,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/cosmos_utils"
-      ref: starport-redesign
-      resolved-ref: "162e75a25f96f39162c33388117161ef6defcced"
+      ref: main
+      resolved-ref: "64ebcf772808420a500cdb7a981bda9e4157dc22"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
