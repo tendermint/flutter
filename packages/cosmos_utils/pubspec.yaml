@@ -16,6 +16,7 @@ dependencies:
   bech32: ^0.2.1
   hex: ^0.2.0
   equatable: ^2.0.3
+  package_info: 2.0.2
 
 dev_dependencies:
   flutter_test:
