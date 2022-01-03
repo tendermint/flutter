@@ -172,10 +172,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => SizedBox(
-        height: MediaQuery.of(context).size.height / 1.06,
-        child: const SettingsSheet(),
-      ),
+      builder: (context) => const SettingsSheet(),
     );
   }
 }
