@@ -3,6 +3,7 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/widgets/app_version_text.dart';
 
 class SettingsSheet extends StatelessWidget {
   const SettingsSheet({Key? key}) : super(key: key);
@@ -54,10 +55,9 @@ class SettingsSheet extends StatelessWidget {
             onTap: () => notImplemented(context),
           ),
           const Spacer(),
-          // TODO: Pick this version from the actual app version
           Padding(
-            padding: EdgeInsets.only(left: theme.spacingXL),
-            child: const Align(alignment: Alignment.centerLeft, child: Text('v 1.0')),
+            padding: EdgeInsets.only(left: theme.spacingXL, bottom: theme.spacingXXL),
+            child: const Align(alignment: Alignment.centerLeft, child: AppVersionText()),
           ),
           MinimalBottomSpacer(padding: theme.spacingXXXL)
         ],

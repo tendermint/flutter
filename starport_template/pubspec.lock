@@ -28,7 +28,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.6"
+    version: "3.1.8"
   args:
     dependency: transitive
     description:
@@ -84,7 +84,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   build_config:
     dependency: transitive
     description:
@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
-      resolved-ref: d74d1226d1377ce6aac60f482d8f44a70ea2aacc
+      resolved-ref: "91e16a27d87b5c2655183727f2b6d66acac81b60"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: d74d1226d1377ce6aac60f482d8f44a70ea2aacc
+      resolved-ref: "91e16a27d87b5c2655183727f2b6d66acac81b60"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -475,6 +475,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  package_info:
+    dependency: transitive
+    description:
+      name: package_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -558,7 +565,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.0"
+    version: "3.5.0"
   process:
     dependency: transitive
     description:
@@ -765,7 +772,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: d74d1226d1377ce6aac60f482d8f44a70ea2aacc
+      resolved-ref: "91e16a27d87b5c2655183727f2b6d66acac81b60"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -859,7 +866,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.3"
   xdg_directories:
     dependency: transitive
     description:
