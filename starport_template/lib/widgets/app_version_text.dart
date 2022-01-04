@@ -1,14 +1,22 @@
 import 'package:cosmos_utils/app_info_extractor.dart';
+import 'package:cosmos_utils/app_info_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// TODO: Make this intelligent enough to display all of the properties inside [AppInfo] configurable from outside
 
 class AppVersionText extends StatefulWidget {
-  const AppVersionText({Key? key}) : super(key: key);
+  const AppVersionText({required this.appInfoProvider, Key? key}) : super(key: key);
+  final AppInfoProvider appInfoProvider;
 
   @override
   State<AppVersionText> createState() => _AppVersionTextState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AppInfoProvider>('appInfoProvider', appInfoProvider));
+  }
 }
 
 class _AppVersionTextState extends State<AppVersionText> {
@@ -27,8 +35,7 @@ class _AppVersionTextState extends State<AppVersionText> {
   }
 
   Future<void> _getAppVersion() async {
-    final response = await getAppInfo();
-    version = response.version;
+    version = await widget.appInfoProvider.getAppVersion();
     setState(() {});
   }
 

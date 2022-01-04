@@ -57,7 +57,12 @@ class SettingsSheet extends StatelessWidget {
           const Spacer(),
           Padding(
             padding: EdgeInsets.only(left: theme.spacingXL, bottom: theme.spacingXXL),
-            child: const Align(alignment: Alignment.centerLeft, child: AppVersionText()),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: AppVersionText(
+                appInfoProvider: AppInfoProvider(),
+              ),
+            ),
           ),
           MinimalBottomSpacer(padding: theme.spacingXXXL)
         ],
