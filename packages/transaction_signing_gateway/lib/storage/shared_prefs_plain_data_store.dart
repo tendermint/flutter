@@ -3,16 +3,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/storage/data_store.dart';
 
+typedef SharedPrefsProvider = Future<SharedPreferences> Function();
+
 class SharedPrefsPlainDataStore implements PlainDataStore {
+  SharedPrefsPlainDataStore({
+    SharedPrefsProvider? sharedPreferencesProvider,
+  }) : sharedPreferencesProvider = sharedPreferencesProvider ?? SharedPreferences.getInstance;
+
+  static const String keyPrefix = 'cosmosSharedPrefs_';
+
+  final SharedPrefsProvider sharedPreferencesProvider;
+
   @override
   Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = await sharedPreferencesProvider();
       return right(
         Map.fromEntries(
-          prefs.getKeys().map(
+          prefs.getKeys().where((it) => it.startsWith(keyPrefix)).map(
                 (key) => MapEntry(
-                  key,
+                  key.replaceFirst(keyPrefix, ''),
                   prefs.getString(key),
                 ),
               ),
@@ -24,10 +34,12 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, String?>> readPlainText({required String key}) async {
+  Future<Either<CredentialsStorageFailure, String?>> readPlainText({
+    required String key,
+  }) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      return right(prefs.getString(key));
+      final prefs = await sharedPreferencesProvider();
+      return right(prefs.getString('$keyPrefix$key'));
     } catch (ex, stack) {
       return left(CredentialsStorageFailure("Error while reading plain text for key: '$key'", cause: ex, stack: stack));
     }
@@ -36,11 +48,11 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
   @override
   Future<Either<CredentialsStorageFailure, Unit>> savePlainText({required String key, required String? value}) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = await sharedPreferencesProvider();
       if (value == null) {
-        await prefs.remove(key);
+        await prefs.remove('$keyPrefix$key');
       } else {
-        await prefs.setString(key, value);
+        await prefs.setString('$keyPrefix$key', value);
       }
       return right(unit);
     } catch (ex, stack) {
