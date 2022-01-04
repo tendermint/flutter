@@ -1,6 +1,7 @@
 library cosmos_utils;
 
 export 'address_parser.dart';
+export 'app_info_provider.dart';
 export 'colors_generator.dart';
 export 'extensions.dart';
 export 'future_either.dart';
