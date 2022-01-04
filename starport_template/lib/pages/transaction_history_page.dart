@@ -1,7 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
-import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,6 +10,7 @@ import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/receive_money_sheet.dart';
+import 'package:starport_template/widgets/settings_sheet.dart';
 import 'package:starport_template/widgets/transaction_history_list.dart';
 import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -85,7 +85,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
         children: [
           CosmosImageButton(
             asset: 'assets/images/settings.png',
-            onTap: () => notImplemented(context),
+            onTap: _onTapSettings,
           ),
           CosmosImageButton(
             asset: 'assets/images/arrow_right.png',
@@ -166,5 +166,13 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet))
       ..add(StringProperty('walletAddress', walletAddress))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading));
+  }
+
+  Future<void> _onTapSettings() async {
+    await showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const SettingsSheet(),
+    );
   }
 }

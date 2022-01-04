@@ -36,7 +36,7 @@ jobs:
 
       - name: check for changes in folders
         run: |
-          echo "changes_starport_template=$(git diff --quiet HEAD $GITHUB_REF -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
+          echo "changes_starport_template=$(git diff --quiet HEAD HEAD~1  -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
 
       - uses: subosito/flutter-action@v1
         if: env.changes_starport_template == 'true'
