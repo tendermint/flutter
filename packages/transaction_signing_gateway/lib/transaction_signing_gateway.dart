@@ -3,6 +3,7 @@ library transaction_signing_gateway;
 export 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
 export 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
 export 'package:transaction_signing_gateway/alan/alan_transaction.dart';
+export 'package:transaction_signing_gateway/alan/alan_transaction_broadcaster.dart';
 export 'package:transaction_signing_gateway/alan/alan_transaction_signer.dart';
 export 'package:transaction_signing_gateway/encrypt/aes_cipher.dart';
 export 'package:transaction_signing_gateway/encrypt/cipher.dart';
