@@ -9,7 +9,7 @@ packages:
     source: hosted
     version: "22.0.0"
   alan:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: alan
       url: "https://pub.dartlang.org"
@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
-      resolved-ref: "4dfec50edcce5f46bc632bbe836bbff778717686"
+      resolved-ref: "43fcac1251d66333c6bc21900339603ca111f5cc"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "4dfec50edcce5f46bc632bbe836bbff778717686"
+      resolved-ref: "43fcac1251d66333c6bc21900339603ca111f5cc"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -216,7 +216,7 @@ packages:
     source: hosted
     version: "5.0.1"
   equatable:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: equatable
       url: "https://pub.dartlang.org"
@@ -268,7 +268,7 @@ packages:
       name: flutter_mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3+2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -420,7 +420,7 @@ packages:
     source: hosted
     version: "1.8.1"
   local_auth:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: local_auth
       url: "https://pub.dartlang.org"
@@ -460,7 +460,7 @@ packages:
       name: mobx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.6+1"
   modal_bottom_sheet:
     dependency: "direct main"
     description:
@@ -772,7 +772,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: "4dfec50edcce5f46bc632bbe836bbff778717686"
+      resolved-ref: "43fcac1251d66333c6bc21900339603ca111f5cc"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
