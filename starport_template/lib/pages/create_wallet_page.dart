@@ -1,3 +1,4 @@
+import 'package:cosmos_auth/cosmos_auth.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
@@ -8,7 +9,6 @@ import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/back_up_wallet_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/utils/user_authenticator.dart';
 import 'package:starport_template/widgets/backup_later_bottom_sheet.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 
@@ -127,8 +127,13 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   Future<void> _authenticateUser() async {
-    final result = await UserAuthenticator.authenticateUser();
-    setState(() => _isAuthenticated = result);
+    final result = await CosmosAuth().biometricAuthenticate();
+    setState(
+      () => _isAuthenticated = result.fold(
+        (fail) => fail.type == LocalAuthFailureType.noBiometrics,
+        (isAuthenticated) => isAuthenticated,
+      ),
+    );
   }
 
   void _onTapAdvanced() => notImplemented(context);
