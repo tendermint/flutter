@@ -39,7 +39,7 @@ class StorageProblemSigningFailure implements TransactionSigningFailure {
   final CredentialsStorageFailure failure;
 
   @override
-  TransactionSigningFailType get type => throw TransactionSigningFailType.walletCredentialsStorageFailure;
+  TransactionSigningFailType get type => TransactionSigningFailType.walletCredentialsStorageFailure;
 
   @override
   String toString() {
