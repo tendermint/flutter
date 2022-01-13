@@ -121,6 +121,32 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
   }
 
   @override
+  Future<Either<CredentialsStorageFailure, Unit>> deleteWalletCredentials({
+    required WalletPublicInfo publicInfo,
+  }) async {
+    final credsKey = _credentialsKey(
+      chainId: publicInfo.chainId,
+      walletId: publicInfo.walletId,
+    );
+    final serializerKey = _serializerIdKey(
+      chainId: publicInfo.chainId,
+      walletId: publicInfo.walletId,
+    );
+    final publicInfoKey = _publicInfoKey(
+      chainId: publicInfo.chainId,
+      walletId: publicInfo.walletId,
+    );
+
+    return _secureDataStore.saveSecureText(key: credsKey, value: null).flatMap((_) {
+      return _plainDataStore.savePlainText(key: serializerKey, value: null);
+    }).flatMap((_) {
+      return _plainDataStore.savePlainText(key: publicInfoKey, value: null);
+    }).map((_) {
+      return right(unit);
+    });
+  }
+
+  @override
   Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() async =>
       _plainDataStore.readAllPlainText().flatMap(
         (storageMap) async {
