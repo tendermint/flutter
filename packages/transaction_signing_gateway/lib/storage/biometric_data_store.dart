@@ -22,20 +22,6 @@ class BiometricDataStore implements SecureDataStore {
   final String storageFileName;
   final StorageFileInitOptions _storageFileInitOptions;
 
-  /// Convenience helper method to check whether biometric authentication is available on the device
-  Future<Either<BiometricCredentialsStorageFailure, Unit>> authenticateUser() async {
-    return _readMap() //
-        .mapError<BiometricCredentialsStorageFailure>((err) {
-      if (err is BiometricCredentialsStorageFailure) {
-        return err;
-      } else {
-        return BiometricCredentialsStorageFailure.unknown('$err');
-      }
-    }).flatMap((a) async {
-      return right(unit);
-    });
-  }
-
   @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({
     required String key,

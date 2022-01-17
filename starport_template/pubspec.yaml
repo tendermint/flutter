@@ -23,10 +23,17 @@ dependencies:
   share_plus: 3.0.4
   intl: 0.17.0
   alan: 0.40.2+1
+
   cosmos_ui_components:
     git:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_ui_components
+      ref: main
+
+  cosmos_auth:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_auth
       ref: main
 
   cosmos_utils:
@@ -59,6 +66,8 @@ flutter_icons:
 #dependency_overrides:
 #  cosmos_utils:
 #    path: ../packages/cosmos_utils
+#  cosmos_auth:
+#    path: ../packages/cosmos_auth
 #  transaction_signing_gateway:
 #    path: ../packages/transaction_signing_gateway
 #  cosmos_ui_components:
