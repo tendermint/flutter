@@ -15,6 +15,8 @@ abstract class KeyInfoStorage {
     required String password,
   });
 
+  Future<Either<CredentialsStorageFailure, Unit>> deleteWalletCredentials({required WalletPublicInfo publicInfo});
+
   Future<Either<CredentialsStorageFailure, Unit>> updatePublicWalletInfo({
     required WalletPublicInfo info,
   });

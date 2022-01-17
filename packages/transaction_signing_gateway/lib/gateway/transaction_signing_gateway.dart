@@ -54,6 +54,10 @@ class TransactionSigningGateway {
         password: password,
       );
 
+  /// Deletes a wallet from device
+  Future<Either<CredentialsStorageFailure, Unit>> deleteWalletCredentials({required WalletPublicInfo publicInfo}) =>
+      _infoStorage.deleteWalletCredentials(publicInfo: publicInfo);
+
   /// Updates the public details of the wallet
   Future<Either<CredentialsStorageFailure, Unit>> updateWalletPublicInfo({
     required WalletPublicInfo info,
