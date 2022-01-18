@@ -88,8 +88,8 @@ jobs:
         working-directory: ./starport_template/android
         run: >
           mkdir signing
-          echo $STARPORT_TEMPLATE_GOOGLE_SERVICES_JSON_BASE64 | base64 -d >
-          app/google-services.json
+          
+          echo $STARPORT_TEMPLATE_GOOGLE_SERVICES_JSON_BASE64 | base64 -d > app/google-services.json
 
       - name: prepare android build with cosmos testnet
         working-directory: ./starport_template
