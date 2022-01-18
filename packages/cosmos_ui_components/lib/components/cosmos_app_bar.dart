@@ -22,7 +22,6 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(width: CosmosTheme.of(context).spacingS),
               if (leading != null) leading!,
