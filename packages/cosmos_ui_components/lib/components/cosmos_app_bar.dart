@@ -6,45 +6,52 @@ import 'package:flutter/material.dart';
 class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CosmosAppBar({
     Key? key,
-    this.title = '',
+    this.title,
     this.actions,
     this.leading,
+    this.preferredHeight,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final double? preferredHeight;
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SizedBox(width: CosmosTheme.of(context).spacingS),
+              SizedBox(width: theme.spacingS),
               if (leading != null) leading!,
               const Spacer(),
               if (actions != null) ...actions!,
             ],
           ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
-            child: Text(title, style: CosmosTextTheme.titleSans2Bold),
-          ),
+          if (title != null) ...[
+            SizedBox(height: theme.spacingL),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
+              child: Text(title!, style: CosmosTextTheme.titleSans2Bold),
+            ),
+          ]
         ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(114);
+  Size get preferredSize => Size.fromHeight(preferredHeight ?? (title == null ? kToolbarHeight : 120));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
+    properties
+      ..add(StringProperty('title', title))
+      ..add(DoubleProperty('preferredHeight', preferredHeight));
   }
 }
