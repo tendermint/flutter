@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  local_auth: 1.1.9
+  local_auth: ^1.1.10
   cosmos_utils:
     git:
       url: https://github.com/tendermint/flutter.git
@@ -22,11 +22,12 @@ dependencies:
 ## it points to the location of the checked out tendermint/flutter repository
 #dependency_overrides:
 #  cosmos_utils:
-#    path: ../packages/cosmos_utils
+#    path: ../cosmos_utils
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: 1.8.1
+  mocktail: 0.2.0
 
 flutter:
