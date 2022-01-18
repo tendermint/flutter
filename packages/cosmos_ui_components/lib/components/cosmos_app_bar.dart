@@ -19,23 +19,26 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SizedBox(width: CosmosTheme.of(context).spacingS),
+              SizedBox(width: theme.spacingS),
               if (leading != null) leading!,
               const Spacer(),
               if (actions != null) ...actions!,
             ],
           ),
-          if (title != null)
+          if (title != null) ...[
+            SizedBox(height: theme.spacingL),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+              padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
               child: Text(title!, style: CosmosTextTheme.titleSans2Bold),
             ),
+          ]
         ],
       ),
     );
