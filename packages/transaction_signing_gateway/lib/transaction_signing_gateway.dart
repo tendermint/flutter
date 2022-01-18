@@ -17,6 +17,5 @@ export 'package:transaction_signing_gateway/storage/biometric_data_store.dart';
 export 'package:transaction_signing_gateway/storage/cosmos_key_info_storage.dart';
 export 'package:transaction_signing_gateway/storage/flutter_secure_storage_data_store.dart';
 export 'package:transaction_signing_gateway/storage/key_info_storage.dart';
-export 'package:transaction_signing_gateway/storage/locker_data_store.dart';
 export 'package:transaction_signing_gateway/storage/shared_prefs_plain_data_store.dart';
 export 'package:transaction_signing_gateway/transaction_signer.dart';
