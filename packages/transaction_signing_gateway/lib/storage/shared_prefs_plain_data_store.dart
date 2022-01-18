@@ -1,7 +1,6 @@
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
-import 'package:transaction_signing_gateway/storage/data_store.dart';
 
 typedef SharedPrefsProvider = Future<SharedPreferences> Function();
 

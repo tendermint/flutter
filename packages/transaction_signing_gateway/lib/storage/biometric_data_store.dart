@@ -4,10 +4,10 @@ import 'package:biometric_storage/biometric_storage.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
-import 'package:transaction_signing_gateway/storage/data_store.dart';
 
+@Deprecated('Use "cosmos_auth" package instead')
 class BiometricDataStore implements SecureDataStore {
+  @Deprecated('Use "cosmos_auth" package instead')
   BiometricDataStore({
     this.promptInfo = PromptInfo.defaultValues,
     this.storageFileName = 'cosmos_wallet_creds',

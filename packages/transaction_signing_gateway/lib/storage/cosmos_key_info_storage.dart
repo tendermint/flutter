@@ -5,14 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/encrypt/aes_cipher.dart';
 import 'package:transaction_signing_gateway/encrypt/cipher.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info_serializer.dart';
-import 'package:transaction_signing_gateway/storage/data_store.dart';
 import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 
 class CosmosKeyInfoStorage implements KeyInfoStorage {

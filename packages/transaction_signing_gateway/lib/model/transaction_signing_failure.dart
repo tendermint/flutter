@@ -1,4 +1,4 @@
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 
 enum TransactionSigningFailType {
   userDeclined,
