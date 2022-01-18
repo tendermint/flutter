@@ -41,6 +41,7 @@ class CosmosAuth {
       _passwordStore.readPassword(
         biometrics: _biometrics,
         secureDataStore: secureDataStore,
+        useBiometrics: useBiometrics,
         id: id,
       );
 
