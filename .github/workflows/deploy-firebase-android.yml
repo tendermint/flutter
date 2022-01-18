@@ -1,0 +1,119 @@
+name: Deploy Firebase - Android
+'on':
+  push:
+    branches:
+      - main
+  workflow_dispatch: null
+
+concurrency:
+  group: '${{ github.head_ref || github.ref }}-android-deployment'
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: 2.8.0
+  JAVA_VERSION: '12'
+  RUBY_VERSION: '2.7'
+  ALPHA_ANDROID_FIREBASE_TESTERS_GROUP: android-testers
+  LC_ALL: en_US.UTF-8
+  FIREBASE_TOKEN: '${{ secrets.FIREBASE_TOKEN }}'
+  FIREBASE_PLIST_FILE: '${{ secrets.FIREBASE_PLIST_FILE }}'
+  MATCH_GIT_BASIC_AUTHORIZATION: '${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}'
+  STARPORT_TEMPLATE_ANDROID_STORE_PASS: '${{ secrets.STARPORT_TEMPLATE_ANDROID_STORE_PASS }}'
+  STARPORT_TEMPLATE_ANDROID_KEY_ALIAS: '${{ secrets.STARPORT_TEMPLATE_ANDROID_KEY_ALIAS }}'
+  STARPORT_TEMPLATE_ANDROID_KEY_PASS: '${{ secrets.STARPORT_TEMPLATE_ANDROID_KEY_PASS }}'
+  STARPORT_TEMPLATE_ANDROID_KEYSTORE_FILE_BASE64: '${{ secrets.STARPORT_TEMPLATE_ANDROID_KEYSTORE_FILE_BASE64 }}'
+  ALPHA_ANDROID_FIREBASE_APP_ID: '${{ secrets.ALPHA_ANDROID_FIREBASE_APP_ID }}'
+  LANG: en_US.UTF-8
+
+jobs:
+  preconditions:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: check for changes in folders
+        id: check-template-changes
+        run: >
+          echo "::set-output name=template-changes::$(git diff --quiet HEAD HEAD~1  --
+          starport_template && echo "false" || echo "true")"
+    outputs:
+      template-changes: ${{ steps.check-template-changes.outputs.template-changes }}
+
+  deploy-android:
+    needs: preconditions
+    if: needs.preconditions.outputs.template-changes == 'true'
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 10
+
+      - name: check for changes in folders
+        run: >
+          echo "template-changes=$(git diff --quiet HEAD HEAD~1  --
+          starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
+
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '${{ env.FLUTTER_VERSION }}'
+
+      - name: pub get
+        working-directory: ./starport_template/android
+        run: flutter pub get
+
+      - name: set up ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+
+      - name: prepare fastlane
+        working-directory: ./starport_template/android
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: prepare keystore
+        working-directory: ./starport_template/android
+        run: |
+          mkdir signing
+          echo $STARPORT_TEMPLATE_ANDROID_KEYSTORE_FILE_BASE64 | base64 -d > signing/release
+
+      - name: prepare google-services.json
+        working-directory: ./starport_template/android
+        run: |
+          echo $STARPORT_TEMPLATE_GOOGLE_SERVICES_JSON_BASE64 | base64 -d > app/google-services.json
+
+      - name: prepare android build with cosmos testnet
+        working-directory: ./starport_template
+        run: >
+          flutter build apk --build-number $GITHUB_RUN_NUMBER
+          --dart-define=LCD_URL=https://api.testnet.cosmos.network
+          --dart-define=LCD_PORT=443
+          --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network
+          --dart-define=GRPC_PORT=443
+
+      - name: deploy firebase Android
+        working-directory: ./starport_template/android
+        run: |
+          gem install bundler
+          bundle install
+          bundle exec fastlane deploy_firebase
+
+      - name: Report Status
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: '${{ secrets.SLACK_NOTIFICATIONS_CHANNEL }}'
+          SLACK_COLOR: '${{ job.status }}'
+          SLACK_ICON: 'https://github.com/tendermint.png?size=48'
+          SLACK_TITLE: Starport Template - DEPLOY FAILED
+          SLACK_LINK_NAMES: true
+          SLACK_USERNAME: Github Android Deployment
+          MSG_MINIMAL: 'actions url, ref'
+          SLACK_FOOTER: Mobile Slackbot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

@@ -1,0 +1,45 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "deploys to firebase app distribution"
+  lane :deploy_firebase do
+    setup_ci
+    releaseNotes = changelog_from_git_commits(
+      commits_count: 10,
+      date_format: "format:%d %b",
+      pretty: "- (%cd) %s",
+      merge_commit_filtering: "exclude_merges",
+      quiet: true
+    ).split("\n").select do |elem|
+      !elem.include? "skip-ci"
+    end[0...5].join("\n")
+
+    print("RELEASE NOTES:\n")
+    print(releaseNotes)
+
+    firebase_app_distribution(
+      app: ENV["ALPHA_ANDROID_FIREBASE_APP_ID"],
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
+      groups: ENV["ALPHA_ANDROID_FIREBASE_TESTERS_GROUP"],
+      release_notes: releaseNotes,
+      firebase_cli_token: ENV["FIREBASE_TOKEN"]
+    )
+
+  end
+end
