@@ -1,7 +1,7 @@
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';

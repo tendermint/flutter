@@ -1,6 +1,5 @@
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
-import 'package:transaction_signing_gateway/storage/data_store.dart';
 
 class TestMemoryStore implements PlainDataStore, SecureDataStore {
   final Map<String, String?> _values = {};

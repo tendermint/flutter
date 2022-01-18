@@ -2,7 +2,6 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
