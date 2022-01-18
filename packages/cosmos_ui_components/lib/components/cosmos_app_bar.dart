@@ -9,11 +9,13 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.actions,
     this.leading,
+    this.preferredHeight,
   }) : super(key: key);
 
   final String? title;
   final List<Widget>? actions;
   final Widget? leading;
+  final double? preferredHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,6 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (actions != null) ...actions!,
             ],
           ),
-          const SizedBox(height: 20),
           if (title != null)
             Padding(
               padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
@@ -41,11 +42,13 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(title == null ? kToolbarHeight : 120);
+  Size get preferredSize => Size.fromHeight(preferredHeight ?? (title == null ? kToolbarHeight : 120));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
+    properties
+      ..add(StringProperty('title', title))
+      ..add(DoubleProperty('preferredHeight', preferredHeight));
   }
 }
