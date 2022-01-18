@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CosmosAppBar({
     Key? key,
-    this.title = '',
+    this.title,
     this.actions,
     this.leading,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final List<Widget>? actions;
   final Widget? leading;
 
@@ -30,17 +30,18 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
-            child: Text(title, style: CosmosTextTheme.titleSans2Bold),
-          ),
+          if (title != null)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+              child: Text(title!, style: CosmosTextTheme.titleSans2Bold),
+            ),
         ],
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(114);
+  Size get preferredSize => Size.fromHeight(title == null ? kToolbarHeight : 120);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
