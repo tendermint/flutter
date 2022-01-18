@@ -2,8 +2,12 @@ name: Deploy Firebase - iOS
 
 on:
   push:
-    branches: [ main, starport-redesign ]
+    branches: [ main ]
   workflow_dispatch:
+
+concurrency:
+  group: '${{ github.head_ref || github.ref }}-ios-deployment'
+  cancel-in-progress: true
 
 env:
   FLUTTER_VERSION: '2.8.0'
@@ -25,11 +29,31 @@ env:
   MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
   LANG: en_US.UTF-8
 
+
 jobs:
+  preconditions:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: check for changes in folders
+        id: check-template-changes
+        run: >
+          echo "::set-output name=template-changes::$(git diff --quiet HEAD HEAD~1  --
+          starport_template && echo "false" || echo "true")"
+    outputs:
+      template-changes: ${{ steps.check-template-changes.outputs.template-changes }}
+
   deploy-ios:
+    needs: preconditions
+    if: needs.preconditions.outputs.template-changes == 'true'
     timeout-minutes: 30
     runs-on: macos-11
     steps:
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 10
@@ -39,38 +63,46 @@ jobs:
           echo "changes_starport_template=$(git diff --quiet HEAD HEAD~1  -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
 
       - uses: subosito/flutter-action@v1
-        if: env.changes_starport_template == 'true'
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
 
       - name: pub get
         working-directory: ./starport_template/ios
-        if: env.changes_starport_template == 'true'
         run: flutter pub get
 
       - name: set up ruby
-        if: env.changes_starport_template == 'true'
         uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
       - name: prepare fastlane
         working-directory: ./starport_template/ios
-        if: env.changes_starport_template == 'true'
         run: |
           gem install bundler
           bundle install
 
       - name: prepare ios build with cosmos testnet
         working-directory: ./starport_template
-        if: env.changes_starport_template == 'true'
         run: |
           flutter build ios --build-number $GITHUB_RUN_NUMBER --no-codesign --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
 
       - name: deploy firebase iOS
         working-directory: ./starport_template/ios
-        if: env.changes_starport_template == 'true'
         run: |
           gem install bundler
           bundle install
           bundle exec fastlane deploy_firebase
+
+      - name: Report Status
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: '${{ secrets.SLACK_NOTIFICATIONS_CHANNEL }}'
+          SLACK_COLOR: '${{ job.status }}'
+          SLACK_ICON: 'https://github.com/tendermint.png?size=48'
+          SLACK_TITLE: Starport Template - DEPLOY FAILED
+          SLACK_LINK_NAMES: true
+          SLACK_USERNAME: Github iOS Deployment
+          MSG_MINIMAL: 'actions url, ref'
+          SLACK_FOOTER: Mobile Slackbot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

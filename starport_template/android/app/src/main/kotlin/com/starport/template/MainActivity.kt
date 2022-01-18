@@ -1,4 +1,4 @@
-package network.starport.flutter.starport_template
+package com.starport.template
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
