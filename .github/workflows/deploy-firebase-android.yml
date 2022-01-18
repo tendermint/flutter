@@ -79,16 +79,13 @@ jobs:
 
       - name: prepare keystore
         working-directory: ./starport_template/android
-        run: >
+        run: |
           mkdir signing
-          echo $STARPORT_TEMPLATE_ANDROID_KEYSTORE_FILE_BASE64 | base64 -d >
-          signing/release
+          echo $STARPORT_TEMPLATE_ANDROID_KEYSTORE_FILE_BASE64 | base64 -d > signing/release
 
       - name: prepare google-services.json
         working-directory: ./starport_template/android
-        run: >
-          mkdir signing
-          
+        run: |
           echo $STARPORT_TEMPLATE_GOOGLE_SERVICES_JSON_BASE64 | base64 -d > app/google-services.json
 
       - name: prepare android build with cosmos testnet
@@ -106,10 +103,6 @@ jobs:
           gem install bundler
           bundle install
           bundle exec fastlane deploy_firebase
-
-      - name: prepare keystore
-        run: |
-          fvm install
 
       - name: Report Status
         if: failure()
