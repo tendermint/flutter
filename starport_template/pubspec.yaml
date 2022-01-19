@@ -15,7 +15,7 @@ dependencies:
   http: 0.13.4
   decimal: 1.5.0
   equatable: 2.0.3
-  local_auth: 1.1.9
+  local_auth: 1.1.10
   flutter_mobx: 2.0.3+2
   modal_bottom_sheet: 2.0.0
   qr_flutter: 4.0.0

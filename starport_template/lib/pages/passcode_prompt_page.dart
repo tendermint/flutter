@@ -1,6 +1,8 @@
+import 'package:cosmos_auth/auth/cosmos_auth.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/starport_app.dart';
 
 class PasswordPromptPage extends StatefulWidget {
   const PasswordPromptPage({
@@ -9,19 +11,24 @@ class PasswordPromptPage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  static const String starportPassId = '';
+
   final String? message;
 
-  static Future<String?> promptPassword(BuildContext context, {String? message}) => _showPage(
+  static Future<String?> promptPassword(BuildContext context, {String? message}) async {
+    return (await CosmosAuth().hasPassword(
+      secureDataStore: StarportApp.secureDataStore,
+      id: PasswordPromptPage.starportPassId,
+    ))
+        .fold(
+      (l) => null,
+      (hasPassword) => _showPage(
         context,
-        setUpPasscode: false,
-        message: message,
-      );
-
-  static Future<String?> createPassword(BuildContext context) => _showPage(
-        context,
-        setUpPasscode: true,
-        message: 'Provide passcode that we will use to secure your wallet data',
-      );
+        setUpPasscode: !hasPassword,
+        message: hasPassword ? message : 'Provide passcode that we will use to secure your wallet data',
+      ),
+    );
+  }
 
   static Future<String?> _showPage(
     BuildContext context, {
@@ -95,8 +102,19 @@ class _PasswordPromptPageState extends State<PasswordPromptPage> {
     }
   }
 
-  void _onPasscodeSubmit(String value) {
-    Navigator.of(context).pop(value);
+  Future<void> _onPasscodeSubmit(String value) async {
+    final password = await CosmosAuth().readPassword(
+      secureDataStore: StarportApp.secureDataStore,
+      id: PasswordPromptPage.starportPassId,
+      useBiometrics: false,
+    );
+    if (password.getOrElse(() => '') == value) {
+      if (mounted) {
+        Navigator.of(context).pop(value);
+      }
+    } else {
+      _showPasscodeError();
+    }
   }
 
   void _showPasscodeError() {
@@ -109,7 +127,11 @@ class _PasswordPromptPageState extends State<PasswordPromptPage> {
   }
 
   void _savePasscode() {
-    debugPrint('Saving!');
+    CosmosAuth().savePassword(
+      secureDataStore: StarportApp.secureDataStore,
+      id: PasswordPromptPage.starportPassId,
+      password: _passcodes[0],
+    );
     Navigator.of(context).pop(_passcodes[0]);
   }
 }
