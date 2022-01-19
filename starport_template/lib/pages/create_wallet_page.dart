@@ -160,7 +160,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       );
 
   Future<void> _createWallet({required bool isBackedUp}) async {
-    final password = await PasswordPromptPage.createPassword(
+    final password = await PasswordPromptPage.promptPassword(
       context,
     );
     if (password == null) {

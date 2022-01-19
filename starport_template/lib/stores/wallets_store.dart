@@ -8,7 +8,6 @@ import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_wallet_derivation_info.dart';
-import 'package:transaction_signing_gateway/model/credentials_storage_failure.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class WalletsStore {
@@ -175,17 +174,18 @@ class WalletsStore {
       (credentials) {
         return _transactionSigningGateway
             .storeWalletCredentials(
-              credentials: credentials,
-              password: data.password,
-            )
+          credentials: credentials,
+          password: data.password,
+        )
             .flatMap(
-              (_) => _transactionSigningGateway.updateWalletPublicInfo(
-                info: credentials.publicInfo.copyWith(
-                  additionalData: data.additionalData.toJsonString(),
-                ),
+          (_) async {
+            return _transactionSigningGateway.updateWalletPublicInfo(
+              info: credentials.publicInfo.copyWith(
+                additionalData: data.additionalData.toJsonString(),
               ),
-            )
-            .mapSuccess((_) {
+            );
+          },
+        ).mapSuccess((_) {
           return credentials;
         });
       },

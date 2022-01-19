@@ -108,7 +108,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
   }
 
   Future<void> _importWallet({String name = 'Account 1'}) async {
-    final password = await PasswordPromptPage.createPassword(context);
+    final password = await PasswordPromptPage.promptPassword(context);
     if (password == null) {
       return;
     }
