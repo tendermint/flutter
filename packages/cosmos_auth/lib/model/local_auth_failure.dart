@@ -4,11 +4,16 @@ enum LocalAuthFailureType {
 }
 
 class LocalAuthFailure {
-  LocalAuthFailure(this.type);
+  const LocalAuthFailure.noBiometricsAvailable([this.cause, this.stack]) : type = LocalAuthFailureType.noBiometrics;
 
-  const LocalAuthFailure.noBiometricsAvailable() : type = LocalAuthFailureType.noBiometrics;
-
-  const LocalAuthFailure.unknown() : type = LocalAuthFailureType.unknown;
+  const LocalAuthFailure.unknown([this.cause, this.stack]) : type = LocalAuthFailureType.unknown;
 
   final LocalAuthFailureType type;
+  final dynamic cause;
+  final dynamic stack;
+
+  @override
+  String toString() {
+    return 'LocalAuthFailure{type: $type, cause: $cause,\nstack: $stack}';
+  }
 }
