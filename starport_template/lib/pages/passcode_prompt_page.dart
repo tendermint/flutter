@@ -1,5 +1,6 @@
 import 'package:cosmos_auth/auth/cosmos_auth.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_utils/extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
@@ -11,7 +12,7 @@ class PasswordPromptPage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  static const String starportPassId = '';
+  static const String starportPassId = 'mainPass';
 
   final String? message;
 
@@ -62,6 +63,12 @@ class _PasswordPromptPageState extends State<PasswordPromptPage> {
   final List<String> _passcodes = [];
 
   bool get _arePasscodesValid => _passcodes.length == 2 && _passcodes[0] == _passcodes[1];
+
+  @override
+  void initState() {
+    super.initState();
+    _runBiometricsCheck();
+  }
 
   String get _title {
     const enterTitle = 'Enter your passcode';
@@ -133,5 +140,29 @@ class _PasswordPromptPageState extends State<PasswordPromptPage> {
       password: _passcodes[0],
     );
     Navigator.of(context).pop(_passcodes[0]);
+  }
+
+  Future<void> _runBiometricsCheck() async {
+    final cosmosAuth = CosmosAuth();
+    final availableBiometrics = await cosmosAuth.getAvailableBiometrics().asyncFold(
+          (fail) => [],
+          (types) => types,
+        );
+
+    if (StarportApp.settingsStore.biometricsEnabled && availableBiometrics.isNotEmpty) {
+      final password = await cosmosAuth
+          .readPassword(
+            secureDataStore: StarportApp.secureDataStore,
+            id: PasswordPromptPage.starportPassId,
+          )
+          .asyncFold(
+            (fail) => null,
+            (success) => success,
+          );
+      if (!mounted) {
+        return;
+      }
+      Navigator.of(context).pop(password ?? '');
+    }
   }
 }
