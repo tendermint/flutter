@@ -8,6 +8,7 @@ class SettingsItem extends StatelessWidget {
     required this.textStyle,
     this.infoIcon,
     this.onTap,
+    this.showArrow = true,
     Key? key,
   }) : super(key: key);
 
@@ -15,20 +16,24 @@ class SettingsItem extends StatelessWidget {
   final TextStyle textStyle;
   final Widget? infoIcon;
   final VoidCallback? onTap;
+  final bool showArrow;
 
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: theme.spacingL, vertical: theme.spacingM),
-      child: InkWell(
-        onTap: onTap,
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: theme.spacingL,
+          vertical: theme.spacingM,
+        ),
         child: Row(
           children: [
             Text(text, style: textStyle),
             const Spacer(),
             if (infoIcon != null) infoIcon!,
-            Image.asset('assets/images/arrow_right.png', package: packageName),
+            if (showArrow) Image.asset('assets/images/arrow_right.png', package: packageName),
           ],
         ),
       ),
@@ -41,6 +46,7 @@ class SettingsItem extends StatelessWidget {
     properties
       ..add(StringProperty('text', text))
       ..add(DiagnosticsProperty<TextStyle>('textStyle', textStyle))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
+      ..add(DiagnosticsProperty<bool>('showArrow', showArrow));
   }
 }

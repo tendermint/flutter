@@ -12,6 +12,10 @@ class CosmosAuth {
   final Biometrics _biometrics;
   final PasswordStore _passwordStore;
 
+  /// Gets available biometrics sensors list
+  Future<Either<LocalAuthFailure, List<BiometricType>>> getAvailableBiometrics() =>
+      _biometrics.getAvailableBiometrics();
+
   /// Triggers biometric authentication in the system. returns [LocalAuthFailure] in case of an error
   /// or if the device is not capable of biometric auth.
   Future<Either<LocalAuthFailure, bool>> biometricAuthenticate({
