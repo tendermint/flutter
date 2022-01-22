@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "27937fb1472539b38598595e712d226e1f157eac"
+      resolved-ref: "15a1e3a5d107b7c1cdf7145be272720aabf34c48"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -145,7 +145,7 @@ packages:
       name: lint
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.2"
   matcher:
     dependency: transitive
     description:
