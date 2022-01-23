@@ -9,12 +9,12 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/pages/transaction_history_page.dart';
+import 'package:starport_template/pages/wallets_list_sheet.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 import 'package:starport_template/widgets/receive_money_sheet.dart';
 import 'package:starport_template/widgets/starport_button_bar.dart';
-import 'package:starport_template/widgets/wallets_list_sheet.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {

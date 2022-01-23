@@ -8,9 +8,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/pages/assets_transfer_sheet.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/widgets/assets_transfer_sheet.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
 
 class SignTransactionPage extends StatefulWidget {
