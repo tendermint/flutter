@@ -127,7 +127,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   }
 
   Future<void> _authenticateUser() async {
-    final result = await CosmosAuth().biometricAuthenticate();
+    final result = await StarportApp.cosmosAuth.biometricAuthenticate();
     setState(
       () => _isAuthenticated = result.fold(
         (fail) => fail.type == LocalAuthFailureType.noBiometrics,

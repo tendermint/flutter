@@ -12,6 +12,17 @@ extension IterableExtensions<T> on Iterable<T> {
         .map((key, value) => MapEntry(key, mapper(key, value)))
         .values;
   }
+
+  T? firstOrNull({required bool Function(T) where}) {
+    try {
+      return firstWhere(
+        (it) => where(it),
+      );
+      // ignore: avoid_catching_errors
+    } on StateError {
+      return null;
+    }
+  }
 }
 
 /// Extensions for the Either, Future and MobX combinations

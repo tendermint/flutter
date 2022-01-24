@@ -7,11 +7,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/settings_sheet.dart';
 import 'package:starport_template/pages/wallets_list_sheet.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
-import 'package:starport_template/widgets/receive_money_sheet.dart';
 import 'package:starport_template/widgets/transaction_history_list.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 

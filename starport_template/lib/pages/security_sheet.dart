@@ -6,6 +6,7 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/stores/settings_store.dart';
 
@@ -74,7 +75,13 @@ class _SecuritySheetState extends State<SecuritySheet> {
 
   void _setBiometricsEnabled(bool checked) => setState(() => _settingsStore.biometricsEnabled = checked);
 
-  void _setAppLockEnabled(bool checked) => setState(() => _settingsStore.appLockEnabled = checked);
+  Future<void> _setAppLockEnabled(bool checked) async {
+    if (checked && !await _settingsStore.hasPasswordSet()) {
+      final result = await PasswordPromptPage.promptPassword(context);
+      setState(() => _settingsStore.appLockEnabled = result != null);
+    }
+    setState(() => _settingsStore.appLockEnabled = checked);
+  }
 
   String biometricsTitle() {
     if (Platform.isIOS) {
@@ -96,7 +103,7 @@ class _SecuritySheetState extends State<SecuritySheet> {
   }
 
   Future<void> _getAvailableBiometrics() async {
-    _biometricTypes = await CosmosAuth().getAvailableBiometrics().asyncFold(
+    _biometricTypes = await StarportApp.cosmosAuth.getAvailableBiometrics().asyncFold(
           (fail) => [],
           (success) => success,
         );
