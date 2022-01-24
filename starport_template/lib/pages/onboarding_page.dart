@@ -42,11 +42,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   right: theme.spacingL,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width + 24,
-                    ),
                     Text(
                       'Welcome to your first blockchain-powered mobile app.',
                       style: Theme.of(context).textTheme.headline2,

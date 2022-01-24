@@ -11,6 +11,6 @@
 - If you're running the app on real device instead of emulator/simulator or want to taget a specific blockchain run on a remote machine, make sure to specify proper urls and ports when running the app. Here is an example for running the app on cosmos hub testnet:
 
 ```
-flutter run --dart-define=BASE_LCD_URL=api.testnet.cosmos.network --dart-define=PORT=443
+flutter run --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
 ```
 

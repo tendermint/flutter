@@ -24,8 +24,11 @@ class BalanceCardList extends StatelessWidget {
                 children: [
                   CosmosBalanceCard(
                     denomText: balance.denom.text.toUpperCase(),
-                    amountDisplayText: formatAmount(balance.amount.value.toDouble()),
-                    secondaryText: 'available ${balance.denom.text.toUpperCase()}',
+                    amountDisplayText: formatAmount(
+                      balance.amount.value.toDouble(),
+                      symbol: '',
+                    ),
+                    secondaryText: balance.denom.text.toUpperCase(),
                     onTap: onTapItem == null ? null : () => onTapItem!(balance),
                   ),
                   SizedBox(height: CosmosTheme.of(context).spacingL),

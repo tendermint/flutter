@@ -1,4 +1,5 @@
 import 'package:alan/alan.dart';
+import 'package:cosmos_auth/auth/cosmos_auth.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class StarportApp extends StatelessWidget {
   static late NetworkInfo networkInfo;
   static late SecureDataStore secureDataStore;
   static late SettingsStore settingsStore;
+  static late CosmosAuth cosmosAuth;
 
   @override
   Widget build(BuildContext context) {
