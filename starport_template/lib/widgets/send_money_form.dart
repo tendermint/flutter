@@ -76,6 +76,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
   Future<void> _onTapPaste() async {
     final value = await FlutterClipboard.paste();
     setState(() => controller.text = value);
+    widget.onAddressChanged(value);
   }
 
   @override
