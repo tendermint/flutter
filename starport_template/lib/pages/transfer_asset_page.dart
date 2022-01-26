@@ -84,7 +84,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           children: [
             Text('Fees', style: CosmosTextTheme.copy0Normal),
             const Spacer(),
-            Text('${fee.toString()} AKT'),
+            Text('${fee.toString()} ${widget.balance.denom.text}'),
             Image.asset('assets/images/arrow_right.png'),
           ],
         ),
