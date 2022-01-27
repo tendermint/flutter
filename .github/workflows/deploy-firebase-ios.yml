@@ -58,10 +58,6 @@ jobs:
         with:
           fetch-depth: 10
 
-      - name: check for changes in folders
-        run: |
-          echo "changes_starport_template=$(git diff --quiet HEAD HEAD~1  -- starport_template && echo "false" || echo "true")" >> $GITHUB_ENV
-
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -71,7 +67,7 @@ jobs:
         run: flutter pub get
 
       - name: set up ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 

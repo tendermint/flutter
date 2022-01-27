@@ -41,10 +41,11 @@ platform :ios do
       team_id: ENV["MATCH_TEAM_ID"],
       path: "Runner.xcodeproj"
     )
-
-    increment_build_number(
-      build_number: ENV["GITHUB_RUN_NUMBER"]
-    )
+    if ENV["GITHUB_RUN_NUMBER"]
+        increment_build_number(
+          build_number: ENV["GITHUB_RUN_NUMBER"]
+        )
+    end
 
     build_app(
         workspace: "Runner.xcworkspace",
