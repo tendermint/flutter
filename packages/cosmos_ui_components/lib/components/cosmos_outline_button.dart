@@ -7,17 +7,26 @@ class CosmosOutlineButton extends StatelessWidget {
     Key? key,
     this.onTap,
     this.text = '',
+    this.height = defaultHeight,
     this.suffixIcon,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final String text;
   final Widget? suffixIcon;
+  final double height;
+
+  static const defaultHeight = 50.0;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        fixedSize: Size.fromHeight(height),
+        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        elevation: 0,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -36,6 +45,7 @@ class CosmosOutlineButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(StringProperty('text', text));
+      ..add(StringProperty('text', text))
+      ..add(DoubleProperty('height', height));
   }
 }
