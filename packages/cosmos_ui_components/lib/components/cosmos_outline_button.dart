@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/utils/global_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class CosmosOutlineButton extends StatelessWidget {
     Key? key,
     this.onTap,
     this.text = '',
-    this.height = defaultHeight,
+    this.height = GlobalConstants.defaultButtonHeight,
     this.suffixIcon,
   }) : super(key: key);
 
@@ -15,8 +16,6 @@ class CosmosOutlineButton extends StatelessWidget {
   final String text;
   final Widget? suffixIcon;
   final double height;
-
-  static const defaultHeight = 50.0;
 
   @override
   Widget build(BuildContext context) {

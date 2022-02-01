@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/utils/global_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +11,9 @@ class CosmosElevatedButton extends StatelessWidget {
     this.text = '',
     this.suffixIcon,
     this.prefixIcon,
-    this.height = defaultHeight,
+    this.height = GlobalConstants.defaultButtonHeight,
     this.contentPadding,
   }) : super(key: key);
-
-  static const defaultHeight = 50.0;
 
   final VoidCallback? onTap;
   final String text;
