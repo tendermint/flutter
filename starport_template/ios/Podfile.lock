@@ -50,8 +50,8 @@ SPEC CHECKSUMS:
   local_auth: ef62030a2731330b95df7ef1331bd15f6a64b8a6
   package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
-  shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
-  url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 

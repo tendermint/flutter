@@ -64,15 +64,15 @@ flutter_icons:
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
-#dependency_overrides:
-#  cosmos_utils:
-#    path: ../packages/cosmos_utils
-#  cosmos_auth:
-#    path: ../packages/cosmos_auth
-#  transaction_signing_gateway:
-#    path: ../packages/transaction_signing_gateway
-#  cosmos_ui_components:
-#    path: ../packages/cosmos_ui_components
+dependency_overrides:
+  cosmos_utils:
+    path: ../packages/cosmos_utils
+  cosmos_auth:
+    path: ../packages/cosmos_auth
+  transaction_signing_gateway:
+    path: ../packages/transaction_signing_gateway
+  cosmos_ui_components:
+    path: ../packages/cosmos_ui_components
 
 flutter:
   uses-material-design: true

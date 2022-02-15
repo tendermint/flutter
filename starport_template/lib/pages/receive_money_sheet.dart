@@ -1,13 +1,8 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_container.dart';
-import 'package:cosmos_ui_components/components/cosmos_bottom_sheet_header.dart';
-import 'package:cosmos_ui_components/components/cosmos_text_button.dart';
-import 'package:cosmos_ui_components/components/gradient_avatar.dart';
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
-import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
@@ -34,9 +29,11 @@ class ReceiveMoneySheet extends StatelessWidget {
               leading: const Icon(Icons.ten_k, color: Colors.transparent),
               actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
             ),
-            QrImage(
-              data: walletInfo.publicAddress,
-              size: MediaQuery.of(context).size.height / 3.515,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 5),
+              child: CosmosQrImage(
+                data: walletInfo.publicAddress,
+              ),
             ),
             SizedBox(height: theme.spacingXXL),
             Row(
