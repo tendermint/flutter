@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CosmosBottomSheetHeader extends StatelessWidget {
   const CosmosBottomSheetHeader({
     required this.title,
-    required this.titleTextStyle,
+    this.titleTextStyle,
     this.leading,
     this.actions,
     this.leadingIcon,
@@ -13,7 +13,7 @@ class CosmosBottomSheetHeader extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final TextStyle titleTextStyle;
+  final TextStyle? titleTextStyle;
   final Widget? leading;
   final Widget? leadingIcon;
   final List<Widget>? actions;
@@ -39,6 +39,7 @@ class CosmosBottomSheetHeader extends StatelessWidget {
                       leading!,
                     ],
                   ),
+                Spacer(),
                 if (actions != null) ...actions!
               ],
             ),

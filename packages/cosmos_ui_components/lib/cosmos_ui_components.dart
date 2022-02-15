@@ -16,6 +16,7 @@ export 'components/cosmos_image_button.dart';
 export 'components/cosmos_mnemonic_confirm_view.dart';
 export 'components/cosmos_outline_button.dart';
 export 'components/cosmos_passcode_prompt.dart';
+export 'components/cosmos_qr_image.dart';
 export 'components/cosmos_switch.dart';
 export 'components/cosmos_text_button.dart';
 export 'components/cosmos_text_field.dart';
