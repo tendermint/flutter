@@ -39,7 +39,7 @@ class CosmosBottomSheetHeader extends StatelessWidget {
                       leading!,
                     ],
                   ),
-                Spacer(),
+                const Spacer(),
                 if (actions != null) ...actions!
               ],
             ),
