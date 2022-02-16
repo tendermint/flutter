@@ -97,7 +97,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "15a1e3a5d107b7c1cdf7145be272720aabf34c48"
+      resolved-ref: "85f1324a2102162102c060420cb31851cff3c7df"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -187,7 +187,7 @@ packages:
       name: http_multi_server
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.2.0"
   http_parser:
     dependency: transitive
     description:
@@ -313,7 +313,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.0"
+    version: "3.5.1"
   pool:
     dependency: transitive
     description:
