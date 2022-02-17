@@ -1,5 +1,5 @@
 name: cosmos_ui_components
-description: Cosmos UI componen ts
+description: Cosmos UI components
 version: 0.0.1
 homepage: tendermint.com
 publish_to: 'none' # TODO publish it when ready
