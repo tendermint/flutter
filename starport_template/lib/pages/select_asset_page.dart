@@ -15,7 +15,6 @@ class SelectAssetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(balancesList.length);
     return Scaffold(
       appBar: const CosmosAppBar(leading: CosmosBackButton(), title: 'Select Asset'),
       body: Padding(
