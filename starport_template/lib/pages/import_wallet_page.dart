@@ -25,8 +25,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
 
   bool get isImporting => StarportApp.walletsStore.isWalletImporting;
 
-  bool get _importEnabled =>
-      _mnemonicValidError == null && _mnemonic.isNotEmpty;
+  bool get _importEnabled => _mnemonicValidError == null && _mnemonic.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +38,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
             appBar: _appBar(),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: CosmosTheme.of(context).spacingL),
+                padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

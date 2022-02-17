@@ -31,14 +31,12 @@ class SignTransactionPage extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<Balance>('balance', balance))
-      ..add(
-          DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
   }
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
-  double get recipientGetsAmount =>
-      widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
   @override
   Widget build(BuildContext context) {
@@ -127,8 +125,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
         child: AssetsTransferSheet(
           onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (_) =>
-                  const AssetsPortfolioPage(shouldFetchBalances: true),
+              builder: (_) => const AssetsPortfolioPage(shouldFetchBalances: true),
             ),
             (route) => false,
           ),
@@ -157,8 +154,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<MsgSendTransaction>(
-          'transaction', widget.transaction))
+      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', widget.transaction))
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
   }
