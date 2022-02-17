@@ -40,9 +40,11 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   bool get isWalletImporting => StarportApp.walletsStore.isWalletImporting;
 
-  bool get isMnemonicCreatingError => StarportApp.walletsStore.isMnemonicCreatingError;
+  bool get isMnemonicCreatingError =>
+      StarportApp.walletsStore.isMnemonicCreatingError;
 
-  bool get isWalletImportingError => StarportApp.walletsStore.isWalletImportingError;
+  bool get isWalletImportingError =>
+      StarportApp.walletsStore.isWalletImportingError;
 
   @override
   void initState() {
@@ -60,7 +62,9 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         loadingChild: LoadingSplash(
           text: isAuthenticating
               ? 'Authenticating..'
-              : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating wallet..'),
+              : (isMnemonicCreating
+                  ? 'Creating a recovery phrase..'
+                  : 'Creating wallet..'),
         ),
         contentChild: Scaffold(
           body: _contentUI(),
@@ -101,12 +105,16 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
               style: CosmosTextTheme.copy0Normal,
             ),
             SizedBox(height: theme.spacingXL),
-            const InfoCard(text: 'We will never ask you to share your recovery phrase.'),
-            SizedBox(height: theme.spacingL),
-            const InfoCard(text: 'Never share your recovery phrase with anyone, store it securely.'),
+            const InfoCard(
+                text: 'We will never ask you to share your recovery phrase.'),
             SizedBox(height: theme.spacingL),
             const InfoCard(
-              text: 'If you don’t backup your wallet or lose your recovery phrase, '
+                text:
+                    'Never share your recovery phrase with anyone, store it securely.'),
+            SizedBox(height: theme.spacingL),
+            const InfoCard(
+              text:
+                  'If you don’t backup your wallet or lose your recovery phrase, '
                   'you will not able to recover your account',
             ),
             const Spacer(),
@@ -146,7 +154,8 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     }
     if (mounted) {
       await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => BackUpWalletPage(mnemonic: mnemonic)),
+        MaterialPageRoute(
+            builder: (context) => BackUpWalletPage(mnemonic: mnemonic)),
       );
     }
   }
@@ -170,11 +179,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
       password: password,
       isBackedUp: isBackedUp,
       onMnemonicGenerationStarted: () => setState(() {}),
-      onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
+      onWalletCreationStarted: () =>
+          setState(() {}), //this will cause the loading message to update
     );
     if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        MaterialPageRoute(
+          builder: (_) => const AssetsPortfolioPage(),
+        ),
         (route) => false,
       );
     }
@@ -184,12 +196,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<bool>('isMnemonicCreatingError', isMnemonicCreatingError))
+      ..add(DiagnosticsProperty<bool>(
+          'isMnemonicCreatingError', isMnemonicCreatingError))
       ..add(DiagnosticsProperty<bool>('isMnemonicCreating', isMnemonicCreating))
       ..add(DiagnosticsProperty<bool>('isWalletImporting', isWalletImporting))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading))
       ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
-      ..add(DiagnosticsProperty<bool>('isWalletImportingError', isWalletImportingError))
+      ..add(DiagnosticsProperty<bool>(
+          'isWalletImportingError', isWalletImportingError))
       ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 }
