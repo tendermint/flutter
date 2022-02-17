@@ -66,8 +66,7 @@ class ReceiveMoneySheet extends StatelessWidget {
             CosmosTextButton(
               text: 'Share',
               onTap: _onTapShare,
-              textStyle: CosmosTextTheme.elevatedButton
-                  .copyWith(color: theme.colors.link),
+              textStyle: CosmosTextTheme.elevatedButton.copyWith(color: theme.colors.link),
               suffixIcon: Image.asset('assets/images/share.png'),
             ),
             Padding(
@@ -103,5 +102,4 @@ class ReceiveMoneySheet extends StatelessWidget {
   }
 }
 
-String maskAddress(String address) =>
-    '${address.substring(0, 9)}...${address.substring(address.length - 4)}';
+String maskAddress(String address) => '${address.substring(0, 9)}...${address.substring(address.length - 4)}';
