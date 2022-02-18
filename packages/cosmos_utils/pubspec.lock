@@ -122,7 +122,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.3"
+    version: "0.6.4"
   lint:
     dependency: "direct dev"
     description:
@@ -234,5 +234,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-  dart: ">=2.15.0-7.0.dev <3.0.0"
+  dart: ">=2.16.0-100.0.dev <3.0.0"
   flutter: ">=1.17.0"

@@ -2,7 +2,9 @@ import 'package:cosmos_utils/logger.dart';
 import 'package:dartz/dartz.dart';
 
 /// does... nothing ;)
-T? doNothing<T>() {}
+T? doNothing<T>() {
+  return null;
+}
 
 extension IterableExtensions<T> on Iterable<T> {
   /// maps the passed iterable with the mapper that accepts index and element.
