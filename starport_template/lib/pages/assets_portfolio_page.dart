@@ -53,7 +53,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     children: [
                       _gradientAvatar(context),
                       AssetPortfolioHeading(
-                          title: selectedWallet.name, onTap: _onTapDropDown),
+                          title: selectedWallet.name, onTap: _onTapDropDown,),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -66,7 +66,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     onSendPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              SelectAssetPage(balancesList: balancesList)));
+                              SelectAssetPage(balancesList: balancesList),),);
                     },
                   ),
                 ],
@@ -99,7 +99,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   }
 
   void _onTapAvatar(BuildContext context) => Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const TransactionHistoryPage()));
+      MaterialPageRoute(builder: (context) => const TransactionHistoryPage()),);
 
   Future<void> _onTapDropDown() async {
     final wallet = await showMaterialModalBottomSheet(
@@ -123,7 +123,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
         child: ReceiveMoneySheet(
-            walletInfo: StarportApp.walletsStore.selectedWallet),
+            walletInfo: StarportApp.walletsStore.selectedWallet,),
       ),
     );
   }
@@ -133,7 +133,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<WalletPublicInfo>(
-          'selectedWallet', selectedWallet))
+          'selectedWallet', selectedWallet,),)
       ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))
       ..add(DiagnosticsProperty<bool>('isSendMoneyLoading', isSendMoneyLoading))
       ..add(IterableProperty<Balance>('balancesList', balancesList))

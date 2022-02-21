@@ -33,7 +33,8 @@ class SignTransactionPage extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty<Balance>('balance', balance))
       ..add(
-          DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+        DiagnosticsProperty<MsgSendTransaction>('transaction', transaction),
+      );
   }
 }
 
@@ -130,12 +131,14 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
           onTapDone: () async {
-            unawaited(Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (_) => const AssetsPortfolioPage(),
+            unawaited(
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (_) => const AssetsPortfolioPage(),
+                ),
+                (route) => false,
               ),
-              (route) => false,
-            ));
+            );
 
             await StarportApp.walletsStore
                 .getBalances(selectedWallet.publicAddress);
@@ -165,9 +168,16 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<MsgSendTransaction>(
-          'transaction', widget.transaction))
+      ..add(
+        DiagnosticsProperty<MsgSendTransaction>(
+          'transaction',
+          widget.transaction,
+        ),
+      )
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
-      ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
+      ..add(DiagnosticsProperty<Balance>('balance', widget.balance))
+      ..add(
+        DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet),
+      );
   }
 }
