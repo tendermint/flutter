@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "79f8b8ebb452ffbe4e3fa092e43824f0d2a79282"
+      resolved-ref: b30a9c089effaf83a9df78777b302411258d5f36
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -138,7 +138,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.3"
+    version: "0.6.4"
   lint:
     dependency: "direct dev"
     description:
@@ -285,5 +285,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-  dart: ">=2.15.0-7.0.dev <3.0.0"
+  dart: ">=2.16.0-100.0.dev <3.0.0"
   flutter: ">=1.24.0-7.0"

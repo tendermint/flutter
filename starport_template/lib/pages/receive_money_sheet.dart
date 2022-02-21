@@ -27,10 +27,17 @@ class ReceiveMoneySheet extends StatelessWidget {
               title: '',
               titleTextStyle: CosmosTextTheme.title2Bold,
               leading: const Icon(Icons.ten_k, color: Colors.transparent),
-              actions: [CosmosTextButton(text: 'Close', onTap: () => Navigator.of(context).pop())],
+              actions: [
+                CosmosTextButton(
+                  text: 'Close',
+                  onTap: () => Navigator.of(context).pop(),
+                )
+              ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 5),
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width / 5,
+              ),
               child: CosmosQrImage(
                 data: walletInfo.publicAddress,
               ),
@@ -51,7 +58,10 @@ class ReceiveMoneySheet extends StatelessWidget {
               ],
             ),
             SizedBox(height: theme.spacingL),
-            Text(maskAddress(walletAddress), style: CosmosTextTheme.title1Medium),
+            Text(
+              maskAddress(walletAddress),
+              style: CosmosTextTheme.title1Medium,
+            ),
             const Spacer(),
             CosmosTextButton(
               text: 'Share',
@@ -64,14 +74,15 @@ class ReceiveMoneySheet extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: _onTapCopyAddress,
-                      child: const Text('Copy address'),
+                    child: CosmosElevatedButton(
+                      onTap: _onTapCopyAddress,
+                      text: 'Copy address',
                     ),
                   )
                 ],
               ),
             ),
+            SizedBox(height: theme.spacingL)
           ],
         ),
       ),
