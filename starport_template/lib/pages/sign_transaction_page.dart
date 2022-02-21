@@ -39,11 +39,9 @@ class SignTransactionPage extends StatefulWidget {
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
-  double get recipientGetsAmount =>
-      widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
-  WalletPublicInfo get selectedWallet =>
-      StarportApp.walletsStore.selectedWallet;
+  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -140,8 +138,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
               ),
             );
 
-            await StarportApp.walletsStore
-                .getBalances(selectedWallet.publicAddress);
+            await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
           },
         ),
       ),

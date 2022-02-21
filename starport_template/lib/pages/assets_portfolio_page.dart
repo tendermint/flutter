@@ -27,8 +27,7 @@ class AssetsPortfolioPage extends StatefulWidget {
 }
 
 class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
-  ObservableList<Balance> get balancesList =>
-      StarportApp.walletsStore.balancesList;
+  ObservableList<Balance> get balancesList => StarportApp.walletsStore.balancesList;
 
   bool get isBalancesLoading => StarportApp.walletsStore.isBalancesLoading;
 
@@ -36,8 +35,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
   bool get isError => StarportApp.walletsStore.isBalancesLoadingError;
 
-  WalletPublicInfo get selectedWallet =>
-      StarportApp.walletsStore.selectedWallet;
+  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     children: [
                       _gradientAvatar(context),
                       AssetPortfolioHeading(
-                          title: selectedWallet.name, onTap: _onTapDropDown,),
+                        title: selectedWallet.name,
+                        onTap: _onTapDropDown,
+                      ),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -64,17 +64,18 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   StarportButtonBar(
                     onReceivePressed: _onTapReceive,
                     onSendPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              SelectAssetPage(balancesList: balancesList),),);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectAssetPage(balancesList: balancesList),
+                        ),
+                      );
                     },
                   ),
                 ],
               ),
               isLoading: isBalancesLoading,
               isError: isError,
-              errorChild:
-                  const Center(child: Text('An unexpected error occurred')),
+              errorChild: const Center(child: Text('An unexpected error occurred')),
             ),
           ),
         ),
@@ -99,7 +100,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   }
 
   void _onTapAvatar(BuildContext context) => Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const TransactionHistoryPage()),);
+        MaterialPageRoute(builder: (context) => const TransactionHistoryPage()),
+      );
 
   Future<void> _onTapDropDown() async {
     final wallet = await showMaterialModalBottomSheet(
@@ -123,7 +125,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
         child: ReceiveMoneySheet(
-            walletInfo: StarportApp.walletsStore.selectedWallet,),
+          walletInfo: StarportApp.walletsStore.selectedWallet,
+        ),
       ),
     );
   }
@@ -132,8 +135,12 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<WalletPublicInfo>(
-          'selectedWallet', selectedWallet,),)
+      ..add(
+        DiagnosticsProperty<WalletPublicInfo>(
+          'selectedWallet',
+          selectedWallet,
+        ),
+      )
       ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))
       ..add(DiagnosticsProperty<bool>('isSendMoneyLoading', isSendMoneyLoading))
       ..add(IterableProperty<Balance>('balancesList', balancesList))
