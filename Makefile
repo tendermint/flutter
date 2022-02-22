@@ -25,5 +25,5 @@ install:
 
 fix-lint:
 	$(info Running flutter format)
-	fvm flutter format --line-length 120 --set-exit-if-changed lib test
+	fvm flutter format --line-length 120 --set-exit-if-changed starport_template/lib starport_template/test
 	cd starport_template && find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 --set-exit-if-changed {} +;
