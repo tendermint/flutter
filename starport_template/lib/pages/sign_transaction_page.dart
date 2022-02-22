@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
-import 'package:decimal/decimal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -34,7 +33,7 @@ class SignTransactionPage extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty<Balance>('balance', balance))
       ..add(
-          DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+          DiagnosticsProperty<MsgSendTransaction>('transaction', transaction),);
   }
 }
 
@@ -162,7 +161,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<MsgSendTransaction>(
-          'transaction', widget.transaction))
+          'transaction', widget.transaction,),)
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
   }

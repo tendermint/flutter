@@ -47,8 +47,10 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                   SizedBox(height: theme.spacingXXXL),
                   Text('Transferring', style: CosmosTextTheme.title2Bold),
                   SizedBox(height: theme.spacingM),
-                  Text('This may take up to 1 minute.',
-                      style: CosmosTextTheme.copy0Normal),
+                  Text(
+                    'This may take up to 1 minute.',
+                    style: CosmosTextTheme.copy0Normal,
+                  ),
                   const Spacer(),
                   const ContentLoadingIndicator(),
                   const Spacer(),
@@ -58,14 +60,17 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
               ),
               contentChild: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: theme.spacingL, vertical: theme.spacingM),
+                  horizontal: theme.spacingL,
+                  vertical: theme.spacingM,
+                ),
                 child: Column(
                   children: [
                     SizedBox(height: theme.spacingXXXL),
                     SizedBox(
-                        height: 56,
-                        width: 56,
-                        child: Image.asset('assets/images/check_circle.png')),
+                      height: 56,
+                      width: 56,
+                      child: Image.asset('assets/images/check_circle.png'),
+                    ),
                     SizedBox(height: theme.spacingXL),
                     Text('Transferred!', style: CosmosTextTheme.title2Bold),
                     const Spacer(),

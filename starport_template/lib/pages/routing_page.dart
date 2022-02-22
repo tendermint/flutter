@@ -22,7 +22,6 @@ class _RoutingPageState extends State<RoutingPage> {
   void initState() {
     super.initState();
     initialize();
-    _loadWallets();
   }
 
   @override
