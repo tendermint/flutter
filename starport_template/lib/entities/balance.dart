@@ -19,4 +19,14 @@ class Balance extends Equatable {
         denom,
         amount,
       ];
+
+  Balance copyWith({
+    Denom? denom,
+    Amount? amount,
+  }) {
+    return Balance(
+      denom: denom ?? this.denom,
+      amount: amount ?? this.amount,
+    );
+  }
 }

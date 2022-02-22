@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:decimal/decimal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
@@ -31,12 +33,14 @@ class SignTransactionPage extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<Balance>('balance', balance))
-      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+      ..add(
+          DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
   }
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
-  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+  double get recipientGetsAmount =>
+      widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +127,13 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
+          balance: widget.balance.copyWith(
+            amount: Amount.fromDouble(recipientGetsAmount),
+          ),
           onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+            MaterialPageRoute(
+              builder: (_) => const AssetsPortfolioPage(),
+            ),
             (route) => false,
           ),
         ),
@@ -152,7 +161,8 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', widget.transaction))
+      ..add(DiagnosticsProperty<MsgSendTransaction>(
+          'transaction', widget.transaction))
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
   }

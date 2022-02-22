@@ -18,7 +18,9 @@ import 'package:starport_template/widgets/starport_button_bar.dart';
 import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
-  const AssetsPortfolioPage({Key? key}) : super(key: key);
+  const AssetsPortfolioPage({
+    Key ? key,
+  }) : super(key: key);
 
   @override
   State<AssetsPortfolioPage> createState() => _AssetsPortfolioPageState();
@@ -36,12 +38,6 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   @override
-  void initState() {
-    super.initState();
-    _fetchWalletBalances();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -54,7 +50,10 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   Column(
                     children: [
                       _gradientAvatar(context),
-                      AssetPortfolioHeading(title: selectedWallet.name, onTap: _onTapDropDown),
+                      AssetPortfolioHeading(
+                        title: selectedWallet.name,
+                        onTap: _onTapDropDown,
+                      ),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
                       const Divider(),
                       SizedBox(height: CosmosTheme.of(context).spacingL),
@@ -65,8 +64,11 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                   StarportButtonBar(
                     onReceivePressed: _onTapReceive,
                     onSendPressed: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) => SelectAssetPage(balancesList: balancesList)));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectAssetPage(balancesList: balancesList),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -97,12 +99,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     );
   }
 
-  void _onTapAvatar(BuildContext context) =>
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TransactionHistoryPage()));
-
-  Future _fetchWalletBalances() async {
-    await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
-  }
+  void _onTapAvatar(BuildContext context) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const TransactionHistoryPage()),
+      );
 
   Future<void> _onTapDropDown() async {
     final wallet = await showMaterialModalBottomSheet(
@@ -125,7 +124,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
-        child: ReceiveMoneySheet(walletInfo: StarportApp.walletsStore.selectedWallet),
+        child: ReceiveMoneySheet(
+          walletInfo: StarportApp.walletsStore.selectedWallet,
+        ),
       ),
     );
   }
@@ -134,7 +135,12 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet))
+      ..add(
+        DiagnosticsProperty<WalletPublicInfo>(
+          'selectedWallet',
+          selectedWallet,
+        ),
+      )
       ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))
       ..add(DiagnosticsProperty<bool>('isSendMoneyLoading', isSendMoneyLoading))
       ..add(IterableProperty<Balance>('balancesList', balancesList))
