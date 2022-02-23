@@ -12,6 +12,7 @@ import 'package:starport_template/pages/assets_transfer_sheet.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/sign_transaction_tab_view_item.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class SignTransactionPage extends StatefulWidget {
   const SignTransactionPage({
@@ -31,12 +32,16 @@ class SignTransactionPage extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<Balance>('balance', balance))
-      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', transaction));
+      ..add(
+        DiagnosticsProperty<MsgSendTransaction>('transaction', transaction),
+      );
   }
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
   double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+
+  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -123,13 +128,23 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
-          onTapDone: () => Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
-            (route) => false,
-          ),
+          onTapDone: () => _onTapAssetTranserSheetDone(context),
         ),
       ),
     );
+  }
+
+  Future<void> _onTapAssetTranserSheetDone(BuildContext context) async {
+    unawaited(
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) => const AssetsPortfolioPage(),
+        ),
+        (route) => false,
+      ),
+    );
+
+    await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
 
   Padding _transactionFee(CosmosThemeData theme) {
@@ -152,8 +167,16 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<MsgSendTransaction>('transaction', widget.transaction))
+      ..add(
+        DiagnosticsProperty<MsgSendTransaction>(
+          'transaction',
+          widget.transaction,
+        ),
+      )
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
-      ..add(DiagnosticsProperty<Balance>('balance', widget.balance));
+      ..add(DiagnosticsProperty<Balance>('balance', widget.balance))
+      ..add(
+        DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet),
+      );
   }
 }
