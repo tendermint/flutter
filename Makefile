@@ -25,4 +25,5 @@ install:
 
 fix-lint:
 	$(info Running flutter format)
-	fvm flutter format --line-length 120 --set-exit-if-changed lib test
+	fvm flutter format --line-length 120 --set-exit-if-changed starport_template/lib starport_template/test
+	

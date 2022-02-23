@@ -174,7 +174,9 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     );
     if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        MaterialPageRoute(
+          builder: (_) => const AssetsPortfolioPage(),
+        ),
         (route) => false,
       );
     }
