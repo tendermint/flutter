@@ -39,9 +39,11 @@ class SignTransactionPage extends StatefulWidget {
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
-  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+  double get recipientGetsAmount =>
+      widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  WalletPublicInfo get selectedWallet =>
+      StarportApp.walletsStore.selectedWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -128,21 +130,23 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
-          onTapDone: () async {
-            unawaited(
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (_) => const AssetsPortfolioPage(),
-                ),
-                (route) => false,
-              ),
-            );
-
-            await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
-          },
+          onTapDone: () => _handleAssetTranserSheetDone(context),
         ),
       ),
     );
+  }
+
+  Future<void> _handleAssetTranserSheetDone(BuildContext context) async {
+    unawaited(
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) => const AssetsPortfolioPage(),
+        ),
+        (route) => false,
+      ),
+    );
+
+    await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
 
   Padding _transactionFee(CosmosThemeData theme) {
