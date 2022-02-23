@@ -128,13 +128,13 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
-          onTapDone: () => _handleAssetTranserSheetDone(context),
+          onTapDone: () => _onTapAssetTranserSheetDone(context),
         ),
       ),
     );
   }
 
-  Future<void> _handleAssetTranserSheetDone(BuildContext context) async {
+  Future<void> _onTapAssetTranserSheetDone(BuildContext context) async {
     unawaited(
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
