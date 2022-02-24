@@ -28,5 +28,5 @@ fix-lint:
 	fvm flutter format --line-length 120 --set-exit-if-changed starport_template/lib starport_template/test
 	
 run-starport-template:
-	$(info Runningstarport_template)
+	$(info Running starport_template)
 	cd starport_template && fvm flutter run --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
