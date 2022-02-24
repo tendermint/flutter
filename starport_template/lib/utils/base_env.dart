@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:alan/alan.dart';
+import 'package:grpc/grpc.dart';
 
 class BaseEnv {
   BaseEnv({
@@ -18,10 +19,16 @@ class BaseEnv {
           ),
           grpcInfo: GRPCInfo(
             host: grpcUrl ?? envGrpcUrl,
-            port: int.parse(grpcPort ?? envGrpcPort),
+            port: _parseGrpcPort(grpcPort),
+            credentials: _parseGrpcPort(grpcPort) == 443
+                ? const ChannelCredentials.secure()
+                : const ChannelCredentials.insecure(),
           ),
         ),
         baseApiUrl = '${lcdUrl ?? envLcdUrl}:${lcdPort ?? envLcdPort}';
+
+  static int _parseGrpcPort(String? grpcPort) => int.parse(grpcPort ?? envGrpcPort);
+
   final NetworkInfo networkInfo;
 
   final String baseApiUrl;
