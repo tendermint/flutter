@@ -19,7 +19,6 @@ class TokenSender {
     String toAddress,
     String password,
   ) async {
-    
     final message = bank.MsgSend.create()
       ..fromAddress = info.publicAddress
       ..toAddress = toAddress;

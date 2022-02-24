@@ -34,10 +34,8 @@ class WalletsStore {
   final Observable<bool> _isSendingMoney = Observable(false);
 
   final ObservableList<Balance> balancesList = ObservableList();
-  final Observable<CredentialsStorageFailure?> loadWalletsFailure =
-      Observable(null);
-  final Observable<CredentialsStorageFailure?> _renameWalletFailure =
-      Observable(null);
+  final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
+  final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
   final ObservableList<WalletPublicInfo> wallets = ObservableList();
 
   int? get selectedWalletIndex => _selectedWalletIndex.value;
@@ -46,8 +44,7 @@ class WalletsStore {
 
   bool get areWalletsLoading => _areWalletsLoading.value;
 
-  set areWalletsLoading(bool val) =>
-      Action(() => _areWalletsLoading.value = val)();
+  set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
 
   bool get isSendingMoney => _isSendingMoney.value;
 
@@ -55,54 +52,43 @@ class WalletsStore {
 
   bool get isRenamingWallet => _isRenamingWallet.value;
 
-  set isRenamingWallet(bool val) =>
-      Action(() => _isRenamingWallet.value = val)();
+  set isRenamingWallet(bool val) => Action(() => _isRenamingWallet.value = val)();
 
   bool get isSendMoneyError => _isSendMoneyError.value;
 
-  set isSendMoneyError(bool val) =>
-      Action(() => _isSendMoneyError.value = val)();
+  set isSendMoneyError(bool val) => Action(() => _isSendMoneyError.value = val)();
 
   bool get isSendMoneyLoading => _isSendMoneyLoading.value;
 
-  set isSendMoneyLoading(bool val) =>
-      Action(() => _isSendMoneyLoading.value = val)();
+  set isSendMoneyLoading(bool val) => Action(() => _isSendMoneyLoading.value = val)();
 
   bool get isBalancesLoadingError => _isBalancesLoadingError.value;
 
-  set isBalancesLoadingError(bool val) =>
-      Action(() => _isBalancesLoadingError.value = val)();
+  set isBalancesLoadingError(bool val) => Action(() => _isBalancesLoadingError.value = val)();
 
   bool get isBalancesLoading => _isBalancesLoading.value;
 
-  set isBalancesLoading(bool val) =>
-      Action(() => _isBalancesLoading.value = val)();
+  set isBalancesLoading(bool val) => Action(() => _isBalancesLoading.value = val)();
 
   bool get isWalletImportingError => _isWalletImportingError.value;
 
-  set isWalletImportingError(bool val) =>
-      Action(() => _isWalletImportingError.value = val)();
+  set isWalletImportingError(bool val) => Action(() => _isWalletImportingError.value = val)();
 
   bool get isMnemonicCreatingError => _isMnemonicCreatingError.value;
 
-  set isMnemonicCreatingError(bool val) =>
-      Action(() => _isMnemonicCreatingError.value = val)();
+  set isMnemonicCreatingError(bool val) => Action(() => _isMnemonicCreatingError.value = val)();
 
   bool get isMnemonicCreating => _isMnemonicCreating.value;
 
-  set isMnemonicCreating(bool val) =>
-      Action(() => _isMnemonicCreating.value = val)();
+  set isMnemonicCreating(bool val) => Action(() => _isMnemonicCreating.value = val)();
 
   bool get isWalletImporting => _isWalletImporting.value;
 
-  set isWalletImporting(bool val) =>
-      Action(() => _isWalletImporting.value = val)();
+  set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
 
-  CredentialsStorageFailure? get renameWalletFailure =>
-      _renameWalletFailure.value;
+  CredentialsStorageFailure? get renameWalletFailure => _renameWalletFailure.value;
 
-  set renameWalletFailure(CredentialsStorageFailure? val) =>
-      Action(() => _renameWalletFailure.value = val)();
+  set renameWalletFailure(CredentialsStorageFailure? val) => Action(() => _renameWalletFailure.value = val)();
 
   WalletPublicInfo get selectedWallet {
     final index = _selectedWalletIndex.value;
@@ -152,8 +138,7 @@ class WalletsStore {
         .fold(
       (fail) => Action(() => renameWalletFailure = fail)(),
       (success) {
-        final index =
-            wallets.indexWhere((it) => it.walletId == newInfo.walletId);
+        final index = wallets.indexWhere((it) => it.walletId == newInfo.walletId);
         wallets[index] = newInfo;
       },
     );
@@ -292,8 +277,7 @@ class WalletsStore {
 
   void selectWallet(WalletPublicInfo wallet) {
     try {
-      selectedWalletIndex =
-          wallets.indexWhere((element) => element.walletId == wallet.walletId);
+      selectedWalletIndex = wallets.indexWhere((element) => element.walletId == wallet.walletId);
     } catch (ex, stack) {
       logError(ex, stack);
     }

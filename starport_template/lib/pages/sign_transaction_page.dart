@@ -40,8 +40,7 @@ class SignTransactionPage extends StatefulWidget {
 }
 
 class _SignTransactionPageState extends State<SignTransactionPage> {
-  double get recipientGetsAmount =>
-      widget.transaction.amount.value.toDouble() - widget.transaction.fee;
+  double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
   WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
@@ -130,7 +129,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
-            balance: widget.balance.copyWith(
+          balance: widget.balance.copyWith(
             amount: Amount.fromDouble(recipientGetsAmount),
           ),
           onTapDone: () => _onTapAssetTranserSheetDone(context),
