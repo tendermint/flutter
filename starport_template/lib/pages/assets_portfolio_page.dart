@@ -19,7 +19,7 @@ import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
   const AssetsPortfolioPage({
-    Key ? key,
+    Key? key,
   }) : super(key: key);
 
   @override

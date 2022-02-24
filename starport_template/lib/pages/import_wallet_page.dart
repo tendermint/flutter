@@ -124,7 +124,9 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
       _showImportErrorDialog();
     } else if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const AssetsPortfolioPage()),
+        MaterialPageRoute(
+          builder: (_) => const AssetsPortfolioPage(),
+        ),
         (route) => false,
       );
     }
