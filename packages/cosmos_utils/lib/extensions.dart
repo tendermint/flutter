@@ -15,10 +15,10 @@ extension IterableExtensions<T> on Iterable<T> {
         .values;
   }
 
-  T? firstOrNull({required bool Function(T) where}) {
+  T? firstOrNull({bool Function(T)? where}) {
     try {
       return firstWhere(
-        (it) => where(it),
+        (it) => where?.call(it) ?? true,
       );
       // ignore: avoid_catching_errors
     } on StateError {

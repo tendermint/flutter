@@ -143,9 +143,10 @@ class WalletsStore {
     isBalancesLoadingError = false;
     isBalancesLoading = true;
     try {
+      final newBalances = await CosmosBalances(baseEnv).getBalances(walletAddress);
       balancesList
         ..clear()
-        ..addAll(await CosmosBalances(baseEnv).getBalances(walletAddress));
+        ..addAll(newBalances);
     } catch (error, stack) {
       logError(error, stack);
       isBalancesLoadingError = true;
