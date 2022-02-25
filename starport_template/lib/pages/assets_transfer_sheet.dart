@@ -54,7 +54,10 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                   const Spacer(),
                   const ContentLoadingIndicator(),
                   const Spacer(),
-                  Text('1134.48 AKT', style: CosmosTextTheme.title0Medium),
+                  Text(
+                    '${widget.balance.amount.value.toDouble()} ${widget.balance.denom}'.toUpperCase(),
+                    style: CosmosTextTheme.title0Medium,
+                  ),
                   const Spacer(),
                 ],
               ),
@@ -75,8 +78,9 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                     Text('Transferred!', style: CosmosTextTheme.title2Bold),
                     const Spacer(),
                     Text(
-                      '${formatAmount(widget.balance.amount.value.toDouble())} '
-                      '${widget.balance.denom}',
+                      '${widget.balance.amount.value.toDouble()} '
+                              '${widget.balance.denom}'
+                          .toUpperCase(),
                       style: CosmosTextTheme.title0Medium,
                     ),
                     const Spacer(),

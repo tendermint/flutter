@@ -125,6 +125,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void _showAssetsTransferSheet(BuildContext context) {
     showMaterialModalBottomSheet(
       context: context,
+      isDismissible: false, // Stop user from tapping outside sheet to dismiss
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
