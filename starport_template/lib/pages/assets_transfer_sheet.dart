@@ -55,7 +55,8 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                   const ContentLoadingIndicator(),
                   const Spacer(),
                   Text(
-                    '${widget.balance.amount.value.toDouble()} ${widget.balance.denom}'.toUpperCase(),
+                    '${formatAmount(widget.balance.amount.value.toDouble(), symbol: '')} ${widget.balance.denom}'
+                        .toUpperCase(),
                     style: CosmosTextTheme.title0Medium,
                   ),
                   const Spacer(),
