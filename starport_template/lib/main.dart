@@ -38,7 +38,7 @@ void _buildDependencies() {
 
   StarportApp.cosmosAuth = CosmosAuth();
   StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway, StarportApp.baseEnv);
-  StarportApp.settingsStore = SettingsStore(StarportApp.cosmosAuth, StarportApp.secureDataStore);
+  StarportApp.settingsStore = SettingsStore(StarportApp.cosmosAuth, StarportApp.secureDataStore, StarportApp.baseEnv);
   StarportApp.transactionsStore = TransactionsStore(StarportApp.baseEnv);
 }
 
