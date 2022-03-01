@@ -22,6 +22,7 @@ class TokenSender {
     final message = bank.MsgSend.create()
       ..fromAddress = info.publicAddress
       ..toAddress = toAddress;
+
     message.amount.add(
       alan.Coin.create()
         ..denom = balance.denom.text

@@ -5,6 +5,7 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/msg_send_transaction.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
@@ -42,6 +43,10 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
   WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+
+  Balance get recipientGetsAmountBalance => widget.balance.copyWith(
+        amount: Amount.fromString('$recipientGetsAmount'),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +129,12 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   void _showAssetsTransferSheet(BuildContext context) {
     showMaterialModalBottomSheet(
       context: context,
+      isDismissible: false, // Stop user from tapping outside sheet to dismiss
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
+          recipientGetsAmountBalance: recipientGetsAmountBalance,
           onTapDone: () => _onTapAssetTranserSheetDone(context),
         ),
       ),
@@ -177,6 +184,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance))
       ..add(
         DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet),
-      );
+      )
+      ..add(DiagnosticsProperty<Balance>('recipientGetsAmountBalance', recipientGetsAmountBalance));
   }
 }
