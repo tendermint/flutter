@@ -4,7 +4,6 @@ class Amount {
   const Amount(this.value);
 
   Amount.fromString(String string) : value = Decimal.parse(string);
-
   Amount.fromInt(int int) : value = Decimal.fromInt(int);
 
   final Decimal value;
