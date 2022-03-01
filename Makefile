@@ -8,11 +8,11 @@ install-cosmos-utils:
 
 install-transaction-signing-gateway: 
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
-	cd packages/transaction_signing_gateway  && fvm install && fvm flutter pub upgrade
+	cd packages/transaction_signing_gateway && fvm install && fvm flutter pub upgrade
 
 install-starport-template: 
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
-	cd starport_template  && fvm install && fvm flutter pub upgrade
+	cd starport_template && fvm install && fvm flutter pub upgrade
 
 	
 # Ensures proper flutter channel is in use, runs pub upgrade.
