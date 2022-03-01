@@ -44,6 +44,10 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
 
   WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
+  Balance get recipientGetsAmountBalance => widget.balance.copyWith(
+        amount: Amount.fromString('$recipientGetsAmount'),
+      );
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -130,9 +134,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 2.24,
         child: AssetsTransferSheet(
-          balance: widget.balance.copyWith(
-            amount: Amount.fromDouble(recipientGetsAmount),
-          ),
+          recipientGetsAmountBalance: recipientGetsAmountBalance,
           onTapDone: () => _onTapAssetTranserSheetDone(context),
         ),
       ),
@@ -182,6 +184,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance))
       ..add(
         DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet),
-      );
+      )
+      ..add(DiagnosticsProperty<Balance>('recipientGetsAmountBalance', recipientGetsAmountBalance));
   }
 }

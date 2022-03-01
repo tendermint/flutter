@@ -10,12 +10,12 @@ import 'package:starport_template/starport_app.dart';
 class AssetsTransferSheet extends StatefulWidget {
   const AssetsTransferSheet({
     required this.onTapDone,
-    required this.balance,
+    required this.recipientGetsAmountBalance,
     Key? key,
   }) : super(key: key);
 
   final VoidCallback onTapDone;
-  final Balance balance;
+  final Balance recipientGetsAmountBalance;
 
   @override
   State<AssetsTransferSheet> createState() => _AssetsTransferSheetState();
@@ -25,7 +25,7 @@ class AssetsTransferSheet extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback>.has('onTapDone', onTapDone))
-      ..add(DiagnosticsProperty<Balance>('balance', balance));
+      ..add(DiagnosticsProperty<Balance>('balance', recipientGetsAmountBalance));
   }
 }
 
@@ -55,7 +55,7 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                   const ContentLoadingIndicator(),
                   const Spacer(),
                   Text(
-                    '${formatAmount(widget.balance.amount.value.toDouble(), symbol: '')} ${widget.balance.denom}'
+                    '${formatAmount(widget.recipientGetsAmountBalance.amount.value.toDouble(), symbol: '')} ${widget.recipientGetsAmountBalance.denom}'
                         .toUpperCase(),
                     style: CosmosTextTheme.title0Medium,
                   ),
@@ -79,8 +79,8 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                     Text('Transferred!', style: CosmosTextTheme.title2Bold),
                     const Spacer(),
                     Text(
-                      '${widget.balance.amount.value.toDouble()} '
-                              '${widget.balance.denom}'
+                      '${widget.recipientGetsAmountBalance.amount.value.toDouble()} '
+                              '${widget.recipientGetsAmountBalance.denom}'
                           .toUpperCase(),
                       style: CosmosTextTheme.title0Medium,
                     ),
