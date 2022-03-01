@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_utils/amount_formatter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -78,7 +79,7 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                     Text('Transferred!', style: CosmosTextTheme.title2Bold),
                     const Spacer(),
                     Text(
-                      '${widget.recipientGetsAmountBalance.amount.value.toDouble()} '
+                      '${formatAmount(widget.recipientGetsAmountBalance.amount.value.toDouble())} '
                               '${widget.recipientGetsAmountBalance.denom}'
                           .toUpperCase(),
                       style: CosmosTextTheme.title0Medium,
