@@ -29,7 +29,7 @@ class StarportApp extends StatelessWidget {
     return CosmosTheme(
       child: MaterialApp(
         title: 'Starport template',
-        darkTheme: CosmosTheme.buildDarkAppTheme(),
+        //darkTheme: CosmosTheme.buildDarkAppTheme(), // enable for dark mode
         theme: CosmosTheme.buildAppTheme(),
         home: const RoutingPage(),
       ),
