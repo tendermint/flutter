@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:starport_template/utils/base_env.dart';
 
-class NodeInfo {
+class NodeInfoLoader {
   NodeInfo(this.baseEnv);
 
   BaseEnv baseEnv;
