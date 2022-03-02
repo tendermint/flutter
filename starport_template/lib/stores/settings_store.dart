@@ -53,7 +53,7 @@ class SettingsStore {
       appLockEnabled = false;
     }
     biometricsEnabled = prefs.getBool(_biometricsKey) ?? false;
-    nodeNetwork = await NodeInfo(_baseEnv).getChainId();
+    nodeNetwork = await NodeInfoLoader(_baseEnv).getChainId();
     _isInitialized = true;
   }
 

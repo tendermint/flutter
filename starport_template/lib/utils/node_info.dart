@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:starport_template/utils/base_env.dart';
 
 class NodeInfoLoader {
-  NodeInfo(this.baseEnv);
+  NodeInfoLoader(this.baseEnv);
 
   BaseEnv baseEnv;
 
