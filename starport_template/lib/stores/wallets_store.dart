@@ -93,7 +93,12 @@ class WalletsStore {
   WalletPublicInfo get selectedWallet {
     final index = _selectedWalletIndex.value;
     if (index == null) {
-      return const WalletPublicInfo(chainId: '', name: '', publicAddress: '', walletId: '');
+      return const WalletPublicInfo(
+        chainId: '',
+        name: '',
+        publicAddress: '',
+        walletId: '',
+      );
     }
     return wallets[index];
   }
@@ -101,9 +106,10 @@ class WalletsStore {
   final Observable<int?> _selectedWalletIndex = Observable(null);
 
   set selectedWalletIndex(int? value) {
-    if (selectedWalletIndex != value) {
+    if (_selectedWalletIndex.value != value) {
       Action(() => _selectedWalletIndex.value = value)();
       getBalances(selectedWallet.publicAddress);
+      debugLog('wallet address: ${selectedWallet.publicAddress}');
     }
   }
 
@@ -254,7 +260,9 @@ class WalletsStore {
     );
   }
 
-  Future<String?> createMnemonic([VoidCallback? onMnemonicGenerationStarted]) async {
+  Future<String?> createMnemonic([
+    VoidCallback? onMnemonicGenerationStarted,
+  ]) async {
     isMnemonicCreatingError = false;
     isMnemonicCreating = true;
     String? mnemonic;
