@@ -143,8 +143,6 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
         (route) => false,
       ),
     );
-
-    await StarportApp.walletsStore.getBalances(selectedWallet.publicAddress);
   }
 
   Padding _transactionFee(CosmosThemeData theme) {
