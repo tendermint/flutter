@@ -230,6 +230,8 @@ class WalletsStore {
         toAddress,
         password,
       );
+
+      await getBalances(selectedWallet.publicAddress);
     } catch (ex, stack) {
       logError(ex, stack);
       isSendMoneyError = true;

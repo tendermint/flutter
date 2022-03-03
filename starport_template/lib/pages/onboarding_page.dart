@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/create_wallet_page.dart';
 import 'package:starport_template/pages/import_wallet_page.dart';
+import 'package:starport_template/starport_app.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
@@ -23,6 +24,8 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+  String get nodeNetwork => StarportApp.settingsStore.nodeNetwork;
+
   @override
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
@@ -51,7 +54,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     SizedBox(height: theme.spacingL),
                     Text(
-                      'Access your wallet for alicechain/1.',
+                      'Access your wallet for $nodeNetwork.',
                       style: Theme.of(context).textTheme.caption,
                     ),
                     SizedBox(height: theme.spacingXL),
@@ -82,4 +85,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void _onTapImportAccount() => Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const ImportWalletPage()),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('nodeNetwork', nodeNetwork));
+  }
 }
