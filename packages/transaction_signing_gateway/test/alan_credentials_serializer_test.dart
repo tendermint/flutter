@@ -10,7 +10,7 @@ void main() {
       mnemonic: 'mnemonic',
       publicInfo: AccountPublicInfo(
         chainId: 'chainId',
-        accountId: 'walletId',
+        accountId: 'accountId',
         name: 'name',
         publicAddress: 'cosmos1ec4v57s7weuwatd36dgpjh8hj4gnj2cuut9sav',
       ),

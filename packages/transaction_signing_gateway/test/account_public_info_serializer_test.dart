@@ -21,7 +21,7 @@ void main() {
     expect(map['name'], publicInfo.name);
     expect(map['chain_id'], publicInfo.chainId);
     expect(map['public_address'], publicInfo.publicAddress);
-    expect(map['wallet_Id'], publicInfo.accountId);
+    expect(map['account_Id'], publicInfo.accountId);
     expect(map['additional_data'], publicInfo.additionalData);
     expect(info, publicInfo);
   });
