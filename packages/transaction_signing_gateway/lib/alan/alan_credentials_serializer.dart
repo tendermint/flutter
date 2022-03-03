@@ -11,7 +11,7 @@ class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
 
   static const _chainIdKey = 'chain_id';
   static const _mnemonicKey = 'mnemonic';
-  static const _accountIdKey = 'walletId';
+  static const _accountIdKey = 'accountId';
 
   static const _nameKey = 'name';
   static const _publicAddressKey = 'publicAddress';
