@@ -22,7 +22,8 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
       return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
     }
     if (privateAccountCredentials is! AlanPrivateAccountCredentials) {
-      return left(AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'));
+      return left(
+          AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'));
     }
     final txSender = TxSender.fromNetworkInfo(_networkInfo);
     final response =

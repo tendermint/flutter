@@ -1,17 +1,17 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
+import 'package:transaction_signing_gateway/account_derivator.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivator.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
-import 'package:transaction_signing_gateway/model/transaction_hash.dart';
-import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/model/account_derivation_failure.dart';
 import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
+import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
+import 'package:transaction_signing_gateway/model/transaction_hash.dart';
+import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/account_derivator.dart';
 
 class TransactionSigningGateway {
   TransactionSigningGateway({
@@ -106,7 +106,8 @@ class TransactionSigningGateway {
   }) async =>
       _findCapableDerivator(accountDerivationInfo).derive(accountDerivationInfo: accountDerivationInfo);
 
-  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList() => _infoStorage.getAccountsList();
+  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList() =>
+      _infoStorage.getAccountsList();
 
   /// Verifies if passed lookupKey is pointing to a valid account stored within the secure storage.
   Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(AccountLookupKey accountLookupKey) =>
