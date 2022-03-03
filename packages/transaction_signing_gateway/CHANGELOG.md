@@ -1,12 +1,13 @@
 ## Breaking changes after 2.0.3
 
 ### The following classes & properties have been refactored (`OldClassName` -> `NewClassName`)
-####`Alan` related classes
+###`Alan` related classes
 * `AlanWalletDerivationInfo` -> `AlanAccountDerivationInfo`
   * `walletAlias` property refactored to `accountAlias`
 * `AlanWalletDerivator` -> `AlanAccountDerivator`
 * `AlanPrivateWalletCredentials` -> `AlanPrivateAccountCredentials`
-####Models
+
+###Models
 * `WalletDerivationFailure` -> `AccountDerivationFailure`
 * `WalletLookupKey` -> `AccountLookupKey`
   * `walletId` property refactored to `accountId`
@@ -14,7 +15,7 @@
   * `walletId` property refactored to `accountId`
 * `WalletPublicInfoSerializer` -> `AccountPublicInfoSerializer`
   
-####Abstractions
+###Abstractions
 * `WalletDerivator` -> `AccountDerivator`
 * `WalletDerivationInfo` -> `AccountDerivationInfo`
 * `PrivateWalletCredentials` -> `PrivateAccountCredentials`
