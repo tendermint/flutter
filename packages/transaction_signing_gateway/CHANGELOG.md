@@ -56,7 +56,9 @@
 * Support for dark theme
 ###Changed
 * Minimum Android SDK version to 18
+
 ###Fixed
+
 * Minor bug fixes
 
 ## 1.0.0 - 2021-08-17
