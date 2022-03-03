@@ -8,11 +8,11 @@ install-cosmos-utils:
 
 install-transaction-signing-gateway: 
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
-	cd packages/transaction_signing_gateway  && fvm install && fvm flutter pub upgrade
+	cd packages/transaction_signing_gateway && fvm install && fvm flutter pub upgrade
 
 install-starport-template: 
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
-	cd starport_template  && fvm install && fvm flutter pub upgrade
+	cd starport_template && fvm install && fvm flutter pub upgrade
 
 	
 # Ensures proper flutter channel is in use, runs pub upgrade.
@@ -27,3 +27,6 @@ fix-lint:
 	$(info Running flutter format)
 	fvm flutter format --line-length 120 --set-exit-if-changed starport_template/lib starport_template/test
 	
+run-starport-template:
+	$(info Running starport_template using testnet.cosmos.network)
+	cd starport_template && fvm flutter run --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
