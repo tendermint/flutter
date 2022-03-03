@@ -1,13 +1,13 @@
 import 'package:alan/alan.dart' as alan;
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:transaction_signing_gateway/account_derivator.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_account_credentials.dart';
-import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/account_derivation_failure.dart';
 import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
-import 'package:transaction_signing_gateway/account_derivator.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:uuid/uuid.dart';
 
 class AlanAccountDerivator implements AccountDerivator {

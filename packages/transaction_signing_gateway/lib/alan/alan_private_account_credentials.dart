@@ -1,8 +1,8 @@
 import 'package:alan/alan.dart' as alan;
 import 'package:equatable/equatable.dart';
 import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 
 class AlanPrivateAccountCredentials extends Equatable implements PrivateAccountCredentials {
   const AlanPrivateAccountCredentials({

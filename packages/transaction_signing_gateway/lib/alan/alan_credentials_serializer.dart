@@ -2,9 +2,9 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
 class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   static const id = 'AlanCredentialsSerializer';
