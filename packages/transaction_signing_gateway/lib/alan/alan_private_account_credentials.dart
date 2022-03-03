@@ -1,11 +1,11 @@
 import 'package:alan/alan.dart' as alan;
 import 'package:equatable/equatable.dart';
 import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
-class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCredentials {
-  const AlanPrivateWalletCredentials({
+class AlanPrivateAccountCredentials extends Equatable implements PrivateAccountCredentials {
+  const AlanPrivateAccountCredentials({
     required this.mnemonic,
     required this.publicInfo,
   });
@@ -14,9 +14,9 @@ class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCre
   final String mnemonic;
 
   @override
-  final WalletPublicInfo publicInfo;
+  final AccountPublicInfo publicInfo;
 
-  alan.Wallet alanWallet(alan.NetworkInfo networkInfo) => alan.Wallet.derive(
+  alan.Wallet alanAccount(alan.NetworkInfo networkInfo) => alan.Wallet.derive(
         mnemonic.split(' '),
         networkInfo,
       );
@@ -30,11 +30,11 @@ class AlanPrivateWalletCredentials extends Equatable implements PrivateWalletCre
         mnemonic,
       ];
 
-  AlanPrivateWalletCredentials copyWith({
+  AlanPrivateAccountCredentials copyWith({
     String? mnemonic,
-    WalletPublicInfo? publicInfo,
+    AccountPublicInfo? publicInfo,
   }) {
-    return AlanPrivateWalletCredentials(
+    return AlanPrivateAccountCredentials(
       mnemonic: mnemonic ?? this.mnemonic,
       publicInfo: publicInfo ?? this.publicInfo,
     );

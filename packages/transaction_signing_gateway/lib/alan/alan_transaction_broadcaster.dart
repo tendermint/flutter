@@ -1,8 +1,8 @@
 import 'package:alan/alan.dart';
 import 'package:dartz/dartz.dart';
-import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
+import 'package:transaction_signing_gateway/alan/alan_private_account_credentials.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_hash.dart';
@@ -16,13 +16,13 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
   @override
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
     required SignedTransaction transaction,
-    required PrivateWalletCredentials privateWalletCredentials,
+    required PrivateAccountCredentials privateAccountCredentials,
   }) async {
     if (transaction is! SignedAlanTransaction) {
       return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
     }
-    if (privateWalletCredentials is! AlanPrivateWalletCredentials) {
-      return left(AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateWalletCredentials'));
+    if (privateAccountCredentials is! AlanPrivateAccountCredentials) {
+      return left(AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'));
     }
     final txSender = TxSender.fromNetworkInfo(_networkInfo);
     final response =

@@ -1,17 +1,17 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
-import 'package:transaction_signing_gateway/alan/alan_wallet_derivator.dart';
+import 'package:transaction_signing_gateway/alan/alan_account_derivator.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
-import 'package:transaction_signing_gateway/model/wallet_derivation_failure.dart';
-import 'package:transaction_signing_gateway/model/wallet_derivation_info.dart';
-import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
+import 'package:transaction_signing_gateway/model/account_derivation_failure.dart';
+import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
+import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 import 'package:transaction_signing_gateway/transaction_summary_ui.dart';
-import 'package:transaction_signing_gateway/wallet_derivator.dart';
+import 'package:transaction_signing_gateway/account_derivator.dart';
 
 class TransactionSigningGateway {
   TransactionSigningGateway({
@@ -19,10 +19,10 @@ class TransactionSigningGateway {
     List<TransactionBroadcaster>? broadcasters,
     KeyInfoStorage? infoStorage,
     TransactionSummaryUI? transactionSummaryUI,
-    List<WalletDerivator>? derivators,
+    List<AccountDerivator>? derivators,
   })  : _signers = List.unmodifiable(signers ?? []),
         _broadcasters = List.unmodifiable(broadcasters ?? []),
-        _derivators = List.unmodifiable(derivators ?? [AlanWalletDerivator()]),
+        _derivators = List.unmodifiable(derivators ?? [AlanAccountDerivator()]),
         _infoStorage = infoStorage ??
             CosmosKeyInfoStorage(
               serializers: [AlanCredentialsSerializer()],
@@ -33,35 +33,35 @@ class TransactionSigningGateway {
 
   final List<TransactionSigner> _signers;
   final List<TransactionBroadcaster> _broadcasters;
-  final List<WalletDerivator> _derivators;
+  final List<AccountDerivator> _derivators;
   final KeyInfoStorage _infoStorage;
 
   final TransactionSummaryUI _transactionSummaryUI;
 
-  /// Stores the passed-in wallet credentials securely on the device.
+  /// Stores the passed-in account credentials securely on the device.
   ///
   /// The `secure_storage` package and strong encryption are used internally,  where [password] is used to generate the
   /// encryption key. Password IS NOT STORED but is passed every time in order to access the private credentials.
-  /// [WalletPublicInfo], part of the [PrivateWalletCredentials], is accessible without a password.
-  Future<Either<CredentialsStorageFailure, Unit>> storeWalletCredentials({
-    required PrivateWalletCredentials credentials,
+  /// [AccountPublicInfo], part of the [PrivateAccountCredentials], is accessible without a password.
+  Future<Either<CredentialsStorageFailure, Unit>> storeAccountCredentials({
+    required PrivateAccountCredentials credentials,
     required String password,
     String? additionalData,
   }) =>
       _infoStorage.savePrivateCredentials(
-        walletCredentials: credentials,
+        accountCredentials: credentials,
         password: password,
       );
 
-  /// Deletes a wallet from device
-  Future<Either<CredentialsStorageFailure, Unit>> deleteWalletCredentials({required WalletPublicInfo publicInfo}) =>
-      _infoStorage.deleteWalletCredentials(publicInfo: publicInfo);
+  /// Deletes a account from device
+  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials({required AccountPublicInfo publicInfo}) =>
+      _infoStorage.deleteAccountCredentials(publicInfo: publicInfo);
 
-  /// Updates the public details of the wallet
-  Future<Either<CredentialsStorageFailure, Unit>> updateWalletPublicInfo({
-    required WalletPublicInfo info,
+  /// Updates the public details of the account
+  Future<Either<CredentialsStorageFailure, Unit>> updateAccountPublicInfo({
+    required AccountPublicInfo info,
   }) =>
-      _infoStorage.updatePublicWalletInfo(info: info);
+      _infoStorage.updatePublicAccountInfo(info: info);
 
   /// Signs the passed [transaction].
   ///
@@ -71,13 +71,13 @@ class TransactionSigningGateway {
   /// If any of the steps fail, a [TransactionSigningFailure] is returned.
   Future<Either<TransactionSigningFailure, SignedTransaction>> signTransaction({
     required UnsignedTransaction transaction,
-    required WalletLookupKey walletLookupKey,
+    required AccountLookupKey accountLookupKey,
   }) async =>
       _transactionSummaryUI
           .showTransactionSummaryUI(transaction: transaction)
           .flatMap(
             (userAccepted) => _infoStorage
-                .getPrivateCredentials(walletLookupKey)
+                .getPrivateCredentials(accountLookupKey)
                 .leftMap((err) => left(StorageProblemSigningFailure(err))),
           )
           .flatMap(
@@ -88,29 +88,29 @@ class TransactionSigningGateway {
           );
 
   Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcastTransaction({
-    required WalletLookupKey walletLookupKey,
+    required AccountLookupKey accountLookupKey,
     required SignedTransaction transaction,
   }) async =>
       _infoStorage
-          .getPrivateCredentials(walletLookupKey)
+          .getPrivateCredentials(accountLookupKey)
           .leftMap<TransactionBroadcastingFailure>((err) => left(StorageProblemBroadcastingFailure()))
           .flatMap(
             (privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
               transaction: transaction,
-              privateWalletCredentials: privateCreds,
+              privateAccountCredentials: privateCreds,
             ),
           );
 
-  Future<Either<WalletDerivationFailure, PrivateWalletCredentials>> deriveWallet({
-    required WalletDerivationInfo walletDerivationInfo,
+  Future<Either<AccountDerivationFailure, PrivateAccountCredentials>> deriveAccount({
+    required AccountDerivationInfo accountDerivationInfo,
   }) async =>
-      _findCapableDerivator(walletDerivationInfo).derive(walletDerivationInfo: walletDerivationInfo);
+      _findCapableDerivator(accountDerivationInfo).derive(accountDerivationInfo: accountDerivationInfo);
 
-  Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() => _infoStorage.getWalletsList();
+  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList() => _infoStorage.getAccountsList();
 
-  /// Verifies if passed lookupKey is pointing to a valid wallet stored within the secure storage.
-  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(WalletLookupKey walletLookupKey) =>
-      _infoStorage.verifyLookupKey(walletLookupKey);
+  /// Verifies if passed lookupKey is pointing to a valid account stored within the secure storage.
+  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(AccountLookupKey accountLookupKey) =>
+      _infoStorage.verifyLookupKey(accountLookupKey);
 
   TransactionSigner _findCapableSigner(UnsignedTransaction transaction) => _signers.firstWhere(
         (element) => element.canSign(transaction),
@@ -122,8 +122,8 @@ class TransactionSigningGateway {
         orElse: NotFoundBroadcaster.new,
       );
 
-  WalletDerivator _findCapableDerivator(WalletDerivationInfo walletDerivationInfo) => _derivators.firstWhere(
-        (element) => element.canDerive(walletDerivationInfo),
+  AccountDerivator _findCapableDerivator(AccountDerivationInfo accountDerivationInfo) => _derivators.firstWhere(
+        (element) => element.canDerive(accountDerivationInfo),
         orElse: NotFoundDerivator.new,
       );
 }

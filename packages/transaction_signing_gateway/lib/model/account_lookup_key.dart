@@ -1,20 +1,20 @@
 import 'package:equatable/equatable.dart';
 
-class WalletLookupKey extends Equatable {
-  const WalletLookupKey({
+class AccountLookupKey extends Equatable {
+  const AccountLookupKey({
     required this.chainId,
-    required this.walletId,
+    required this.accountId,
     required this.password,
   });
 
   final String chainId;
-  final String walletId;
+  final String accountId;
   final String password;
 
   @override
   List<Object?> get props => [
         chainId,
-        walletId,
+        accountId,
         password,
       ];
 }

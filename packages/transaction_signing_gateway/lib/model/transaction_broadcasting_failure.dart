@@ -1,6 +1,6 @@
 enum TransactionBroadcastingFailType {
   noTransactionBroadcasterFound,
-  walletCredentialsStorageFailure,
+  accountCredentialsStorageFailure,
   unknown,
 }
 
@@ -16,5 +16,5 @@ class TransactionBroadcasterNotFoundFailure extends TransactionBroadcastingFailu
 class StorageProblemBroadcastingFailure extends TransactionBroadcastingFailure {
   @override
   // TODO: implement type
-  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.walletCredentialsStorageFailure;
+  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.accountCredentialsStorageFailure;
 }

@@ -7,7 +7,7 @@ abstract class TransactionSigner {
   ///
   /// Returns [SignedTransaction] on successful sign, or [TransactionSigningFailure] otherwise.
   Future<Either<TransactionSigningFailure, SignedTransaction>> sign({
-    required PrivateWalletCredentials privateCredentials,
+    required PrivateAccountCredentials privateCredentials,
     required UnsignedTransaction transaction,
   });
 
@@ -25,7 +25,7 @@ class NotFoundTransactionSigner implements TransactionSigner {
 
   @override
   Future<Either<TransactionSigningFailure, SignedTransaction>> sign({
-    required PrivateWalletCredentials privateCredentials,
+    required PrivateAccountCredentials privateCredentials,
     required UnsignedTransaction transaction,
   }) async =>
       left(const TransactionSignerNotFoundFailure());
