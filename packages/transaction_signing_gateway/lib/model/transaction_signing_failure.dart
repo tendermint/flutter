@@ -4,7 +4,7 @@ enum TransactionSigningFailType {
   userDeclined,
   invalidPassword,
   noTransactionSignerFound,
-  walletCredentialsStorageFailure,
+  accountCredentialsStorageFailure,
   unknown,
 }
 
@@ -39,7 +39,7 @@ class StorageProblemSigningFailure implements TransactionSigningFailure {
   final CredentialsStorageFailure failure;
 
   @override
-  TransactionSigningFailType get type => TransactionSigningFailType.walletCredentialsStorageFailure;
+  TransactionSigningFailType get type => TransactionSigningFailType.accountCredentialsStorageFailure;
 
   @override
   String toString() {

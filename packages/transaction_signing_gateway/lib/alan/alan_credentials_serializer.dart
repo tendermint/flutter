@@ -1,38 +1,38 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:transaction_signing_gateway/alan/alan_private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/alan/alan_private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 
-class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
+class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   static const id = 'AlanCredentialsSerializer';
 
   static const _chainIdKey = 'chain_id';
   static const _mnemonicKey = 'mnemonic';
-  static const _walletIdKey = 'walletId';
+  static const _accountIdKey = 'accountId';
 
   static const _nameKey = 'name';
   static const _publicAddressKey = 'publicAddress';
 
   @override
-  Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(Map<String, dynamic> json) {
+  Either<CredentialsStorageFailure, PrivateAccountCredentials> fromJson(Map<String, dynamic> json) {
     try {
       return right(
-        AlanPrivateWalletCredentials(
+        AlanPrivateAccountCredentials(
           mnemonic: json[_mnemonicKey] as String? ?? '',
-          publicInfo: WalletPublicInfo(
+          publicInfo: AccountPublicInfo(
             name: json[_nameKey] as String? ?? '',
             publicAddress: json[_publicAddressKey] as String? ?? '',
-            walletId: json[_walletIdKey] as String? ?? '',
+            accountId: json[_accountIdKey] as String? ?? '',
             chainId: json[_chainIdKey] as String? ?? '',
           ),
         ),
       );
     } catch (e, stack) {
       debugPrint('$e\n$stack');
-      return left(CredentialsStorageFailure('Could not parse wallet credentials: $e'));
+      return left(CredentialsStorageFailure('Could not parse account credentials: $e'));
     }
   }
 
@@ -40,17 +40,17 @@ class AlanCredentialsSerializer implements PrivateWalletCredentialsSerializer {
   String get identifier => id;
 
   @override
-  Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(PrivateWalletCredentials credentials) {
-    if (credentials is! AlanPrivateWalletCredentials) {
+  Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(PrivateAccountCredentials credentials) {
+    if (credentials is! AlanPrivateAccountCredentials) {
       return left(
         CredentialsStorageFailure(
-          'Passed credentials are not of type $AlanPrivateWalletCredentials. actual: $credentials',
+          'Passed credentials are not of type $AlanPrivateAccountCredentials. actual: $credentials',
         ),
       );
     }
     return right({
       _chainIdKey: credentials.publicInfo.chainId,
-      _walletIdKey: credentials.publicInfo.walletId,
+      _accountIdKey: credentials.publicInfo.accountId,
       _publicAddressKey: credentials.publicInfo.publicAddress,
       _nameKey: credentials.publicInfo.name,
       _mnemonicKey: credentials.mnemonic,
