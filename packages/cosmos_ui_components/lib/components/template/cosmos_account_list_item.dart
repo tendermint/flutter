@@ -4,8 +4,8 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CosmosWalletListItem extends StatelessWidget {
-  const CosmosWalletListItem({
+class CosmosAccountListItem extends StatelessWidget {
+  const CosmosAccountListItem({
     required this.name,
     required this.address,
     required this.isSelected,
