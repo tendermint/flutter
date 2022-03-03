@@ -1,12 +1,12 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 
-class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCredentials {
-  const PrivateWalletCredentialsMock({
+class PrivateAccountCredentialsMock extends Equatable implements PrivateAccountCredentials {
+  const PrivateAccountCredentialsMock({
     required this.mnemonic,
     required this.publicInfo,
   });
@@ -15,7 +15,7 @@ class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCre
   final String mnemonic;
 
   @override
-  final WalletPublicInfo publicInfo;
+  final AccountPublicInfo publicInfo;
 
   @override
   String get serializerIdentifier => TestPrivateCredentialsSerializer.sIdentifier;
@@ -28,19 +28,19 @@ class PrivateWalletCredentialsMock extends Equatable implements PrivateWalletCre
       ];
 }
 
-class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerializer {
+class TestPrivateCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   static const String sIdentifier = 'TestPrivateCredentialsSerializer';
 
   @override
-  Either<CredentialsStorageFailure, PrivateWalletCredentials> fromJson(
+  Either<CredentialsStorageFailure, PrivateAccountCredentials> fromJson(
     Map<String, dynamic> json,
   ) {
     try {
       return right(
-        PrivateWalletCredentialsMock(
-          publicInfo: WalletPublicInfo(
+        PrivateAccountCredentialsMock(
+          publicInfo: AccountPublicInfo(
             chainId: json['chainId'] as String,
-            walletId: json['walletId'] as String,
+            accountId: json['walletId'] as String,
             name: json['name'] as String,
             publicAddress: json['publicAddress'] as String,
           ),
@@ -57,11 +57,11 @@ class TestPrivateCredentialsSerializer implements PrivateWalletCredentialsSerial
 
   @override
   Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(
-    PrivateWalletCredentials credentials,
+    PrivateAccountCredentials credentials,
   ) =>
       right({
         'chainId': credentials.publicInfo.chainId,
-        'walletId': credentials.publicInfo.walletId,
+        'walletId': credentials.publicInfo.accountId,
         'mnemonic': credentials.mnemonic,
         'name': credentials.publicInfo.name,
         'publicAddress': credentials.publicInfo.publicAddress

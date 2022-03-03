@@ -5,12 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/encrypt/aes_cipher.dart';
 import 'package:transaction_signing_gateway/encrypt/cipher.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials.dart';
-import 'package:transaction_signing_gateway/model/private_wallet_credentials_serializer.dart';
+import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:transaction_signing_gateway/model/account_public_info_serializer.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
+import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
-import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info_serializer.dart';
 import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 
 class CosmosKeyInfoStorage implements KeyInfoStorage {
@@ -24,44 +24,44 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         _cipher = cipher ?? AESCipher();
 
   static const _publicKeySuffix = ':public';
-  final List<PrivateWalletCredentialsSerializer> serializers;
+  final List<PrivateAccountCredentialsSerializer> serializers;
   final SecureDataStore _secureDataStore;
   final PlainDataStore _plainDataStore;
 
   final Cipher _cipher;
 
   @override
-  Future<Either<CredentialsStorageFailure, PrivateWalletCredentials>> getPrivateCredentials(
-    WalletLookupKey walletLookupKey,
+  Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>> getPrivateCredentials(
+    AccountLookupKey accountLookupKey,
   ) =>
       _secureDataStore
           .readSecureText(
             key: _credentialsKey(
-              chainId: walletLookupKey.chainId,
-              walletId: walletLookupKey.walletId,
+              chainId: accountLookupKey.chainId,
+              accountId: accountLookupKey.accountId,
             ),
           )
           .zipWith(
             _findDeserializer(
               _serializerIdKey(
-                chainId: walletLookupKey.chainId,
-                walletId: walletLookupKey.walletId,
+                chainId: accountLookupKey.chainId,
+                accountId: accountLookupKey.accountId,
               ),
             ),
           )
-          .flatMap<PrivateWalletCredentials>(
+          .flatMap<PrivateAccountCredentials>(
         (tuple) async {
           final data = tuple.value1;
           final serializer = tuple.value2;
           if (data == null) {
-            return left(CredentialsStorageFailure('Could not find credentials for $walletLookupKey'));
+            return left(CredentialsStorageFailure('Could not find credentials for $accountLookupKey'));
           }
           if (serializer == null) {
-            return left(CredentialsStorageFailure('Could not find proper deserializer for $walletLookupKey'));
+            return left(CredentialsStorageFailure('Could not find proper deserializer for $accountLookupKey'));
           }
 
           try {
-            final decrypted = _cipher.decrypt(password: walletLookupKey.password, encryptedData: data);
+            final decrypted = _cipher.decrypt(password: accountLookupKey.password, encryptedData: data);
             final json = await compute(jsonDecode, decrypted) as Map<String, dynamic>;
             return serializer.fromJson(json);
           } catch (error) {
@@ -72,45 +72,45 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         fail: logError,
       );
 
-  String _credentialsKey({required String chainId, required String walletId}) => '$chainId:$walletId';
+  String _credentialsKey({required String chainId, required String accountId}) => '$chainId:$accountId';
 
-  String _publicInfoKey({required String chainId, required String walletId}) => '$chainId:$walletId$_publicKeySuffix';
+  String _publicInfoKey({required String chainId, required String accountId}) => '$chainId:$accountId$_publicKeySuffix';
 
   bool _isPublicInfoKey(String key) => key.endsWith(_publicKeySuffix);
 
-  String _serializerIdKey({required String chainId, required String walletId}) => '$chainId:$walletId:serializer';
+  String _serializerIdKey({required String chainId, required String accountId}) => '$chainId:$accountId:serializer';
 
   @override
   Future<Either<CredentialsStorageFailure, Unit>> savePrivateCredentials({
-    required PrivateWalletCredentials walletCredentials,
+    required PrivateAccountCredentials accountCredentials,
     required String password,
   }) async {
-    final serializer = _findSerializer(walletCredentials);
+    final serializer = _findSerializer(accountCredentials);
     if (serializer == null) {
       return left(
-        CredentialsStorageFailure('Could not find proper serializer for ${walletCredentials.runtimeType}'),
+        CredentialsStorageFailure('Could not find proper serializer for ${accountCredentials.runtimeType}'),
       );
     }
     final credsKey = _credentialsKey(
-      chainId: walletCredentials.publicInfo.chainId,
-      walletId: walletCredentials.publicInfo.walletId,
+      chainId: accountCredentials.publicInfo.chainId,
+      accountId: accountCredentials.publicInfo.accountId,
     );
     final serializerKey = _serializerIdKey(
-      chainId: walletCredentials.publicInfo.chainId,
-      walletId: walletCredentials.publicInfo.walletId,
+      chainId: accountCredentials.publicInfo.chainId,
+      accountId: accountCredentials.publicInfo.accountId,
     );
     final publicInfoKey = _publicInfoKey(
-      chainId: walletCredentials.publicInfo.chainId,
-      walletId: walletCredentials.publicInfo.walletId,
+      chainId: accountCredentials.publicInfo.chainId,
+      accountId: accountCredentials.publicInfo.accountId,
     );
-    final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(walletCredentials.publicInfo));
-    return Future.value(serializer.toJson(walletCredentials))
+    final publicInfoJson = await compute(jsonEncode, AccountPublicInfoSerializer.toMap(accountCredentials.publicInfo));
+    return Future.value(serializer.toJson(accountCredentials))
         .flatMap((jsonMap) async => right(await compute(jsonEncode, jsonMap)))
         .flatMap((jsonString) async {
       final encrypted = _cipher.encrypt(password: password, data: jsonString);
       return _secureDataStore.saveSecureText(key: credsKey, value: encrypted);
     }).flatMap((_) {
-      return _plainDataStore.savePlainText(key: serializerKey, value: walletCredentials.serializerIdentifier);
+      return _plainDataStore.savePlainText(key: serializerKey, value: accountCredentials.serializerIdentifier);
     }).flatMap((_) {
       return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
     }).map((_) {
@@ -119,20 +119,20 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, Unit>> deleteWalletCredentials({
-    required WalletPublicInfo publicInfo,
+  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials({
+    required AccountPublicInfo publicInfo,
   }) async {
     final credsKey = _credentialsKey(
       chainId: publicInfo.chainId,
-      walletId: publicInfo.walletId,
+      accountId: publicInfo.accountId,
     );
     final serializerKey = _serializerIdKey(
       chainId: publicInfo.chainId,
-      walletId: publicInfo.walletId,
+      accountId: publicInfo.accountId,
     );
     final publicInfoKey = _publicInfoKey(
       chainId: publicInfo.chainId,
-      walletId: publicInfo.walletId,
+      accountId: publicInfo.accountId,
     );
 
     return _secureDataStore.saveSecureText(key: credsKey, value: null).flatMap((_) {
@@ -145,7 +145,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, List<WalletPublicInfo>>> getWalletsList() async =>
+  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList() async =>
       _plainDataStore.readAllPlainText().flatMap(
         (storageMap) async {
           try {
@@ -154,7 +154,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
                 .map((key) {
                   return jsonDecode(storageMap[key] ?? '') as Map<String, dynamic>;
                 })
-                .map(WalletPublicInfoSerializer.fromMap)
+                .map(AccountPublicInfoSerializer.fromMap)
                 .toList();
             return right(infos);
           } catch (e) {
@@ -163,7 +163,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         },
       );
 
-  Future<Either<CredentialsStorageFailure, PrivateWalletCredentialsSerializer?>> _findDeserializer(
+  Future<Either<CredentialsStorageFailure, PrivateAccountCredentialsSerializer?>> _findDeserializer(
     String serializerIdKey,
   ) =>
       _plainDataStore.readPlainText(key: serializerIdKey).flatMap(
@@ -172,7 +172,7 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
             return right(null);
           }
           return right(
-            serializers.cast<PrivateWalletCredentialsSerializer?>().firstWhere(
+            serializers.cast<PrivateAccountCredentialsSerializer?>().firstWhere(
                   (element) => element?.identifier == identifier,
                   orElse: () => null,
                 ),
@@ -180,32 +180,32 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         },
       );
 
-  PrivateWalletCredentialsSerializer? _findSerializer(PrivateWalletCredentials creds) =>
-      serializers.cast<PrivateWalletCredentialsSerializer?>().firstWhere(
+  PrivateAccountCredentialsSerializer? _findSerializer(PrivateAccountCredentials creds) =>
+      serializers.cast<PrivateAccountCredentialsSerializer?>().firstWhere(
             (element) => element?.identifier == creds.serializerIdentifier,
             orElse: () => null,
           );
 
   @override
-  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(WalletLookupKey walletLookupKey) async {
-    final privateCreds = await getPrivateCredentials(walletLookupKey);
+  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(AccountLookupKey accountLookupKey) async {
+    final privateCreds = await getPrivateCredentials(accountLookupKey);
     return right(privateCreds.isRight());
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, Unit>> updatePublicWalletInfo({required WalletPublicInfo info}) async {
+  Future<Either<CredentialsStorageFailure, Unit>> updatePublicAccountInfo({required AccountPublicInfo info}) async {
     try {
       final publicInfoKey = _publicInfoKey(
         chainId: info.chainId,
-        walletId: info.walletId,
+        accountId: info.accountId,
       );
 
-      return _plainDataStore.readPlainText(key: publicInfoKey).flatMap((walletInfo) async {
-        if (walletInfo == null) {
-          return left(const CredentialsStorageFailure('Wallet not found'));
+      return _plainDataStore.readPlainText(key: publicInfoKey).flatMap((accountInfo) async {
+        if (accountInfo == null) {
+          return left(const CredentialsStorageFailure('Account not found'));
         }
 
-        final publicInfoJson = await compute(jsonEncode, WalletPublicInfoSerializer.toMap(info));
+        final publicInfoJson = await compute(jsonEncode, AccountPublicInfoSerializer.toMap(info));
         return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
       });
     } catch (e, stack) {

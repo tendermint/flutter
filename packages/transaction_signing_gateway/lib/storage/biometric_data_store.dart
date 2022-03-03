@@ -10,7 +10,7 @@ class BiometricDataStore implements SecureDataStore {
   @Deprecated('Use "cosmos_auth" package instead')
   BiometricDataStore({
     this.promptInfo = PromptInfo.defaultValues,
-    this.storageFileName = 'cosmos_wallet_creds',
+    this.storageFileName = 'cosmos_account_creds',
     StorageFileInitOptions? storageFileInitOptions,
   }) : _storageFileInitOptions = storageFileInitOptions ??
             StorageFileInitOptions(
