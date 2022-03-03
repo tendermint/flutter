@@ -4,7 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/utils/base_env.dart';
-import 'package:starport_template/utils/node_info.dart';
+import 'package:starport_template/utils/node_info_loader.dart';
 
 class SettingsStore {
   SettingsStore(
