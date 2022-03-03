@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/models/account_info.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -59,16 +60,4 @@ class CosmosAccountsListView extends StatelessWidget {
       ..add(ObjectFlagProperty<void Function(AccountInfo p1)>.has('onEditIconPressed', onEditIconPressed))
       ..add(DiagnosticsProperty<AccountInfo>('selectedAccount', selectedAccount));
   }
-}
-
-class AccountInfo {
-  AccountInfo({
-    required this.name,
-    required this.address,
-    required this.accountId,
-  });
-
-  final String name;
-  final String address;
-  final String accountId;
 }
