@@ -3,10 +3,8 @@ import 'package:alan/proto/cosmos/bank/v1beta1/export.dart' as bank;
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
-import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
-import 'package:transaction_signing_gateway/model/wallet_lookup_key.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class TokenSender {
   TokenSender(this.transactionSigningGateway);
@@ -14,7 +12,7 @@ class TokenSender {
   TransactionSigningGateway transactionSigningGateway;
 
   Future<void> sendCosmosMoney(
-    WalletPublicInfo info,
+    AccountPublicInfo info,
     Balance balance,
     String toAddress,
     String password,
@@ -31,8 +29,8 @@ class TokenSender {
 
     final unsignedTransaction = UnsignedAlanTransaction(messages: [message]);
 
-    final walletLookupKey = WalletLookupKey(
-      walletId: info.walletId,
+    final accountLookupKey = AccountLookupKey(
+      accountId: info.accountId,
       chainId: info.chainId,
       password: password,
     );
@@ -40,12 +38,12 @@ class TokenSender {
     final result = await transactionSigningGateway
         .signTransaction(
           transaction: unsignedTransaction,
-          walletLookupKey: walletLookupKey,
+          accountLookupKey: accountLookupKey,
         )
         .mapError<dynamic>((error) => throw error)
         .flatMap(
           (signed) => transactionSigningGateway.broadcastTransaction(
-            walletLookupKey: walletLookupKey,
+            accountLookupKey: accountLookupKey,
             transaction: signed,
           ),
         );

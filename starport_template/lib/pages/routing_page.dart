@@ -16,7 +16,7 @@ class RoutingPage extends StatefulWidget {
 }
 
 class _RoutingPageState extends State<RoutingPage> {
-  bool get isLoading => StarportApp.walletsStore.areWalletsLoading || !StarportApp.settingsStore.isInitialized;
+  bool get isLoading => StarportApp.accountsStore.areAccountsLoading || !StarportApp.settingsStore.isInitialized;
 
   @override
   void initState() {
@@ -29,10 +29,10 @@ class _RoutingPageState extends State<RoutingPage> {
     return Scaffold(
       body: ContentStateSwitcher(
         isLoading: isLoading,
-        isError: StarportApp.walletsStore.loadWalletsFailure.value != null,
+        isError: StarportApp.accountsStore.loadAccountsFailure.value != null,
         errorChild: const CosmosErrorView(
           title: 'Something went wrong',
-          message: 'We had problems retrieving wallets from secure storage.',
+          message: 'We had problems retrieving accounts from secure storage.',
         ),
         contentChild: const SizedBox(),
       ),
@@ -41,22 +41,22 @@ class _RoutingPageState extends State<RoutingPage> {
 
   Future<void> initialize() async {
     await _initSettings();
-    await _loadWallets();
+    await _loadAccounts();
     await _performRouting();
   }
 
   Future<void> _initSettings() => StarportApp.settingsStore.init();
 
-  Future<void> _loadWallets() async {
-    final store = StarportApp.walletsStore;
-    await store.loadWallets();
+  Future<void> _loadAccounts() async {
+    final store = StarportApp.accountsStore;
+    await store.loadAccounts();
   }
 
   Future<void> _performRouting() async {
-    if (StarportApp.walletsStore.loadWalletsFailure.value != null || !(await _isPasscodeValid()) || !mounted) {
+    if (StarportApp.accountsStore.loadAccountsFailure.value != null || !(await _isPasscodeValid()) || !mounted) {
       return;
     }
-    if (StarportApp.walletsStore.wallets.isEmpty) {
+    if (StarportApp.accountsStore.accounts.isEmpty) {
       unawaited(
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const OnboardingPage()),

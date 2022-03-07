@@ -12,8 +12,8 @@ class CosmosBalances {
 
   BaseEnv baseEnv;
 
-  Future<List<Balance>> getBalances(String walletAddress) async {
-    final uri = '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$walletAddress';
+  Future<List<Balance>> getBalances(String accountAddress) async {
+    final uri = '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$accountAddress';
     final response = await http.get(Uri.parse(uri));
     final map = jsonDecode(response.body) as Map<String, dynamic>;
     if (map['balances'] == null) {

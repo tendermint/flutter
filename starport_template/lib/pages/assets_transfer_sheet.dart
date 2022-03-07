@@ -30,7 +30,7 @@ class AssetsTransferSheet extends StatefulWidget {
 }
 
 class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
-  bool get isLoading => StarportApp.walletsStore.isSendMoneyLoading;
+  bool get isLoading => StarportApp.accountsStore.isSendMoneyLoading;
 
   @override
   Widget build(BuildContext context) {

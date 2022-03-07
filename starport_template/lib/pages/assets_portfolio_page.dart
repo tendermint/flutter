@@ -7,15 +7,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/pages/accounts_list_sheet.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/pages/transaction_history_page.dart';
-import 'package:starport_template/pages/wallets_list_sheet.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 import 'package:starport_template/widgets/starport_button_bar.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
   const AssetsPortfolioPage({
@@ -27,15 +27,15 @@ class AssetsPortfolioPage extends StatefulWidget {
 }
 
 class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
-  ObservableList<Balance> get balancesList => StarportApp.walletsStore.balancesList;
+  ObservableList<Balance> get balancesList => StarportApp.accountsStore.balancesList;
 
-  bool get isBalancesLoading => StarportApp.walletsStore.isBalancesLoading;
+  bool get isBalancesLoading => StarportApp.accountsStore.isBalancesLoading;
 
-  bool get isSendMoneyLoading => StarportApp.walletsStore.isSendMoneyLoading;
+  bool get isSendMoneyLoading => StarportApp.accountsStore.isSendMoneyLoading;
 
-  bool get isError => StarportApp.walletsStore.isBalancesLoadingError;
+  bool get isError => StarportApp.accountsStore.isBalancesLoadingError;
 
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     children: [
                       _gradientAvatar(context),
                       AssetPortfolioHeading(
-                        title: selectedWallet.name,
+                        title: selectedAccount.name,
                         onTap: _onTapDropDown,
                       ),
                       SizedBox(height: CosmosTheme.of(context).spacingXL),
@@ -92,7 +92,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
           height: 35,
           child: InkWell(
             onTap: () => _onTapAvatar(context),
-            child: GradientAvatar(stringKey: selectedWallet.publicAddress),
+            child: GradientAvatar(stringKey: selectedAccount.publicAddress),
           ),
         ),
       ),
@@ -104,17 +104,17 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       );
 
   Future<void> _onTapDropDown() async {
-    final wallet = await showMaterialModalBottomSheet(
+    final account = await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
-        child: const WalletsListSheet(),
+        child: const AccountsListSheet(),
       ),
-    ) as WalletPublicInfo?;
+    ) as AccountPublicInfo?;
 
-    if (wallet != null) {
-      StarportApp.walletsStore.selectWallet(wallet);
+    if (account != null) {
+      StarportApp.accountsStore.selectAccount(account);
     }
   }
 
@@ -125,7 +125,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
         child: ReceiveMoneySheet(
-          walletInfo: StarportApp.walletsStore.selectedWallet,
+          accountInfo: StarportApp.accountsStore.selectedAccount,
         ),
       ),
     );
@@ -136,9 +136,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     super.debugFillProperties(properties);
     properties
       ..add(
-        DiagnosticsProperty<WalletPublicInfo>(
-          'selectedWallet',
-          selectedWallet,
+        DiagnosticsProperty<AccountPublicInfo>(
+          'selectedAccount',
+          selectedAccount,
         ),
       )
       ..add(DiagnosticsProperty<bool>('isBalancesLoading', isBalancesLoading))

@@ -1,17 +1,17 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/pages/create_wallet_page.dart';
-import 'package:starport_template/pages/import_wallet_page.dart';
+import 'package:starport_template/pages/create_account_page.dart';
+import 'package:starport_template/pages/import_account_page.dart';
 import 'package:starport_template/starport_app.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({
-    this.openWalletsListOnDone = true,
+    this.openAccountsListOnDone = true,
     Key? key,
   }) : super(key: key);
 
-  final bool openWalletsListOnDone;
+  final bool openAccountsListOnDone;
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -19,7 +19,7 @@ class OnboardingPage extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('openWalletsListOnDone', openWalletsListOnDone));
+    properties.add(DiagnosticsProperty<bool>('openAccountsListOnDone', openAccountsListOnDone));
   }
 }
 
@@ -54,7 +54,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                     SizedBox(height: theme.spacingL),
                     Text(
-                      'Access your wallet for $nodeNetwork.',
+                      'Access your account for $nodeNetwork.',
                       style: Theme.of(context).textTheme.caption,
                     ),
                     SizedBox(height: theme.spacingXL),
@@ -79,12 +79,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _onTapCreateAccount() => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const CreateWalletPage()),
+        MaterialPageRoute(builder: (_) => const CreateAccountPage()),
       );
 
   void _onTapImportAccount() => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const ImportWalletPage()),
+        MaterialPageRoute(builder: (_) => const ImportAccountPage()),
       );
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

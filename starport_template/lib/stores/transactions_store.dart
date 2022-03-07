@@ -21,10 +21,10 @@ class TransactionsStore {
 
   set isTransactionHistoryError(bool val) => Action(() => _isTransactionHistoryError.value = val)();
 
-  Future<void> getTransactionHistory(String walletAddress) async {
+  Future<void> getTransactionHistory(String accountAddress) async {
     isTransactionHistoryLoading = true;
     try {
-      final list = await CosmosTransactionHistoryLoader(baseEnv).getTransactionHistory(walletAddress);
+      final list = await CosmosTransactionHistoryLoader(baseEnv).getTransactionHistory(accountAddress);
       transactionsList
         ..clear()
         ..addAll(list);

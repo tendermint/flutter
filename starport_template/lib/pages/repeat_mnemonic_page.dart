@@ -2,8 +2,8 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/entities/import_wallet_form_data.dart';
-import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
+import 'package:starport_template/entities/import_account_form_data.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
@@ -34,9 +34,9 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
 
   bool get _createButtonEnabled => listEquals(_mnemonicWords, _selectedWords);
 
-  bool get _isLoading => StarportApp.walletsStore.isWalletImporting;
+  bool get _isLoading => StarportApp.accountsStore.isAccountImporting;
 
-  bool get _isError => StarportApp.walletsStore.isWalletImportingError;
+  bool get _isError => StarportApp.accountsStore.isAccountImportingError;
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
         errorChild: _errorUI(),
         isLoading: _isLoading,
         loadingChild: const LoadingSplash(
-          text: 'Creating wallet..',
+          text: 'Creating account..',
         ),
         contentChild: Scaffold(
           body: _contentUI(),
@@ -126,14 +126,14 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
     if (password == null) {
       return;
     }
-    await StarportApp.walletsStore.importAlanWallet(
-      ImportWalletFormData(
-        name: 'Wallet ${StarportApp.walletsStore.wallets.length}',
+    await StarportApp.accountsStore.importAlanAccount(
+      ImportAccountFormData(
+        name: 'Account ${StarportApp.accountsStore.accounts.length}',
         password: password,
         mnemonic: widget.mnemonic,
-        additionalData: WalletAdditionalData(isBackedUp: true),
+        additionalData: AccountAdditionalData(isBackedUp: true),
       ),
-      onWalletCreationStarted: () => setState(() {}),
+      onAccountCreationStarted: () => setState(() {}),
     );
     setState(() {});
     if (!mounted) {

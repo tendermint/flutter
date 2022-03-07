@@ -3,9 +3,9 @@ import 'package:cosmos_auth/cosmos_auth.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/starport_app.dart';
+import 'package:starport_template/stores/accounts_store.dart';
 import 'package:starport_template/stores/settings_store.dart';
 import 'package:starport_template/stores/transactions_store.dart';
-import 'package:starport_template/stores/wallets_store.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -37,7 +37,7 @@ void _buildDependencies() {
   );
 
   StarportApp.cosmosAuth = CosmosAuth();
-  StarportApp.walletsStore = WalletsStore(StarportApp.signingGateway, StarportApp.baseEnv);
+  StarportApp.accountsStore = AccountsStore(StarportApp.signingGateway, StarportApp.baseEnv);
   StarportApp.settingsStore = SettingsStore(StarportApp.cosmosAuth, StarportApp.secureDataStore, StarportApp.baseEnv);
   StarportApp.transactionsStore = TransactionsStore(StarportApp.baseEnv);
 }

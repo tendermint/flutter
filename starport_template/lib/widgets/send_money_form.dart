@@ -55,7 +55,7 @@ class _SendMoneyFormState extends State<SendMoneyForm> {
             controller: controller,
             onChanged: widget.onAddressChanged,
             initialText: text,
-            hint: "Enter receiver's wallet address",
+            hint: "Enter receiver's account address",
             suffix: CosmosTextButton(
               onTap: _onTapPaste,
               text: 'Paste',
