@@ -8,7 +8,7 @@ class Biometrics {
   const Biometrics();
 
   Future<Either<LocalAuthFailure, bool>> authenticate({
-    String reason = "We want to make sure you're the owner of the device in order to secure your wallet data",
+    String reason = "We want to make sure you're the owner of the device in order to secure your account data",
     bool biometricsOnly = false,
   }) async {
     try {
