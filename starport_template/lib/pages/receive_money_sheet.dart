@@ -4,17 +4,17 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class ReceiveMoneySheet extends StatelessWidget {
   const ReceiveMoneySheet({
-    required this.walletInfo,
+    required this.accountInfo,
     Key? key,
   }) : super(key: key);
 
-  final WalletPublicInfo walletInfo;
+  final AccountPublicInfo accountInfo;
 
-  String get walletAddress => walletInfo.publicAddress;
+  String get accountAddress => accountInfo.publicAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ReceiveMoneySheet extends StatelessWidget {
                 horizontal: MediaQuery.of(context).size.width / 5,
               ),
               child: CosmosQrImage(
-                data: walletInfo.publicAddress,
+                data: accountInfo.publicAddress,
               ),
             ),
             SizedBox(height: theme.spacingXXL),
@@ -48,18 +48,18 @@ class ReceiveMoneySheet extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 35,
-                  child: GradientAvatar(stringKey: walletInfo.publicAddress),
+                  child: GradientAvatar(stringKey: accountInfo.publicAddress),
                 ),
                 SizedBox(width: theme.spacingL),
                 Text(
-                  walletInfo.name,
+                  accountInfo.name,
                   style: CosmosTextTheme.title1Medium,
                 )
               ],
             ),
             SizedBox(height: theme.spacingL),
             Text(
-              maskAddress(walletAddress),
+              maskAddress(accountAddress),
               style: CosmosTextTheme.title1Medium,
             ),
             const Spacer(),
@@ -89,16 +89,16 @@ class ReceiveMoneySheet extends StatelessWidget {
     );
   }
 
-  void _onTapCopyAddress() => FlutterClipboard.copy(walletAddress);
+  void _onTapCopyAddress() => FlutterClipboard.copy(accountAddress);
 
-  void _onTapShare() => Share.share(walletAddress);
+  void _onTapShare() => Share.share(accountAddress);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<WalletPublicInfo>('walletInfo', walletInfo))
-      ..add(StringProperty('walletAddress', walletAddress));
+      ..add(DiagnosticsProperty<AccountPublicInfo>('accountInfo', accountInfo))
+      ..add(StringProperty('accountAddress', accountAddress));
   }
 }
 

@@ -12,9 +12,9 @@ class CosmosTransactionHistoryLoader {
 
   BaseEnv baseEnv;
 
-  Future<List<TransactionHistoryItem>> getTransactionHistory(String walletAddress) async {
-    final outGoingTransactions = await _getTransactionResponses(walletAddress, TransactionType.Send);
-    final incomingTransactions = await _getTransactionResponses(walletAddress, TransactionType.Receive);
+  Future<List<TransactionHistoryItem>> getTransactionHistory(String accountAddress) async {
+    final outGoingTransactions = await _getTransactionResponses(accountAddress, TransactionType.Send);
+    final incomingTransactions = await _getTransactionResponses(accountAddress, TransactionType.Receive);
 
     final list = [...outGoingTransactions, ...incomingTransactions] //
       ..sort((a, b) => b.date.compareTo(a.date));
@@ -22,9 +22,9 @@ class CosmosTransactionHistoryLoader {
     return list;
   }
 
-  Future<List<TransactionHistoryItem>> _getTransactionResponses(String walletAddress, TransactionType type) async {
+  Future<List<TransactionHistoryItem>> _getTransactionResponses(String accountAddress, TransactionType type) async {
     final uri =
-        '${baseEnv.baseApiUrl}/cosmos/tx/v1beta1/txs?events=transfer.${type == TransactionType.Send ? 'sender' : 'recipient'}%3D%27$walletAddress%27';
+        '${baseEnv.baseApiUrl}/cosmos/tx/v1beta1/txs?events=transfer.${type == TransactionType.Send ? 'sender' : 'recipient'}%3D%27$accountAddress%27';
     final response = await http.get(Uri.parse(uri));
     final map = jsonDecode(response.body) as Map<String, dynamic>;
     if (map['tx_responses'] == null) {

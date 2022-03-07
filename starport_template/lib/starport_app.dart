@@ -4,9 +4,9 @@ import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/pages/routing_page.dart';
+import 'package:starport_template/stores/accounts_store.dart';
 import 'package:starport_template/stores/settings_store.dart';
 import 'package:starport_template/stores/transactions_store.dart';
-import 'package:starport_template/stores/wallets_store.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 
@@ -16,7 +16,7 @@ class StarportApp extends StatelessWidget {
   }) : super(key: key);
 
   static late TransactionSigningGateway signingGateway;
-  static late WalletsStore walletsStore;
+  static late AccountsStore accountsStore;
   static late TransactionsStore transactionsStore;
   static late BaseEnv baseEnv;
   static late NetworkInfo networkInfo;

@@ -21,7 +21,7 @@ class PasswordPromptPage extends StatefulWidget {
     return _showPage(
       context,
       setUpPasscode: !hasPassword,
-      message: hasPassword ? message : 'Provide passcode that we will use to secure your wallet data',
+      message: hasPassword ? message : 'Provide passcode that we will use to secure your account data',
     );
   }
 

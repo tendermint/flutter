@@ -3,27 +3,27 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:starport_template/entities/import_wallet_form_data.dart';
-import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
+import 'package:starport_template/entities/import_account_form_data.dart';
+import 'package:starport_template/pages/account_name_page.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
-import 'package:starport_template/pages/wallet_name_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 
-class ImportWalletPage extends StatefulWidget {
-  const ImportWalletPage({Key? key}) : super(key: key);
+class ImportAccountPage extends StatefulWidget {
+  const ImportAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<ImportWalletPage> createState() => _ImportWalletPageState();
+  State<ImportAccountPage> createState() => _ImportAccountPageState();
 }
 
-class _ImportWalletPageState extends State<ImportWalletPage> {
+class _ImportAccountPageState extends State<ImportAccountPage> {
   MnemonicValidationError? _mnemonicValidError;
 
   String _mnemonic = '';
 
-  bool get isImporting => StarportApp.walletsStore.isWalletImporting;
+  bool get isImporting => StarportApp.accountsStore.isAccountImporting;
 
   bool get _importEnabled => _mnemonicValidError == null && _mnemonic.isNotEmpty;
 
@@ -86,12 +86,12 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
   void _onTapAdvanced() => notImplemented(context);
 
   Future<void> _onTapImport() async {
-    if (StarportApp.walletsStore.wallets.isEmpty) {
-      await _importWallet();
+    if (StarportApp.accountsStore.accounts.isEmpty) {
+      await _importAccount();
     } else {
       final name = await _chooseName();
       if (name != null) {
-        await _importWallet(name: name);
+        await _importAccount(name: name);
       }
     }
   }
@@ -99,7 +99,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
   Future<String?> _chooseName() {
     return Navigator.of(context).push<String>(
       MaterialPageRoute(
-        builder: (_) => const WalletNamePage(
+        builder: (_) => const AccountNamePage(
           name: '',
           actionTitle: 'Import',
         ),
@@ -107,20 +107,20 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
     );
   }
 
-  Future<void> _importWallet({String name = 'Account 1'}) async {
+  Future<void> _importAccount({String name = 'Account 1'}) async {
     final password = await PasswordPromptPage.promptPassword(context);
     if (password == null) {
       return;
     }
-    await StarportApp.walletsStore.importAlanWallet(
-      ImportWalletFormData(
+    await StarportApp.accountsStore.importAlanAccount(
+      ImportAccountFormData(
         mnemonic: _mnemonic,
         name: name,
         password: password,
-        additionalData: WalletAdditionalData(isBackedUp: true),
+        additionalData: AccountAdditionalData(isBackedUp: true),
       ),
     );
-    if (StarportApp.walletsStore.isWalletImportingError) {
+    if (StarportApp.accountsStore.isAccountImportingError) {
       _showImportErrorDialog();
     } else if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(

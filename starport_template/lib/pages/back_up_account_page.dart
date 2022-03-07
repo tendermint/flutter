@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:starport_template/pages/repeat_mnemonic_page.dart';
 import 'package:starport_template/widgets/copy_to_clipboard_button.dart';
 
-class BackUpWalletPage extends StatefulWidget {
-  const BackUpWalletPage({
+class BackUpAccountPage extends StatefulWidget {
+  const BackUpAccountPage({
     required this.mnemonic,
     Key? key,
   }) : super(key: key);
@@ -15,7 +15,7 @@ class BackUpWalletPage extends StatefulWidget {
   final String mnemonic;
 
   @override
-  State<BackUpWalletPage> createState() => _BackUpWalletPageState();
+  State<BackUpAccountPage> createState() => _BackUpAccountPageState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -24,7 +24,7 @@ class BackUpWalletPage extends StatefulWidget {
   }
 }
 
-class _BackUpWalletPageState extends State<BackUpWalletPage> {
+class _BackUpAccountPageState extends State<BackUpAccountPage> {
   List<String> get mnemonicWords => widget.mnemonic.splitToWords();
   var _confirmChecked = false;
 
