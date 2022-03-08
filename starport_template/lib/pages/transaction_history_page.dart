@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
-import 'package:starport_template/entities/wallet_additional_data.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/settings_sheet.dart';
 import 'package:starport_template/pages/wallets_list_sheet.dart';
@@ -23,7 +23,7 @@ class TransactionHistoryPage extends StatefulWidget {
 }
 
 class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   String get walletAddress => selectedWallet.publicAddress;
 
@@ -137,7 +137,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
         height: MediaQuery.of(context).size.height / 1.06,
         child: const WalletsListSheet(),
       ),
-    ) as WalletPublicInfo?;
+    ) as AccountPublicInfo?;
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
@@ -163,7 +163,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     super.debugFillProperties(properties);
     properties
       ..add(IterableProperty<TransactionHistoryItem>('transactionsList', transactionsList))
-      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet))
+      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedWallet', selectedWallet))
       ..add(StringProperty('walletAddress', walletAddress))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading));
   }

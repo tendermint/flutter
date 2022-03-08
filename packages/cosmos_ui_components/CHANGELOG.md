@@ -9,12 +9,12 @@
 
 #### UI related models
 
-* `WalletInfo` -> `AccountInfo`
+* `AccountInfo` -> `AccountInfo`
 
 #### Files moved
 
 * `AccountInfo` class was previously located inside `cosmos_accounts_list_view.dart` which itself is renamed
-  from `cosmos_wallets_list_view.dart`
+  from `cosmos_accounts_list_view.dart`
 * Now `AccountInfo` class is located under `models` folder in a separate file named `account_info.dart`
 
 ## 2.0.3 - 2021-01-27

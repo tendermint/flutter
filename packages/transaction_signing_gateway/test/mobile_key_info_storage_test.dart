@@ -8,7 +8,7 @@ import 'mocks/test_memory_store.dart';
 void main() {
   group('MobileKeyInfoStorage', () {
     const chainId = 'atom';
-    const accountId = '123walletId';
+    const accountId = '123accountId';
     const password = 'coolPassword123';
     const name = 'name';
     const publicAddress = 'cosmos1wze8mn5nsgl9qrgazq6a92fvh7m5e6psjcx2du';
@@ -41,7 +41,8 @@ void main() {
     );
     //
     test('save and retrieve creds', () async {
-      final saveResult = await storage.savePrivateCredentials(accountCredentials: privateCredsStub, password: password);
+      final saveResult = await storage.savePrivateCredentials(
+          accountCredentials: privateCredsStub, password: password,);
       expect(saveResult.isRight(), true, reason: '$saveResult');
 
       final readResult = await storage.getPrivateCredentials(
@@ -52,13 +53,16 @@ void main() {
         ),
       );
       expect(readResult.isRight(), true, reason: '$readResult');
-      expect(readResult.getOrElse(() => throw AssertionError()), privateCredsStub);
+      expect(
+          readResult.getOrElse(() => throw AssertionError()), privateCredsStub,);
     });
 
     //
     test('retrieve public infos', () async {
-      await storage.savePrivateCredentials(accountCredentials: privateCredsStub, password: password);
-      await storage.savePrivateCredentials(accountCredentials: privateCredsStub2, password: password);
+      await storage.savePrivateCredentials(
+          accountCredentials: privateCredsStub, password: password,);
+      await storage.savePrivateCredentials(
+          accountCredentials: privateCredsStub2, password: password,);
 
       final readResult = await storage.getAccountsList();
       expect(readResult.isRight(), true, reason: '$readResult');

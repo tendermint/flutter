@@ -1,4 +1,4 @@
-import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
 
 class ImportWalletFormData {
   const ImportWalletFormData({

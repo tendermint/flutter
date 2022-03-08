@@ -1,3 +1,4 @@
+import 'package:alan/alan.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/account_derivator.dart';
@@ -7,7 +8,6 @@ import 'package:transaction_signing_gateway/model/account_derivation_failure.dar
 import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
-import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -87,7 +87,7 @@ class TransactionSigningGateway {
             ),
           );
 
-  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcastTransaction({
+  Future<Either<TransactionBroadcastingFailure, TxResponse>> broadcastTransaction({
     required AccountLookupKey accountLookupKey,
     required SignedTransaction transaction,
   }) async =>

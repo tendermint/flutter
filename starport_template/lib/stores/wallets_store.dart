@@ -1,13 +1,13 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/entities/import_wallet_form_data.dart';
-import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/entities/import_account_form_data.dart';
 import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
-import 'package:transaction_signing_gateway/alan/alan_wallet_derivation_info.dart';
+import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class WalletsStore {
@@ -36,7 +36,7 @@ class WalletsStore {
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
   final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
-  final ObservableList<WalletPublicInfo> wallets = ObservableList();
+  final ObservableList<AccountPublicInfo> wallets = ObservableList();
 
   int? get selectedWalletIndex => _selectedWalletIndex.value;
 
@@ -90,14 +90,14 @@ class WalletsStore {
 
   set renameWalletFailure(CredentialsStorageFailure? val) => Action(() => _renameWalletFailure.value = val)();
 
-  WalletPublicInfo get selectedWallet {
+  AccountPublicInfo get selectedWallet {
     final index = _selectedWalletIndex.value;
     if (index == null) {
-      return const WalletPublicInfo(
+      return const AccountPublicInfo(
         chainId: '',
         name: '',
         publicAddress: '',
-        walletId: '',
+        accountId: '',
       );
     }
     return wallets[index];
@@ -115,7 +115,7 @@ class WalletsStore {
 
   Future<void> loadWallets() async {
     areWalletsLoading = true;
-    (await _transactionSigningGateway.getWalletsList()).fold(
+    (await _transactionSigningGateway.getAccountsList()).fold(
       (fail) => Action(() => loadWalletsFailure.value = fail)(),
       (newWallets) {
         wallets
@@ -132,13 +132,13 @@ class WalletsStore {
   Future<void> renameWallet(String name) async {
     isRenamingWallet = true;
     final newInfo = selectedWallet.copyWith(name: name);
-    (await _transactionSigningGateway.updateWalletPublicInfo(
+    (await _transactionSigningGateway.updateAccountPublicInfo(
       info: newInfo,
     ))
         .fold(
       (fail) => Action(() => renameWalletFailure = fail)(),
       (success) {
-        final index = wallets.indexWhere((it) => it.walletId == newInfo.walletId);
+        final index = wallets.indexWhere((it) => it.accountId == newInfo.accountId);
         wallets[index] = newInfo;
       },
     );
@@ -160,16 +160,16 @@ class WalletsStore {
     isBalancesLoading = false;
   }
 
-  Future<WalletPublicInfo?> importAlanWallet(
+  Future<AccountPublicInfo?> importAlanWallet(
     ImportWalletFormData data, {
     VoidCallback? onWalletCreationStarted,
   }) async {
     isWalletImportingError = false;
     isWalletImporting = true;
     final result = await _transactionSigningGateway
-        .deriveWallet(
-      walletDerivationInfo: AlanWalletDerivationInfo(
-        walletAlias: data.name,
+        .deriveAccount(
+      accountDerivationInfo: AlanAccountDerivationInfo(
+        accountAlias: data.name,
         networkInfo: baseEnv.networkInfo,
         mnemonic: data.mnemonic,
         chainId: chainId,
@@ -180,13 +180,13 @@ class WalletsStore {
     }).flatMap(
       (credentials) {
         return _transactionSigningGateway
-            .storeWalletCredentials(
+            .storeAccountCredentials(
           credentials: credentials,
           password: data.password,
         )
             .flatMap(
           (_) async {
-            return _transactionSigningGateway.updateWalletPublicInfo(
+            return _transactionSigningGateway.updateAccountPublicInfo(
               info: credentials.publicInfo.copyWith(
                 additionalData: data.additionalData.toJsonString(),
               ),
@@ -216,7 +216,7 @@ class WalletsStore {
   }
 
   Future<void> sendTokens({
-    required WalletPublicInfo info,
+    required AccountPublicInfo info,
     required Balance balance,
     required String toAddress,
     required String password,
@@ -239,7 +239,7 @@ class WalletsStore {
     isSendMoneyLoading = false;
   }
 
-  Future<WalletPublicInfo?> createNewWallet({
+  Future<AccountPublicInfo?> createNewWallet({
     required String password,
     required bool isBackedUp,
     VoidCallback? onMnemonicGenerationStarted,
@@ -277,9 +277,9 @@ class WalletsStore {
     return mnemonic;
   }
 
-  void selectWallet(WalletPublicInfo wallet) {
+  void selectWallet(AccountPublicInfo wallet) {
     try {
-      selectedWalletIndex = wallets.indexWhere((element) => element.walletId == wallet.walletId);
+      selectedWalletIndex = wallets.indexWhere((element) => element.accountId == wallet.accountId);
     } catch (ex, stack) {
       logError(ex, stack);
     }

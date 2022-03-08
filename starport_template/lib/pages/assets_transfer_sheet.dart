@@ -25,7 +25,8 @@ class AssetsTransferSheet extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback>.has('onTapDone', onTapDone))
-      ..add(DiagnosticsProperty<Balance>('balance', recipientGetsAmountBalance));
+      ..add(
+          DiagnosticsProperty<Balance>('balance', recipientGetsAmountBalance));
   }
 }
 
@@ -79,7 +80,7 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                     Text('Transferred!', style: CosmosTextTheme.title2Bold),
                     const Spacer(),
                     Text(
-                      '${formatAmount(widget.recipientGetsAmountBalance.amount.value.toDouble())} '
+                      '${widget.recipientGetsAmountBalance.amount.value} '
                               '${widget.recipientGetsAmountBalance.denom}'
                           .toUpperCase(),
                       style: CosmosTextTheme.title0Medium,

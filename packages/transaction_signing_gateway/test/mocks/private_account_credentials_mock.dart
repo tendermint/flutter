@@ -5,7 +5,8 @@ import 'package:transaction_signing_gateway/model/account_public_info.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 
-class PrivateAccountCredentialsMock extends Equatable implements PrivateAccountCredentials {
+class PrivateAccountCredentialsMock extends Equatable
+    implements PrivateAccountCredentials {
   const PrivateAccountCredentialsMock({
     required this.mnemonic,
     required this.publicInfo,
@@ -18,7 +19,8 @@ class PrivateAccountCredentialsMock extends Equatable implements PrivateAccountC
   final AccountPublicInfo publicInfo;
 
   @override
-  String get serializerIdentifier => TestPrivateCredentialsSerializer.sIdentifier;
+  String get serializerIdentifier =>
+      TestPrivateCredentialsSerializer.sIdentifier;
 
   @override
   List<Object?> get props => [
@@ -28,7 +30,8 @@ class PrivateAccountCredentialsMock extends Equatable implements PrivateAccountC
       ];
 }
 
-class TestPrivateCredentialsSerializer implements PrivateAccountCredentialsSerializer {
+class TestPrivateCredentialsSerializer
+    implements PrivateAccountCredentialsSerializer {
   static const String sIdentifier = 'TestPrivateCredentialsSerializer';
 
   @override
@@ -40,7 +43,7 @@ class TestPrivateCredentialsSerializer implements PrivateAccountCredentialsSeria
         PrivateAccountCredentialsMock(
           publicInfo: AccountPublicInfo(
             chainId: json['chainId'] as String,
-            accountId: json['walletId'] as String,
+            accountId: json['accountId'] as String,
             name: json['name'] as String,
             publicAddress: json['publicAddress'] as String,
           ),
@@ -61,7 +64,7 @@ class TestPrivateCredentialsSerializer implements PrivateAccountCredentialsSeria
   ) =>
       right({
         'chainId': credentials.publicInfo.chainId,
-        'walletId': credentials.publicInfo.accountId,
+        'accountId': credentials.publicInfo.accountId,
         'mnemonic': credentials.mnemonic,
         'name': credentials.publicInfo.name,
         'publicAddress': credentials.publicInfo.publicAddress

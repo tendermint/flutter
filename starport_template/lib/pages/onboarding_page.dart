@@ -1,8 +1,8 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/pages/create_wallet_page.dart';
-import 'package:starport_template/pages/import_wallet_page.dart';
+import 'package:starport_template/pages/create_account_page.dart';
+import 'package:starport_template/pages/import_account_page.dart';
 import 'package:starport_template/starport_app.dart';
 
 class OnboardingPage extends StatefulWidget {

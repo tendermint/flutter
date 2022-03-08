@@ -24,7 +24,7 @@ class WalletAdditionalData {
   String toJsonString() => jsonEncode(toJson());
 }
 
-extension AdditionalDataParsing on WalletPublicInfo {
+extension AdditionalDataParsing on AccountPublicInfo {
   WalletAdditionalData get data =>
       WalletAdditionalData.fromJson(jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
 }

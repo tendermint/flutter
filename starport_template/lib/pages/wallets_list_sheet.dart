@@ -1,14 +1,15 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/models/account_info.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:starport_template/pages/create_wallet_page.dart';
-import 'package:starport_template/pages/import_wallet_page.dart';
-import 'package:starport_template/pages/wallet_name_page.dart';
+import 'package:starport_template/pages/account_name_page.dart';
+import 'package:starport_template/pages/create_account_page.dart';
+import 'package:starport_template/pages/import_account_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
 class WalletsListSheet extends StatefulWidget {
   const WalletsListSheet({
@@ -20,16 +21,16 @@ class WalletsListSheet extends StatefulWidget {
 }
 
 class _WalletsListSheetState extends State<WalletsListSheet> {
-  List<WalletPublicInfo> get publicInfos => StarportApp.walletsStore.wallets;
+  List<AccountPublicInfo> get publicInfos => StarportApp.walletsStore.wallets;
 
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
-  List<WalletInfo> get walletInfos => publicInfos
+  List<AccountInfo> get walletInfos => publicInfos
       .map(
-        (publicInfo) => WalletInfo(
+        (publicInfo) => AccountInfo(
           name: publicInfo.name,
           address: publicInfo.publicAddress,
-          walletId: publicInfo.walletId,
+          accountId: publicInfo.accountId,
         ),
       )
       .toList();
@@ -98,9 +99,9 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
   Expanded _buildMainList() {
     return Expanded(
       child: Observer(
-        builder: (context) => CosmosWalletsListView(
+        builder: (context) => CosmosAccountsListView(
           list: walletInfos,
-          selectedWallet: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
+          selectedAccount: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
           onClicked: _walletClicked,
           isEditing: isEditingAccountList,
           onEditIconPressed: _onEditIconPressed,
@@ -109,7 +110,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     );
   }
 
-  Future<void> _onTapRenameAccount(WalletInfo walletInfo) async {
+  Future<void> _onTapRenameAccount(AccountInfo walletInfo) async {
     final newName = await Navigator.of(context).push<String>(
       MaterialPageRoute(
         builder: (context) => WalletNamePage(name: walletInfo.name),
@@ -145,7 +146,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
 
   void _walletClicked(int index) => Navigator.of(context).pop(publicInfos[index]);
 
-  void _onEditIconPressed(WalletInfo walletInfo) {
+  void _onEditIconPressed(AccountInfo walletInfo) {
     showCosmosActionSheet(
       context: context,
       actions: [
@@ -168,8 +169,8 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<bool>('isEditingAccountList', isEditingAccountList))
-      ..add(IterableProperty<WalletInfo>('walletInfos', walletInfos))
-      ..add(IterableProperty<WalletPublicInfo>('publicInfos', publicInfos))
-      ..add(DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet));
+      ..add(IterableProperty<AccountInfo>('walletInfos', walletInfos))
+      ..add(IterableProperty<AccountPublicInfo>('publicInfos', publicInfos))
+      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedWallet', selectedWallet));
   }
 }

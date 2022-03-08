@@ -42,7 +42,7 @@ class SignTransactionPage extends StatefulWidget {
 class _SignTransactionPageState extends State<SignTransactionPage> {
   double get recipientGetsAmount => widget.transaction.amount.value.toDouble() - widget.transaction.fee;
 
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   Balance get recipientGetsAmountBalance => widget.balance.copyWith(
         amount: Amount.fromString('$recipientGetsAmount'),
@@ -181,7 +181,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
       ..add(DoubleProperty('recipientGetsAmount', recipientGetsAmount))
       ..add(DiagnosticsProperty<Balance>('balance', widget.balance))
       ..add(
-        DiagnosticsProperty<WalletPublicInfo>('selectedWallet', selectedWallet),
+        DiagnosticsProperty<AccountPublicInfo>('selectedWallet', selectedWallet),
       )
       ..add(DiagnosticsProperty<Balance>('recipientGetsAmountBalance', recipientGetsAmountBalance));
   }

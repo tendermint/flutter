@@ -4,7 +4,7 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/model/account_public_info.dart';
 
 class ReceiveMoneySheet extends StatelessWidget {
   const ReceiveMoneySheet({
@@ -12,7 +12,7 @@ class ReceiveMoneySheet extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final WalletPublicInfo walletInfo;
+  final AccountPublicInfo walletInfo;
 
   String get walletAddress => walletInfo.publicAddress;
 
@@ -97,7 +97,7 @@ class ReceiveMoneySheet extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<WalletPublicInfo>('walletInfo', walletInfo))
+      ..add(DiagnosticsProperty<AccountPublicInfo>('walletInfo', walletInfo))
       ..add(StringProperty('walletAddress', walletAddress));
   }
 }

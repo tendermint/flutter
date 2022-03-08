@@ -9,10 +9,10 @@
 
 #### Models
 * `WalletDerivationFailure` -> `AccountDerivationFailure`
-* `WalletLookupKey` -> `AccountLookupKey`
-  * `walletId` property refactored to `accountId`
-* `WalletPublicInfo` -> `AccountPublicInfo`
-  * `walletId` property refactored to `accountId`
+* `accountLookupKey` -> `AccountLookupKey`
+  * `accountId` property refactored to `accountId`
+* `AccountPublicInfo` -> `AccountPublicInfo`
+  * `accountId` property refactored to `accountId`
 * `WalletPublicInfoSerializer` -> `AccountPublicInfoSerializer`
   
 #### Abstractions

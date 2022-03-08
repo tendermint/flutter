@@ -3,11 +3,11 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:starport_template/entities/import_wallet_form_data.dart';
-import 'package:starport_template/entities/wallet_additional_data.dart';
+import 'package:starport_template/entities/account_additional_data.dart';
+import 'package:starport_template/entities/import_account_form_data.dart';
+import 'package:starport_template/pages/account_name_page.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
-import 'package:starport_template/pages/wallet_name_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 

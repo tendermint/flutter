@@ -15,7 +15,7 @@ import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 import 'package:starport_template/widgets/starport_button_bar.dart';
-import 'package:transaction_signing_gateway/model/wallet_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
 class AssetsPortfolioPage extends StatefulWidget {
   const AssetsPortfolioPage({
@@ -35,7 +35,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
   bool get isError => StarportApp.walletsStore.isBalancesLoadingError;
 
-  WalletPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
         height: MediaQuery.of(context).size.height / 1.06,
         child: const WalletsListSheet(),
       ),
-    ) as WalletPublicInfo?;
+    ) as AccountPublicInfo?;
 
     if (wallet != null) {
       StarportApp.walletsStore.selectWallet(wallet);
@@ -136,7 +136,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     super.debugFillProperties(properties);
     properties
       ..add(
-        DiagnosticsProperty<WalletPublicInfo>(
+        DiagnosticsProperty<AccountPublicInfo>(
           'selectedWallet',
           selectedWallet,
         ),

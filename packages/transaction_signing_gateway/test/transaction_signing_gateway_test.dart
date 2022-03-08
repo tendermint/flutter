@@ -16,7 +16,7 @@ void main() {
     late KeyInfoStorageMock infoStorage;
     late TransactionSigningGateway signingGateway;
     const chainId = 'atom';
-    const accountId = '123walletId';
+    const accountId = '123accountId';
     const publicAddress = 'cosmos1wze8mn5nsgl9qrgazq6a92fvh7m5e6psjcx2du';
     const name = 'name';
     const mnemonic =
@@ -33,8 +33,10 @@ void main() {
 
     test('declining ui returns failure', () async {
       // GIVEN
-      when(summaryUI.showTransactionSummaryUI(transaction: anyNamed('transaction')))
-          .thenAnswer((_) async => left(const UserDeclinedTransactionSignerFailure()));
+      when(summaryUI.showTransactionSummaryUI(
+              transaction: anyNamed('transaction'),),)
+          .thenAnswer(
+              (_) async => left(const UserDeclinedTransactionSignerFailure()),);
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
@@ -46,16 +48,19 @@ void main() {
       );
       // THEN
       expect(result.isLeft(), true);
-      expect(result.fold((l) => l, (r) => r), isA<UserDeclinedTransactionSignerFailure>());
+      expect(result.fold((l) => l, (r) => r),
+          isA<UserDeclinedTransactionSignerFailure>(),);
       verifyNever(infoStorage.getPrivateCredentials(any));
     });
 
     test('failing to retrieve key returns failure', () async {
       // GIVEN
-      when(summaryUI.showTransactionSummaryUI(transaction: anyNamed('transaction')))
+      when(summaryUI.showTransactionSummaryUI(
+              transaction: anyNamed('transaction'),),)
           .thenAnswer((_) async => right(unit));
       when(infoStorage.getPrivateCredentials(any)) //
-          .thenAnswer((_) async => left(const CredentialsStorageFailure('fail')));
+          .thenAnswer(
+              (_) async => left(const CredentialsStorageFailure('fail')),);
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
@@ -68,14 +73,17 @@ void main() {
       // THEN
       expect(result.isLeft(), true);
       expect(result.fold((l) => l, (r) => r), isA<TransactionSigningFailure>());
-      verify(summaryUI.showTransactionSummaryUI(transaction: anyNamed('transaction')));
+      verify(summaryUI.showTransactionSummaryUI(
+          transaction: anyNamed('transaction'),),);
     });
 
     test('missing proper signer returns failure', () async {
       // GIVEN
-      when(summaryUI.showTransactionSummaryUI(transaction: anyNamed('transaction')))
+      when(summaryUI.showTransactionSummaryUI(
+              transaction: anyNamed('transaction'),),)
           .thenAnswer((_) async => right(unit));
-      when(infoStorage.getPrivateCredentials(any)).thenAnswer((_) async => right(privateCredsStub));
+      when(infoStorage.getPrivateCredentials(any))
+          .thenAnswer((_) async => right(privateCredsStub));
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),
@@ -87,8 +95,10 @@ void main() {
       );
       // THEN
       expect(result.isLeft(), true);
-      expect(result.fold((l) => l, (r) => r), isA<TransactionSignerNotFoundFailure>());
-      verify(summaryUI.showTransactionSummaryUI(transaction: anyNamed('transaction')));
+      expect(result.fold((l) => l, (r) => r),
+          isA<TransactionSignerNotFoundFailure>(),);
+      verify(summaryUI.showTransactionSummaryUI(
+          transaction: anyNamed('transaction'),),);
       verify(infoStorage.getPrivateCredentials(any));
     });
 
