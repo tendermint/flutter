@@ -5,7 +5,6 @@ import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
-import 'package:transaction_signing_gateway/model/transaction_hash.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 
 class AlanTransactionBroadcaster implements TransactionBroadcaster {
@@ -14,34 +13,38 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
+  Future<Either<TransactionBroadcastingFailure, TxResponse>> broadcast({
     required SignedTransaction transaction,
     required PrivateAccountCredentials privateAccountCredentials,
   }) async {
     if (transaction is! SignedAlanTransaction) {
-      return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
+      return left(AlanTransactionBroadcastingFailure(
+          'passed transaction is not $SignedAlanTransaction'));
     }
     if (privateAccountCredentials is! AlanPrivateAccountCredentials) {
       return left(
-        AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'),
+        AlanTransactionBroadcastingFailure(
+            'passed privateCredentials is not $AlanPrivateAccountCredentials'),
       );
     }
     final txSender = TxSender.fromNetworkInfo(_networkInfo);
-    final response =
-        await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
+    final response = await txSender.broadcastTx(transaction.signedTransaction,
+        mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 
     if (response.hasTxhash()) {
-      return right(TransactionHash(txHash: response.txhash));
+      return right(response);
     } else {
       return left(AlanTransactionBroadcastingFailure('Tx error: $response'));
     }
   }
 
   @override
-  bool canBroadcast(SignedTransaction signedTransaction) => signedTransaction is SignedAlanTransaction;
+  bool canBroadcast(SignedTransaction signedTransaction) =>
+      signedTransaction is SignedAlanTransaction;
 }
 
-class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure {
+class AlanTransactionBroadcastingFailure
+    extends TransactionBroadcastingFailure {
   AlanTransactionBroadcastingFailure(this.cause);
 
   final Object cause;
@@ -53,5 +56,6 @@ class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure 
 
   @override
   // TODO: implement type
-  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.unknown;
+  TransactionBroadcastingFailType get type =>
+      TransactionBroadcastingFailType.unknown;
 }

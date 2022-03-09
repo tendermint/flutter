@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: b30a9c089effaf83a9df78777b302411258d5f36
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -208,7 +208,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.1"
+    version: "3.5.2"
   qr:
     dependency: transitive
     description:
