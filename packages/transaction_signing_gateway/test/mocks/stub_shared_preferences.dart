@@ -52,13 +52,11 @@ class StubSharedPreferences implements SharedPreferences {
   Future<bool> setBool(String key, bool value) => throw UnimplementedError();
 
   @override
-  Future<bool> setDouble(String key, double value) =>
-      throw UnimplementedError();
+  Future<bool> setDouble(String key, double value) => throw UnimplementedError();
 
   @override
   Future<bool> setInt(String key, int value) => throw UnimplementedError();
 
   @override
-  Future<bool> setStringList(String key, List<String> value) =>
-      throw UnimplementedError();
+  Future<bool> setStringList(String key, List<String> value) => throw UnimplementedError();
 }

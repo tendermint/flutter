@@ -6,8 +6,7 @@ import 'package:transaction_signing_gateway/model/private_account_credentials.da
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 
 abstract class KeyInfoStorage {
-  Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>>
-      getPrivateCredentials(
+  Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>> getPrivateCredentials(
     AccountLookupKey accountLookupKey,
   );
 
@@ -16,16 +15,13 @@ abstract class KeyInfoStorage {
     required String password,
   });
 
-  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials(
-      {required AccountPublicInfo publicInfo});
+  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials({required AccountPublicInfo publicInfo});
 
   Future<Either<CredentialsStorageFailure, Unit>> updatePublicAccountInfo({
     required AccountPublicInfo info,
   });
 
-  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>>
-      getAccountsList();
+  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList();
 
-  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(
-      AccountLookupKey accountLookupKey);
+  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(AccountLookupKey accountLookupKey);
 }

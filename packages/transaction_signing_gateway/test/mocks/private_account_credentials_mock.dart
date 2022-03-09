@@ -5,8 +5,7 @@ import 'package:transaction_signing_gateway/model/account_public_info.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 
-class PrivateAccountCredentialsMock extends Equatable
-    implements PrivateAccountCredentials {
+class PrivateAccountCredentialsMock extends Equatable implements PrivateAccountCredentials {
   const PrivateAccountCredentialsMock({
     required this.mnemonic,
     required this.publicInfo,
@@ -19,8 +18,7 @@ class PrivateAccountCredentialsMock extends Equatable
   final AccountPublicInfo publicInfo;
 
   @override
-  String get serializerIdentifier =>
-      TestPrivateCredentialsSerializer.sIdentifier;
+  String get serializerIdentifier => TestPrivateCredentialsSerializer.sIdentifier;
 
   @override
   List<Object?> get props => [
@@ -30,8 +28,7 @@ class PrivateAccountCredentialsMock extends Equatable
       ];
 }
 
-class TestPrivateCredentialsSerializer
-    implements PrivateAccountCredentialsSerializer {
+class TestPrivateCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   static const String sIdentifier = 'TestPrivateCredentialsSerializer';
 
   @override

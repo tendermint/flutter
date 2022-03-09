@@ -17,8 +17,7 @@ class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   static const _publicAddressKey = 'publicAddress';
 
   @override
-  Either<CredentialsStorageFailure, PrivateAccountCredentials> fromJson(
-      Map<String, dynamic> json) {
+  Either<CredentialsStorageFailure, PrivateAccountCredentials> fromJson(Map<String, dynamic> json) {
     try {
       return right(
         AlanPrivateAccountCredentials(
@@ -33,8 +32,7 @@ class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
       );
     } catch (e, stack) {
       debugPrint('$e\n$stack');
-      return left(
-          CredentialsStorageFailure('Could not parse account credentials: $e'));
+      return left(CredentialsStorageFailure('Could not parse account credentials: $e'));
     }
   }
 
@@ -42,8 +40,7 @@ class AlanCredentialsSerializer implements PrivateAccountCredentialsSerializer {
   String get identifier => id;
 
   @override
-  Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(
-      PrivateAccountCredentials credentials) {
+  Either<CredentialsStorageFailure, Map<String, dynamic>> toJson(PrivateAccountCredentials credentials) {
     if (credentials is! AlanPrivateAccountCredentials) {
       return left(
         CredentialsStorageFailure(

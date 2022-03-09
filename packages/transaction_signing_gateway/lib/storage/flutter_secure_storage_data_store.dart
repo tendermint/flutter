@@ -10,8 +10,7 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
   final FlutterSecureStorage _store;
 
   @override
-  Future<Either<CredentialsStorageFailure, String?>> readSecureText(
-      {required String key}) async {
+  Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) async {
     try {
       return right(
         await _store.read(
@@ -21,16 +20,12 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
         ),
       );
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure(
-          "Could not retrieve secure text for key '$key'",
-          cause: ex,
-          stack: stack));
+      return left(CredentialsStorageFailure("Could not retrieve secure text for key '$key'", cause: ex, stack: stack));
     }
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, Unit>> saveSecureText(
-      {required String key, required String? value}) async {
+  Future<Either<CredentialsStorageFailure, Unit>> saveSecureText({required String key, required String? value}) async {
     try {
       await _store.write(
         key: key,
@@ -40,10 +35,7 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
       );
       return right(unit);
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure(
-          "Could not write secure text for key '$key'",
-          cause: ex,
-          stack: stack));
+      return left(CredentialsStorageFailure("Could not write secure text for key '$key'", cause: ex, stack: stack));
     }
   }
 }

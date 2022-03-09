@@ -16,26 +16,21 @@ class TransactionSignerNotFoundFailure implements TransactionSigningFailure {
   const TransactionSignerNotFoundFailure();
 
   @override
-  TransactionSigningFailType get type =>
-      TransactionSigningFailType.noTransactionSignerFound;
+  TransactionSigningFailType get type => TransactionSigningFailType.noTransactionSignerFound;
 }
 
-class UserDeclinedTransactionSignerFailure
-    implements TransactionSigningFailure {
+class UserDeclinedTransactionSignerFailure implements TransactionSigningFailure {
   const UserDeclinedTransactionSignerFailure();
 
   @override
-  TransactionSigningFailType get type =>
-      TransactionSigningFailType.userDeclined;
+  TransactionSigningFailType get type => TransactionSigningFailType.userDeclined;
 }
 
-class InvalidPasswordTransactionSignerFailure
-    implements TransactionSigningFailure {
+class InvalidPasswordTransactionSignerFailure implements TransactionSigningFailure {
   const InvalidPasswordTransactionSignerFailure();
 
   @override
-  TransactionSigningFailType get type =>
-      TransactionSigningFailType.invalidPassword;
+  TransactionSigningFailType get type => TransactionSigningFailType.invalidPassword;
 }
 
 class StorageProblemSigningFailure implements TransactionSigningFailure {
@@ -44,8 +39,7 @@ class StorageProblemSigningFailure implements TransactionSigningFailure {
   final CredentialsStorageFailure failure;
 
   @override
-  TransactionSigningFailType get type =>
-      TransactionSigningFailType.accountCredentialsStorageFailure;
+  TransactionSigningFailType get type => TransactionSigningFailType.accountCredentialsStorageFailure;
 
   @override
   String toString() {

@@ -46,8 +46,7 @@ class BiometricDataStore implements SecureDataStore {
         },
       );
 
-  Future<Either<CredentialsStorageFailure, Map<String, String?>>>
-      _readMap() async {
+  Future<Either<CredentialsStorageFailure, Map<String, String?>>> _readMap() async {
     return _getStorageFile() //
         .flatMap((storageFile) async {
       final fileRead = await storageFile.read();
@@ -101,8 +100,7 @@ class BiometricDataStore implements SecureDataStore {
     }
   }
 
-  Future<Either<CredentialsStorageFailure, BiometricStorageFile>>
-      _getStorageFile() async {
+  Future<Either<CredentialsStorageFailure, BiometricStorageFile>> _getStorageFile() async {
     final biometricStorage = BiometricStorage();
     final canAuthenticate = await biometricStorage.canAuthenticate();
     switch (canAuthenticate) {

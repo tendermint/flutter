@@ -95,8 +95,7 @@ void main() {
           transaction: anyNamed('transaction'),
         ),
       ).thenAnswer((_) async => right(unit));
-      when(infoStorage.getPrivateCredentials(any))
-          .thenAnswer((_) async => right(privateCredsStub));
+      when(infoStorage.getPrivateCredentials(any)).thenAnswer((_) async => right(privateCredsStub));
       // WHEN
       final result = await signingGateway.signTransaction(
         transaction: UnsignedTransaction(),

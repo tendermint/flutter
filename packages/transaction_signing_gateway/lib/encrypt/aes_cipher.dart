@@ -32,8 +32,7 @@ class AESCipher implements Cipher {
   IV _salt() => IV.fromSecureRandom(32);
 
   Encrypter _fromPassword({required String password, required IV salt}) {
-    final key = Key.fromUtf8(password)
-        .stretch(32, salt: salt.bytes, iterationCount: 500);
+    final key = Key.fromUtf8(password).stretch(32, salt: salt.bytes, iterationCount: 500);
     return Encrypter(AES(key));
   }
 }
@@ -64,6 +63,5 @@ class _EncryptedBundle {
     }
   }
 
-  String get string =>
-      '${iv.base64}$_delimiter${salt.base64}$_delimiter${encryptedData.base64}';
+  String get string => '${iv.base64}$_delimiter${salt.base64}$_delimiter${encryptedData.base64}';
 }

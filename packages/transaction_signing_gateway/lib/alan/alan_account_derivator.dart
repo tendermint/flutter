@@ -16,10 +16,8 @@ class AlanAccountDerivator implements AccountDerivator {
     required AccountDerivationInfo accountDerivationInfo,
   }) async {
     try {
-      final alanAccountDerivationInfo =
-          accountDerivationInfo as AlanAccountDerivationInfo;
-      final account =
-          await compute(_deriveAccountSync, alanAccountDerivationInfo);
+      final alanAccountDerivationInfo = accountDerivationInfo as AlanAccountDerivationInfo;
+      final account = await compute(_deriveAccountSync, alanAccountDerivationInfo);
       return right(
         AlanPrivateAccountCredentials(
           publicInfo: AccountPublicInfo(
@@ -37,12 +35,10 @@ class AlanAccountDerivator implements AccountDerivator {
   }
 
   @override
-  bool canDerive(AccountDerivationInfo accountDerivationInfo) =>
-      accountDerivationInfo is AlanAccountDerivationInfo;
+  bool canDerive(AccountDerivationInfo accountDerivationInfo) => accountDerivationInfo is AlanAccountDerivationInfo;
 }
 
-alan.Wallet _deriveAccountSync(AlanAccountDerivationInfo derivationInfo) =>
-    alan.Wallet.derive(
+alan.Wallet _deriveAccountSync(AlanAccountDerivationInfo derivationInfo) => alan.Wallet.derive(
       derivationInfo.mnemonic.split(' '),
       derivationInfo.networkInfo,
     );
