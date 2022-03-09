@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
-String formatDate(DateTime date, DateFormatEnum dateFormat) => DateFormat(getDateFormat[dateFormat]).format(date);
+String formatDate(DateTime date, DateFormatEnum dateFormat) =>
+    DateFormat(getDateFormat[dateFormat]).format(date);
 
 String extractMonth(String groupedMonthYear) => groupedMonthYear.split('-')[0];
 

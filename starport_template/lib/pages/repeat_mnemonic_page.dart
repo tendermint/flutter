@@ -34,9 +34,9 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
 
   bool get _createButtonEnabled => listEquals(_mnemonicWords, _selectedWords);
 
-  bool get _isLoading => StarportApp.walletsStore.isWalletImporting;
+  bool get _isLoading => StarportApp.accountsStore.isAccountImporting;
 
-  bool get _isError => StarportApp.walletsStore.isWalletImportingError;
+  bool get _isError => StarportApp.accountsStore.isAccountImportingError;
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
         errorChild: _errorUI(),
         isLoading: _isLoading,
         loadingChild: const LoadingSplash(
-          text: 'Creating wallet..',
+          text: 'Creating account..',
         ),
         contentChild: Scaffold(
           body: _contentUI(),
@@ -126,14 +126,14 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
     if (password == null) {
       return;
     }
-    await StarportApp.walletsStore.importAlanWallet(
-      ImportWalletFormData(
-        name: 'Wallet ${StarportApp.walletsStore.wallets.length}',
+    await StarportApp.accountsStore.importAlanAccount(
+      ImportAccountFormData(
+        name: 'Account ${StarportApp.accountsStore.accounts.length}',
         password: password,
         mnemonic: widget.mnemonic,
-        additionalData: WalletAdditionalData(isBackedUp: true),
+        additionalData: AccountAdditionalData(isBackedUp: true),
       ),
-      onWalletCreationStarted: () => setState(() {}),
+      onAccountCreationStarted: () => setState(() {}),
     );
     setState(() {});
     if (!mounted) {

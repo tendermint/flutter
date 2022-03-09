@@ -45,7 +45,8 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(preferredHeight ?? (title == null ? kToolbarHeight : 120));
+  Size get preferredSize => Size.fromHeight(
+      preferredHeight ?? (title == null ? kToolbarHeight : 120));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

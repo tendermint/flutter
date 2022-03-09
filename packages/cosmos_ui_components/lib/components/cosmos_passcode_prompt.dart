@@ -39,7 +39,8 @@ class CosmosPasscodePrompt extends StatefulWidget {
       ..add(StringProperty('message', message))
       ..add(IntProperty('pinCount', pinCount))
       ..add(ObjectFlagProperty<VoidCallback?>.has('cancelAction', cancelAction))
-      ..add(ObjectFlagProperty<ValueChanged<String>?>.has('onChanged', onChanged));
+      ..add(ObjectFlagProperty<ValueChanged<String>?>.has(
+          'onChanged', onChanged));
   }
 }
 
@@ -100,12 +101,16 @@ class _CosmosPasscodePromptState extends State<CosmosPasscodePrompt> {
                 maxHeight: 10,
                 maxWidth: 10,
               ),
-              textStyle: const TextStyle(fontSize: 0, color: Colors.transparent),
+              textStyle:
+                  const TextStyle(fontSize: 0, color: Colors.transparent),
               eachFieldHeight: 10,
               useNativeKeyboard: false,
               enableInteractiveSelection: false,
               submittedFieldDecoration: _pinPutDecoration.copyWith(
-                color: CosmosTheme.of(context).colors.text.withOpacity(filledOpacity),
+                color: CosmosTheme.of(context)
+                    .colors
+                    .text
+                    .withOpacity(filledOpacity),
               ),
               selectedFieldDecoration: _pinPutDecoration,
               followingFieldDecoration: _pinPutDecoration,
@@ -173,7 +178,8 @@ class _CosmosPasscodePromptState extends State<CosmosPasscodePrompt> {
         child: const Text('⌫'),
         onPressed: () {
           if (_pinPutController.text.isNotEmpty) {
-            _pinPutController.text = _pinPutController.text.substring(0, _pinPutController.text.length - 1);
+            _pinPutController.text = _pinPutController.text
+                .substring(0, _pinPutController.text.length - 1);
             _notifyListeners();
           }
         },

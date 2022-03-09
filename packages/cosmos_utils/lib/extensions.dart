@@ -33,7 +33,8 @@ extension AsyncEither<L, R> on Future<Either<L, R>> {
     return (await this).leftMap(errorMapper);
   }
 
-  Future<Either<L, R2>> mapSuccess<R2>(R2 Function(R response) responseMapper) async {
+  Future<Either<L, R2>> mapSuccess<R2>(
+      R2 Function(R response) responseMapper) async {
     return (await this).map(responseMapper);
   }
 

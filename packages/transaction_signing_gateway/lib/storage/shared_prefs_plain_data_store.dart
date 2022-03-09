@@ -7,14 +7,16 @@ typedef SharedPrefsProvider = Future<SharedPreferences> Function();
 class SharedPrefsPlainDataStore implements PlainDataStore {
   SharedPrefsPlainDataStore({
     SharedPrefsProvider? sharedPreferencesProvider,
-  }) : sharedPreferencesProvider = sharedPreferencesProvider ?? SharedPreferences.getInstance;
+  }) : sharedPreferencesProvider =
+            sharedPreferencesProvider ?? SharedPreferences.getInstance;
 
   static const String keyPrefix = 'cosmosSharedPrefs_';
 
   final SharedPrefsProvider sharedPreferencesProvider;
 
   @override
-  Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText() async {
+  Future<Either<CredentialsStorageFailure, Map<String, String?>>>
+      readAllPlainText() async {
     try {
       final prefs = await sharedPreferencesProvider();
       return right(
@@ -28,7 +30,10 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
         ),
       );
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure('Error while reading all plain text data', cause: ex, stack: stack));
+      return left(CredentialsStorageFailure(
+          'Error while reading all plain text data',
+          cause: ex,
+          stack: stack));
     }
   }
 
@@ -40,12 +45,16 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       final prefs = await sharedPreferencesProvider();
       return right(prefs.getString('$keyPrefix$key'));
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Error while reading plain text for key: '$key'", cause: ex, stack: stack));
+      return left(CredentialsStorageFailure(
+          "Error while reading plain text for key: '$key'",
+          cause: ex,
+          stack: stack));
     }
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, Unit>> savePlainText({required String key, required String? value}) async {
+  Future<Either<CredentialsStorageFailure, Unit>> savePlainText(
+      {required String key, required String? value}) async {
     try {
       final prefs = await sharedPreferencesProvider();
       if (value == null) {
@@ -55,7 +64,10 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       }
       return right(unit);
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Error while setting plain text for key: '$key'", cause: ex, stack: stack));
+      return left(CredentialsStorageFailure(
+          "Error while setting plain text for key: '$key'",
+          cause: ex,
+          stack: stack));
     }
   }
 }

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class CosmosPasswordField extends StatefulWidget {
   const CosmosPasswordField({
     required this.onPasswordUpdated,
-    this.helperText = 'This password will be used to recover your account every time you log in to the app',
+    this.helperText =
+        'This password will be used to recover your account every time you log in to the app',
     this.hintText = 'Enter password',
     Key? key,
   }) : super(key: key);
@@ -21,7 +22,8 @@ class CosmosPasswordField extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('helperText', helperText))
-      ..add(ObjectFlagProperty<Function(String p1)>.has('onPasswordUpdated', onPasswordUpdated))
+      ..add(ObjectFlagProperty<Function(String p1)>.has(
+          'onPasswordUpdated', onPasswordUpdated))
       ..add(StringProperty('hintText', hintText));
   }
 }
@@ -29,7 +31,8 @@ class CosmosPasswordField extends StatefulWidget {
 class _CosmosPasswordFieldState extends State<CosmosPasswordField> {
   bool obscurePassword = true;
 
-  void togglePasswordVisibility() => setState(() => obscurePassword = !obscurePassword);
+  void togglePasswordVisibility() =>
+      setState(() => obscurePassword = !obscurePassword);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,8 @@ class _CosmosPasswordFieldState extends State<CosmosPasswordField> {
         helperMaxLines: 3,
         suffixIcon: InkWell(
           onTap: togglePasswordVisibility,
-          child: Icon(obscurePassword ? Icons.visibility : Icons.visibility_off),
+          child:
+              Icon(obscurePassword ? Icons.visibility : Icons.visibility_off),
         ),
       ),
     );
@@ -53,6 +57,7 @@ class _CosmosPasswordFieldState extends State<CosmosPasswordField> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<bool>('obscurePassword', obscurePassword));
+    properties
+        .add(DiagnosticsProperty<bool>('obscurePassword', obscurePassword));
   }
 }

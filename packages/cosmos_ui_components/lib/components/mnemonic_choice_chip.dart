@@ -22,7 +22,8 @@ class MnemonicChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveStyle = MnemonicChoiceChipStyle.def(context).mergeWith(style);
+    final effectiveStyle =
+        MnemonicChoiceChipStyle.def(context).mergeWith(style);
     final radius = Radius.circular(effectiveStyle.borderRadius ?? 0);
     final borderRadius = BorderRadius.all(radius);
     return Material(
@@ -40,7 +41,9 @@ class MnemonicChoiceChip extends StatelessWidget {
           borderType: BorderType.RRect,
           child: Padding(
             padding: EdgeInsets.only(
-              left: showIndex ? CosmosTheme.of(context).spacingM : CosmosTheme.of(context).spacingL,
+              left: showIndex
+                  ? CosmosTheme.of(context).spacingM
+                  : CosmosTheme.of(context).spacingL,
               right: CosmosTheme.of(context).spacingL,
               top: CosmosTheme.of(context).spacingM,
               bottom: CosmosTheme.of(context).spacingM,
@@ -65,7 +68,9 @@ class MnemonicChoiceChip extends StatelessWidget {
     );
   }
 
-  Widget _indexText(BuildContext context, MnemonicChoiceChipStyle style, int index) => Padding(
+  Widget _indexText(
+          BuildContext context, MnemonicChoiceChipStyle style, int index) =>
+      Padding(
         padding: EdgeInsets.only(right: CosmosTheme.of(context).spacingM),
         child: Container(
           width: 18,

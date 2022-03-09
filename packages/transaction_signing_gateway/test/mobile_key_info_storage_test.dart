@@ -42,7 +42,9 @@ void main() {
     //
     test('save and retrieve creds', () async {
       final saveResult = await storage.savePrivateCredentials(
-          accountCredentials: privateCredsStub, password: password,);
+        accountCredentials: privateCredsStub,
+        password: password,
+      );
       expect(saveResult.isRight(), true, reason: '$saveResult');
 
       final readResult = await storage.getPrivateCredentials(
@@ -54,15 +56,21 @@ void main() {
       );
       expect(readResult.isRight(), true, reason: '$readResult');
       expect(
-          readResult.getOrElse(() => throw AssertionError()), privateCredsStub,);
+        readResult.getOrElse(() => throw AssertionError()),
+        privateCredsStub,
+      );
     });
 
     //
     test('retrieve public infos', () async {
       await storage.savePrivateCredentials(
-          accountCredentials: privateCredsStub, password: password,);
+        accountCredentials: privateCredsStub,
+        password: password,
+      );
       await storage.savePrivateCredentials(
-          accountCredentials: privateCredsStub2, password: password,);
+        accountCredentials: privateCredsStub2,
+        password: password,
+      );
 
       final readResult = await storage.getAccountsList();
       expect(readResult.isRight(), true, reason: '$readResult');

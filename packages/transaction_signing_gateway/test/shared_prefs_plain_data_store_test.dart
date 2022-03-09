@@ -10,7 +10,8 @@ void main() {
 
   setUp(() {
     sharedPrefs = StubSharedPreferences();
-    store = SharedPrefsPlainDataStore(sharedPreferencesProvider: () async => sharedPrefs);
+    store = SharedPrefsPlainDataStore(
+        sharedPreferencesProvider: () async => sharedPrefs);
   });
   //
   test('storing value should allow to retrieve it', () async {
@@ -25,7 +26,8 @@ void main() {
     expect(await store.readPlainText(key: key), right(value));
   });
   //
-  test('store should not show data stored directly in the sharedPrefs', () async {
+  test('store should not show data stored directly in the sharedPrefs',
+      () async {
     //GIVEN
     const key = 'key_of_complex_data';
     const value = '{"some":"complex","value": true}';

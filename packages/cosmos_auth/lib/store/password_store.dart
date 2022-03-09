@@ -25,7 +25,8 @@ class PasswordStore {
             .readSecureText(key: _passwordKey(id))
             .mapError((fail) => ReadPasswordFailure.secureStorageFailure(fail));
       } else {
-        return left(const ReadPasswordFailure.authenticationFailed('User failed biometric authentication'));
+        return left(const ReadPasswordFailure.authenticationFailed(
+            'User failed biometric authentication'));
       }
     });
   }

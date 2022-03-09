@@ -29,7 +29,8 @@ class TransactionSigningGateway {
               plainDataStore: SharedPrefsPlainDataStore(),
               secureDataStore: FlutterSecureStorageDataStore(),
             ),
-        _transactionSummaryUI = transactionSummaryUI ?? NoOpTransactionSummaryUI();
+        _transactionSummaryUI =
+            transactionSummaryUI ?? NoOpTransactionSummaryUI();
 
   final List<TransactionSigner> _signers;
   final List<TransactionBroadcaster> _broadcasters;
@@ -54,7 +55,8 @@ class TransactionSigningGateway {
       );
 
   /// Deletes a account from device
-  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials({required AccountPublicInfo publicInfo}) =>
+  Future<Either<CredentialsStorageFailure, Unit>> deleteAccountCredentials(
+          {required AccountPublicInfo publicInfo}) =>
       _infoStorage.deleteAccountCredentials(publicInfo: publicInfo);
 
   /// Updates the public details of the account
@@ -87,43 +89,54 @@ class TransactionSigningGateway {
             ),
           );
 
-  Future<Either<TransactionBroadcastingFailure, TxResponse>> broadcastTransaction({
+  Future<Either<TransactionBroadcastingFailure, TxResponse>>
+      broadcastTransaction({
     required AccountLookupKey accountLookupKey,
     required SignedTransaction transaction,
   }) async =>
-      _infoStorage
-          .getPrivateCredentials(accountLookupKey)
-          .leftMap<TransactionBroadcastingFailure>((err) => left(StorageProblemBroadcastingFailure()))
-          .flatMap(
-            (privateCreds) async => _findCapableBroadcaster(transaction).broadcast(
-              transaction: transaction,
-              privateAccountCredentials: privateCreds,
-            ),
-          );
+          _infoStorage
+              .getPrivateCredentials(accountLookupKey)
+              .leftMap<TransactionBroadcastingFailure>(
+                  (err) => left(StorageProblemBroadcastingFailure()))
+              .flatMap(
+                (privateCreds) async =>
+                    _findCapableBroadcaster(transaction).broadcast(
+                  transaction: transaction,
+                  privateAccountCredentials: privateCreds,
+                ),
+              );
 
-  Future<Either<AccountDerivationFailure, PrivateAccountCredentials>> deriveAccount({
+  Future<Either<AccountDerivationFailure, PrivateAccountCredentials>>
+      deriveAccount({
     required AccountDerivationInfo accountDerivationInfo,
   }) async =>
-      _findCapableDerivator(accountDerivationInfo).derive(accountDerivationInfo: accountDerivationInfo);
+          _findCapableDerivator(accountDerivationInfo)
+              .derive(accountDerivationInfo: accountDerivationInfo);
 
-  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>> getAccountsList() =>
-      _infoStorage.getAccountsList();
+  Future<Either<CredentialsStorageFailure, List<AccountPublicInfo>>>
+      getAccountsList() => _infoStorage.getAccountsList();
 
   /// Verifies if passed lookupKey is pointing to a valid account stored within the secure storage.
-  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(AccountLookupKey accountLookupKey) =>
+  Future<Either<TransactionSigningFailure, bool>> verifyLookupKey(
+          AccountLookupKey accountLookupKey) =>
       _infoStorage.verifyLookupKey(accountLookupKey);
 
-  TransactionSigner _findCapableSigner(UnsignedTransaction transaction) => _signers.firstWhere(
+  TransactionSigner _findCapableSigner(UnsignedTransaction transaction) =>
+      _signers.firstWhere(
         (element) => element.canSign(transaction),
         orElse: NotFoundTransactionSigner.new,
       );
 
-  TransactionBroadcaster _findCapableBroadcaster(SignedTransaction transaction) => _broadcasters.firstWhere(
+  TransactionBroadcaster _findCapableBroadcaster(
+          SignedTransaction transaction) =>
+      _broadcasters.firstWhere(
         (element) => element.canBroadcast(transaction),
         orElse: NotFoundBroadcaster.new,
       );
 
-  AccountDerivator _findCapableDerivator(AccountDerivationInfo accountDerivationInfo) => _derivators.firstWhere(
+  AccountDerivator _findCapableDerivator(
+          AccountDerivationInfo accountDerivationInfo) =>
+      _derivators.firstWhere(
         (element) => element.canDerive(accountDerivationInfo),
         orElse: NotFoundDerivator.new,
       );

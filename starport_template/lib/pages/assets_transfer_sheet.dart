@@ -25,13 +25,12 @@ class AssetsTransferSheet extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback>.has('onTapDone', onTapDone))
-      ..add(
-          DiagnosticsProperty<Balance>('balance', recipientGetsAmountBalance));
+      ..add(DiagnosticsProperty<Balance>('balance', recipientGetsAmountBalance));
   }
 }
 
 class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
-  bool get isLoading => StarportApp.walletsStore.isSendMoneyLoading;
+  bool get isLoading => StarportApp.accountsStore.isSendMoneyLoading;
 
   @override
   Widget build(BuildContext context) {

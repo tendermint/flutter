@@ -9,7 +9,8 @@ void main() {
 
     test('encrypting and decrypting works', () async {
       final encrypted = cipher.encrypt(password: password, data: testData);
-      final decrypted = cipher.decrypt(password: password, encryptedData: encrypted);
+      final decrypted =
+          cipher.decrypt(password: password, encryptedData: encrypted);
       expect(testData, decrypted);
     });
     test('encrypting same data yields different result each time', () async {

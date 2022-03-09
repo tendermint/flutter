@@ -24,7 +24,8 @@ class CosmosBalanceCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+        padding:
+            EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

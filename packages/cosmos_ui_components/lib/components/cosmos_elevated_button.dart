@@ -28,7 +28,8 @@ class CosmosElevatedButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        shape: RoundedRectangleBorder(
+            borderRadius: CosmosTheme.of(context).borderRadiusM),
         elevation: 0,
       ),
       child: Row(

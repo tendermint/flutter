@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 abstract class CosmosTextTheme {
-  factory CosmosTextTheme._() => throw UnsupportedError('Not meant to be instantiated');
+  factory CosmosTextTheme._() =>
+      throw UnsupportedError('Not meant to be instantiated');
 
   static const String fontInter = 'Inter';
 

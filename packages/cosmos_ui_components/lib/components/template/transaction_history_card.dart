@@ -24,14 +24,16 @@ class TransactionHistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: theme.spacingL, vertical: theme.spacingM),
+      padding: EdgeInsets.symmetric(
+          horizontal: theme.spacingL, vertical: theme.spacingM),
       child: Column(
         children: [
           Row(
             children: [
               RotatedBox(
                 quarterTurns: isOutgoing ? 2 : 0,
-                child: Image.asset('assets/images/receive_icon.png', package: packageName),
+                child: Image.asset('assets/images/receive_icon.png',
+                    package: packageName),
               ),
               SizedBox(width: theme.spacingL),
               Column(
@@ -51,10 +53,12 @@ class TransactionHistoryCard extends StatelessWidget {
                 children: [
                   Text(
                     '${isOutgoing ? '-' : '+'} $amountText',
-                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : theme.colors.positiveText),
+                    style: CosmosTextTheme.labelS.copyWith(
+                        color: isOutgoing ? null : theme.colors.positiveText),
                   ),
                   SizedBox(height: theme.spacingXS),
-                  Text(denomText.toUpperCase(), style: CosmosTextTheme.copyMinus1Normal)
+                  Text(denomText.toUpperCase(),
+                      style: CosmosTextTheme.copyMinus1Normal)
                 ],
               )
             ],

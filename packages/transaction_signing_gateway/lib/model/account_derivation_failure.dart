@@ -14,7 +14,8 @@ class InvalidMnemonicFailure implements AccountDerivationFailure {
   final Object failure;
 
   @override
-  AccountDerivationFailType get type => AccountDerivationFailType.invalidMnemonic;
+  AccountDerivationFailType get type =>
+      AccountDerivationFailType.invalidMnemonic;
 
   @override
   String toString() => 'InvalidMnemonicFailure{fail: $failure}';
@@ -24,7 +25,8 @@ class DerivatorNotFoundFailure implements AccountDerivationFailure {
   const DerivatorNotFoundFailure();
 
   @override
-  AccountDerivationFailType get type => AccountDerivationFailType.derivatorNotFound;
+  AccountDerivationFailType get type =>
+      AccountDerivationFailType.derivatorNotFound;
 
   @override
   String toString() => 'DerivatorNotFoundFailure';

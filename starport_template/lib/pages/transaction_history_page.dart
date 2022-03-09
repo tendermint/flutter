@@ -7,9 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
+import 'package:starport_template/pages/accounts_list_sheet.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/settings_sheet.dart';
-import 'package:starport_template/pages/wallets_list_sheet.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/transaction_history_list.dart';
@@ -23,9 +23,9 @@ class TransactionHistoryPage extends StatefulWidget {
 }
 
 class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
-  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
 
-  String get walletAddress => selectedWallet.publicAddress;
+  String get accountAddress => selectedAccount.publicAddress;
 
   bool get isLoading => StarportApp.transactionsStore.isTransactionHistoryLoading;
 
@@ -34,7 +34,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
   @override
   void initState() {
     super.initState();
-    StarportApp.transactionsStore.getTransactionHistory(walletAddress);
+    StarportApp.transactionsStore.getTransactionHistory(accountAddress);
   }
 
   @override
@@ -47,9 +47,9 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
             _appBar(theme, context),
             SizedBox(height: theme.spacingM),
             _gradientAvatar(context),
-            AssetPortfolioHeading(title: selectedWallet.name, onTap: _onDropDownTapped, isCentered: true),
+            AssetPortfolioHeading(title: selectedAccount.name, onTap: _onDropDownTapped, isCentered: true),
             _textButtonRow(context, theme),
-            if (!selectedWallet.data.isBackedUp)
+            if (!selectedAccount.data.isBackedUp)
               Padding(
                 padding: EdgeInsets.all(theme.spacingL),
                 child: CosmosWarningBox(
@@ -124,28 +124,28 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       onTap: () {},
       child: Padding(
         padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-        child: SizedBox(height: 48, child: GradientAvatar(stringKey: walletAddress)),
+        child: SizedBox(height: 48, child: GradientAvatar(stringKey: accountAddress)),
       ),
     );
   }
 
   Future<void> _onDropDownTapped() async {
-    final wallet = await showMaterialModalBottomSheet(
+    final account = await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
-        child: const WalletsListSheet(),
+        child: const AccountsListSheet(),
       ),
     ) as AccountPublicInfo?;
 
-    if (wallet != null) {
-      StarportApp.walletsStore.selectWallet(wallet);
-      await StarportApp.transactionsStore.getTransactionHistory(walletAddress);
+    if (account != null) {
+      StarportApp.accountsStore.selectAccount(account);
+      await StarportApp.transactionsStore.getTransactionHistory(accountAddress);
     }
   }
 
-  void _onTapCopyAddress() => FlutterClipboard.copy(walletAddress);
+  void _onTapCopyAddress() => FlutterClipboard.copy(accountAddress);
 
   void _onTapReceive() {
     showMaterialModalBottomSheet(
@@ -153,7 +153,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height / 1.06,
-        child: ReceiveMoneySheet(walletInfo: selectedWallet),
+        child: ReceiveMoneySheet(accountInfo: selectedAccount),
       ),
     );
   }
@@ -163,8 +163,8 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     super.debugFillProperties(properties);
     properties
       ..add(IterableProperty<TransactionHistoryItem>('transactionsList', transactionsList))
-      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedWallet', selectedWallet))
-      ..add(StringProperty('walletAddress', walletAddress))
+      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedAccount', selectedAccount))
+      ..add(StringProperty('accountAddress', accountAddress))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading));
   }
 

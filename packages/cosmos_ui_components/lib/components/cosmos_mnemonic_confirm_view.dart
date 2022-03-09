@@ -19,7 +19,8 @@ class CosmosMnemonicConfirmView extends StatefulWidget {
   final String invalidOrderText;
 
   @override
-  State<CosmosMnemonicConfirmView> createState() => _CosmosMnemonicConfirmViewState();
+  State<CosmosMnemonicConfirmView> createState() =>
+      _CosmosMnemonicConfirmViewState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -41,7 +42,8 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
   final _usedWords = <String>[];
 
   bool get _showInvalidOrderError =>
-      widget.mnemonicWords.length == _usedWords.length && !listEquals(_usedWords, widget.mnemonicWords);
+      widget.mnemonicWords.length == _usedWords.length &&
+      !listEquals(_usedWords, widget.mnemonicWords);
 
   @override
   void initState() {
@@ -92,7 +94,8 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
                               },
                             ),
                           ),
-                          if (_showInvalidOrderError) _invalidIndicator(context),
+                          if (_showInvalidOrderError)
+                            _invalidIndicator(context),
                         ],
                       ),
                     ),
@@ -180,6 +183,7 @@ class _AvailableWordsGrid extends StatelessWidget {
     properties
       ..add(IterableProperty<String>('mnemonicWords', mnemonicWords))
       ..add(IterableProperty<String>('usedWords', usedWords))
-      ..add(ObjectFlagProperty<void Function(String p1)>.has('onTapWord', onTapWord));
+      ..add(ObjectFlagProperty<void Function(String p1)>.has(
+          'onTapWord', onTapWord));
   }
 }

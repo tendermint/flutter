@@ -4,7 +4,8 @@ import 'package:transaction_signing_gateway/alan/alan_credentials_serializer.dar
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 
-class AlanPrivateAccountCredentials extends Equatable implements PrivateAccountCredentials {
+class AlanPrivateAccountCredentials extends Equatable
+    implements PrivateAccountCredentials {
   const AlanPrivateAccountCredentials({
     required this.mnemonic,
     required this.publicInfo,

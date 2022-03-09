@@ -76,7 +76,8 @@ Future<T?> _showCupertinoBottomSheet<T>(
           onPressed: cancelAction ?? () => Navigator.of(buildContext).pop(),
           child: Text(
             'Cancel',
-            style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetPositive),
+            style: defaultTextStyle.copyWith(
+                color: CosmosTheme.of(context).colors.actionSheetPositive),
             textAlign: TextAlign.center,
           ),
         ),
@@ -119,7 +120,10 @@ Future<T?> _showMaterialBottomSheet<T>(
                       action.text,
                       textAlign: TextAlign.center,
                       style: action.isCriticalAction
-                          ? defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive)
+                          ? defaultTextStyle.copyWith(
+                              color: CosmosTheme.of(context)
+                                  .colors
+                                  .actionSheetDestructive)
                           : defaultTextStyle,
                     ),
                   ),
@@ -131,7 +135,10 @@ Future<T?> _showMaterialBottomSheet<T>(
                   child: Padding(
                     padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
                     child: DefaultTextStyle(
-                      style: defaultTextStyle.copyWith(color: CosmosTheme.of(context).colors.actionSheetDestructive),
+                      style: defaultTextStyle.copyWith(
+                          color: CosmosTheme.of(context)
+                              .colors
+                              .actionSheetDestructive),
                       textAlign: TextAlign.center,
                       child: const Text('Cancel'),
                     ),

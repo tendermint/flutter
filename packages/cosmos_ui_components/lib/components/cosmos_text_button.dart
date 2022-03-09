@@ -33,7 +33,8 @@ class CosmosTextButton extends StatelessWidget {
       onPressed: onTap,
       style: TextButton.styleFrom(
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        shape: RoundedRectangleBorder(
+            borderRadius: CosmosTheme.of(context).borderRadiusM),
         onSurface: color,
       ),
       child: Row(
@@ -44,7 +45,8 @@ class CosmosTextButton extends StatelessWidget {
               padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
               child: leadingIcon,
             ),
-            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingM),
+            if (text.isNotEmpty)
+              SizedBox(width: CosmosTheme.of(context).spacingM),
           ],
           Text(
             text,
@@ -54,7 +56,8 @@ class CosmosTextButton extends StatelessWidget {
                 ),
           ),
           if (suffixIcon != null) ...[
-            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingS),
+            if (text.isNotEmpty)
+              SizedBox(width: CosmosTheme.of(context).spacingS),
             Padding(
               padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
               child: suffixIcon,

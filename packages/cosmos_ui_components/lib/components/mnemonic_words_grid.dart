@@ -42,10 +42,13 @@ class CosmosMnemonicWordsGrid extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ObjectFlagProperty<void Function(int index)?>.has('onTapWord', onTapWord))
+      ..add(ObjectFlagProperty<void Function(int index)?>.has(
+          'onTapWord', onTapWord))
       ..add(IterableProperty<String>('mnemonicWords', mnemonicWords))
       ..add(DiagnosticsProperty<ScrollPhysics?>('physics', physics))
-      ..add(ObjectFlagProperty<MnemonicChoiceChipStyle Function(int index)?>.has('itemStyle', itemStyle))
+      ..add(
+          ObjectFlagProperty<MnemonicChoiceChipStyle Function(int index)?>.has(
+              'itemStyle', itemStyle))
       ..add(DiagnosticsProperty<bool>('showIndices', showIndices));
   }
 }

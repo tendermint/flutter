@@ -15,7 +15,8 @@ class AlanTransactionSigner implements TransactionSigner {
   final NetworkInfo _networkInfo;
 
   @override
-  bool canSign(UnsignedTransaction unsignedTransaction) => unsignedTransaction is UnsignedAlanTransaction;
+  bool canSign(UnsignedTransaction unsignedTransaction) =>
+      unsignedTransaction is UnsignedAlanTransaction;
 
   @override
   Future<Either<TransactionSigningFailure, SignedTransaction>> sign({
@@ -23,10 +24,12 @@ class AlanTransactionSigner implements TransactionSigner {
     required UnsignedTransaction transaction,
   }) async {
     if (transaction is! UnsignedAlanTransaction) {
-      return left(AlanTransactionSigningFailure('passed transaction is not $UnsignedAlanTransaction'));
+      return left(AlanTransactionSigningFailure(
+          'passed transaction is not $UnsignedAlanTransaction'));
     }
     if (privateCredentials is! AlanPrivateAccountCredentials) {
-      return left(AlanTransactionSigningFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'));
+      return left(AlanTransactionSigningFailure(
+          'passed privateCredentials is not $AlanPrivateAccountCredentials'));
     }
 
     try {

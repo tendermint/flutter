@@ -40,7 +40,8 @@ class CosmosTextField extends StatefulWidget {
       ..add(StringProperty('initialText', initialText))
       ..add(IntProperty('minLines', minLines))
       ..add(ObjectFlagProperty<Function(String p1)>.has('onChanged', onChanged))
-      ..add(DiagnosticsProperty<TextEditingController?>('controller', controller))
+      ..add(
+          DiagnosticsProperty<TextEditingController?>('controller', controller))
       ..add(StringProperty('hint', hint));
   }
 }
@@ -83,7 +84,8 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       },
       decoration: InputDecoration(
         counterText: widget.maxLength == null ? null : '',
-        border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
+        border: UnderlineInputBorder(
+            borderSide: BorderSide(color: theme.colors.inputBorder)),
         hintText: widget.hint,
         hintStyle: CosmosTextTheme.copy0Normal.copyWith(
           color: theme.colors.text.withOpacity(0.67),
@@ -113,7 +115,8 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<TextEditingController>('controller', controller))
+      ..add(
+          DiagnosticsProperty<TextEditingController>('controller', controller))
       ..add(DiagnosticsProperty<bool>('isTextEmpty', isTextEmpty));
   }
 }

@@ -2,8 +2,8 @@ import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class WalletNamePage extends StatefulWidget {
-  const WalletNamePage({
+class AccountNamePage extends StatefulWidget {
+  const AccountNamePage({
     required this.name,
     this.actionTitle = 'Save',
     Key? key,
@@ -13,7 +13,7 @@ class WalletNamePage extends StatefulWidget {
   final String actionTitle;
 
   @override
-  State<WalletNamePage> createState() => _WalletNamePageState();
+  State<AccountNamePage> createState() => _AccountNamePageState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -24,7 +24,7 @@ class WalletNamePage extends StatefulWidget {
   }
 }
 
-class _WalletNamePageState extends State<WalletNamePage> {
+class _AccountNamePageState extends State<AccountNamePage> {
   late String name;
 
   @override

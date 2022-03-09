@@ -4,9 +4,11 @@ enum LocalAuthFailureType {
 }
 
 class LocalAuthFailure {
-  const LocalAuthFailure.noBiometricsAvailable([this.cause, this.stack]) : type = LocalAuthFailureType.noBiometrics;
+  const LocalAuthFailure.noBiometricsAvailable([this.cause, this.stack])
+      : type = LocalAuthFailureType.noBiometrics;
 
-  const LocalAuthFailure.unknown([this.cause, this.stack]) : type = LocalAuthFailureType.unknown;
+  const LocalAuthFailure.unknown([this.cause, this.stack])
+      : type = LocalAuthFailureType.unknown;
 
   final LocalAuthFailureType type;
   final dynamic cause;

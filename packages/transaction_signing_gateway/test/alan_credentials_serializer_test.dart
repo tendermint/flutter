@@ -21,7 +21,8 @@ void main() {
       expect(jsonResult.isRight(), true);
       final credentialsResult = jsonResult.flatMap(serializer.fromJson);
       expect(credentialsResult.isRight(), true);
-      final alanCredsResult = credentialsResult.getOrElse(() => throw '') as AlanPrivateAccountCredentials;
+      final alanCredsResult = credentialsResult.getOrElse(() => throw '')
+          as AlanPrivateAccountCredentials;
       expect(alanCredsResult, credentials);
     });
   });

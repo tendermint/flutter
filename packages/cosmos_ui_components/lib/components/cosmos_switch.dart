@@ -22,7 +22,9 @@ class CosmosSwitch extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1000),
           border: Border.all(
-            color: checked ? Colors.transparent : theme.colors.text.withOpacity(0.1),
+            color: checked
+                ? Colors.transparent
+                : theme.colors.text.withOpacity(0.1),
           ),
         ),
         child: Transform.scale(

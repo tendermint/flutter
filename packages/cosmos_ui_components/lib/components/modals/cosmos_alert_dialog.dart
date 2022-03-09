@@ -14,7 +14,8 @@ Future<T?> showCosmosAlertDialog<T>({
   final system = osProvider();
   switch (system) {
     case OS.iOS:
-      return cupertino.showCupertinoDialog(context: context, builder: dialogBuilder);
+      return cupertino.showCupertinoDialog(
+          context: context, builder: dialogBuilder);
     case OS.Android:
     case OS.Other:
       return showDialog(context: context, builder: dialogBuilder);

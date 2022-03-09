@@ -21,7 +21,9 @@ class CosmosWarningBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Container(
-      decoration: BoxDecoration(borderRadius: theme.borderRadiusM, border: Border.all(color: theme.colors.divider)),
+      decoration: BoxDecoration(
+          borderRadius: theme.borderRadiusM,
+          border: Border.all(color: theme.colors.divider)),
       child: Padding(
         padding: EdgeInsets.all(theme.spacingL),
         child: Row(

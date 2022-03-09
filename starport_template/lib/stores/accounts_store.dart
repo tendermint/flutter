@@ -10,8 +10,8 @@ import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
-class WalletsStore {
-  WalletsStore(
+class AccountsStore {
+  AccountsStore(
     this._transactionSigningGateway,
     this.baseEnv,
   );
@@ -21,38 +21,38 @@ class WalletsStore {
 
   final BaseEnv baseEnv;
 
-  final Observable<bool> _areWalletsLoading = Observable(false);
+  final Observable<bool> _areAccountsLoading = Observable(false);
   final Observable<bool> _isSendMoneyLoading = Observable(false);
   final Observable<bool> _isSendMoneyError = Observable(false);
   final Observable<bool> _isBalancesLoading = Observable(false);
-  final Observable<bool> _isWalletImporting = Observable(false);
-  final Observable<bool> _isWalletImportingError = Observable(false);
+  final Observable<bool> _isAccountImporting = Observable(false);
+  final Observable<bool> _isAccountImportingError = Observable(false);
   final Observable<bool> _isMnemonicCreatingError = Observable(false);
   final Observable<bool> _isMnemonicCreating = Observable(false);
   final Observable<bool> _isBalancesLoadingError = Observable(false);
-  final Observable<bool> _isRenamingWallet = Observable(false);
+  final Observable<bool> _isRenamingAccount = Observable(false);
   final Observable<bool> _isSendingMoney = Observable(false);
 
   final ObservableList<Balance> balancesList = ObservableList();
-  final Observable<CredentialsStorageFailure?> loadWalletsFailure = Observable(null);
-  final Observable<CredentialsStorageFailure?> _renameWalletFailure = Observable(null);
-  final ObservableList<AccountPublicInfo> wallets = ObservableList();
+  final Observable<CredentialsStorageFailure?> loadAccountsFailure = Observable(null);
+  final Observable<CredentialsStorageFailure?> _renameAccountFailure = Observable(null);
+  final ObservableList<AccountPublicInfo> accounts = ObservableList();
 
-  int? get selectedWalletIndex => _selectedWalletIndex.value;
+  int? get selectedAccountIndex => _selectetAccountIndex.value;
 
   double get defaultFee => 0.02;
 
-  bool get areWalletsLoading => _areWalletsLoading.value;
+  bool get areAccountsLoading => _areAccountsLoading.value;
 
-  set areWalletsLoading(bool val) => Action(() => _areWalletsLoading.value = val)();
+  set areAccountsLoading(bool val) => Action(() => _areAccountsLoading.value = val)();
 
   bool get isSendingMoney => _isSendingMoney.value;
 
   set isSendingMoney(bool val) => Action(() => _isSendingMoney.value = val)();
 
-  bool get isRenamingWallet => _isRenamingWallet.value;
+  bool get isRenamingAccount => _isRenamingAccount.value;
 
-  set isRenamingWallet(bool val) => Action(() => _isRenamingWallet.value = val)();
+  set isRenamingAccount(bool val) => Action(() => _isRenamingAccount.value = val)();
 
   bool get isSendMoneyError => _isSendMoneyError.value;
 
@@ -70,9 +70,9 @@ class WalletsStore {
 
   set isBalancesLoading(bool val) => Action(() => _isBalancesLoading.value = val)();
 
-  bool get isWalletImportingError => _isWalletImportingError.value;
+  bool get isAccountImportingError => _isAccountImportingError.value;
 
-  set isWalletImportingError(bool val) => Action(() => _isWalletImportingError.value = val)();
+  set isAccountImportingError(bool val) => Action(() => _isAccountImportingError.value = val)();
 
   bool get isMnemonicCreatingError => _isMnemonicCreatingError.value;
 
@@ -82,16 +82,16 @@ class WalletsStore {
 
   set isMnemonicCreating(bool val) => Action(() => _isMnemonicCreating.value = val)();
 
-  bool get isWalletImporting => _isWalletImporting.value;
+  bool get isAccountImporting => _isAccountImporting.value;
 
-  set isWalletImporting(bool val) => Action(() => _isWalletImporting.value = val)();
+  set isAccountImporting(bool val) => Action(() => _isAccountImporting.value = val)();
 
-  CredentialsStorageFailure? get renameWalletFailure => _renameWalletFailure.value;
+  CredentialsStorageFailure? get renameAccountFailure => _renameAccountFailure.value;
 
-  set renameWalletFailure(CredentialsStorageFailure? val) => Action(() => _renameWalletFailure.value = val)();
+  set renameAccountFailure(CredentialsStorageFailure? val) => Action(() => _renameAccountFailure.value = val)();
 
-  AccountPublicInfo get selectedWallet {
-    final index = _selectedWalletIndex.value;
+  AccountPublicInfo get selectedAccount {
+    final index = _selectetAccountIndex.value;
     if (index == null) {
       return const AccountPublicInfo(
         chainId: '',
@@ -100,56 +100,56 @@ class WalletsStore {
         accountId: '',
       );
     }
-    return wallets[index];
+    return accounts[index];
   }
 
-  final Observable<int?> _selectedWalletIndex = Observable(null);
+  final Observable<int?> _selectetAccountIndex = Observable(null);
 
-  set selectedWalletIndex(int? value) {
-    if (_selectedWalletIndex.value != value) {
-      Action(() => _selectedWalletIndex.value = value)();
-      getBalances(selectedWallet.publicAddress);
-      debugLog('wallet address: ${selectedWallet.publicAddress}');
+  set selectedAccountIndex(int? value) {
+    if (_selectetAccountIndex.value != value) {
+      Action(() => _selectetAccountIndex.value = value)();
+      getBalances(selectedAccount.publicAddress);
+      debugLog('account address: ${selectedAccount.publicAddress}');
     }
   }
 
-  Future<void> loadWallets() async {
-    areWalletsLoading = true;
+  Future<void> loadAccounts() async {
+    areAccountsLoading = true;
     (await _transactionSigningGateway.getAccountsList()).fold(
-      (fail) => Action(() => loadWalletsFailure.value = fail)(),
-      (newWallets) {
-        wallets
+      (fail) => Action(() => loadAccountsFailure.value = fail)(),
+      (newAccounts) {
+        accounts
           ..clear()
-          ..addAll(newWallets);
-        if (wallets.isNotEmpty) {
-          selectedWalletIndex = 0;
+          ..addAll(newAccounts);
+        if (accounts.isNotEmpty) {
+          selectedAccountIndex = 0;
         }
       },
     );
-    areWalletsLoading = false;
+    areAccountsLoading = false;
   }
 
-  Future<void> renameWallet(String name) async {
-    isRenamingWallet = true;
-    final newInfo = selectedWallet.copyWith(name: name);
+  Future<void> renameAccount(String name) async {
+    isRenamingAccount = true;
+    final newInfo = selectedAccount.copyWith(name: name);
     (await _transactionSigningGateway.updateAccountPublicInfo(
       info: newInfo,
     ))
         .fold(
-      (fail) => Action(() => renameWalletFailure = fail)(),
+      (fail) => Action(() => renameAccountFailure = fail)(),
       (success) {
-        final index = wallets.indexWhere((it) => it.accountId == newInfo.accountId);
-        wallets[index] = newInfo;
+        final index = accounts.indexWhere((it) => it.accountId == newInfo.accountId);
+        accounts[index] = newInfo;
       },
     );
-    isRenamingWallet = false;
+    isRenamingAccount = false;
   }
 
-  Future<void> getBalances(String walletAddress) async {
+  Future<void> getBalances(String accountAddress) async {
     isBalancesLoadingError = false;
     isBalancesLoading = true;
     try {
-      final newBalances = await CosmosBalances(baseEnv).getBalances(walletAddress);
+      final newBalances = await CosmosBalances(baseEnv).getBalances(accountAddress);
       balancesList
         ..clear()
         ..addAll(newBalances);
@@ -160,12 +160,12 @@ class WalletsStore {
     isBalancesLoading = false;
   }
 
-  Future<AccountPublicInfo?> importAlanWallet(
-    ImportWalletFormData data, {
-    VoidCallback? onWalletCreationStarted,
+  Future<AccountPublicInfo?> importAlanAccount(
+    ImportAccountFormData data, {
+    VoidCallback? onAccountCreationStarted,
   }) async {
-    isWalletImportingError = false;
-    isWalletImporting = true;
+    isAccountImportingError = false;
+    isAccountImporting = true;
     final result = await _transactionSigningGateway
         .deriveAccount(
       accountDerivationInfo: AlanAccountDerivationInfo(
@@ -198,17 +198,17 @@ class WalletsStore {
       },
     );
 
-    isWalletImporting = false;
+    isAccountImporting = false;
     return result.fold(
       (fail) {
         logError(fail);
-        isWalletImportingError = true;
+        isAccountImportingError = true;
         return null;
       },
       (credentials) {
-        wallets.add(credentials.publicInfo);
-        if (selectedWallet.publicAddress.isEmpty) {
-          selectedWalletIndex = 0;
+        accounts.add(credentials.publicInfo);
+        if (selectedAccount.publicAddress.isEmpty) {
+          selectedAccountIndex = 0;
         }
         return credentials.publicInfo;
       },
@@ -231,7 +231,7 @@ class WalletsStore {
         password,
       );
 
-      await getBalances(selectedWallet.publicAddress);
+      await getBalances(selectedAccount.publicAddress);
     } catch (ex, stack) {
       logError(ex, stack);
       isSendMoneyError = true;
@@ -239,24 +239,24 @@ class WalletsStore {
     isSendMoneyLoading = false;
   }
 
-  Future<AccountPublicInfo?> createNewWallet({
+  Future<AccountPublicInfo?> createNewAccount({
     required String password,
     required bool isBackedUp,
     VoidCallback? onMnemonicGenerationStarted,
-    VoidCallback? onWalletCreationStarted,
+    VoidCallback? onAccountCreationStarted,
   }) async {
     final mnemonic = await createMnemonic(onMnemonicGenerationStarted);
     if (mnemonic == null) {
       return null;
     }
-    return importAlanWallet(
-      ImportWalletFormData(
+    return importAlanAccount(
+      ImportAccountFormData(
         mnemonic: mnemonic,
-        name: 'Wallet ${wallets.length + 1}',
-        additionalData: WalletAdditionalData(isBackedUp: isBackedUp),
+        name: 'Account ${accounts.length + 1}',
+        additionalData: AccountAdditionalData(isBackedUp: isBackedUp),
         password: password,
       ),
-      onWalletCreationStarted: onWalletCreationStarted,
+      onAccountCreationStarted: onAccountCreationStarted,
     );
   }
 
@@ -277,9 +277,9 @@ class WalletsStore {
     return mnemonic;
   }
 
-  void selectWallet(AccountPublicInfo wallet) {
+  void selectAccount(AccountPublicInfo account) {
     try {
-      selectedWalletIndex = wallets.indexWhere((element) => element.accountId == wallet.accountId);
+      selectedAccountIndex = accounts.indexWhere((element) => element.accountId == account.accountId);
     } catch (ex, stack) {
       logError(ex, stack);
     }

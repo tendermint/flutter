@@ -13,13 +13,14 @@ class CosmosAuth {
   final PasswordStore _passwordStore;
 
   /// Gets available biometrics sensors list
-  Future<Either<LocalAuthFailure, List<BiometricType>>> getAvailableBiometrics() =>
-      _biometrics.getAvailableBiometrics();
+  Future<Either<LocalAuthFailure, List<BiometricType>>>
+      getAvailableBiometrics() => _biometrics.getAvailableBiometrics();
 
   /// Triggers biometric authentication in the system. returns [LocalAuthFailure] in case of an error
   /// or if the device is not capable of biometric auth.
   Future<Either<LocalAuthFailure, bool>> biometricAuthenticate({
-    String reason = "We want to make sure you're the owner of the device in order to secure your wallet data",
+    String reason =
+        "We want to make sure you're the owner of the device in order to secure your account data",
     bool biometricsOnly = false,
   }) async =>
       _biometrics.authenticate(reason: reason, biometricsOnly: biometricsOnly);

@@ -27,8 +27,10 @@ class CosmosAppTheme {
   static const fontSizeXL = 28.0;
   static const fontSizeXXL = 40.0;
 
-  static const BorderRadius borderRadiusM = BorderRadius.all(Radius.circular(radiusM));
-  static const BorderRadius borderRadiusS = BorderRadius.all(Radius.circular(radiusS));
+  static const BorderRadius borderRadiusM =
+      BorderRadius.all(Radius.circular(radiusM));
+  static const BorderRadius borderRadiusS =
+      BorderRadius.all(Radius.circular(radiusS));
 
   static const elevationS = 4.0;
 
@@ -80,12 +82,14 @@ class CosmosAppTheme {
               return CosmosColors.darkBg;
             }
           }),
-          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          foregroundColor:
+              MaterialStateProperty.all<Color>(CosmosColors.lightBg),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.lightBg),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(CosmosColors.lightBg),
           foregroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.disabled)) {
               return CosmosColors.darkBg.withOpacity(0.5);
@@ -144,12 +148,14 @@ class CosmosAppTheme {
               return CosmosColors.lightBg;
             }
           }),
-          foregroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          foregroundColor:
+              MaterialStateProperty.all<Color>(CosmosColors.darkBg),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(CosmosColors.darkBg),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(CosmosColors.darkBg),
           foregroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.disabled)) {
               return CosmosColors.lightBg.withOpacity(0.5);
@@ -157,7 +163,8 @@ class CosmosAppTheme {
               return CosmosColors.lightBg;
             }
           }),
-          side: MaterialStateProperty.all<BorderSide>(const BorderSide(color: CosmosColors.lightBg)),
+          side: MaterialStateProperty.all<BorderSide>(
+              const BorderSide(color: CosmosColors.lightBg)),
         ),
       ),
     );
@@ -165,8 +172,10 @@ class CosmosAppTheme {
 }
 
 TextTheme buildTextTheme(ColorScheme colorScheme) => TextTheme(
-      headline2: CosmosTextTheme.title2Bold.copyWith(color: colorScheme.onSurface),
-      caption: CosmosTextTheme.copy0Normal.copyWith(color: colorScheme.onSurface.withOpacity(0.6)),
+      headline2:
+          CosmosTextTheme.title2Bold.copyWith(color: colorScheme.onSurface),
+      caption: CosmosTextTheme.copy0Normal
+          .copyWith(color: colorScheme.onSurface.withOpacity(0.6)),
     );
 
 @Deprecated('Use CosmosColorsPalette instead')

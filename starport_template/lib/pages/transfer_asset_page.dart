@@ -31,10 +31,10 @@ class TransferAssetPage extends StatefulWidget {
 
 class _TransferAssetPageState extends State<TransferAssetPage> {
   double amount = 0;
-  double fee = StarportApp.walletsStore.defaultFee;
-  String walletAddress = '';
+  double fee = StarportApp.accountsStore.defaultFee;
+  String accountAddress = '';
 
-  bool get isTransferValidated => amount != 0.0 && walletAddress.isNotEmpty && fee != 0.0;
+  bool get isTransferValidated => amount != 0.0 && accountAddress.isNotEmpty && fee != 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           SizedBox(height: theme.spacingXXL),
           SendMoneyForm(
             onAddressChanged: (value) {
-              walletAddress = value;
+              accountAddress = value;
               setState(() {});
             },
             onAmountChanged: (value) {
@@ -127,7 +127,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           transaction: MsgSendTransaction(
             amount: Amount.fromString(amount.toString()),
             fee: fee,
-            recipient: walletAddress,
+            recipient: accountAddress,
           ),
           balance: widget.balance,
         ),
@@ -140,7 +140,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     super.debugFillProperties(properties);
     properties
       ..add(DoubleProperty('amount', amount))
-      ..add(StringProperty('walletAddress', walletAddress))
+      ..add(StringProperty('accountAddress', accountAddress))
       ..add(DiagnosticsProperty<bool>('isTransferValidated', isTransferValidated))
       ..add(DoubleProperty('fee', fee));
   }

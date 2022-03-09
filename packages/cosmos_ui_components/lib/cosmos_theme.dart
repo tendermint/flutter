@@ -13,8 +13,10 @@ class CosmosTheme extends InheritedWidget {
   final CosmosThemeData themeData;
 
   static CosmosThemeData of(BuildContext context) {
-    final cosmosTheme = context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
-    assert(cosmosTheme != null, "No 'CosmosTheme' widget found in the widget tree");
+    final cosmosTheme =
+        context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
+    assert(cosmosTheme != null,
+        "No 'CosmosTheme' widget found in the widget tree");
     return cosmosTheme!.themeData;
   }
 
@@ -27,11 +29,13 @@ class CosmosTheme extends InheritedWidget {
   static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
   @override
-  bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;
+  bool updateShouldNotify(CosmosTheme oldWidget) =>
+      oldWidget.themeData != themeData;
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
+    properties
+        .add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
   }
 }
 
@@ -89,9 +93,12 @@ class CosmosThemeData extends Equatable {
   static const defaultFontSizeXXL = 40.0;
   static const defaultElevationS = 4.0;
 
-  static const defaultBorderRadiusL = BorderRadius.all(Radius.circular(defaultRadiusL));
-  static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
-  static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
+  static const defaultBorderRadiusL =
+      BorderRadius.all(Radius.circular(defaultRadiusL));
+  static const defaultBorderRadiusM =
+      BorderRadius.all(Radius.circular(defaultRadiusM));
+  static const defaultBorderRadiusS =
+      BorderRadius.all(Radius.circular(defaultRadiusS));
 
   final double spacingXXXL;
   final double spacingXXL;

@@ -34,6 +34,7 @@ class CosmosBalancesListView extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(IterableProperty<Balance>('list', list))
-      ..add(ObjectFlagProperty<void Function(int p1)>.has('onClicked', onClicked));
+      ..add(ObjectFlagProperty<void Function(int p1)>.has(
+          'onClicked', onClicked));
   }
 }

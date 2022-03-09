@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
-class WalletAdditionalData {
-  WalletAdditionalData({
+class AccountAdditionalData {
+  AccountAdditionalData({
     required this.isBackedUp,
   });
 
-  factory WalletAdditionalData.fromJson(Map<String, dynamic> map) {
-    return WalletAdditionalData(
+  factory AccountAdditionalData.fromJson(Map<String, dynamic> map) {
+    return AccountAdditionalData(
       isBackedUp: map['isBackedUp'] as bool? ?? false,
     );
   }
@@ -25,6 +25,6 @@ class WalletAdditionalData {
 }
 
 extension AdditionalDataParsing on AccountPublicInfo {
-  WalletAdditionalData get data =>
-      WalletAdditionalData.fromJson(jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
+  AccountAdditionalData get data =>
+      AccountAdditionalData.fromJson(jsonDecode(additionalData ?? '{}') as Map<String, dynamic>);
 }

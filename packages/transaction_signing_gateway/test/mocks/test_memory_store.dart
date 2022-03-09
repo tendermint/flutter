@@ -5,7 +5,8 @@ class TestMemoryStore implements PlainDataStore, SecureDataStore {
   final Map<String, String?> _values = {};
 
   @override
-  Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText() async => right({..._values});
+  Future<Either<CredentialsStorageFailure, Map<String, String?>>>
+      readAllPlainText() async => right({..._values});
 
   @override
   Future<Either<CredentialsStorageFailure, String?>> readPlainText({

@@ -12,37 +12,37 @@ import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';
 
-class CreateWalletPage extends StatefulWidget {
-  const CreateWalletPage({Key? key}) : super(key: key);
+class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<CreateWalletPage> createState() => _CreateWalletPageState();
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
 }
 
-class _CreateWalletPageState extends State<CreateWalletPage> {
+class _CreateAccountPageState extends State<CreateAccountPage> {
   bool? _isAuthenticated;
 
   String? _mnemonic;
 
   bool get isLoading =>
       _isAuthenticated == null ||
-      StarportApp.walletsStore.isMnemonicCreating ||
-      StarportApp.walletsStore.isWalletImporting;
+      StarportApp.accountsStore.isMnemonicCreating ||
+      StarportApp.accountsStore.isAccountImporting;
 
   bool get isError =>
       !(_isAuthenticated ?? true) ||
-      StarportApp.walletsStore.isMnemonicCreatingError ||
-      StarportApp.walletsStore.isWalletImportingError;
+      StarportApp.accountsStore.isMnemonicCreatingError ||
+      StarportApp.accountsStore.isAccountImportingError;
 
   bool get isAuthenticating => _isAuthenticated == null;
 
-  bool get isMnemonicCreating => StarportApp.walletsStore.isMnemonicCreating;
+  bool get isMnemonicCreating => StarportApp.accountsStore.isMnemonicCreating;
 
-  bool get isWalletImporting => StarportApp.walletsStore.isWalletImporting;
+  bool get isAccountImporting => StarportApp.accountsStore.isAccountImporting;
 
-  bool get isMnemonicCreatingError => StarportApp.walletsStore.isMnemonicCreatingError;
+  bool get isMnemonicCreatingError => StarportApp.accountsStore.isMnemonicCreatingError;
 
-  bool get isWalletImportingError => StarportApp.walletsStore.isWalletImportingError;
+  bool get isAccountImportingError => StarportApp.accountsStore.isAccountImportingError;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         loadingChild: LoadingSplash(
           text: isAuthenticating
               ? 'Authenticating..'
-              : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating wallet..'),
+              : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating account..'),
         ),
         contentChild: Scaffold(
           body: _contentUI(),
@@ -106,7 +106,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
             const InfoCard(text: 'Never share your recovery phrase with anyone, store it securely.'),
             SizedBox(height: theme.spacingL),
             const InfoCard(
-              text: 'If you don’t backup your wallet or lose your recovery phrase, '
+              text: 'If you don’t backup your account or lose your recovery phrase, '
                   'you will not able to recover your account',
             ),
             const Spacer(),
@@ -139,14 +139,14 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   void _onTapAdvanced() => notImplemented(context);
 
   Future<void> _onTapBackUpNow() async {
-    _mnemonic ??= await StarportApp.walletsStore.createMnemonic();
+    _mnemonic ??= await StarportApp.accountsStore.createMnemonic();
     final mnemonic = _mnemonic;
     if (mnemonic == null) {
       return;
     }
     if (mounted) {
       await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => BackUpWalletPage(mnemonic: mnemonic)),
+        MaterialPageRoute(builder: (context) => BackUpAccountPage(mnemonic: mnemonic)),
       );
     }
   }
@@ -155,22 +155,22 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
         context: context,
         backgroundColor: Colors.transparent,
         builder: (context) => BackupLaterBottomSheet(
-          onTapSkipBackup: () => _createWallet(isBackedUp: false),
+          onTapSkipBackup: () => _createAccount(isBackedUp: false),
         ),
       );
 
-  Future<void> _createWallet({required bool isBackedUp}) async {
+  Future<void> _createAccount({required bool isBackedUp}) async {
     final password = await PasswordPromptPage.promptPassword(
       context,
     );
     if (password == null) {
       return;
     }
-    await StarportApp.walletsStore.createNewWallet(
+    await StarportApp.accountsStore.createNewAccount(
       password: password,
       isBackedUp: isBackedUp,
       onMnemonicGenerationStarted: () => setState(() {}),
-      onWalletCreationStarted: () => setState(() {}), //this will cause the loading message to update
+      onAccountCreationStarted: () => setState(() {}), //this will cause the loading message to update
     );
     if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(
@@ -188,10 +188,10 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
     properties
       ..add(DiagnosticsProperty<bool>('isMnemonicCreatingError', isMnemonicCreatingError))
       ..add(DiagnosticsProperty<bool>('isMnemonicCreating', isMnemonicCreating))
-      ..add(DiagnosticsProperty<bool>('isWalletImporting', isWalletImporting))
+      ..add(DiagnosticsProperty<bool>('isAccountImporting', isAccountImporting))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading))
       ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
-      ..add(DiagnosticsProperty<bool>('isWalletImportingError', isWalletImportingError))
+      ..add(DiagnosticsProperty<bool>('isAccountImportingError', isAccountImportingError))
       ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 }

@@ -54,10 +54,13 @@ class CosmosAccountsListView extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ObjectFlagProperty<void Function(int p1)>.has('onClicked', onClicked))
+      ..add(
+          ObjectFlagProperty<void Function(int p1)>.has('onClicked', onClicked))
       ..add(IterableProperty<AccountInfo>('list', list))
       ..add(DiagnosticsProperty<bool>('isEditing', isEditing))
-      ..add(ObjectFlagProperty<void Function(AccountInfo p1)>.has('onEditIconPressed', onEditIconPressed))
-      ..add(DiagnosticsProperty<AccountInfo>('selectedAccount', selectedAccount));
+      ..add(ObjectFlagProperty<void Function(AccountInfo p1)>.has(
+          'onEditIconPressed', onEditIconPressed))
+      ..add(
+          DiagnosticsProperty<AccountInfo>('selectedAccount', selectedAccount));
   }
 }

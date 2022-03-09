@@ -32,7 +32,7 @@ class _CustomFeePageState extends State<CustomFeePage> {
   @override
   void initState() {
     super.initState();
-    fee = widget.initialFee ?? StarportApp.walletsStore.defaultFee;
+    fee = widget.initialFee ?? StarportApp.accountsStore.defaultFee;
   }
 
   @override

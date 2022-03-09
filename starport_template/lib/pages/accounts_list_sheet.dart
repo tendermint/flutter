@@ -9,23 +9,23 @@ import 'package:starport_template/pages/account_name_page.dart';
 import 'package:starport_template/pages/create_account_page.dart';
 import 'package:starport_template/pages/import_account_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:transaction_signing_gateway/model/account_public_info.dart';
+import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
-class WalletsListSheet extends StatefulWidget {
-  const WalletsListSheet({
+class AccountsListSheet extends StatefulWidget {
+  const AccountsListSheet({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<WalletsListSheet> createState() => _WalletsListSheetState();
+  State<AccountsListSheet> createState() => _AccountsListSheetState();
 }
 
-class _WalletsListSheetState extends State<WalletsListSheet> {
-  List<AccountPublicInfo> get publicInfos => StarportApp.walletsStore.wallets;
+class _AccountsListSheetState extends State<AccountsListSheet> {
+  List<AccountPublicInfo> get publicInfos => StarportApp.accountsStore.accounts;
 
-  AccountPublicInfo get selectedWallet => StarportApp.walletsStore.selectedWallet;
+  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
 
-  List<AccountInfo> get walletInfos => publicInfos
+  List<AccountInfo> get accountInfos => publicInfos
       .map(
         (publicInfo) => AccountInfo(
           name: publicInfo.name,
@@ -47,10 +47,10 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
         child: Observer(
           builder: (context) => ContentStateSwitcher(
             emptyChild: const EmptyListMessage(
-              message: 'No wallets found. Add one.',
+              message: 'No accounts found. Add one.',
             ),
-            isLoading: StarportApp.walletsStore.isRenamingWallet,
-            isEmpty: walletInfos.isEmpty,
+            isLoading: StarportApp.accountsStore.isRenamingAccount,
+            isEmpty: accountInfos.isEmpty,
             contentChild: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,20 +89,20 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
   }
 
   void _onTapCreateAccount() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CreateWalletPage()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CreateAccountPage()));
   }
 
   void _onTapImportAccount() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ImportWalletPage()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ImportAccountPage()));
   }
 
   Expanded _buildMainList() {
     return Expanded(
       child: Observer(
         builder: (context) => CosmosAccountsListView(
-          list: walletInfos,
-          selectedAccount: walletInfos.firstWhere((element) => element.address == selectedWallet.publicAddress),
-          onClicked: _walletClicked,
+          list: accountInfos,
+          selectedAccount: accountInfos.firstWhere((element) => element.address == selectedAccount.publicAddress),
+          onClicked: _accountClicked,
           isEditing: isEditingAccountList,
           onEditIconPressed: _onEditIconPressed,
         ),
@@ -110,10 +110,10 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     );
   }
 
-  Future<void> _onTapRenameAccount(AccountInfo walletInfo) async {
+  Future<void> _onTapRenameAccount(AccountInfo accountInfo) async {
     final newName = await Navigator.of(context).push<String>(
       MaterialPageRoute(
-        builder: (context) => WalletNamePage(name: walletInfo.name),
+        builder: (context) => AccountNamePage(name: accountInfo.name),
       ),
     );
     if (!mounted) {
@@ -121,13 +121,13 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     }
     if (newName != null) {
       Navigator.of(context).pop();
-      await _renameWallet(newName);
+      await _renameAccount(newName);
     }
   }
 
-  Future<void> _renameWallet(String newName) async {
-    await StarportApp.walletsStore.renameWallet(newName);
-    if (StarportApp.walletsStore.renameWalletFailure != null) {
+  Future<void> _renameAccount(String newName) async {
+    await StarportApp.accountsStore.renameAccount(newName);
+    if (StarportApp.accountsStore.renameAccountFailure != null) {
       await showCosmosAlertDialog(
         context: context,
         dialogBuilder: (context) => CosmosAlertDialog(
@@ -144,15 +144,15 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     }
   }
 
-  void _walletClicked(int index) => Navigator.of(context).pop(publicInfos[index]);
+  void _accountClicked(int index) => Navigator.of(context).pop(publicInfos[index]);
 
-  void _onEditIconPressed(AccountInfo walletInfo) {
+  void _onEditIconPressed(AccountInfo accountInfo) {
     showCosmosActionSheet(
       context: context,
       actions: [
         CosmosModalAction(
           text: 'Rename Account',
-          onPressed: () => _onTapRenameAccount(walletInfo),
+          onPressed: () => _onTapRenameAccount(accountInfo),
         ),
         CosmosModalAction(
           text: 'Delete Account',
@@ -160,7 +160,7 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
           isCriticalAction: true,
         ),
       ],
-      title: Text(walletInfo.name),
+      title: Text(accountInfo.name),
     );
   }
 
@@ -169,8 +169,8 @@ class _WalletsListSheetState extends State<WalletsListSheet> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty<bool>('isEditingAccountList', isEditingAccountList))
-      ..add(IterableProperty<AccountInfo>('walletInfos', walletInfos))
+      ..add(IterableProperty<AccountInfo>('accountInfos', accountInfos))
       ..add(IterableProperty<AccountPublicInfo>('publicInfos', publicInfos))
-      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedWallet', selectedWallet));
+      ..add(DiagnosticsProperty<AccountPublicInfo>('selectedAccount', selectedAccount));
   }
 }

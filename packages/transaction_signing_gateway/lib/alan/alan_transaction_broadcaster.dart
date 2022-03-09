@@ -18,16 +18,18 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
     required PrivateAccountCredentials privateAccountCredentials,
   }) async {
     if (transaction is! SignedAlanTransaction) {
-      return left(AlanTransactionBroadcastingFailure('passed transaction is not $SignedAlanTransaction'));
+      return left(AlanTransactionBroadcastingFailure(
+          'passed transaction is not $SignedAlanTransaction'));
     }
     if (privateAccountCredentials is! AlanPrivateAccountCredentials) {
       return left(
-        AlanTransactionBroadcastingFailure('passed privateCredentials is not $AlanPrivateAccountCredentials'),
+        AlanTransactionBroadcastingFailure(
+            'passed privateCredentials is not $AlanPrivateAccountCredentials'),
       );
     }
     final txSender = TxSender.fromNetworkInfo(_networkInfo);
-    final response =
-        await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
+    final response = await txSender.broadcastTx(transaction.signedTransaction,
+        mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 
     if (response.hasTxhash()) {
       return right(response);
@@ -37,10 +39,12 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
   }
 
   @override
-  bool canBroadcast(SignedTransaction signedTransaction) => signedTransaction is SignedAlanTransaction;
+  bool canBroadcast(SignedTransaction signedTransaction) =>
+      signedTransaction is SignedAlanTransaction;
 }
 
-class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure {
+class AlanTransactionBroadcastingFailure
+    extends TransactionBroadcastingFailure {
   AlanTransactionBroadcastingFailure(this.cause);
 
   final Object cause;
@@ -52,5 +56,6 @@ class AlanTransactionBroadcastingFailure extends TransactionBroadcastingFailure 
 
   @override
   // TODO: implement type
-  TransactionBroadcastingFailType get type => TransactionBroadcastingFailType.unknown;
+  TransactionBroadcastingFailType get type =>
+      TransactionBroadcastingFailType.unknown;
 }

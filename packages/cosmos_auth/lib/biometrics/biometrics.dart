@@ -8,7 +8,8 @@ class Biometrics {
   const Biometrics();
 
   Future<Either<LocalAuthFailure, bool>> authenticate({
-    String reason = "We want to make sure you're the owner of the device in order to secure your wallet data",
+    String reason =
+        "We want to make sure you're the owner of the device in order to secure your account data",
     bool biometricsOnly = false,
   }) async {
     try {
@@ -28,7 +29,8 @@ class Biometrics {
     }
   }
 
-  Future<Either<LocalAuthFailure, List<model.BiometricType>>> getAvailableBiometrics() async {
+  Future<Either<LocalAuthFailure, List<model.BiometricType>>>
+      getAvailableBiometrics() async {
     try {
       final biometrics = await LocalAuthentication().getAvailableBiometrics();
       return right(biometrics.map(_biometricTypeFromLocalAuth).toList());

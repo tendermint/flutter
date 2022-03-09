@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('validate mnemonic', () async {
-    expect(validateMnemonic('words are words'), MnemonicValidationError.WrongNumberOfWords);
-    expect(validateMnemonic('invalid character!'), MnemonicValidationError.InvalidCharacter);
+    expect(validateMnemonic('words are words'),
+        MnemonicValidationError.WrongNumberOfWords);
+    expect(validateMnemonic('invalid character!'),
+        MnemonicValidationError.InvalidCharacter);
     expect(validateMnemonic(''), MnemonicValidationError.MnemonicEmpty);
     expect(
       validateMnemonic(
@@ -21,7 +23,8 @@ void main() {
       null,
     );
     expect(
-      validateMnemonic('delay cruise little equip orange dolphin jealous fluid little nurse cube version'),
+      validateMnemonic(
+          'delay cruise little equip orange dolphin jealous fluid little nurse cube version'),
       null,
     );
   });

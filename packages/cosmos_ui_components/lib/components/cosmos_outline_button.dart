@@ -23,7 +23,8 @@ class CosmosOutlineButton extends StatelessWidget {
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        shape: RoundedRectangleBorder(
+            borderRadius: CosmosTheme.of(context).borderRadiusM),
         elevation: 0,
       ),
       child: Row(

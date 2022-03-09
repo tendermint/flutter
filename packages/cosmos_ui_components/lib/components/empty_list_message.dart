@@ -14,7 +14,8 @@ class EmptyListMessage extends StatelessWidget {
     return Center(
       child: Text(
         message,
-        style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.grey),
+        style:
+            Theme.of(context).textTheme.headline6?.copyWith(color: Colors.grey),
       ),
     );
   }

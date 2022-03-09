@@ -10,7 +10,9 @@ extension FutureEither<L, R> on Future<Either<L, R>> {
     );
   }
 
-  Future<Either<L, Tuple2<R, R2>>> zipWith<R2>(Future<Either<L, R2>> withThis) => flatMap(
+  Future<Either<L, Tuple2<R, R2>>> zipWith<R2>(
+          Future<Either<L, R2>> withThis) =>
+      flatMap(
         (r) async => withThis.flatMap(
           (r2) async => right(Tuple2(r, r2)),
         ),

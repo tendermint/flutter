@@ -32,13 +32,15 @@ void main() {
       id: 'main',
       password: 'password',
     );
-    final result = await cosmosAuth.readPassword(secureDataStore: dataStore, id: 'main');
+    final result =
+        await cosmosAuth.readPassword(secureDataStore: dataStore, id: 'main');
     expect(result.isRight(), true);
     expect(result.getOrElse(() => ''), 'password');
   });
   //
   test('reading password on failed biometrics', () async {
-    biometrics.mockAuthenticate(result: left(const LocalAuthFailure.noBiometricsAvailable()));
+    biometrics.mockAuthenticate(
+        result: left(const LocalAuthFailure.noBiometricsAvailable()));
     final cosmosAuth = CosmosAuth(
       biometrics: biometrics,
     );

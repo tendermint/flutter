@@ -27,7 +27,8 @@ class CosmosBottomSheetHeader extends StatelessWidget {
       children: [
         if (isExtended)
           Padding(
-            padding: EdgeInsets.only(right: theme.spacingM, top: theme.spacingL),
+            padding:
+                EdgeInsets.only(right: theme.spacingM, top: theme.spacingL),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,7 +36,9 @@ class CosmosBottomSheetHeader extends StatelessWidget {
                   Row(
                     children: [
                       if (leadingIcon != null)
-                        Padding(padding: EdgeInsets.only(left: theme.spacingL), child: leadingIcon),
+                        Padding(
+                            padding: EdgeInsets.only(left: theme.spacingL),
+                            child: leadingIcon),
                       leading!,
                     ],
                   ),
@@ -45,7 +48,9 @@ class CosmosBottomSheetHeader extends StatelessWidget {
             ),
           ),
         Padding(
-          padding: EdgeInsets.only(left: theme.spacingM, top: isExtended ? theme.spacingXL : theme.spacingXXXL),
+          padding: EdgeInsets.only(
+              left: theme.spacingM,
+              top: isExtended ? theme.spacingXL : theme.spacingXXXL),
           child: Row(
             children: [
               SizedBox(width: theme.spacingM),
