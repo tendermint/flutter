@@ -7,6 +7,8 @@ class TransactionResponse extends Equatable {
     required this.hash,
     required this.data,
     required this.logs,
+    required this.info,
+    required this.codespace,
     required this.rawLog,
     required this.gasUsed,
     required this.gasWanted,
@@ -15,9 +17,11 @@ class TransactionResponse extends Equatable {
 
   factory TransactionResponse.fromTxResponse(TxResponse tx) {
     return TransactionResponse(
-      hash: TransactionHash(hash: tx.txhash),
+      info: tx.info,
       data: tx.data,
       rawLog: tx.rawLog,
+      codespace: tx.codespace,
+      hash: TransactionHash(hash: tx.txhash),
       logs: List<TransactionLog>.from(
         tx.logs.map(
           (log) => TransactionLog(
@@ -40,6 +44,8 @@ class TransactionResponse extends Equatable {
   final TransactionHash hash;
   final String data;
   final String rawLog;
+  final String codespace;
+  final String info;
   final List<TransactionLog> logs;
   final Decimal gasUsed;
   final Decimal gasWanted;
@@ -51,6 +57,8 @@ class TransactionResponse extends Equatable {
       hash,
       data,
       rawLog,
+      codespace,
+      info,
       logs,
       gasUsed,
       gasWanted,
@@ -62,6 +70,8 @@ class TransactionResponse extends Equatable {
     TransactionHash? hash,
     String? data,
     String? rawLog,
+    String? codespace,
+    String? info,
     List<TransactionLog>? logs,
     Decimal? gasUsed,
     Decimal? gasWanted,
@@ -71,6 +81,8 @@ class TransactionResponse extends Equatable {
       hash: hash ?? this.hash,
       data: data ?? this.data,
       rawLog: rawLog ?? this.rawLog,
+      codespace: codespace ?? this.codespace,
+      info: info ?? this.info,
       logs: logs ?? this.logs,
       gasUsed: gasUsed ?? this.gasUsed,
       gasWanted: gasWanted ?? this.gasWanted,

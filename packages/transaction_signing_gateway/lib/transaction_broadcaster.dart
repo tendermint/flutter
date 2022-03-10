@@ -1,4 +1,3 @@
-import 'package:alan/alan.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';

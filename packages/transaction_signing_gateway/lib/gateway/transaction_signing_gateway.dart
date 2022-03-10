@@ -1,4 +1,3 @@
-import 'package:alan/alan.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:transaction_signing_gateway/account_derivator.dart';
