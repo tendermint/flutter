@@ -8,6 +8,7 @@ import 'package:transaction_signing_gateway/model/account_derivation_failure.dar
 import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
+import 'package:transaction_signing_gateway/model/transaction_response.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -87,7 +88,7 @@ class TransactionSigningGateway {
             ),
           );
 
-  Future<Either<TransactionBroadcastingFailure, TxResponse>> broadcastTransaction({
+  Future<Either<TransactionBroadcastingFailure, TransactionResponse>> broadcastTransaction({
     required AccountLookupKey accountLookupKey,
     required SignedTransaction transaction,
   }) async =>
