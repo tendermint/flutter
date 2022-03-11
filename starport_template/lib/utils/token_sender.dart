@@ -49,7 +49,7 @@ class TokenSender {
         );
     result.fold(
       (fail) => throw fail as Object,
-      (tx) => debugPrint('new TX hash: ${tx.toString()}'),
+      (tx) => debugPrint('new TX hash: $tx'),
     );
   }
 }
