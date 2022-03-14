@@ -28,7 +28,7 @@ class TransactionResponse extends Equatable {
   final DateTime timestamp;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       hash,
       data,

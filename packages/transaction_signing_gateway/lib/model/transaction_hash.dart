@@ -6,7 +6,7 @@ class TransactionHash extends Equatable {
   final String hash;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       hash,
     ];

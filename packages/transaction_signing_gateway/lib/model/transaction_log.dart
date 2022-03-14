@@ -4,7 +4,7 @@ class TransactionLog extends Equatable {
   const TransactionLog({
     required this.msgIndex,
     required this.log,
-    this.events,
+    this.events = const [],
   });
 
   final int msgIndex;
