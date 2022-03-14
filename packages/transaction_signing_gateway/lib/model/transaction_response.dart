@@ -1,6 +1,8 @@
 import 'package:alan/alan.dart';
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
+import 'package:transaction_signing_gateway/model/transaction_hash.dart';
+import 'package:transaction_signing_gateway/model/transaction_log.dart';
 
 class TransactionResponse extends Equatable {
   const TransactionResponse({
@@ -14,32 +16,6 @@ class TransactionResponse extends Equatable {
     required this.gasWanted,
     required this.timestamp,
   });
-
-  factory TransactionResponse.fromTxResponse(TxResponse tx) {
-    return TransactionResponse(
-      info: tx.info,
-      data: tx.data,
-      rawLog: tx.rawLog,
-      codespace: tx.codespace,
-      hash: TransactionHash(hash: tx.txhash),
-      logs: List<TransactionLog>.from(
-        tx.logs.map(
-          (log) => TransactionLog(
-            log: log.log,
-            msgIndex: log.msgIndex,
-            events: List.from(
-              log.events.map(
-                (e) => e.toProto3Json(),
-              ),
-            ),
-          ),
-        ),
-      ),
-      gasUsed: Decimal.parse('${tx.gasUsed}'),
-      gasWanted: Decimal.parse('${tx.gasWanted}'),
-      timestamp: DateTime.fromMillisecondsSinceEpoch(int.parse(tx.timestamp)),
-    );
-  }
 
   final TransactionHash hash;
   final String data;
@@ -91,50 +67,28 @@ class TransactionResponse extends Equatable {
   }
 }
 
-class TransactionHash extends Equatable {
-  const TransactionHash({required this.hash});
-
-  final String hash;
-
-  @override
-  List<Object> get props {
-    return [
-      hash,
-    ];
-  }
-
-  TransactionHash copyWith({
-    String? hash,
-  }) {
-    return TransactionHash(
-      hash: hash ?? this.hash,
-    );
-  }
-}
-
-class TransactionLog extends Equatable {
-  const TransactionLog({
-    required this.msgIndex,
-    required this.log,
-    this.events,
-  });
-
-  final int msgIndex;
-  final String? log;
-  final List<Object?>? events;
-
-  @override
-  List<Object> get props => [msgIndex, log ?? '', events ?? []];
-
-  TransactionLog copyWith({
-    int? msgIndex,
-    String? log,
-    List<Object?>? events,
-  }) {
-    return TransactionLog(
-      msgIndex: msgIndex ?? this.msgIndex,
-      log: log ?? this.log,
-      events: events ?? this.events,
-    );
-  }
+extension TxResponseTranslator on TxResponse {
+  TransactionResponse toTransactionResponse() => TransactionResponse(
+        info: info,
+        data: data,
+        rawLog: rawLog,
+        codespace: codespace,
+        hash: TransactionHash(hash: txhash),
+        logs: List<TransactionLog>.from(
+          logs.map(
+            (log) => TransactionLog(
+              log: log.log,
+              msgIndex: log.msgIndex,
+              events: List.from(
+                log.events.map(
+                  (e) => e.toProto3Json(),
+                ),
+              ),
+            ),
+          ),
+        ),
+        gasUsed: Decimal.parse('$gasUsed'),
+        gasWanted: Decimal.parse('$gasWanted'),
+        timestamp: DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp)),
+      );
 }

@@ -31,7 +31,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
         await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 
     if (response.hasTxhash()) {
-      return right(TransactionResponse.fromTxResponse(response));
+      return right(response.toTransactionResponse());
     } else {
       return left(AlanTransactionBroadcastingFailure('Tx error: $response'));
     }
