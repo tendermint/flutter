@@ -28,7 +28,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.2"
   args:
     dependency: transitive
     description:
@@ -167,7 +167,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: b30a9c089effaf83a9df78777b302411258d5f36
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -479,7 +479,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.1"
+    version: "3.5.2"
   process:
     dependency: transitive
     description:
@@ -500,7 +500,7 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   pubspec_parse:
     dependency: transitive
     description:
@@ -528,7 +528,7 @@ packages:
       name: shared_preferences_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.10"
+    version: "2.1.0"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -631,7 +631,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.5"
+    version: "3.0.6"
   vector_math:
     dependency: transitive
     description:
