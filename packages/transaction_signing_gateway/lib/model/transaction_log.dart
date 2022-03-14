@@ -13,10 +13,10 @@ class TransactionLog extends Equatable {
 
   @override
   List<Object?> get props => [
-    msgIndex, 
-    log, 
-    events,
-];
+        msgIndex,
+        log,
+        events,
+      ];
 
   TransactionLog copyWith({
     int? msgIndex,
