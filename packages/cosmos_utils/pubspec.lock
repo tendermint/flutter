@@ -171,7 +171,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.1"
+    version: "3.5.2"
   sky_engine:
     dependency: transitive
     description: flutter

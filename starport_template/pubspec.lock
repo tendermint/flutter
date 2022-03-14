@@ -28,7 +28,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.2"
   args:
     dependency: transitive
     description:
@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_auth"
       ref: main
-      resolved-ref: c55ed8cf98b7510245502b113a98b299b7659f37
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
-      resolved-ref: c55ed8cf98b7510245502b113a98b299b7659f37
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -171,7 +171,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: c55ed8cf98b7510245502b113a98b299b7659f37
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -602,7 +602,7 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   pubspec_parse:
     dependency: transitive
     description:
@@ -788,7 +788,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: c55ed8cf98b7510245502b113a98b299b7659f37
+      resolved-ref: "2946ddfdab692a9d9f4752c4af83c2b1083f51e6"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
