@@ -12,7 +12,11 @@ class TransactionLog extends Equatable {
   final List<Object?>? events;
 
   @override
-  List<Object> get props => [msgIndex, log ?? '', events ?? []];
+  List<Object?> get props => [
+    msgIndex, 
+    log, 
+    events,
+];
 
   TransactionLog copyWith({
     int? msgIndex,
