@@ -8,8 +8,8 @@ class TransactionLog extends Equatable {
   });
 
   final int msgIndex;
-  final String? log;
-  final List<Object?>? events;
+  final String log;
+  final List<Object?> events;
 
   @override
   List<Object?> get props => [
