@@ -20,7 +20,14 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
         ),
       );
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Could not retrieve secure text for key '$key'", cause: ex, stack: stack));
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          "Could not retrieve secure text for key '$key'",
+          cause: ex,
+          stack: stack,
+        ),
+      );
     }
   }
 
@@ -35,7 +42,14 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
       );
       return right(unit);
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Could not write secure text for key '$key'", cause: ex, stack: stack));
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          "Could not write secure text for key '$key'",
+          cause: ex,
+          stack: stack,
+        ),
+      );
     }
   }
 }
