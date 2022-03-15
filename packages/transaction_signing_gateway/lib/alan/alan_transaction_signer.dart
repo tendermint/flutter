@@ -1,6 +1,6 @@
 import 'package:alan/alan.dart';
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/alan/alan_private_account_credentials.dart';
 import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
@@ -38,23 +38,29 @@ class AlanTransactionSigner implements TransactionSigner {
         fee: transaction.fee,
       );
       return right(SignedAlanTransaction(signedTransaction: signedTrans));
-    } catch (e, stack) {
-      debugPrint('$e\n$stack');
-      return left(AlanTransactionSigningFailure(e));
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(
+        AlanTransactionSigningFailure(
+          ex,
+          stack: stack,
+        ),
+      );
     }
   }
 }
 
 class AlanTransactionSigningFailure extends TransactionSigningFailure {
-  AlanTransactionSigningFailure(this.cause);
+  AlanTransactionSigningFailure(this.cause, {this.stack});
 
-  final Object cause;
+  final dynamic cause;
+  final dynamic stack;
 
   @override
   TransactionSigningFailType get type => TransactionSigningFailType.unknown;
 
   @override
   String toString() {
-    return 'AlanTransactionSigningFailure{cause: $cause}';
+    return 'AlanTransactionSigningFailure{cause: $cause, ${stack == null ? '' : '\nstack:\n$stack'}';
   }
 }

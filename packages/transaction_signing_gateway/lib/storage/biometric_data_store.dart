@@ -90,6 +90,7 @@ class BiometricDataStore implements SecureDataStore {
       );
       return result;
     } catch (ex, stack) {
+      logError(ex, stack);
       return left(
         CredentialsStorageFailure(
           'Could not write map to secure storage',

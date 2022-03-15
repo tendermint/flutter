@@ -9,15 +9,18 @@ abstract class AccountDerivationFailure {
 }
 
 class InvalidMnemonicFailure implements AccountDerivationFailure {
-  const InvalidMnemonicFailure(this.failure);
+  const InvalidMnemonicFailure(this.cause, {this.stack});
 
-  final Object failure;
+  final dynamic cause;
+  final dynamic stack;
 
   @override
   AccountDerivationFailType get type => AccountDerivationFailType.invalidMnemonic;
 
   @override
-  String toString() => 'InvalidMnemonicFailure{fail: $failure}';
+  String toString() {
+    return 'InvalidMnemonicFailure{cause: $cause\n${stack == null ? '' : 'stack:\n$stack'}';
+  }
 }
 
 class DerivatorNotFoundFailure implements AccountDerivationFailure {

@@ -1,4 +1,5 @@
 import 'package:alan/alan.dart' as alan;
+import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:transaction_signing_gateway/account_derivator.dart';
@@ -29,8 +30,14 @@ class AlanAccountDerivator implements AccountDerivator {
           mnemonic: alanAccountDerivationInfo.mnemonic,
         ),
       );
-    } catch (ex) {
-      return left(InvalidMnemonicFailure(ex.toString()));
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(
+        InvalidMnemonicFailure(
+          ex,
+          stack: stack,
+        ),
+      );
     }
   }
 
