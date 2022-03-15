@@ -5,7 +5,7 @@ import 'package:transaction_signing_gateway/alan/alan_transaction.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/signed_transaction.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
-import 'package:transaction_signing_gateway/model/transaction_hash.dart';
+import 'package:transaction_signing_gateway/model/transaction_response.dart';
 import 'package:transaction_signing_gateway/transaction_broadcaster.dart';
 
 class AlanTransactionBroadcaster implements TransactionBroadcaster {
@@ -14,7 +14,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<Either<TransactionBroadcastingFailure, TransactionHash>> broadcast({
+  Future<Either<TransactionBroadcastingFailure, TransactionResponse>> broadcast({
     required SignedTransaction transaction,
     required PrivateAccountCredentials privateAccountCredentials,
   }) async {
@@ -31,7 +31,7 @@ class AlanTransactionBroadcaster implements TransactionBroadcaster {
         await txSender.broadcastTx(transaction.signedTransaction, mode: BroadcastMode.BROADCAST_MODE_BLOCK);
 
     if (response.hasTxhash()) {
-      return right(TransactionHash(txHash: response.txhash));
+      return right(response.toTransactionResponse());
     } else {
       return left(AlanTransactionBroadcastingFailure('Tx error: $response'));
     }
