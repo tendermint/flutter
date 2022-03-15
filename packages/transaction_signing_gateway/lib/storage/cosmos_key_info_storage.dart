@@ -64,8 +64,15 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
             final decrypted = _cipher.decrypt(password: accountLookupKey.password, encryptedData: data);
             final json = await compute(jsonDecode, decrypted) as Map<String, dynamic>;
             return serializer.fromJson(json);
-          } catch (error) {
-            return left(const CredentialsStorageFailure('invalid password'));
+          } catch (error, stack) {
+            logError(error, stack);
+            return left(
+              CredentialsStorageFailure(
+                'invalid password',
+                cause: error,
+                stack: stack,
+              ),
+            );
           }
         },
       ).doOn(
@@ -157,8 +164,15 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
                 .map(AccountPublicInfoSerializer.fromMap)
                 .toList();
             return right(infos);
-          } catch (e) {
-            return left(CredentialsStorageFailure('$e'));
+          } catch (error, stack) {
+            logError(error, stack);
+            return left(
+              CredentialsStorageFailure(
+                '$error',
+                cause: error,
+                stack: stack,
+              ),
+            );
           }
         },
       );
@@ -208,9 +222,15 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
         final publicInfoJson = await compute(jsonEncode, AccountPublicInfoSerializer.toMap(info));
         return _plainDataStore.savePlainText(key: publicInfoKey, value: publicInfoJson);
       });
-    } catch (e, stack) {
-      logError(e, stack);
-      return left(CredentialsStorageFailure('$e'));
+    } catch (error, stack) {
+      logError(error, stack);
+      return left(
+        CredentialsStorageFailure(
+          '$error',
+          cause: error,
+          stack: stack,
+        ),
+      );
     }
   }
 }

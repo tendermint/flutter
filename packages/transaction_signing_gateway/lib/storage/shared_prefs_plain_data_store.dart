@@ -28,7 +28,14 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
         ),
       );
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure('Error while reading all plain text data', cause: ex, stack: stack));
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          'Error while reading all plain text data',
+          cause: ex,
+          stack: stack,
+        ),
+      );
     }
   }
 
@@ -40,7 +47,14 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       final prefs = await sharedPreferencesProvider();
       return right(prefs.getString('$keyPrefix$key'));
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Error while reading plain text for key: '$key'", cause: ex, stack: stack));
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          "Error while reading plain text for key: '$key'",
+          cause: ex,
+          stack: stack,
+        ),
+      );
     }
   }
 
@@ -55,7 +69,14 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       }
       return right(unit);
     } catch (ex, stack) {
-      return left(CredentialsStorageFailure("Error while setting plain text for key: '$key'", cause: ex, stack: stack));
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          "Error while setting plain text for key: '$key'",
+          cause: ex,
+          stack: stack,
+        ),
+      );
     }
   }
 }
