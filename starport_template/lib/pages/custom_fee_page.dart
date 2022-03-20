@@ -44,7 +44,9 @@ class _CustomFeePageState extends State<CustomFeePage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+          padding: EdgeInsets.symmetric(
+            horizontal: CosmosTheme.of(context).spacingL,
+          ),
           child: Column(
             children: [
               CosmosTextField(
@@ -57,7 +59,7 @@ class _CustomFeePageState extends State<CustomFeePage> {
                 children: [
                   Expanded(
                     child: CosmosElevatedButton(
-                      onTap: fee == 0.0 ? null : _onTapSave,
+                      onTap: _onTapSave,
                       text: 'Save',
                     ),
                   )
