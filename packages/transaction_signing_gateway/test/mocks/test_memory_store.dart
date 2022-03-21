@@ -9,7 +9,7 @@ class TestMemoryStore implements PlainDataStore, SecureDataStore {
     _values.clear();
     return right(true);
   }
-  
+
   @override
   Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText() async => right({..._values});
 
