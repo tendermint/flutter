@@ -157,21 +157,22 @@ class CosmosThemeData extends Equatable {
 }
 
 class CosmosColorsData extends Equatable {
-  const CosmosColorsData(
-      {this.inactive = lightInactive,
-      this.divider = lightDivider,
-      this.text = onLightText,
-      this.background = lightBg,
-      this.cardBackground = lightCardBg,
-      this.actionSheetPositive = Colors.lightBlue,
-      this.actionSheetDestructive = iosError,
-      this.chipBackground = lightChip,
-      this.link = lightLink,
-      this.positiveText = lightPositive,
-      this.inputBorder = lightBorder,
-      this.avatarBg = silver,
-      this.error = defaultError,
-      this.shadowColor = defaultShadowColor});
+  const CosmosColorsData({
+    this.inactive = lightInactive,
+    this.divider = lightDivider,
+    this.text = onLightText,
+    this.background = lightBg,
+    this.cardBackground = lightCardBg,
+    this.actionSheetPositive = Colors.lightBlue,
+    this.actionSheetDestructive = iosError,
+    this.chipBackground = lightChip,
+    this.link = lightLink,
+    this.positiveText = lightPositive,
+    this.inputBorder = lightBorder,
+    this.avatarBg = silver,
+    this.error = defaultError,
+    this.shadowColor = defaultShadowColor,
+  });
 
   static const lightBg = Color(0xFFFFFFFF);
   static const lightCardBg = Color(0x08000000);
