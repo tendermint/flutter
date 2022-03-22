@@ -13,6 +13,10 @@ class CosmosElevatedButton extends StatelessWidget {
     this.prefixIcon,
     this.height = GlobalConstants.defaultButtonHeight,
     this.contentPadding,
+    this.elevation,
+    this.backgroundColor,
+    this.textColor,
+    this.shadowColor,
   }) : super(key: key);
 
   final VoidCallback? onTap;
@@ -21,29 +25,37 @@ class CosmosElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
   final double height;
   final double? contentPadding;
+  final double? elevation;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? shadowColor;
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
+        primary: backgroundColor,
+        onPrimary: textColor,
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
-        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
+        elevation: elevation ?? 0,
+        shadowColor: shadowColor ?? theme.colors.shadowColor,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (prefixIcon != null) ...[
             prefixIcon!,
-            SizedBox(width: contentPadding ?? CosmosTheme.of(context).spacingS),
+            SizedBox(width: contentPadding ?? theme.spacingS),
           ],
           Text(
             text,
             style: CosmosTextTheme.elevatedButton,
           ),
           if (suffixIcon != null) ...[
-            SizedBox(width: contentPadding ?? CosmosTheme.of(context).spacingS),
+            SizedBox(width: contentPadding ?? theme.spacingS),
             suffixIcon!,
           ],
         ],
@@ -58,6 +70,10 @@ class CosmosElevatedButton extends StatelessWidget {
       ..add(DoubleProperty('contentPadding', contentPadding))
       ..add(DoubleProperty('height', height))
       ..add(StringProperty('text', text))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap));
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
+      ..add(DoubleProperty('elevation', elevation))
+      ..add(ColorProperty('textColor', textColor))
+      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('shadowColor', shadowColor));
   }
 }

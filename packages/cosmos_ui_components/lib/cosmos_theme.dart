@@ -28,6 +28,7 @@ class CosmosTheme extends InheritedWidget {
 
   @override
   bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -60,6 +61,8 @@ class CosmosThemeData extends Equatable {
     this.borderRadiusM = defaultBorderRadiusM,
     this.borderRadiusS = defaultBorderRadiusS,
     this.elevationS = defaultElevationS,
+    this.elevationM = defaultElevationM,
+    this.elevationL = defaultElevationL,
     this.colors = const CosmosColorsData(),
   });
 
@@ -88,6 +91,8 @@ class CosmosThemeData extends Equatable {
   static const defaultFontSizeXL = 28.0;
   static const defaultFontSizeXXL = 40.0;
   static const defaultElevationS = 4.0;
+  static const defaultElevationM = 8.0;
+  static const defaultElevationL = 12.0;
 
   static const defaultBorderRadiusL = BorderRadius.all(Radius.circular(defaultRadiusL));
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
@@ -113,6 +118,8 @@ class CosmosThemeData extends Equatable {
   final double fontSizeXL;
   final double fontSizeXXL;
   final double elevationS;
+  final double elevationM;
+  final double elevationL;
   final BorderRadius borderRadiusM;
   final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
@@ -122,6 +129,7 @@ class CosmosThemeData extends Equatable {
   List<Object?> get props => [
         spacingXXXL,
         spacingXXL,
+        spacingXL,
         spacingL,
         spacingM,
         spacingS,
@@ -130,6 +138,7 @@ class CosmosThemeData extends Equatable {
         mediumDuration,
         shortDuration,
         radiusXL,
+        radiusL,
         radiusM,
         radiusS,
         fontSizeS,
@@ -137,8 +146,13 @@ class CosmosThemeData extends Equatable {
         fontSizeL,
         fontSizeXL,
         fontSizeXXL,
+        borderRadiusL,
         borderRadiusM,
         borderRadiusS,
+        elevationS,
+        elevationM,
+        elevationL,
+        colors,
       ];
 }
 
@@ -157,6 +171,7 @@ class CosmosColorsData extends Equatable {
     this.inputBorder = lightBorder,
     this.avatarBg = silver,
     this.error = defaultError,
+    this.shadowColor = defaultShadowColor,
   });
 
   static const lightBg = Color(0xFFFFFFFF);
@@ -179,6 +194,7 @@ class CosmosColorsData extends Equatable {
   static const darkDivider = Color(0x17FFFFFF);
   static const iosError = Color(0xFFE74444);
   static const defaultError = Color(0xFFFF3D56);
+  static const defaultShadowColor = Colors.black38;
 
   final Color inactive;
   final Color divider;
@@ -193,6 +209,7 @@ class CosmosColorsData extends Equatable {
   final Color inputBorder;
   final Color avatarBg;
   final Color error;
+  final Color shadowColor;
 
   @override
   List<Object?> get props => [
@@ -209,5 +226,6 @@ class CosmosColorsData extends Equatable {
         inputBorder,
         avatarBg,
         error,
+        shadowColor,
       ];
 }
