@@ -9,6 +9,9 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
 
   final FlutterSecureStorage _store;
 
+  static const iosOptions = IOSOptions(accessibility: IOSAccessibility.passcode);
+  static const androidOptions = AndroidOptions(encryptedSharedPreferences: true);
+
   @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) async {
     try {
@@ -57,8 +60,8 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
   Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
     try {
       await _store.deleteAll(
-        iOptions: const IOSOptions(accessibility: IOSAccessibility.passcode),
-        aOptions: const AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: iosOptions,
+        aOptions: androidOptions,
       );
       return right(true);
     } catch (ex, stack) {
