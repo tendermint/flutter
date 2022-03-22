@@ -11,7 +11,10 @@ abstract class PlainDataStore {
     required String key,
   });
 
-  Future<Either<CredentialsStorageFailure, Map<String, String?>>> readAllPlainText();
+  Future<Either<CredentialsStorageFailure, Map<String, String?>>>
+      readAllPlainText();
+      
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData();
 }
 
 abstract class SecureDataStore {
@@ -23,4 +26,6 @@ abstract class SecureDataStore {
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({
     required String key,
   });
+
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData();
 }
