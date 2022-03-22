@@ -14,6 +14,8 @@ class CosmosTextField extends StatefulWidget {
     this.hint,
     this.keyboardType,
     this.controller,
+    this.textAlign = TextAlign.start,
+    this.style,
     Key? key,
   }) : super(key: key);
 
@@ -26,6 +28,8 @@ class CosmosTextField extends StatefulWidget {
   final Widget? suffix;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
+  final TextAlign textAlign;
+  final TextStyle? style;
 
   @override
   State<CosmosTextField> createState() => _CosmosTextFieldState();
@@ -41,26 +45,28 @@ class CosmosTextField extends StatefulWidget {
       ..add(IntProperty('minLines', minLines))
       ..add(ObjectFlagProperty<Function(String p1)>.has('onChanged', onChanged))
       ..add(DiagnosticsProperty<TextEditingController?>('controller', controller))
-      ..add(StringProperty('hint', hint));
+      ..add(StringProperty('hint', hint))
+      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
+      ..add(DiagnosticsProperty<TextStyle?>('style', style));
   }
 }
 
 class _CosmosTextFieldState extends State<CosmosTextField> {
-  late TextEditingController controller;
-  bool isTextEmpty = false;
+  late TextEditingController _controller;
+  bool _isTextEmpty = false;
 
   @override
   void initState() {
     super.initState();
-    controller = widget.controller ?? TextEditingController();
-    controller.text = widget.initialText;
+    _controller = widget.controller ?? TextEditingController();
+    _controller.text = widget.initialText;
   }
 
   @override
   void dispose() {
     if (widget.controller == null) {
       // it's a controller created internally by the CosmosTextField, thus we'll take care of disposing it properly here
-      controller.dispose();
+      _controller.dispose();
     }
     super.dispose();
   }
@@ -69,18 +75,20 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return TextField(
-      controller: controller,
+      controller: _controller,
       maxLines: widget.maxLines,
       maxLength: widget.maxLength,
       minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       onChanged: (value) {
         widget.onChanged(value);
-        if (value.isEmpty == isTextEmpty) {
+        if (value.isEmpty == _isTextEmpty) {
           setState(() {});
-          isTextEmpty = !isTextEmpty;
+          _isTextEmpty = !_isTextEmpty;
         }
       },
+      textAlign: widget.textAlign,
+      style: widget.style,
       decoration: InputDecoration(
         counterText: widget.maxLength == null ? null : '',
         border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
@@ -90,7 +98,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         ),
         suffix: widget.suffix == null
             ? _buildClearButton()
-            : (controller.text.isEmpty ? widget.suffix : _buildClearButton()),
+            : (_controller.text.isEmpty ? widget.suffix : _buildClearButton()),
       ),
     );
   }
@@ -98,7 +106,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
   InkWell _buildClearButton() {
     return InkWell(
       onTap: () {
-        controller.clear();
+        _controller.clear();
         setState(() {});
       },
       child: SizedBox(
@@ -107,13 +115,5 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         child: Image.asset('assets/images/cross.png', package: packageName),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty<TextEditingController>('controller', controller))
-      ..add(DiagnosticsProperty<bool>('isTextEmpty', isTextEmpty));
   }
 }
