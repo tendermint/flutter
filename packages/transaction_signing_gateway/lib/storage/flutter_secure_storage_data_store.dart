@@ -52,24 +52,4 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
       );
     }
   }
-
-  @override
-  Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
-    try {
-      await _store.deleteAll(
-        iOptions: const IOSOptions(accessibility: IOSAccessibility.passcode),
-        aOptions: const AndroidOptions(encryptedSharedPreferences: true),
-      );
-      return right(true);
-    } catch (ex, stack) {
-      logError(ex, stack);
-      return left(
-        CredentialsStorageFailure(
-          "Could not delete secure data'",
-          cause: ex,
-          stack: stack,
-        ),
-      );
-    }
-  }
 }

@@ -6,8 +6,6 @@ import 'package:transaction_signing_gateway/model/private_account_credentials.da
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
 
 abstract class KeyInfoStorage {
-  Future<Either<CredentialsStorageFailure, bool>> clearCredentials();
-
   Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>> getPrivateCredentials(
     AccountLookupKey accountLookupKey,
   );
