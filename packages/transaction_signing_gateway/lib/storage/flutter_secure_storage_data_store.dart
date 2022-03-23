@@ -17,8 +17,8 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
       return right(
         await _store.read(
           key: key,
-          iOptions: const IOSOptions(accessibility: IOSAccessibility.passcode),
-          aOptions: const AndroidOptions(encryptedSharedPreferences: true),
+          iOptions: iosOptions,
+          aOptions: androidOptions,
         ),
       );
     } catch (ex, stack) {
