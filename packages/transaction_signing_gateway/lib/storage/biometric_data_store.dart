@@ -124,6 +124,29 @@ class BiometricDataStore implements SecureDataStore {
         return left(BiometricCredentialsStorageFailure.unsupported());
     }
   }
+
+@override
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
+    try {
+      final biometricStorage = BiometricStorage();
+      final storageFile = await biometricStorage.getStorage(
+        storageFileName,
+        options: _storageFileInitOptions,
+        promptInfo: promptInfo,
+      );
+      await storageFile.delete();
+      return right(true);
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          'Error while clearing data in Biometric storage',
+          cause: ex,
+          stack: stack,
+        ),
+      );
+    }
+  }
 }
 
 Map<String, String?> _decodeMap(String json) => (json.trim().isEmpty

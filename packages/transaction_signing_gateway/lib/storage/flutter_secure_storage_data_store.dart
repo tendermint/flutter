@@ -8,6 +8,8 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
   }) : _store = storage ?? const FlutterSecureStorage();
 
   final FlutterSecureStorage _store;
+  static const iosOptions = IOSOptions(accessibility: IOSAccessibility.passcode);
+  static const androidOptions = AndroidOptions(encryptedSharedPreferences: true);
 
   @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) async {
@@ -46,6 +48,26 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
       return left(
         CredentialsStorageFailure(
           "Could not write secure text for key '$key'",
+          cause: ex,
+          stack: stack,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
+    try {
+      await _store.deleteAll(
+        iOptions: iosOptions,
+        aOptions: androidOptions,
+      );
+      return right(true);
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          "Could not delete secure data'",
           cause: ex,
           stack: stack,
         ),
