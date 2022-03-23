@@ -79,7 +79,7 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       );
     }
   }
-  
+
   @override
   Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
     try {

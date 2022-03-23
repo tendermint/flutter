@@ -13,7 +13,6 @@ class TestMemoryStore implements PlainDataStore, SecureDataStore {
     return right(true);
   }
 
-
   @override
   Future<Either<CredentialsStorageFailure, String?>> readPlainText({
     required String key,

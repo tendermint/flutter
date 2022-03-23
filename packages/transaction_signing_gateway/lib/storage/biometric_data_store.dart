@@ -125,7 +125,7 @@ class BiometricDataStore implements SecureDataStore {
     }
   }
 
-@override
+  @override
   Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
     try {
       final biometricStorage = BiometricStorage();
