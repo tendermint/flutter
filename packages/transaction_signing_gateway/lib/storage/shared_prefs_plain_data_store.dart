@@ -79,4 +79,21 @@ class SharedPrefsPlainDataStore implements PlainDataStore {
       );
     }
   }
+
+  @override
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
+    try {
+      final prefs = await sharedPreferencesProvider();
+      return right(await prefs.clear());
+    } catch (ex, stack) {
+      logError(ex, stack);
+      return left(
+        CredentialsStorageFailure(
+          'Error while clearing all  data',
+          cause: ex,
+          stack: stack,
+        ),
+      );
+    }
+  }
 }
