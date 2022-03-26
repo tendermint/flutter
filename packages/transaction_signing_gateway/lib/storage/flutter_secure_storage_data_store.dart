@@ -11,9 +11,6 @@ class FlutterSecureStorageDataStore implements SecureDataStore {
   static const iosOptions = IOSOptions(accessibility: IOSAccessibility.passcode);
   static const androidOptions = AndroidOptions(encryptedSharedPreferences: true);
 
-  static const iosOptions = IOSOptions(accessibility: IOSAccessibility.passcode);
-  static const androidOptions = AndroidOptions(encryptedSharedPreferences: true);
-
   @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({required String key}) async {
     try {
