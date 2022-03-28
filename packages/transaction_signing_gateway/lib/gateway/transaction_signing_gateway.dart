@@ -6,6 +6,7 @@ import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.
 import 'package:transaction_signing_gateway/model/account_derivation_failure.dart';
 import 'package:transaction_signing_gateway/model/account_derivation_info.dart';
 import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
+import 'package:transaction_signing_gateway/model/clear_credentials_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_broadcasting_failure.dart';
 import 'package:transaction_signing_gateway/model/transaction_response.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
@@ -127,4 +128,7 @@ class TransactionSigningGateway {
         (element) => element.canDerive(accountDerivationInfo),
         orElse: NotFoundDerivator.new,
       );
+
+  /// Removes all stored account's data. If it fails, a [ClearCredentialsFailure] is returned.
+  Future<Either<ClearCredentialsFailure, Unit>> clearAllCredentials() => _infoStorage.clearCredentials();
 }

@@ -8,6 +8,7 @@ import 'package:transaction_signing_gateway/encrypt/cipher.dart';
 import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/account_public_info.dart';
 import 'package:transaction_signing_gateway/model/account_public_info_serializer.dart';
+import 'package:transaction_signing_gateway/model/clear_credentials_failure.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials_serializer.dart';
 import 'package:transaction_signing_gateway/model/transaction_signing_failure.dart';
@@ -235,9 +236,20 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
   }
 
   @override
-  Future<Either<CredentialsStorageFailure, bool>> clearCredentials() async {
+  Future<Either<ClearCredentialsFailure, Unit>> clearCredentials() async {
     return _secureDataStore
         .clearAllData() //
-        .flatMap((_) => _plainDataStore.clearAllData());
+        .zipWith(_plainDataStore.clearAllData())
+        .mapError(ClearCredentialsFailure.unknown)
+        .flatMap((result) async {
+      if (!result.value1 || !result.value2) {
+        return left(
+          ClearCredentialsFailure.unknown(
+            'data clearing failed: secured store failed: ${result.value1} & plain store failed: ${result.value2}',
+          ),
+        );
+      }
+      return right(unit);
+    });
   }
 }
