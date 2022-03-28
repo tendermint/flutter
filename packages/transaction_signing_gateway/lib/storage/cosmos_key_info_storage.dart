@@ -233,4 +233,11 @@ class CosmosKeyInfoStorage implements KeyInfoStorage {
       );
     }
   }
+
+  @override
+  Future<Either<CredentialsStorageFailure, bool>> clearCredentials() async {
+    return _secureDataStore
+        .clearAllData() //
+        .flatMap((_) => _plainDataStore.clearAllData());
+  }
 }
