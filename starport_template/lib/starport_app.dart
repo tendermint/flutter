@@ -7,7 +7,7 @@ import 'package:starport_template/pages/routing_page.dart';
 import 'package:starport_template/stores/accounts_store.dart';
 import 'package:starport_template/stores/settings_store.dart';
 import 'package:starport_template/stores/transactions_store.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 import 'package:transaction_signing_gateway/gateway/transaction_signing_gateway.dart';
 
 class StarportApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class StarportApp extends StatelessWidget {
   static late TransactionSigningGateway signingGateway;
   static late AccountsStore accountsStore;
   static late TransactionsStore transactionsStore;
-  static late BaseEnv baseEnv;
+  static late BaseEnvUtil baseEnv;
   static late NetworkInfo networkInfo;
   static late SecureDataStore secureDataStore;
   static late SettingsStore settingsStore;

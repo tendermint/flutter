@@ -1,13 +1,13 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 import 'package:starport_template/utils/cosmos_transaction_history_loader.dart';
 
 class TransactionsStore {
   TransactionsStore(this.baseEnv);
 
-  final BaseEnv baseEnv;
+  final BaseEnvUtil baseEnv;
   final Observable<bool> _isTransactionHistoryLoading = Observable(false);
   final Observable<bool> _isTransactionHistoryError = Observable(false);
 

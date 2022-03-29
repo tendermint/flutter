@@ -3,7 +3,7 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 import 'package:starport_template/utils/node_info_loader.dart';
 
 class SettingsStore {
@@ -18,7 +18,7 @@ class SettingsStore {
   static const _nodeNetworkKey = 'node_network';
 
   final CosmosAuth _cosmosAuth;
-  final BaseEnv _baseEnv;
+  final BaseEnvUtil _baseEnv;
   final SecureDataStore _secureDataStore;
   final Observable<bool> _appLockEnabled = Observable(false);
   final Observable<bool> _biometricsEnabled = Observable(false);

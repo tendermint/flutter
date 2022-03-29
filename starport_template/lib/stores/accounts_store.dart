@@ -4,7 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_account_form_data.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
@@ -19,7 +19,7 @@ class AccountsStore {
   static const chainId = 'my_starport_chain';
   final TransactionSigningGateway _transactionSigningGateway;
 
-  final BaseEnv baseEnv;
+  final BaseEnvUtil baseEnv;
 
   final Observable<bool> _areAccountsLoading = Observable(false);
   final Observable<bool> _isSendMoneyLoading = Observable(false);

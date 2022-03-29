@@ -2,11 +2,12 @@ import 'package:alan/alan.dart';
 import 'package:cosmos_auth/cosmos_auth.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:starport_template/base_env.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/stores/accounts_store.dart';
 import 'package:starport_template/stores/settings_store.dart';
 import 'package:starport_template/stores/transactions_store.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 
@@ -16,7 +17,8 @@ void main() {
 }
 
 void _buildDependencies() {
-  StarportApp.baseEnv = BaseEnv();
+  final env = BaseEnv();
+  StarportApp.baseEnv = BaseEnvUtil(env);
   StarportApp.networkInfo = StarportApp.baseEnv.networkInfo;
   _logBackendInfo(StarportApp.networkInfo);
   StarportApp.secureDataStore = FlutterSecureStorageDataStore();

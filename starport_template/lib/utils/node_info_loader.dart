@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 
 class NodeInfoLoader {
   NodeInfoLoader(this.baseEnv);
 
-  BaseEnv baseEnv;
+  BaseEnvUtil baseEnv;
 
   Future<String> getChainId() async {
     final uri = '${baseEnv.baseApiUrl}/node_info';

@@ -5,12 +5,12 @@ import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/model/tx_response_json.dart';
-import 'package:starport_template/utils/base_env.dart';
+import 'package:starport_template/utils/env_util.dart';
 
 class CosmosTransactionHistoryLoader {
   CosmosTransactionHistoryLoader(this.baseEnv);
 
-  BaseEnv baseEnv;
+  BaseEnvUtil baseEnv;
 
   Future<List<TransactionHistoryItem>> getTransactionHistory(String accountAddress) async {
     final outGoingTransactions = await _getTransactionResponses(accountAddress, TransactionType.Send);
