@@ -1,8 +1,8 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
-import 'package:starport_template/utils/env_util.dart';
 import 'package:starport_template/utils/cosmos_transaction_history_loader.dart';
+import 'package:starport_template/utils/env_util.dart';
 
 class TransactionsStore {
   TransactionsStore(this.baseEnv);
