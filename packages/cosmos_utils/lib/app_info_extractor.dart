@@ -23,4 +23,18 @@ class AppInfo {
   final String packageName;
   final String version;
   final String buildNumber;
+
+  AppInfo fromMap(Map<String, dynamic> json) => AppInfo(
+        packageName: json['packageName'] as String? ?? '',
+        appName: json['appName'] as String? ?? '',
+        buildNumber: json['buildNumber'] as String? ?? '',
+        version: json['version'] as String? ?? '',
+      );
+
+  Map<String, dynamic> toMap() => {
+        'appName': appName,
+        'packageName': packageName,
+        'version': version,
+        'buildNumber': buildNumber,
+      };
 }
