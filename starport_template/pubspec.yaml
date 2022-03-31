@@ -24,7 +24,6 @@ dependencies:
   intl: 0.17.0
   alan: 0.40.2+1
   shared_preferences: 2.0.12
-  flutter_masked_text2: ^0.9.1
 
   cosmos_ui_components:
     git:
