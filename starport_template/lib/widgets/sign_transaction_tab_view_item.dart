@@ -35,7 +35,7 @@ class SignTransactionTabViewItem extends StatelessWidget {
           ),
           SizedBox(width: theme.spacingL),
           Text(
-            '${NumberFormat.decimalPercentPattern(decimalDigits: 3).format(amount)} ${balance.denom.text.toUpperCase()}',
+            '${NumberFormat.decimalPercentPattern(decimalDigits: 5).format(amount)} ${balance.denom.text.toUpperCase()}',
             style: CosmosTextTheme.title1Medium,
           ),
           SizedBox(width: theme.spacingL),
