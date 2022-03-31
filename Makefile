@@ -1,3 +1,6 @@
+run:
+	cd starport_template && fvm flutter run --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
+
 install-cosmos-ui-components: 
 	$(info Running flutter pub upgrade on `cosmos_ui_components`)
 	cd packages/cosmos_ui_components && fvm install && fvm flutter pub upgrade
@@ -14,7 +17,6 @@ install-starport-template:
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
 	cd starport_template && fvm install && fvm flutter pub upgrade
 
-	
 # Ensures proper flutter channel is in use, runs pub upgrade.
 install:
 	$(MAKE) install-cosmos-ui-components

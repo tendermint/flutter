@@ -28,7 +28,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.2"
+    version: "3.3.0"
   args:
     dependency: transitive
     description:
@@ -153,7 +153,7 @@ packages:
     description:
       path: "packages/cosmos_auth"
       ref: main
-      resolved-ref: "99035c7be78a9959591220c8efb3e1e122274c03"
+      resolved-ref: "76dcfa3870501c995be757e2104bf16b171f2226"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +162,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
-      resolved-ref: "99035c7be78a9959591220c8efb3e1e122274c03"
+      resolved-ref: "76dcfa3870501c995be757e2104bf16b171f2226"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -171,7 +171,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "99035c7be78a9959591220c8efb3e1e122274c03"
+      resolved-ref: "76dcfa3870501c995be757e2104bf16b171f2226"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -271,6 +271,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.2"
+  flutter_masked_text2:
+    dependency: "direct main"
+    description:
+      name: flutter_masked_text2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.1"
   flutter_mobx:
     dependency: "direct main"
     description:
@@ -788,7 +795,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-      resolved-ref: "99035c7be78a9959591220c8efb3e1e122274c03"
+      resolved-ref: "76dcfa3870501c995be757e2104bf16b171f2226"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -882,7 +889,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.4"
+    version: "2.5.1"
   xdg_directories:
     dependency: transitive
     description:
