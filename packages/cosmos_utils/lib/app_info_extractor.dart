@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:package_info/package_info.dart';
 
 Future<AppInfo> getAppInfo() async {
@@ -19,17 +21,17 @@ class AppInfo {
     required this.version,
   });
 
-  final String appName;
-  final String packageName;
-  final String version;
-  final String buildNumber;
-
-  AppInfo fromJson(Map<String, dynamic> json) => AppInfo(
+  factory AppInfo.fromJson(Map<String, dynamic> json) => AppInfo(
         packageName: json['packageName'] as String? ?? '',
         appName: json['appName'] as String? ?? '',
         buildNumber: json['buildNumber'] as String? ?? '',
         version: json['version'] as String? ?? '',
       );
+
+  final String appName;
+  final String packageName;
+  final String version;
+  final String buildNumber;
 
   Map<String, dynamic> toJson() => {
         'appName': appName,
@@ -37,4 +39,6 @@ class AppInfo {
         'version': version,
         'buildNumber': buildNumber,
       };
+
+  String toJsonString() => jsonEncode(toJson());
 }
