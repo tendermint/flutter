@@ -21,6 +21,12 @@ class AppInfo {
     required this.version,
   });
 
+  AppInfo.empty()
+      : packageName = '',
+        appName = '',
+        buildNumber = '',
+        version = '';
+
   factory AppInfo.fromJson(Map<String, dynamic> json) => AppInfo(
         packageName: json['packageName'] as String? ?? '',
         appName: json['appName'] as String? ?? '',
@@ -33,6 +39,8 @@ class AppInfo {
   final String version;
   final String buildNumber;
 
+  int get buildNumberInt => int.tryParse(buildNumber) ?? 0;
+
   Map<String, dynamic> toJson() => {
         'appName': appName,
         'packageName': packageName,
@@ -41,4 +49,18 @@ class AppInfo {
       };
 
   String toJsonString() => jsonEncode(toJson());
+
+  AppInfo copyWith({
+    String? appName,
+    String? packageName,
+    String? version,
+    String? buildNumber,
+  }) {
+    return AppInfo(
+      appName: appName ?? this.appName,
+      packageName: packageName ?? this.packageName,
+      version: version ?? this.version,
+      buildNumber: buildNumber ?? this.buildNumber,
+    );
+  }
 }
