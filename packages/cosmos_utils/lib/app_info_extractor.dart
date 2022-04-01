@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:package_info/package_info.dart';
 
 Future<AppInfo> getAppInfo() async {
@@ -37,4 +39,6 @@ class AppInfo {
         'version': version,
         'buildNumber': buildNumber,
       };
+
+  String toJsonString() => jsonEncode(toJson());
 }
