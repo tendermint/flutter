@@ -7,6 +7,12 @@ class StubSecureDataStore implements SecureDataStore {
   Map<String, String> map = {};
 
   @override
+  Future<Either<CredentialsStorageFailure, bool>> clearAllData() async {
+    map.clear();
+    return right(true);
+  }
+
+  @override
   Future<Either<CredentialsStorageFailure, String?>> readSecureText({
     required String key,
   }) async =>
