@@ -47,7 +47,7 @@ void main() {
       // THEN
       expect(result.isLeft(), true);
       expect(result.fold((l) => l, (r) => r), isA<UserDeclinedTransactionSignerFailure>());
-      verifyNever(() => infoStorage.getPrivateCredentials(any));
+      verifyNever(() => infoStorage.getPrivateCredentials(any()));
     });
 
     test('failing to retrieve key returns failure', () async {

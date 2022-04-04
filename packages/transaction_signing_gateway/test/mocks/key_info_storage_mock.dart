@@ -1,6 +1,7 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 
@@ -19,7 +20,7 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
 
   @override
   Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>> getPrivateCredentials(
-    Object? accountLookupKey,
+    AccountLookupKey? accountLookupKey,
   ) =>
       super.noSuchMethod(
         Invocation.method(
