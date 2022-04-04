@@ -33,7 +33,7 @@ dev_dependencies:
     sdk: flutter
   lint: 1.8.1
   very_good_analysis: 2.4.0
-  mocktail: ^0.3.0
+  mocktail: 0.3.0
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository

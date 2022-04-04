@@ -96,6 +96,13 @@ void main() {
       summaryUI = TransactionSummaryUIMock();
       infoStorage = KeyInfoStorageMock();
       registerFallbackValue(const UnsignedAlanTransaction(messages: []));
+      registerFallbackValue(
+        const AccountLookupKey(
+          chainId: chainId,
+          accountId: accountId,
+          password: 'password',
+        ),
+      );
       signingGateway = TransactionSigningGateway(
         transactionSummaryUI: summaryUI,
         signers: [],
