@@ -7,13 +7,14 @@ class AccountPublicInfoSerializer {
   static const _publicAddressKey = 'public_address';
   static const _accountIdKey = 'account_Id';
   static const _additionalDataKey = 'additional_data';
+  static const _walletIdKey = 'wallet_Id';
 
   static AccountPublicInfo fromMap(Map<String, dynamic> map) {
     return AccountPublicInfo(
-      name: map[_nameKey] as String,
-      publicAddress: map[_publicAddressKey] as String,
-      accountId: map[_accountIdKey] as String,
-      chainId: map[_chainIdKey] as String,
+      name: map[_nameKey] as String? ?? '',
+      publicAddress: map[_publicAddressKey] as String? ?? '',
+      accountId: map[_accountIdKey] as String? ?? map[_walletIdKey] as String? ?? '',
+      chainId: map[_chainIdKey] as String? ?? '',
       additionalData: map[_additionalDataKey] as String?,
     );
   }
