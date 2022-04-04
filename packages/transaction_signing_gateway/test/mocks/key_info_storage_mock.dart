@@ -1,7 +1,6 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mockito/mockito.dart';
-import 'package:transaction_signing_gateway/model/account_lookup_key.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:transaction_signing_gateway/model/private_account_credentials.dart';
 import 'package:transaction_signing_gateway/storage/key_info_storage.dart';
 
@@ -20,7 +19,7 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
 
   @override
   Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>> getPrivateCredentials(
-    AccountLookupKey? accountLookupKey,
+    Object? accountLookupKey,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -29,9 +28,6 @@ class KeyInfoStorageMock extends Mock implements KeyInfoStorage {
             accountLookupKey,
           ],
           {},
-        ),
-        returnValue: Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>>.value(
-          left(const CredentialsStorageFailure('not mocked')),
         ),
       ) as Future<Either<CredentialsStorageFailure, PrivateAccountCredentials>>;
 }
