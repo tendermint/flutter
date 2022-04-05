@@ -1,6 +1,6 @@
 library cosmos_ui_components;
 
-export 'components/app_version_info.dart';
+export 'components/app_version_text.dart';
 export 'components/content_loading_indicator.dart';
 export 'components/content_state_switcher.dart';
 export 'components/cosmos_app_bar.dart';
