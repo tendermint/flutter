@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 class ChipText extends StatelessWidget {
   const ChipText({
     required this.title,
+    this.style,
+    this.backgroundColor,
     Key? key,
   }) : super(key: key);
   final String title;
+  final TextStyle? style;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +20,21 @@ class ChipText extends StatelessWidget {
       padding: EdgeInsets.all(theme.spacingM),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: theme.colors.chipBackground,
+        color: backgroundColor ?? theme.colors.chipBackground,
       ),
-      child: Text(title),
+      child: Text(
+        title,
+        style: style,
+      ),
     );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('title', title));
+    properties
+      ..add(StringProperty('title', title))
+      ..add(DiagnosticsProperty<TextStyle?>('style', style))
+      ..add(ColorProperty('backgroundColor', backgroundColor));
   }
 }
