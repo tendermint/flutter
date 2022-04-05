@@ -3,7 +3,7 @@ import 'package:grpc/grpc.dart';
 
 class AppConfig {
   AppConfig({
-    this.lcdUrl = 'http://10.0.2.2',
+    this.lcdUrl = 'http://localhost',
     this.grpcUrl = 'http://localhost',
     this.lcdPort = '1317',
     this.grpcPort = '9090',
