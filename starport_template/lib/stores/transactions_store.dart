@@ -1,13 +1,13 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:mobx/mobx.dart';
+import 'package:starport_template/app_config.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
-import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_transaction_history_loader.dart';
 
 class TransactionsStore {
-  TransactionsStore(this.baseEnv);
+  TransactionsStore(this.appConfig);
 
-  final BaseEnv baseEnv;
+  final AppConfig appConfig;
   final Observable<bool> _isTransactionHistoryLoading = Observable(false);
   final Observable<bool> _isTransactionHistoryError = Observable(false);
 
@@ -24,7 +24,7 @@ class TransactionsStore {
   Future<void> getTransactionHistory(String accountAddress) async {
     isTransactionHistoryLoading = true;
     try {
-      final list = await CosmosTransactionHistoryLoader(baseEnv).getTransactionHistory(accountAddress);
+      final list = await CosmosTransactionHistoryLoader(appConfig).getTransactionHistory(accountAddress);
       transactionsList
         ..clear()
         ..addAll(list);
