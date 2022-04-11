@@ -1,10 +1,10 @@
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:starport_template/app_config.dart';
 import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/import_account_form_data.dart';
-import 'package:starport_template/utils/base_env.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
 import 'package:transaction_signing_gateway/alan/alan_account_derivation_info.dart';
@@ -13,13 +13,13 @@ import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 class AccountsStore {
   AccountsStore(
     this._transactionSigningGateway,
-    this.baseEnv,
+    this.appConfig,
   );
 
   static const chainId = 'my_starport_chain';
   final TransactionSigningGateway _transactionSigningGateway;
 
-  final BaseEnv baseEnv;
+  final AppConfig appConfig;
 
   final Observable<bool> _areAccountsLoading = Observable(false);
   final Observable<bool> _isSendMoneyLoading = Observable(false);
@@ -149,7 +149,7 @@ class AccountsStore {
     isBalancesLoadingError = false;
     isBalancesLoading = true;
     try {
-      final newBalances = await CosmosBalances(baseEnv).getBalances(accountAddress);
+      final newBalances = await CosmosBalances(appConfig).getBalances(accountAddress);
       balancesList
         ..clear()
         ..addAll(newBalances);
@@ -170,7 +170,7 @@ class AccountsStore {
         .deriveAccount(
       accountDerivationInfo: AlanAccountDerivationInfo(
         accountAlias: data.name,
-        networkInfo: baseEnv.networkInfo,
+        networkInfo: appConfig.networkInfo,
         mnemonic: data.mnemonic,
         chainId: chainId,
       ),

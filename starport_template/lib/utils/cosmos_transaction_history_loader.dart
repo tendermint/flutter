@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:starport_template/app_config.dart';
 import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/model/tx_response_json.dart';
-import 'package:starport_template/utils/base_env.dart';
 
 class CosmosTransactionHistoryLoader {
-  CosmosTransactionHistoryLoader(this.baseEnv);
+  CosmosTransactionHistoryLoader(this.appConfig);
 
-  BaseEnv baseEnv;
+  AppConfig appConfig;
 
   Future<List<TransactionHistoryItem>> getTransactionHistory(String accountAddress) async {
     final outGoingTransactions = await _getTransactionResponses(accountAddress, TransactionType.Send);
@@ -24,7 +24,7 @@ class CosmosTransactionHistoryLoader {
 
   Future<List<TransactionHistoryItem>> _getTransactionResponses(String accountAddress, TransactionType type) async {
     final uri =
-        '${baseEnv.baseApiUrl}/cosmos/tx/v1beta1/txs?events=transfer.${type == TransactionType.Send ? 'sender' : 'recipient'}%3D%27$accountAddress%27';
+        '${appConfig.baseApiUrl}/cosmos/tx/v1beta1/txs?events=transfer.${type == TransactionType.Send ? 'sender' : 'recipient'}%3D%27$accountAddress%27';
     final response = await http.get(Uri.parse(uri));
     final map = jsonDecode(response.body) as Map<String, dynamic>;
     if (map['tx_responses'] == null) {

@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:starport_template/app_config.dart';
 import 'package:starport_template/entities/amount.dart';
 import 'package:starport_template/entities/balance.dart';
 import 'package:starport_template/entities/denom.dart';
 import 'package:starport_template/model/balance_json.dart';
-import 'package:starport_template/utils/base_env.dart';
 
 class CosmosBalances {
-  CosmosBalances(this.baseEnv);
+  CosmosBalances(this.appConfig);
 
-  BaseEnv baseEnv;
+  AppConfig appConfig;
 
   Future<List<Balance>> getBalances(String accountAddress) async {
-    final uri = '${baseEnv.baseApiUrl}/cosmos/bank/v1beta1/balances/$accountAddress';
+    final uri = '${appConfig.baseApiUrl}/cosmos/bank/v1beta1/balances/$accountAddress';
     final response = await http.get(Uri.parse(uri));
     final map = jsonDecode(response.body) as Map<String, dynamic>;
     if (map['balances'] == null) {
