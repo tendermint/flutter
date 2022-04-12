@@ -2,7 +2,6 @@ import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:starport_template/entities/balance.dart';
 
 class SignTransactionTabViewItem extends StatelessWidget {
@@ -22,23 +21,14 @@ class SignTransactionTabViewItem extends StatelessWidget {
     final theme = CosmosTheme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(text, style: CosmosTextTheme.titleS),
-              const Spacer(),
-              CosmosTokenAvatar(text: balance.denom.text),
-            ],
-          ),
+          Text(text, style: CosmosTextTheme.titleS),
+          const Spacer(),
+          Text(balance.amountWithDenomText, style: CosmosTextTheme.title1Medium),
           SizedBox(width: theme.spacingL),
-          Text(
-            '${NumberFormat.decimalPercentPattern(decimalDigits: 5).format(amount)} ${balance.denom.text.toUpperCase()}',
-            style: CosmosTextTheme.title1Medium,
-          ),
-          SizedBox(width: theme.spacingL),
+          CosmosTokenAvatar(text: balance.denom.text),
         ],
       ),
     );

@@ -86,4 +86,3 @@ report.xml
 **/*.ipr
 **/misc.xml
 starport_template/ios/build
-starport_template/lib/app_config.dart
