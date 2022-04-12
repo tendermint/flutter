@@ -22,7 +22,6 @@
 .last_build_id
 */build/
 
-
 # Web related
 lib/generated_plugin_registrant.dart
 
@@ -87,3 +86,4 @@ report.xml
 **/*.ipr
 **/misc.xml
 starport_template/ios/build
+starport_template/lib/app_config.dart

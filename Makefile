@@ -1,5 +1,5 @@
 run:
-	cd starport_template && fvm flutter run --dart-define=LCD_URL=https://api.testnet.cosmos.network --dart-define=LCD_PORT=443 --dart-define=GRPC_URL=https://grpc.testnet.cosmos.network --dart-define=GRPC_PORT=443
+	cd starport_template && fvm flutter run 
 
 install-cosmos-ui-components: 
 	$(info Running flutter pub upgrade on `cosmos_ui_components`)

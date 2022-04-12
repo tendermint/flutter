@@ -34,7 +34,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
   double fee = StarportApp.accountsStore.defaultFee;
   String accountAddress = '';
 
-  bool get isTransferValidated => amount != 0.0 && accountAddress.isNotEmpty && fee != 0.0;
+  bool get isTransferValidated => amount != 0.0 && accountAddress.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,8 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
           CosmosBalanceCard(
             denomText: widget.balance.denom.text,
             amountDisplayText: widget.balance.amount.displayText,
-            secondaryText: 'available ${widget.balance.denom.text.toUpperCase()}',
+            secondaryText:
+                'available ${widget.balance.denom.text.toUpperCase()}',
             isListTileType: true,
           ),
           SizedBox(height: theme.spacingXXL),
@@ -95,7 +96,8 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
   Future<void> _onTapFee() async {
     fee = await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => CustomFeePage(denomText: widget.balance.denom.text, initialFee: fee),
+            builder: (context) => CustomFeePage(
+                denomText: widget.balance.denom.text, initialFee: fee),
           ),
         ) as double? ??
         0.0;
@@ -141,7 +143,8 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
     properties
       ..add(DoubleProperty('amount', amount))
       ..add(StringProperty('accountAddress', accountAddress))
-      ..add(DiagnosticsProperty<bool>('isTransferValidated', isTransferValidated))
+      ..add(
+          DiagnosticsProperty<bool>('isTransferValidated', isTransferValidated))
       ..add(DoubleProperty('fee', fee));
   }
 }
