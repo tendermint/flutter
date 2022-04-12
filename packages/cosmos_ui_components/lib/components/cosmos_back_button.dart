@@ -7,10 +7,12 @@ class CosmosBackButton extends StatelessWidget {
     Key? key,
     this.text = 'Back',
     this.onTap,
+    this.color,
   }) : super(key: key);
 
   final VoidCallback? onTap;
   final String? text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class CosmosBackButton extends StatelessWidget {
         width: 32,
         height: 32,
         scale: 1,
-        color: CosmosTheme.of(context).colors.text,
+        color: color ?? CosmosTheme.of(context).colors.text,
       ),
     );
   }
@@ -34,6 +36,7 @@ class CosmosBackButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback?>.has('onTap', onTap))
-      ..add(StringProperty('text', text));
+      ..add(StringProperty('text', text))
+      ..add(ColorProperty('color', color));
   }
 }
