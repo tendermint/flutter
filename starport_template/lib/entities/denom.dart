@@ -11,7 +11,6 @@ class Denom extends Equatable {
 
   String amountWithDenomText(Amount amount) => '${formatAmount(amount.value.toDouble(), symbol: '')} $text';
 
-
   @override
   List<Object> get props => [
         text,
