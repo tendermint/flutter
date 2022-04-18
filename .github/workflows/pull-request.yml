@@ -61,6 +61,11 @@ jobs:
         if: env.changes_cosmos_ui_components == 'true'
         run: flutter pub get
 
+      - name: cosmos_ui_components - generate assets
+        working-directory: packages/cosmos_ui_components
+        if: env.changes_cosmos_ui_components == 'true'
+        run: flutter packages pub run build_runner build
+
       - name: cosmos_ui_components - check codestyle
         working-directory: packages/cosmos_ui_components
         if: env.changes_cosmos_ui_components == 'true'

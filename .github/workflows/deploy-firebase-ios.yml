@@ -66,6 +66,9 @@ jobs:
         working-directory: ./starport_template/ios
         run: flutter pub get
 
+      - name: pub get
+        run: flutter packages pub run build_runner build
+
       - name: set up ruby
         uses: ruby/setup-ruby@v1
         with:
