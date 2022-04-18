@@ -5,7 +5,6 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/pages/security_sheet.dart';
-import 'package:starport_template/widgets/app_version_text.dart';
 
 class SettingsSheet extends StatelessWidget {
   const SettingsSheet({Key? key}) : super(key: key);
