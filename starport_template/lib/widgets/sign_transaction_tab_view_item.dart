@@ -26,7 +26,7 @@ class SignTransactionTabViewItem extends StatelessWidget {
         children: [
           Text(text, style: CosmosTextTheme.titleS),
           const Spacer(),
-          Text('${amount.toString()} ${balance.denom.text.toUpperCase()}', style: CosmosTextTheme.title1Medium),
+          Text(balance.amountWithDenomText, style: CosmosTextTheme.title1Medium),
           SizedBox(width: theme.spacingL),
           CosmosTokenAvatar(text: balance.denom.text),
         ],

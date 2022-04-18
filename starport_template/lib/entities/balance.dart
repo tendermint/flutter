@@ -14,6 +14,8 @@ class Balance extends Equatable {
   @override
   String toString() => '$amount $denom';
 
+  String get amountWithDenomText => denom.amountWithDenomText(amount);
+
   @override
   List<Object> get props => [
         denom,

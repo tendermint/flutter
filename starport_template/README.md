@@ -24,7 +24,7 @@
 
 - Edit and update your environment variables in the [`app_config.dart`](https://github.com/tendermint/flutter/blob/main/starport_template/app_config.dart)
 
-- Run the `starport_template` app using `fvm flutter run` or `make run-dev` commands:
+- Run the `starport_template` app using `fvm flutter run` or `make run` commands:
 
 
 ## Using template from Starport's scaffolded chain
