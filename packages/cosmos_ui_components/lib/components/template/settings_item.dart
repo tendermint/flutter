@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class SettingsItem extends StatelessWidget {
             Text(text, style: textStyle),
             const Spacer(),
             if (infoIcon != null) infoIcon!,
-            if (showArrow) Image.asset('assets/images/arrow_right.png', package: packageName),
+            if (showArrow) Image.asset(Assets.images.arrowRight.path, package: packageName),
           ],
         ),
       ),

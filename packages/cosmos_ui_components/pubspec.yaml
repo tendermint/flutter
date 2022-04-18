@@ -24,6 +24,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^1.8.1
+  build_runner:
+  flutter_gen_runner:
 
 #dependency_overrides:
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
@@ -31,10 +33,26 @@ dev_dependencies:
 #  cosmos_utils:
 #    path: ../cosmos_utils
 
+flutter_gen:
+  output: lib/generated_assets/
+  line_length: 120
+
+  assets:
+    enabled: true
+    style: dot-delimiter
 
 flutter:
   assets:
-    - assets/images/
+    - assets/images/arrow_right.png
+    - assets/images/big_arrow_left.png
+    - assets/images/check.png
+    - assets/images/checkbox_checked.png
+    - assets/images/checkbox_unchecked.png
+    - assets/images/cross.png
+    - assets/images/icon_invalid.png
+    - assets/images/icon_warning.png
+    - assets/images/more.png
+    - assets/images/receive_icon.png
 
   fonts:
     - family: Inter

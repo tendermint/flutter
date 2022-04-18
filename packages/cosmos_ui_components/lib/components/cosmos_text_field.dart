@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -112,7 +113,7 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       child: SizedBox(
         height: 17,
         width: 17,
-        child: Image.asset('assets/images/cross.png', package: packageName),
+        child: Image.asset(Assets.images.cross.path, package: packageName),
       ),
     );
   }

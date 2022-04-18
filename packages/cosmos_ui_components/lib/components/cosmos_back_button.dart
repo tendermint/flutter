@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class CosmosBackButton extends StatelessWidget {
       text: text ?? '',
       iconTopSpacing: 2,
       leadingIcon: Image.asset(
-        'assets/images/big-arrow-left.png',
+        Assets.images.bigArrowLeft.path,
         package: packageName,
         width: 32,
         height: 32,

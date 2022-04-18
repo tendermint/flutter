@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +123,7 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/icon_invalid.png', package: packageName),
+          Image.asset(Assets.images.iconInvalid.path, package: packageName),
           SizedBox(width: theme.spacingM),
           Text(
             widget.invalidOrderText,

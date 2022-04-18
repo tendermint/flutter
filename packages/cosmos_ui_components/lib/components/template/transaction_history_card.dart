@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:cosmos_ui_components/utils/date_formatter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class TransactionHistoryCard extends StatelessWidget {
             children: [
               RotatedBox(
                 quarterTurns: isOutgoing ? 2 : 0,
-                child: Image.asset('assets/images/receive_icon.png', package: packageName),
+                child: Image.asset(Assets.images.receiveIcon.path, package: packageName),
               ),
               SizedBox(width: theme.spacingL),
               Column(

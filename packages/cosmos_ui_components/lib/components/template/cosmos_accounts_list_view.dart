@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:cosmos_ui_components/models/account_info.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
@@ -33,13 +34,13 @@ class CosmosAccountsListView extends StatelessWidget {
                 onClicked: () => onClicked(index),
                 suffix: isEditing
                     ? CosmosImageButton(
-                        asset: 'assets/images/more.png',
+                        asset: Assets.images.more.path,
                         package: packageName,
                         onTap: () => onEditIconPressed(account),
                       )
                     : selectedAccount.address == account.address
-                        ? const CosmosImageButton(
-                            asset: 'assets/images/check.png',
+                        ? CosmosImageButton(
+                            asset: Assets.images.check.path,
                             package: packageName,
                           )
                         : null,

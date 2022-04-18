@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,7 @@ class CosmosCheckboxTile extends StatelessWidget {
                     right: theme.spacingL,
                   ),
                   child: Image.asset(
-                    "assets/images/checkbox_${checked ? "checked" : "unchecked"}.png",
+                    checked ? Assets.images.checkboxChecked.path : Assets.images.checkboxUnchecked.path,
                     package: packageName,
                     width: 24,
                     height: 24,

@@ -1,5 +1,6 @@
 import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/generated_assets/assets.gen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class CosmosWarningBox extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 2),
               child: Image.asset(
-                asset ?? 'assets/images/icon_warning.png',
+                asset ?? Assets.images.iconWarning.path,
                 package: package ?? (asset == null ? packageName : null),
                 width: 16,
                 fit: BoxFit.contain,
