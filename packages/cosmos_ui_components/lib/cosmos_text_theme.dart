@@ -1,12 +1,13 @@
+import 'package:cosmos_ui_components/generated_assets/fonts.gen.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class CosmosTextTheme {
   factory CosmosTextTheme._() => throw UnsupportedError('Not meant to be instantiated');
 
-  static const String fontInter = 'Inter';
+  static const String fontInter = FontFamily.inter;
 
   static TextStyle get title0Bold => const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: fontInter,
         fontWeight: FontWeight.w700,
         fontSize: 16,
         height: 1.3,
@@ -27,14 +28,14 @@ abstract class CosmosTextTheme {
       );
 
   static TextStyle get titleS => const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: fontInter,
         fontWeight: FontWeight.w700,
         fontSize: 13,
         height: 1.23,
       );
 
   static TextStyle get title1Medium => const TextStyle(
-        fontFamily: 'Inter',
+        fontFamily: fontInter,
         fontWeight: FontWeight.w600,
         fontSize: 21,
         height: 1.287,
