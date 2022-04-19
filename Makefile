@@ -1,3 +1,6 @@
+run:
+	cd starport_template && fvm flutter run 
+
 install-cosmos-ui-components: 
 	$(info Running flutter pub upgrade on `cosmos_ui_components`)
 	cd packages/cosmos_ui_components && fvm install && fvm flutter pub upgrade

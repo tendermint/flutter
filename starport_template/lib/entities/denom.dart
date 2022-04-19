@@ -1,4 +1,6 @@
+import 'package:cosmos_utils/amount_formatter.dart';
 import 'package:equatable/equatable.dart';
+import 'package:starport_template/entities/amount.dart';
 
 class Denom extends Equatable {
   const Denom(
@@ -6,6 +8,8 @@ class Denom extends Equatable {
   );
 
   final String text;
+
+  String amountWithDenomText(Amount amount) => '${formatAmount(amount.value.toDouble(), symbol: '')} $text';
 
   @override
   List<Object> get props => [
