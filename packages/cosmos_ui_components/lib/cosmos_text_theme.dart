@@ -4,6 +4,7 @@ abstract class CosmosTextTheme {
   factory CosmosTextTheme._() => throw UnsupportedError('Not meant to be instantiated');
 
   static const String fontInter = 'Inter';
+  static const String fontCasta = 'Casta';
 
   static TextStyle get title0Bold => const TextStyle(
         fontFamily: 'Inter',
@@ -111,5 +112,12 @@ abstract class CosmosTextTheme {
         fontWeight: FontWeight.w700,
         fontSize: 38,
         height: 1.26,
+      );
+
+  static TextStyle get title2BoldCasta => const TextStyle(
+        fontFamily: fontCasta,
+        fontWeight: FontWeight.w700,
+        fontSize: 28,
+        height: 1.27,
       );
 }

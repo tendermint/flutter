@@ -57,3 +57,23 @@ flutter:
           weight: 800
         - asset: lib/fonts/Inter-Black.ttf
           weight: 900
+    - family: Casta
+      fonts:
+        - asset: lib/fonts/casta/Casta-ThinExpanded.otf
+          weight: 100
+        - asset: lib/fonts/casta/Casta-ExtraLightExpanded.otf
+          weight: 200
+        - asset: lib/fonts/casta/Casta-LightExpanded.otf
+          weight: 300
+        - asset: lib/fonts/casta/Casta-Expanded.otf
+          weight: 400
+        - asset: lib/fonts/casta/Casta-MediumExpanded.otf
+          weight: 500
+        - asset: lib/fonts/casta/Casta-SemiBoldExpanded.otf
+          weight: 600
+        - asset: lib/fonts/casta/Casta-BoldExpanded.otf
+          weight: 700
+        - asset: lib/fonts/casta/Casta-ExtraBoldExpanded.otf
+          weight: 800
+        - asset: lib/fonts/casta/Casta-BlackExpanded.otf
+          weight: 900
