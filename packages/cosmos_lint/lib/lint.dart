@@ -1,14 +1,16 @@
-/// The lint package doesn't ship any dart source code.
-///
-/// To enable `lint`,
+/// To enable `cosmos_lint`,
 /// 1. Add it to your dev_dependencies
 /// ```yaml
 /// dev_dependencies:
-///   lint: ^1.0.0
+/// cosmos_lint:
+///     git:
+///       url: https://github.com/tendermint/flutter.git
+///       path: packages/cosmos_lint
+///       ref: main
 /// ```
 ///
 /// 2. Include the rules into your `analysis_options.yaml`
 /// ```yaml
-/// include: package:lint/analysis_options.yaml
+/// include: package:cosmos_lint/analysis_options.yaml
 /// ```
 library lint;
