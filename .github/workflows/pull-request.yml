@@ -30,7 +30,7 @@ jobs:
           flutter-version: '2.10.1'
 
       ###########################################################################################
-      ## COSMOS_AUTH
+      ## COSMOS_LINT
       ###########################################################################################
 
       - name: cosmos_lint - pub get
@@ -38,7 +38,7 @@ jobs:
         if: env.changes_cosmos_lint == 'true'
         run: flutter pub get
 
-      - name: cosmos_auth - dart analysis
+      - name: cosmos_lint - dart analysis
         working-directory: packages/cosmos_lint
         if: env.changes_cosmos_lint == 'true'
         run: flutter analyze
