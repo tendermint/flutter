@@ -24,6 +24,7 @@ jobs:
           echo "changes_cosmos_ui_components=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_ui_components && echo "false" || echo "true")" >> $GITHUB_ENV
           echo "changes_cosmos_utils=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_utils && echo "false" || echo "true")" >> $GITHUB_ENV
           echo "changes_cosmos_auth=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_auth && echo "false" || echo "true")" >> $GITHUB_ENV
+          echo "cosmos_node_client=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_node_client && echo "false" || echo "true")" >> $GITHUB_ENV
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '2.10.1'
@@ -50,6 +51,30 @@ jobs:
       - name: transaction_signing_gateway - tests
         working-directory: packages/transaction_signing_gateway
         if: env.changes_transaction_signing_gateway == 'true'
+        run: flutter test
+        
+      ###########################################################################################
+      ## COSMOS_NODE_CLIENT
+      ###########################################################################################
+
+      - name: cosmos_node_client - pub get
+        working-directory: packages/cosmos_node_client
+        if: env.changes_transaction_signing_gateway == 'true'
+        run: flutter pub get
+
+      - name: cosmos_node_client - check codestyle
+        working-directory: packages/cosmos_node_client
+        if: env.cosmos_node_client == 'true'
+        run: find lib test -name "*.dart" -not -name "*.g.dart" -not -name "*.freezed.dart" -not -name "*.gen.dart" -exec dart format -l 120 --set-exit-if-changed {} +;
+
+      - name: cosmos_node_client - dart analysis
+        working-directory: packages/cosmos_node_client
+        if: env.cosmos_node_client == 'true'
+        run: flutter analyze
+
+      - name: cosmos_node_client - tests
+        working-directory: packages/cosmos_node_client
+        if: env.cosmos_node_client == 'true'
         run: flutter test
 
       ###########################################################################################
