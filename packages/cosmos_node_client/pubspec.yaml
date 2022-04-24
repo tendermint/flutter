@@ -1,0 +1,32 @@
+name: cosmos_node_client
+description: cosmos node client package
+version: 0.0.1
+publish_to: 'none'
+homepage: starport.com
+
+environment:
+  sdk: ">=2.14.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cosmos_utils:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_node_client
+      ref: main
+
+## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
+## it points to the location of the checked out tendermint/flutter repository
+#dependency_overrides:
+#  cosmos_utils:
+#    path: ../cosmos_utils
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: 1.8.1
+  mocktail: 0.2.0
+
+flutter:
