@@ -13,6 +13,10 @@ install-cosmos-auth:
 	$(info Running flutter pub upgrade on `cosmos_auth`)
 	cd packages/cosmos_auth && fvm install && fvm flutter pub upgrade
 
+install-cosmos-lint: 
+	$(info Running flutter pub upgrade on `cosmos_lint`)
+	cd packages/cosmos_lint && fvm install && fvm flutter pub upgrade
+
 install-transaction-signing-gateway: 
 	$(info Running flutter pub upgrade on `transaction_signing_gateway`)
 	cd packages/transaction_signing_gateway && fvm install && fvm flutter pub upgrade
@@ -25,6 +29,7 @@ install-starport-template:
 # Ensures proper flutter channel is in use, runs pub upgrade.
 install:
 	$(MAKE) install-cosmos-auth
+	$(MAKE) install-cosmos-lint
 	$(MAKE) install-cosmos-ui-components
 	$(MAKE) install-cosmos-utils
 	$(MAKE) install-transaction-signing-gateway
