@@ -75,7 +75,7 @@ jobs:
       - name: cosmos_node_client - tests
         working-directory: packages/cosmos_node_client
         if: env.cosmos_node_client == 'true'
-        run: flutter test
+        #run: flutter test
 
       ###########################################################################################
       ## COSMOS_UI_COMPONENTS
