@@ -11,11 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cosmos_utils:
-    git:
-      url: https://github.com/tendermint/flutter.git
-      path: packages/cosmos_node_client
-      ref: main
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
