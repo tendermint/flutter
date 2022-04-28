@@ -78,6 +78,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  cosmos_lint:
+    dependency: "direct dev"
+    description:
+      path: "packages/cosmos_lint"
+      ref: main
+      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
+      url: "https://github.com/tendermint/flutter.git"
+    source: git
+    version: "1.9.0"
   coverage:
     dependency: transitive
     description:
@@ -158,13 +167,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-  lint:
-    dependency: "direct dev"
-    description:
-      name: lint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.8.1"
   logging:
     dependency: transitive
     description:
