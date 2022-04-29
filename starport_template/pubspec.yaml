@@ -42,6 +42,11 @@ dependencies:
       url: https://github.com/tendermint/flutter.git
       path: packages/cosmos_utils
       ref: main
+  cosmos_lint:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_lint
+      ref: main
 
   transaction_signing_gateway:
     git:
@@ -69,6 +74,8 @@ flutter_icons:
 #    path: ../packages/cosmos_utils
 #  cosmos_auth:
 #    path: ../packages/cosmos_auth
+#  cosmos_lint:
+#    path: ../packages/cosmos_lint
 #  transaction_signing_gateway:
 #    path: ../packages/transaction_signing_gateway
 #  cosmos_ui_components:
