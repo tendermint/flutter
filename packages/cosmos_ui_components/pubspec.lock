@@ -64,12 +64,21 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  cosmos_lint:
+    dependency: "direct dev"
+    description:
+      path: "packages/cosmos_lint"
+      ref: main
+      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
+      url: "https://github.com/tendermint/flutter.git"
+    source: git
+    version: "1.9.0"
   cosmos_utils:
     dependency: "direct main"
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "6d6a66c11aec98326728f99eab2672a88a9de8a3"
+      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -79,7 +88,7 @@ packages:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   dartz:
     dependency: transitive
     description:
@@ -139,13 +148,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-  lint:
-    dependency: "direct dev"
-    description:
-      name: lint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.8.2"
   matcher:
     dependency: transitive
     description:
@@ -208,7 +210,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.2"
+    version: "3.6.0"
   qr:
     dependency: transitive
     description:
