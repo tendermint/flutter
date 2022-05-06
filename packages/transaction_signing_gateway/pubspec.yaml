@@ -31,7 +31,11 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: 1.8.1
+  cosmos_lint:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_lint
+      ref: main
   very_good_analysis: 2.4.0
   mocktail: 0.3.0
 

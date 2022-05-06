@@ -84,7 +84,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1"
+    version: "2.3.0"
   build_config:
     dependency: transitive
     description:
@@ -134,12 +134,21 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  cosmos_lint:
+    dependency: "direct dev"
+    description:
+      path: "packages/cosmos_lint"
+      ref: main
+      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
+      url: "https://github.com/tendermint/flutter.git"
+    source: git
+    version: "1.9.0"
   cosmos_utils:
     dependency: "direct main"
     description:
       path: "packages/cosmos_utils"
       ref: main
-      resolved-ref: "6d6a66c11aec98326728f99eab2672a88a9de8a3"
+      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -156,14 +165,14 @@ packages:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   dart_style:
     dependency: transitive
     description:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.2"
+    version: "2.2.3"
   dartz:
     dependency: transitive
     description:
@@ -375,13 +384,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
-  lint:
-    dependency: "direct dev"
-    description:
-      name: lint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.8.1"
   logging:
     dependency: transitive
     description:
@@ -493,7 +495,7 @@ packages:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.2"
+    version: "3.6.0"
   pool:
     dependency: transitive
     description:
@@ -631,7 +633,7 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.2"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -750,7 +752,7 @@ packages:
       name: web_socket_channel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   webkit_inspection_protocol:
     dependency: transitive
     description:
@@ -764,7 +766,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.1"
+    version: "2.5.2"
   xdg_directories:
     dependency: transitive
     description:
