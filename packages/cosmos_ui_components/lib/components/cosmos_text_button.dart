@@ -14,6 +14,8 @@ class CosmosTextButton extends StatelessWidget {
     this.textStyle,
     this.iconTopSpacing,
     this.color,
+    this.maxLines = 1,
+    this.overflow = TextOverflow.ellipsis,
   }) : super(key: key);
 
   static const defaultHeight = 50.0;
@@ -26,6 +28,8 @@ class CosmosTextButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Color? color;
   final double? iconTopSpacing;
+  final int maxLines;
+  final TextOverflow overflow;
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +52,9 @@ class CosmosTextButton extends StatelessWidget {
           ],
           Text(
             text,
-            style: textStyle ??
-                CosmosTextTheme.elevatedButton.copyWith(
-                  color: color,
-                ),
+            maxLines: maxLines,
+            overflow: overflow,
+            style: textStyle ?? CosmosTextTheme.elevatedButton.copyWith(color: color),
           ),
           if (suffixIcon != null) ...[
             if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingS),
@@ -74,6 +77,8 @@ class CosmosTextButton extends StatelessWidget {
       ..add(ColorProperty('color', color))
       ..add(StringProperty('text', text))
       ..add(DiagnosticsProperty<TextStyle?>('textStyle', textStyle))
-      ..add(DoubleProperty('height', height));
+      ..add(DoubleProperty('height', height))
+      ..add(IntProperty('maxLines', maxLines))
+      ..add(EnumProperty<TextOverflow>('overflow', overflow));
   }
 }
