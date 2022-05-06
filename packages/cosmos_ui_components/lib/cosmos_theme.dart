@@ -1,12 +1,9 @@
-import 'package:cosmos_ui_components/cosmos_app_theme.dart';
-import 'package:cosmos_ui_components/utils/theme_converter.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const cosmosDarkThemeData = CosmosThemeData(
   colors: darkThemeColors,
-  brightness: Brightness.dark,
 );
 
 const darkThemeColors = CosmosColorsData(
@@ -23,11 +20,15 @@ const darkThemeColors = CosmosColorsData(
 class CosmosTheme extends InheritedWidget {
   const CosmosTheme({
     required Widget child,
+    required this.darkThemeData,
+    required this.brightness,
     this.themeData = const CosmosThemeData(),
     Key? key,
   }) : super(key: key, child: child);
 
   final CosmosThemeData themeData;
+  final CosmosThemeData darkThemeData;
+  final Brightness brightness;
 
   static CosmosThemeData of(BuildContext context) {
     final cosmosTheme = context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
@@ -35,17 +36,17 @@ class CosmosTheme extends InheritedWidget {
     return cosmosTheme!.themeData;
   }
 
-  static CosmosThemeData get darkThemeData => cosmosDarkThemeData;
+  // static CosmosThemeData get darkThemeData => cosmosDarkThemeData;
 
-  static ThemeData buildTheme(BuildContext context) => convertCosmosThemeToMaterialTheme(of(context));
+  // static ThemeData buildTheme(BuildContext context) => convertCosmosThemeToMaterialTheme(of(context));
 
-  // TODO stop using CosmosAppTheme
-  //ignore: deprecated_member_use_from_same_package
-  static ThemeData buildDarkAppTheme() => CosmosAppTheme.buildDarkAppTheme();
-
-  // TODO stop using CosmosAppTheme
-  //ignore: deprecated_member_use_from_same_package
-  static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
+  // // TODO stop using CosmosAppTheme
+  // //ignore: deprecated_member_use_from_same_package
+  // static ThemeData buildDarkAppTheme() => CosmosAppTheme.buildDarkAppTheme();
+  //
+  // // TODO stop using CosmosAppTheme
+  // //ignore: deprecated_member_use_from_same_package
+  // static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
   @override
   bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;
@@ -53,7 +54,10 @@ class CosmosTheme extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
+    properties
+      ..add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData))
+      ..add(DiagnosticsProperty<CosmosThemeData>('darkThemeData', darkThemeData))
+      ..add(EnumProperty<Brightness>('brightness', brightness));
   }
 }
 
@@ -85,7 +89,6 @@ class CosmosThemeData extends Equatable {
     this.elevationM = defaultElevationM,
     this.elevationL = defaultElevationL,
     this.colors = const CosmosColorsData(),
-    this.brightness = Brightness.light,
   });
 
   static const offWhite = Color(0xFFF2F2F2);
@@ -146,8 +149,6 @@ class CosmosThemeData extends Equatable {
   final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
-
-  final Brightness brightness;
 
   @override
   List<Object?> get props => [
