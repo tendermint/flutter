@@ -22,7 +22,7 @@ class CosmosTheme extends InheritedWidget {
     required Widget child,
     required this.darkThemeData,
     required this.brightness,
-    this.themeData = const CosmosThemeData(),
+    required this.themeData,
     Key? key,
   }) : super(key: key, child: child);
 
@@ -33,20 +33,8 @@ class CosmosTheme extends InheritedWidget {
   static CosmosThemeData of(BuildContext context) {
     final cosmosTheme = context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
     assert(cosmosTheme != null, "No 'CosmosTheme' widget found in the widget tree");
-    return cosmosTheme!.themeData;
+    return cosmosTheme!.brightness == Brightness.dark ? cosmosTheme.darkThemeData : cosmosTheme.themeData;
   }
-
-  // static CosmosThemeData get darkThemeData => cosmosDarkThemeData;
-
-  // static ThemeData buildTheme(BuildContext context) => convertCosmosThemeToMaterialTheme(of(context));
-
-  // // TODO stop using CosmosAppTheme
-  // //ignore: deprecated_member_use_from_same_package
-  // static ThemeData buildDarkAppTheme() => CosmosAppTheme.buildDarkAppTheme();
-  //
-  // // TODO stop using CosmosAppTheme
-  // //ignore: deprecated_member_use_from_same_package
-  // static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
   @override
   bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;

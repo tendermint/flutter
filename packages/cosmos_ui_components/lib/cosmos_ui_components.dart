@@ -39,7 +39,6 @@ export 'components/template/cosmos_account_list_item.dart';
 export 'components/template/cosmos_accounts_list_view.dart';
 export 'components/template/cosmos_balance_card.dart';
 export 'components/template/cosmos_password_field.dart';
-export 'cosmos_app_theme.dart';
 export 'cosmos_theme.dart';
 export 'utils/durations.dart';
 
