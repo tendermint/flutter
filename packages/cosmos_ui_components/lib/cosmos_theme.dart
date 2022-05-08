@@ -84,6 +84,7 @@ class CosmosThemeData extends Equatable {
     this.elevationL = defaultElevationL,
     this.colors = const CosmosColorsData(),
     this.brightness = Brightness.light,
+    this.errorColor = CosmosColorsData.defaultError,
   });
 
   static const offWhite = Color(0xFFF2F2F2);
@@ -146,6 +147,7 @@ class CosmosThemeData extends Equatable {
   final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
+  final Color errorColor;
 
   @override
   List<Object?> get props => [
