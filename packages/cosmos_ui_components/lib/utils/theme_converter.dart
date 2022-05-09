@@ -11,7 +11,7 @@ ThemeData convertCosmosThemeToMaterialTheme(CosmosThemeData theme) {
     background: theme.colors.background,
     onPrimary: theme.colors.text,
     onSecondary: theme.colors.text,
-    onSurface: theme.colors.background,
+    onSurface: theme.colors.text,
     onBackground: theme.colors.text,
     onError: theme.colors.chipBackground,
     error: theme.errorColor,
