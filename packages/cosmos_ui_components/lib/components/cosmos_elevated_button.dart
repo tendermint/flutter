@@ -36,8 +36,8 @@ class CosmosElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        primary: backgroundColor,
-        onPrimary: textColor,
+        primary: backgroundColor ?? theme.colors.background,
+        onPrimary: textColor ?? theme.colors.text,
         fixedSize: Size.fromHeight(height),
         shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
         elevation: elevation ?? 0,

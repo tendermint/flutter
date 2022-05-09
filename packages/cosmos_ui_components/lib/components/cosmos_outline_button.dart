@@ -19,11 +19,15 @@ class CosmosOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
+        backgroundColor: theme.colors.text,
+        primary: theme.colors.background,
+        side: BorderSide(color: theme.colors.background),
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
+        shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
         elevation: 0,
       ),
       child: Row(
@@ -31,7 +35,7 @@ class CosmosOutlineButton extends StatelessWidget {
         children: [
           Text(text),
           if (suffixIcon != null) ...[
-            SizedBox(width: CosmosTheme.of(context).spacingS),
+            SizedBox(width: theme.spacingS),
             suffixIcon!,
           ],
         ],
