@@ -16,7 +16,7 @@ class ContentLoadingIndicator extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircularProgressIndicator(),
+          CircularProgressIndicator(color: CosmosTheme.of(context).colors.text),
           SizedBox(height: CosmosTheme.of(context).spacingM),
           if (message.isNotEmpty) Text(message),
         ],
