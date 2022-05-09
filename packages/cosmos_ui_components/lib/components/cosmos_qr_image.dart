@@ -23,6 +23,7 @@ class CosmosQrImage extends StatelessWidget {
       child: QrImage(
         padding: padding,
         data: data,
+        foregroundColor: theme.colors.text,
       ),
     );
   }

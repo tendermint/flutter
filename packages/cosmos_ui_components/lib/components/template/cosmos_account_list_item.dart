@@ -35,7 +35,7 @@ class CosmosAccountListItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: theme.borderRadiusM,
-              border: Border.all(color: isSelected ? theme.colors.divider : Colors.transparent),
+              border: Border.all(color: isSelected ? theme.colors.inactive : Colors.transparent),
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: theme.spacingM),

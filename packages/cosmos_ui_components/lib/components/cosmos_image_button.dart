@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,11 @@ class CosmosImageButton extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: width,
-        child: Image.asset(asset, package: package),
+        child: Image.asset(
+          asset,
+          package: package,
+          color: CosmosTheme.of(context).colors.text,
+        ),
       ),
     );
   }

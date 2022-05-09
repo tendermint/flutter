@@ -12,7 +12,7 @@ class CosmosDivider extends StatelessWidget {
     final theme = CosmosTheme.of(context);
     return Padding(
       padding: edgeInsets ?? EdgeInsets.symmetric(horizontal: theme.spacingL),
-      child: Divider(color: theme.colors.inputBorder),
+      child: Divider(color: theme.colors.divider),
     );
   }
 

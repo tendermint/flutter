@@ -33,7 +33,12 @@ class SettingsItem extends StatelessWidget {
             Text(text, style: textStyle),
             const Spacer(),
             if (infoIcon != null) infoIcon!,
-            if (showArrow) Image.asset('assets/images/arrow_right.png', package: packageName),
+            if (showArrow)
+              Image.asset(
+                'assets/images/arrow_right.png',
+                package: packageName,
+                color: theme.colors.text,
+              ),
           ],
         ),
       ),
