@@ -36,7 +36,12 @@ class CosmosAppBar extends StatelessWidget implements PreferredSizeWidget {
             SizedBox(height: theme.spacingL),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
-              child: Text(title!, style: CosmosTextTheme.titleSans2Bold),
+              child: Text(
+                title!,
+                style: CosmosTextTheme.titleSans2Bold.copyWith(
+                  color: theme.colors.text,
+                ),
+              ),
             ),
           ]
         ],
