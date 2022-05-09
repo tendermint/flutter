@@ -23,9 +23,9 @@ class CosmosOutlineButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
-        backgroundColor: theme.colors.text,
-        primary: theme.colors.background,
-        side: BorderSide(color: theme.colors.background),
+        primary: theme.colors.text,
+        backgroundColor: theme.colors.background,
+        side: BorderSide(color: theme.colors.text),
         fixedSize: Size.fromHeight(height),
         shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
         elevation: 0,
