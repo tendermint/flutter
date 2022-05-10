@@ -22,8 +22,8 @@ COSMOS_VERSION=$4
 
 # Download the Cosmos Protobuf files from the Cosmos SDK
 COSMOS_ZIP="$BUILD/cosmos.zip"
-echo "Downloading Cosmos SDK: https://codeload.github.com/cosmos/cosmos-sdk/zip/refs/tags/v$COSMOS_VERSION"
-echo "$COSMOS_ZIP"
+echo "Downloading Cosmos SDK -> https://codeload.github.com/cosmos/cosmos-sdk/zip/refs/tags/v$COSMOS_VERSION"
+
 curl -o "$COSMOS_ZIP" "https://codeload.github.com/cosmos/cosmos-sdk/zip/refs/tags/v$COSMOS_VERSION"
 unzip "$COSMOS_ZIP" -d "$BUILD/" && rm "$COSMOS_ZIP"
 COSMOS="$BUILD/cosmos-sdk-$COSMOS_VERSION"
