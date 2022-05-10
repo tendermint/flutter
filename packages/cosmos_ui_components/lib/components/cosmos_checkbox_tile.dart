@@ -52,7 +52,7 @@ class CosmosCheckboxTile extends StatelessWidget {
                 Expanded(
                   child: Text(
                     text,
-                    style: CosmosTextTheme.copyMinus1Normal,
+                    style: CosmosTextTheme.copyMinus1Normal.copyWith(color: theme.colors.text),
                   ),
                 ),
               ],
