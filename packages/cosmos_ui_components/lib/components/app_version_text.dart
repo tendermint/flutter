@@ -1,3 +1,5 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/app_info_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,10 @@ class AppVersionText extends StatelessWidget {
         future: appInfoProvider.getAppVersion(),
         builder: (context, snapshot) => Text(
           snapshot.data ?? '',
-          style: style,
+          style: style ??
+              CosmosTextTheme.copyMinus1Normal.copyWith(
+                color: CosmosTheme.of(context).colors.text,
+              ),
         ),
       );
 
