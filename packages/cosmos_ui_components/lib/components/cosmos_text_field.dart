@@ -88,9 +88,17 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         }
       },
       textAlign: widget.textAlign,
-      style: widget.style,
+      style: widget.style ??
+          CosmosTextTheme.copy0Normal.copyWith(
+            color: theme.colors.text,
+          ),
       decoration: InputDecoration(
         counterText: widget.maxLength == null ? null : '',
+        filled: true,
+        fillColor: theme.colors.chipBackground,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
         hintText: widget.hint,
         hintStyle: CosmosTextTheme.copy0Normal.copyWith(
           color: theme.colors.text.withOpacity(0.67),
