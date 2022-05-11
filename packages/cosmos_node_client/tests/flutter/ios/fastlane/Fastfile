@@ -1,0 +1,72 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "deploys to firebase app distribution"
+  lane :deploy_firebase do
+    setup_ci
+    releaseNotes = changelog_from_git_commits(
+      commits_count: 10,
+      date_format: "format:%d %b",
+      pretty: "- (%cd) %s",
+      merge_commit_filtering: "exclude_merges",
+      quiet: true
+    ).split("\n").select do |elem|
+      !elem.include? "skip-ci"
+    end[0...5].join("\n")
+
+    print("RELEASE NOTES:\n")
+    print(releaseNotes)
+
+    match(type: "adhoc", readonly: is_ci)
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      profile_name: ENV["MATCH_ADHOC_PROVISIONING_PROFILE"],
+      team_id: ENV["MATCH_TEAM_ID"],
+      path: "Runner.xcodeproj"
+    )
+    if ENV["GITHUB_RUN_NUMBER"]
+        increment_build_number(
+          build_number: ENV["GITHUB_RUN_NUMBER"]
+        )
+    end
+
+    build_app(
+        workspace: "Runner.xcworkspace",
+        codesigning_identity: ENV["FASTLANE_IOS_CODE_SIGNING_IDENTITY"],
+        export_team_id: ENV["MATCH_TEAM_ID"],
+        export_method: "ad-hoc",
+    )
+
+    firebase_app_distribution(
+      app: ENV["ALPHA_IOS_FIREBASE_APP_ID"],
+      groups: ENV["ALPHA_IOS_FIREBASE_TESTERS_GROUP"],
+      release_notes: releaseNotes,
+      firebase_cli_token: ENV["FIREBASE_TOKEN"]
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      path: "Runner.xcodeproj",
+      team_id: "",
+      profile_name: ""
+    )
+
+  end
+end

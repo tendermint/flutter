@@ -1,0 +1,9 @@
+storage_mode("git")
+type("adhoc")
+git_url(ENV["MATCH_GIT_URL"])
+team_id(ENV["MATCH_TEAM_ID"])
+app_identifier(ENV["MATCH_APP_ID"])
+username(ENV["MATCH_APPLE_USERNAME"])
+
+# For all available options run `fastlane match --help`
+# The docs are available on https://docs.fastlane.tools/actions/match
