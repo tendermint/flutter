@@ -43,7 +43,7 @@ class CosmosCheckboxTile extends StatelessWidget {
                     right: theme.spacingL,
                   ),
                   child: Image.asset(
-                    'assets/images/checkbox${checked ? "" : "_unchecked"}.png',
+                    'assets/images/checkbox_${checked ? "checked" : "unchecked"}.png',
                     package: packageName,
                     color: checked ? theme.colors.text : theme.colors.inactive,
                     width: 24,
