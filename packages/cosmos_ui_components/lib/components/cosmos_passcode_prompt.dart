@@ -88,7 +88,7 @@ class _CosmosPasscodePromptState extends State<CosmosPasscodePrompt> {
             ],
             Text(
               widget.title,
-              style: CosmosTextTheme.labelL,
+              style: CosmosTextTheme.labelL.copyWith(color: CosmosTheme.of(context).colors.text),
             ),
             SizedBox(height: CosmosTheme.of(context).spacingXL),
             PinPut(
@@ -141,12 +141,14 @@ class _CosmosPasscodePromptState extends State<CosmosPasscodePrompt> {
   }
 
   Widget _digitButton(int digit) {
+    final theme = CosmosTheme.of(context);
     return TextButton(
       style: TextButton.styleFrom(
-        textStyle: CosmosTextTheme.headingM,
+        textStyle: CosmosTextTheme.headingM.copyWith(color: theme.colors.text),
       ),
       child: Text(
         '$digit',
+        style: CosmosTextTheme.headingM.copyWith(color: CosmosTheme.of(context).colors.text),
       ),
       onPressed: () {
         if (_pinPutController.text.length >= widget.pinCount) {
@@ -162,15 +164,27 @@ class _CosmosPasscodePromptState extends State<CosmosPasscodePrompt> {
   Widget _cancelButton() {
     return TextButton(
       style: TextButton.styleFrom(
-        textStyle: CosmosTextTheme.copy0Normal,
+        textStyle: CosmosTextTheme.copy0Normal.copyWith(
+          color: CosmosTheme.of(context).colors.text,
+        ),
       ),
       onPressed: widget.cancelAction ?? () => Navigator.of(context).pop(),
-      child: Text(widget.cancelText),
+      child: Text(
+        widget.cancelText,
+        style: CosmosTextTheme.copy0Normal.copyWith(
+          color: CosmosTheme.of(context).colors.text,
+        ),
+      ),
     );
   }
 
   Widget _backspaceButton() => TextButton(
-        child: const Text('⌫'),
+        child: Text(
+          '⌫',
+          style: CosmosTextTheme.copy0Normal.copyWith(
+            color: CosmosTheme.of(context).colors.text,
+          ),
+        ),
         onPressed: () {
           if (_pinPutController.text.isNotEmpty) {
             _pinPutController.text = _pinPutController.text.substring(0, _pinPutController.text.length - 1);
