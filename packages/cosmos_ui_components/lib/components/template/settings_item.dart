@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 class SettingsItem extends StatelessWidget {
   const SettingsItem({
     required this.text,
-    required this.textStyle,
+    this.textStyle,
     this.infoIcon,
     this.onTap,
     this.showArrow = true,
@@ -13,7 +14,7 @@ class SettingsItem extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final Widget? infoIcon;
   final VoidCallback? onTap;
   final bool showArrow;
@@ -30,7 +31,13 @@ class SettingsItem extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Text(text, style: textStyle),
+            Text(
+              text,
+              style: textStyle ??
+                  CosmosTextTheme.copy0Normal.copyWith(
+                    color: CosmosTheme.of(context).colors.text,
+                  ),
+            ),
             const Spacer(),
             if (infoIcon != null) infoIcon!,
             if (showArrow)
