@@ -21,10 +21,11 @@ class CosmosBalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: CosmosTheme.of(context).spacingL),
+        padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -33,15 +34,22 @@ class CosmosBalanceCard extends StatelessWidget {
                 Row(
                   children: [
                     CosmosTokenAvatar(text: denomText),
-                    SizedBox(width: CosmosTheme.of(context).spacingM),
+                    SizedBox(width: theme.spacingM),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(denomText, style: CosmosTextTheme.title0Medium),
+                        Text(
+                          denomText,
+                          style: CosmosTextTheme.title0Medium.copyWith(
+                            color: theme.colors.text,
+                          ),
+                        ),
                         if (isListTileType)
                           Text(
                             '$amountDisplayText ${denomText.toUpperCase()}',
-                            style: CosmosTextTheme.copyMinus1Normal,
+                            style: CosmosTextTheme.copyMinus1Normal.copyWith(
+                              color: theme.colors.text,
+                            ),
                           ),
                       ],
                     ),
@@ -54,8 +62,18 @@ class CosmosBalanceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(amountDisplayText, style: CosmosTextTheme.labelS),
-                  Text(secondaryText, style: CosmosTextTheme.copyMinus1Normal),
+                  Text(
+                    amountDisplayText,
+                    style: CosmosTextTheme.labelS.copyWith(
+                      color: theme.colors.text,
+                    ),
+                  ),
+                  Text(
+                    secondaryText,
+                    style: CosmosTextTheme.copyMinus1Normal.copyWith(
+                      color: theme.colors.text,
+                    ),
+                  ),
                 ],
               ),
           ],
