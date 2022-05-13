@@ -89,6 +89,6 @@ extension TxResponseTranslator on TxResponse {
         ),
         gasUsed: Decimal.parse('$gasUsed'),
         gasWanted: Decimal.parse('$gasWanted'),
-        timestamp: DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp)),
+        timestamp: DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestamp) ?? 0),
       );
 }
