@@ -39,7 +39,9 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       body: SafeArea(
         child: Center(
           child: Observer(
