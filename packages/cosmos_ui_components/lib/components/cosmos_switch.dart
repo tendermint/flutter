@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class CosmosSwitch extends StatelessWidget {
   const CosmosSwitch({
     required this.checked,
-    this.toggleAsset = 'assets/images/toggle.png',
+    this.toggleAsset,
     this.checkedGradientStops = const [0, 0.5866, 1],
     this.gradientColors = GlobalConstants.cosmosGradientColors,
     this.package,
@@ -17,7 +17,7 @@ class CosmosSwitch extends StatelessWidget {
 
   final bool checked;
   final ValueChanged<bool>? onChanged;
-  final String toggleAsset;
+  final String? toggleAsset;
   final List<double> checkedGradientStops;
   final List<Color> gradientColors;
   final String? package;
@@ -54,7 +54,10 @@ class CosmosSwitch extends StatelessWidget {
                 child: SizedBox(
                   width: 30,
                   height: 30,
-                  child: Image.asset(toggleAsset, package: package),
+                  child: Image.asset(
+                    toggleAsset ?? 'assets/images/toggle.png',
+                    package: package ?? (toggleAsset == null ? packageName : null),
+                  ),
                 ),
               ),
             ),
