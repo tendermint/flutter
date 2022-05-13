@@ -1,4 +1,5 @@
-import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/utils/global_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,10 @@ import 'package:flutter/material.dart';
 class CosmosSwitch extends StatelessWidget {
   const CosmosSwitch({
     required this.checked,
-    required this.toggleAsset,
-    required this.checkedGradientStops,
-    required this.gradientColors,
+    this.toggleAsset = 'assets/images/toggle.png',
+    this.checkedGradientStops = const [0, 0.5866, 1],
+    this.gradientColors = GlobalConstants.cosmosGradientColors,
+    this.package,
     this.onChanged,
     Key? key,
   }) : super(key: key);
@@ -18,6 +20,7 @@ class CosmosSwitch extends StatelessWidget {
   final String toggleAsset;
   final List<double> checkedGradientStops;
   final List<Color> gradientColors;
+  final String? package;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class CosmosSwitch extends StatelessWidget {
                 child: SizedBox(
                   width: 30,
                   height: 30,
-                  child: Image.asset(toggleAsset),
+                  child: Image.asset(toggleAsset, package: package),
                 ),
               ),
             ),
@@ -69,6 +72,7 @@ class CosmosSwitch extends StatelessWidget {
       ..add(ObjectFlagProperty<ValueChanged<bool>?>.has('onChanged', onChanged))
       ..add(StringProperty('toggleAsset', toggleAsset))
       ..add(IterableProperty<double>('checkedGradientStops', checkedGradientStops))
-      ..add(IterableProperty<Color>('gradientColors', gradientColors));
+      ..add(IterableProperty<Color>('gradientColors', gradientColors))
+      ..add(StringProperty('package', package));
   }
 }
