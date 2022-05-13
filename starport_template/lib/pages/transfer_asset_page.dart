@@ -40,6 +40,7 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       appBar: CosmosAppBar(
         leading: const CosmosBackButton(),
         title: 'Transfer ${widget.balance.denom.text}',
@@ -82,10 +83,23 @@ class _TransferAssetPageState extends State<TransferAssetPage> {
         padding: EdgeInsets.symmetric(horizontal: theme.spacingL),
         child: Row(
           children: [
-            Text('Fees', style: CosmosTextTheme.copy0Normal),
+            Text(
+              'Fees',
+              style: CosmosTextTheme.copy0Normal.copyWith(
+                color: theme.colors.text,
+              ),
+            ),
             const Spacer(),
-            Text('${fee.toString()} ${widget.balance.denom.text}'),
-            Image.asset('assets/images/arrow_right.png'),
+            Text(
+              '${fee.toString()} ${widget.balance.denom.text}',
+              style: CosmosTextTheme.copyMinus1Normal.copyWith(
+                color: theme.colors.text,
+              ),
+            ),
+            Image.asset(
+              'assets/images/arrow_right.png',
+              color: theme.colors.text,
+            ),
           ],
         ),
       ),
