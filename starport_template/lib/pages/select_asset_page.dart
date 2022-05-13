@@ -15,14 +15,20 @@ class SelectAssetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       appBar: const CosmosAppBar(leading: CosmosBackButton(), title: 'Select Asset'),
       body: Padding(
         padding: EdgeInsets.only(top: CosmosTheme.of(context).spacingXXL),
         child: BalanceCardList(
           balancesList: balancesList,
           onTapItem: (balance) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransferAssetPage(balance: balance)));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TransferAssetPage(balance: balance),
+              ),
+            );
           },
         ),
       ),
