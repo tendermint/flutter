@@ -46,7 +46,12 @@ class CosmosAccountListItem extends StatelessWidget {
                     children: [
                       SizedBox(height: 32, child: GradientAvatar(stringKey: address)),
                       SizedBox(width: theme.spacingM),
-                      Text(name, style: CosmosTextTheme.title0Medium),
+                      Text(
+                        name,
+                        style: CosmosTextTheme.title0Medium.copyWith(
+                          color: theme.colors.text,
+                        ),
+                      ),
                     ],
                   ),
                   if (suffix != null) suffix!,

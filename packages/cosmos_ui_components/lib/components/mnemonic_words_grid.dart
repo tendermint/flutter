@@ -21,9 +21,10 @@ class CosmosMnemonicWordsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Wrap(
-      spacing: CosmosTheme.of(context).spacingM,
-      runSpacing: CosmosTheme.of(context).spacingM,
+      spacing: theme.spacingM,
+      runSpacing: theme.spacingM,
       children: mnemonicWords //
           .mapIndexed(
             (index, word) => MnemonicChoiceChip(
