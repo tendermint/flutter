@@ -29,19 +29,35 @@ class TransactionHistoryCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              RotatedBox(
-                quarterTurns: isOutgoing ? 2 : 0,
-                child: Image.asset('assets/images/receive_icon.png', package: packageName),
+              Container(
+                padding: EdgeInsets.all(theme.spacingL),
+                decoration: BoxDecoration(
+                  borderRadius: theme.borderRadiusL,
+                  color: theme.colors.chipBackground,
+                ),
+                child: RotatedBox(
+                  quarterTurns: isOutgoing ? 2 : 0,
+                  child: Image.asset(
+                    'assets/images/receive_icon.png',
+                    package: packageName,
+                    color: theme.colors.text,
+                  ),
+                ),
               ),
               SizedBox(width: theme.spacingL),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(transactionType, style: CosmosTextTheme.labelS),
+                  Text(
+                    transactionType,
+                    style: CosmosTextTheme.labelS.copyWith(
+                      color: theme.colors.text,
+                    ),
+                  ),
                   SizedBox(height: theme.spacingXS),
                   Text(
                     formatDate(date, DateFormatEnum.shortUIDateDay),
-                    style: CosmosTextTheme.copyMinus1Normal,
+                    style: CosmosTextTheme.copyMinus1Normal.copyWith(color: theme.colors.text),
                   ),
                 ],
               ),
@@ -51,10 +67,16 @@ class TransactionHistoryCard extends StatelessWidget {
                 children: [
                   Text(
                     '${isOutgoing ? '-' : '+'} $amountText',
-                    style: CosmosTextTheme.labelS.copyWith(color: isOutgoing ? null : theme.colors.positiveText),
+                    style: CosmosTextTheme.labelS
+                        .copyWith(color: isOutgoing ? theme.colors.text : theme.colors.positiveText),
                   ),
                   SizedBox(height: theme.spacingXS),
-                  Text(denomText.toUpperCase(), style: CosmosTextTheme.copyMinus1Normal)
+                  Text(
+                    denomText.toUpperCase(),
+                    style: CosmosTextTheme.copyMinus1Normal.copyWith(
+                      color: theme.colors.text,
+                    ),
+                  )
                 ],
               )
             ],

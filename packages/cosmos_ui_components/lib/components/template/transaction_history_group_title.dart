@@ -13,9 +13,15 @@ class TransactionHistoryGroupTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Padding(
-      padding: EdgeInsets.all(CosmosTheme.of(context).spacingL),
-      child: Text(title, style: CosmosTextTheme.title0Bold),
+      padding: EdgeInsets.all(theme.spacingL),
+      child: Text(
+        title,
+        style: CosmosTextTheme.title0Bold.copyWith(
+          color: theme.colors.text,
+        ),
+      ),
     );
   }
 

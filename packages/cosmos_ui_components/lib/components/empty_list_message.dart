@@ -1,3 +1,5 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,9 @@ class EmptyListMessage extends StatelessWidget {
     return Center(
       child: Text(
         message,
-        style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.grey),
+        style: CosmosTextTheme.title1Bold.copyWith(
+          color: CosmosTheme.of(context).colors.inactive,
+        ),
       ),
     );
   }
