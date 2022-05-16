@@ -55,6 +55,7 @@ class _RepeatMnemonicPageState extends State<RepeatMnemonicPage> {
           text: 'Creating account..',
         ),
         contentChild: Scaffold(
+          backgroundColor: CosmosTheme.of(context).colors.background,
           body: _contentUI(),
           appBar: _appBar(),
         ),
