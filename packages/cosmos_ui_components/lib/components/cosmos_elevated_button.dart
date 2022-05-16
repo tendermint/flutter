@@ -34,7 +34,7 @@ class CosmosElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return ElevatedButton(
-      onPressed: onTap ?? () {},
+      onPressed: onTap,
       style: onTap == null ? _disabledStyle(context) : _enabledStyle(context),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -62,6 +62,7 @@ class CosmosElevatedButton extends StatelessWidget {
       splashFactory: NoSplash.splashFactory,
       onPrimary: backgroundColor ?? theme.colors.background,
       primary: textColor ?? theme.colors.inactive,
+      onSurface: theme.colors.inactive,
       fixedSize: Size.fromHeight(height),
       shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
       elevation: elevation ?? 0,
