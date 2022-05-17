@@ -4,10 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const cosmosDarkThemeData = CosmosThemeData(
-  colors: darkThemeColors,
-);
-
 const darkThemeColors = CosmosColorsData(
   inactive: CosmosColorsData.darkInactive,
   divider: CosmosColorsData.darkDivider,
@@ -22,19 +18,21 @@ const darkThemeColors = CosmosColorsData(
 class CosmosTheme extends InheritedWidget {
   const CosmosTheme({
     required Widget child,
-    this.themeData = const CosmosThemeData(),
+    this.themeData = const CosmosThemeData.light(),
+    this.darkThemeData = const CosmosThemeData.dark(),
+    this.brightness = Brightness.light,
     Key? key,
   }) : super(key: key, child: child);
 
   final CosmosThemeData themeData;
+  final CosmosThemeData darkThemeData;
+  final Brightness brightness;
 
   static CosmosThemeData of(BuildContext context) {
     final cosmosTheme = context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
     assert(cosmosTheme != null, "No 'CosmosTheme' widget found in the widget tree");
-    return cosmosTheme!.themeData;
+    return cosmosTheme!.brightness == Brightness.dark ? cosmosTheme.themeData : cosmosTheme.darkThemeData;
   }
-
-  static CosmosThemeData get darkThemeData => cosmosDarkThemeData;
 
   @Deprecated('Use CosmosTheme instead')
   static ThemeData buildTheme(BuildContext context) => convertCosmosThemeToMaterialTheme(of(context));
@@ -51,12 +49,77 @@ class CosmosTheme extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
+    properties
+      ..add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData))
+      ..add(EnumProperty<Brightness>('brightness', brightness))
+      ..add(DiagnosticsProperty<CosmosThemeData>('darkThemeData', darkThemeData));
   }
 }
 
 class CosmosThemeData extends Equatable {
   const CosmosThemeData({
+    this.spacingXXXL = defaultSpacingXXXL,
+    this.spacingXXL = defaultSpacingXXL,
+    this.spacingXL = defaultSpacingXL,
+    this.spacingL = defaultSpacingL,
+    this.spacingM = defaultSpacingM,
+    this.spacingS = defaultSpacingS,
+    this.spacingXS = defaultSpacingXS,
+    this.longDuration = defaultLongDuration,
+    this.mediumDuration = defaultMediumDuration,
+    this.shortDuration = defaultShortDuration,
+    this.radiusXL = defaultRadiusXL,
+    this.radiusL = defaultRadiusL,
+    this.radiusM = defaultRadiusM,
+    this.radiusS = defaultRadiusS,
+    this.fontSizeS = defaultFontSizeS,
+    this.fontSizeM = defaultFontSizeM,
+    this.fontSizeL = defaultFontSizeL,
+    this.fontSizeXL = defaultFontSizeXL,
+    this.fontSizeXXL = defaultFontSizeXXL,
+    this.borderRadiusL = defaultBorderRadiusL,
+    this.borderRadiusM = defaultBorderRadiusM,
+    this.borderRadiusS = defaultBorderRadiusS,
+    this.elevationS = defaultElevationS,
+    this.elevationM = defaultElevationM,
+    this.elevationL = defaultElevationL,
+    this.colors = const CosmosColorsData(),
+    this.brightness = Brightness.light,
+    this.errorColor = CosmosColorsData.defaultError,
+  });
+
+  const CosmosThemeData.dark({
+    this.spacingXXXL = defaultSpacingXXXL,
+    this.spacingXXL = defaultSpacingXXL,
+    this.spacingXL = defaultSpacingXL,
+    this.spacingL = defaultSpacingL,
+    this.spacingM = defaultSpacingM,
+    this.spacingS = defaultSpacingS,
+    this.spacingXS = defaultSpacingXS,
+    this.longDuration = defaultLongDuration,
+    this.mediumDuration = defaultMediumDuration,
+    this.shortDuration = defaultShortDuration,
+    this.radiusXL = defaultRadiusXL,
+    this.radiusL = defaultRadiusL,
+    this.radiusM = defaultRadiusM,
+    this.radiusS = defaultRadiusS,
+    this.fontSizeS = defaultFontSizeS,
+    this.fontSizeM = defaultFontSizeM,
+    this.fontSizeL = defaultFontSizeL,
+    this.fontSizeXL = defaultFontSizeXL,
+    this.fontSizeXXL = defaultFontSizeXXL,
+    this.borderRadiusL = defaultBorderRadiusL,
+    this.borderRadiusM = defaultBorderRadiusM,
+    this.borderRadiusS = defaultBorderRadiusS,
+    this.elevationS = defaultElevationS,
+    this.elevationM = defaultElevationM,
+    this.elevationL = defaultElevationL,
+    this.colors = darkThemeColors,
+    this.brightness = Brightness.dark,
+    this.errorColor = CosmosColorsData.defaultError,
+  });
+
+  const CosmosThemeData.light({
     this.spacingXXXL = defaultSpacingXXXL,
     this.spacingXXL = defaultSpacingXXL,
     this.spacingXL = defaultSpacingXL,
