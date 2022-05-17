@@ -19,7 +19,7 @@ class CosmosQrImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(theme.radiusL),
+      borderRadius: borderRadius ?? theme.borderRadiusL,
       child: QrImage(
         padding: padding,
         data: data,

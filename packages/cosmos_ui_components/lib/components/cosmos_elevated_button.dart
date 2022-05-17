@@ -35,14 +35,7 @@ class CosmosElevatedButton extends StatelessWidget {
     final theme = CosmosTheme.of(context);
     return ElevatedButton(
       onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        onPrimary: backgroundColor ?? theme.colors.background,
-        primary: textColor ?? theme.colors.text,
-        fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
-        elevation: elevation ?? 0,
-        shadowColor: shadowColor ?? theme.colors.shadowColor,
-      ),
+      style: onTap == null ? _disabledStyle(context) : _enabledStyle(context),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -60,6 +53,32 @@ class CosmosElevatedButton extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+
+  ButtonStyle _disabledStyle(context) {
+    final theme = CosmosTheme.of(context);
+    return ElevatedButton.styleFrom(
+      splashFactory: NoSplash.splashFactory,
+      onPrimary: backgroundColor ?? theme.colors.background,
+      primary: textColor ?? theme.colors.inactive,
+      onSurface: theme.colors.inactive,
+      fixedSize: Size.fromHeight(height),
+      shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
+      elevation: elevation ?? 0,
+      shadowColor: shadowColor ?? Colors.transparent,
+    );
+  }
+
+  ButtonStyle _enabledStyle(context) {
+    final theme = CosmosTheme.of(context);
+    return ElevatedButton.styleFrom(
+      onPrimary: backgroundColor ?? theme.colors.background,
+      primary: textColor ?? theme.colors.text,
+      fixedSize: Size.fromHeight(height),
+      shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
+      elevation: elevation ?? 0,
+      shadowColor: shadowColor ?? theme.colors.shadowColor,
     );
   }
 

@@ -37,7 +37,12 @@ class CosmosWarningBox extends StatelessWidget {
               ),
             ),
             SizedBox(width: theme.spacingL),
-            Text(text, style: CosmosTextTheme.copyMinus1Normal),
+            Text(
+              text,
+              style: CosmosTextTheme.copyMinus1Normal.copyWith(
+                color: theme.colors.text,
+              ),
+            ),
             if (suffix != null) ...[
               const Spacer(),
               suffix!,
