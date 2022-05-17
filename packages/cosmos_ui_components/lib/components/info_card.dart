@@ -13,9 +13,10 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: CosmosTheme.of(context).colors.cardBackground,
+        color: theme.colors.cardBackground,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -35,7 +36,7 @@ class InfoCard extends StatelessWidget {
                 height: 8,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CosmosTheme.of(context).colors.text,
+                  color: theme.colors.text,
                 ),
               ),
             ),
@@ -43,7 +44,7 @@ class InfoCard extends StatelessWidget {
             Expanded(
               child: Text(
                 text,
-                style: CosmosTextTheme.copyMinus1Normal,
+                style: CosmosTextTheme.copyMinus1Normal.copyWith(color: theme.colors.text),
               ),
             )
           ],

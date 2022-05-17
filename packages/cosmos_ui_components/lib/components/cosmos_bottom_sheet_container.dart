@@ -29,7 +29,7 @@ class CosmosBottomSheetContainer extends StatelessWidget {
                 theme.radiusXL * 1.1,
               ),
             ),
-            color: theme.colors.background,
+            color: theme.colors.chipBackground,
           ),
           child: child,
         ),

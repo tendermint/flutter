@@ -39,7 +39,7 @@ class CosmosTextButton extends StatelessWidget {
       style: TextButton.styleFrom(
         fixedSize: Size.fromHeight(height),
         shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
-        onSurface: color,
+        onSurface: color ?? theme.colors.text,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

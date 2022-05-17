@@ -25,6 +25,7 @@ class MnemonicChoiceChip extends StatelessWidget {
     final effectiveStyle = MnemonicChoiceChipStyle.def(context).mergeWith(style);
     final radius = Radius.circular(effectiveStyle.borderRadius ?? 0);
     final borderRadius = BorderRadius.all(radius);
+    final theme = CosmosTheme.of(context);
     return Material(
       color: effectiveStyle.backgroundColor,
       borderRadius: borderRadius,
@@ -40,10 +41,10 @@ class MnemonicChoiceChip extends StatelessWidget {
           borderType: BorderType.RRect,
           child: Padding(
             padding: EdgeInsets.only(
-              left: showIndex ? CosmosTheme.of(context).spacingM : CosmosTheme.of(context).spacingL,
-              right: CosmosTheme.of(context).spacingL,
-              top: CosmosTheme.of(context).spacingM,
-              bottom: CosmosTheme.of(context).spacingM,
+              left: showIndex ? theme.spacingM : theme.spacingL,
+              right: theme.spacingL,
+              top: theme.spacingM,
+              bottom: theme.spacingM,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -110,15 +111,16 @@ class MnemonicChoiceChipStyle {
   });
 
   factory MnemonicChoiceChipStyle.def(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return MnemonicChoiceChipStyle(
       borderColor: Colors.transparent,
       borderWidth: 0,
       dottedBorder: false,
-      backgroundColor: CosmosTheme.of(context).colors.chipBackground,
-      textColor: CosmosTheme.of(context).colors.text,
-      indexBackgroundColor: CosmosTheme.of(context).colors.text,
-      indexTextColor: CosmosTheme.of(context).colors.chipBackground,
-      borderRadius: CosmosTheme.of(context).radiusM,
+      backgroundColor: theme.colors.chipBackground,
+      textColor: theme.colors.text,
+      indexBackgroundColor: theme.colors.text,
+      indexTextColor: theme.colors.chipBackground,
+      borderRadius: theme.radiusM,
     );
   }
 
