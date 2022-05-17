@@ -58,6 +58,8 @@ jobs:
           fetch-depth: 10
 
       - uses: kuhnroyal/flutter-fvm-config-action@v1
+        with:
+          path: 'starport_template/.fvm/fvm_config.json'
 
       - uses: subosito/flutter-action@v1
         with:

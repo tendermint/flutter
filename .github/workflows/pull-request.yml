@@ -29,6 +29,8 @@ jobs:
           echo "cosmos_node_client=$(git diff --quiet HEAD origin/$GITHUB_BASE_REF -- packages/cosmos_node_client && echo "false" || echo "true")" >> $GITHUB_ENV
 
       - uses: kuhnroyal/flutter-fvm-config-action@v1
+        with:
+          path: 'starport_template/.fvm/fvm_config.json'
 
       - uses: subosito/flutter-action@v1
         with:
