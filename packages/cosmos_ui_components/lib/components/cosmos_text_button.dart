@@ -33,12 +33,13 @@ class CosmosTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return TextButton(
       onPressed: onTap,
       style: TextButton.styleFrom(
         fixedSize: Size.fromHeight(height),
-        shape: RoundedRectangleBorder(borderRadius: CosmosTheme.of(context).borderRadiusM),
-        onSurface: color,
+        shape: RoundedRectangleBorder(borderRadius: theme.borderRadiusM),
+        onSurface: color ?? theme.colors.text,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -48,16 +49,19 @@ class CosmosTextButton extends StatelessWidget {
               padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
               child: leadingIcon,
             ),
-            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingM),
+            if (text.isNotEmpty) SizedBox(width: theme.spacingM),
           ],
           Text(
             text,
             maxLines: maxLines,
             overflow: overflow,
-            style: textStyle ?? CosmosTextTheme.elevatedButton.copyWith(color: color),
+            style: textStyle ??
+                CosmosTextTheme.elevatedButton.copyWith(
+                  color: color ?? theme.colors.text,
+                ),
           ),
           if (suffixIcon != null) ...[
-            if (text.isNotEmpty) SizedBox(width: CosmosTheme.of(context).spacingS),
+            if (text.isNotEmpty) SizedBox(width: theme.spacingS),
             Padding(
               padding: EdgeInsets.only(top: iconTopSpacing ?? 0.0),
               child: suffixIcon,

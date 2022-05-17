@@ -1,3 +1,4 @@
+import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,13 @@ class CosmosBottomSheetHeader extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(width: theme.spacingM),
-              Text(title, style: titleTextStyle),
+              Text(
+                title,
+                style: titleTextStyle ??
+                    CosmosTextTheme.title2Bold.copyWith(
+                      color: theme.colors.text,
+                    ),
+              ),
               SizedBox(width: theme.spacingM),
             ],
           ),

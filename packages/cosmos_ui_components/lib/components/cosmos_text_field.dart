@@ -88,10 +88,17 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
         }
       },
       textAlign: widget.textAlign,
-      style: widget.style,
+      style: widget.style ??
+          CosmosTextTheme.copy0Normal.copyWith(
+            color: theme.colors.text,
+          ),
       decoration: InputDecoration(
         counterText: widget.maxLength == null ? null : '',
-        border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.inputBorder)),
+        filled: true,
+        fillColor: theme.colors.chipBackground,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
         hintText: widget.hint,
         hintStyle: CosmosTextTheme.copy0Normal.copyWith(
           color: theme.colors.text.withOpacity(0.67),
@@ -112,7 +119,11 @@ class _CosmosTextFieldState extends State<CosmosTextField> {
       child: SizedBox(
         height: 17,
         width: 17,
-        child: Image.asset('assets/images/cross.png', package: packageName),
+        child: Image.asset(
+          'assets/images/cross.png',
+          package: packageName,
+          color: CosmosTheme.of(context).colors.text,
+        ),
       ),
     );
   }

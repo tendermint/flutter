@@ -1,7 +1,23 @@
-import 'package:cosmos_ui_components/cosmos_app_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:cosmos_ui_components/utils/theme_converter.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+const cosmosDarkThemeData = CosmosThemeData(
+  colors: darkThemeColors,
+);
+
+const darkThemeColors = CosmosColorsData(
+  inactive: CosmosColorsData.darkInactive,
+  divider: CosmosColorsData.darkDivider,
+  text: CosmosColorsData.onDarkText,
+  background: CosmosColorsData.darkBg,
+  inputBorder: CosmosColorsData.darkDivider,
+  chipBackground: CosmosColorsData.darkSurface,
+  cardBackground: CosmosColorsData.darkSurface,
+  shadowColor: CosmosColorsData.onDarkText,
+);
 
 class CosmosTheme extends InheritedWidget {
   const CosmosTheme({
@@ -18,12 +34,15 @@ class CosmosTheme extends InheritedWidget {
     return cosmosTheme!.themeData;
   }
 
-  // TODO stop using CosmosAppTheme
-  //ignore: deprecated_member_use_from_same_package
+  static CosmosThemeData get darkThemeData => cosmosDarkThemeData;
+
+  @Deprecated('Use CosmosTheme instead')
+  static ThemeData buildTheme(BuildContext context) => convertCosmosThemeToMaterialTheme(of(context));
+
+  @Deprecated('Use CosmosTheme instead')
   static ThemeData buildDarkAppTheme() => CosmosAppTheme.buildDarkAppTheme();
 
-  // TODO stop using CosmosAppTheme
-  //ignore: deprecated_member_use_from_same_package
+  @Deprecated('Use CosmosTheme instead')
   static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
   @override
@@ -32,7 +51,7 @@ class CosmosTheme extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
+    properties..add(DiagnosticsProperty<CosmosThemeData>('themeData', themeData));
   }
 }
 
@@ -64,6 +83,8 @@ class CosmosThemeData extends Equatable {
     this.elevationM = defaultElevationM,
     this.elevationL = defaultElevationL,
     this.colors = const CosmosColorsData(),
+    this.brightness = Brightness.light,
+    this.errorColor = CosmosColorsData.defaultError,
   });
 
   static const offWhite = Color(0xFFF2F2F2);
@@ -98,6 +119,8 @@ class CosmosThemeData extends Equatable {
   static const defaultBorderRadiusM = BorderRadius.all(Radius.circular(defaultRadiusM));
   static const defaultBorderRadiusS = BorderRadius.all(Radius.circular(defaultRadiusS));
 
+  final Brightness brightness;
+
   final double spacingXXXL;
   final double spacingXXL;
   final double spacingXL;
@@ -124,6 +147,7 @@ class CosmosThemeData extends Equatable {
   final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
+  final Color errorColor;
 
   @override
   List<Object?> get props => [
@@ -171,7 +195,7 @@ class CosmosColorsData extends Equatable {
     this.inputBorder = lightBorder,
     this.avatarBg = silver,
     this.error = defaultError,
-    this.shadowColor = defaultShadowColor,
+    this.shadowColor = onLightText,
   });
 
   static const lightBg = Color(0xFFFFFFFF);
@@ -191,7 +215,8 @@ class CosmosColorsData extends Equatable {
   static const darkInactive = Color(0x2CFFFFFF);
   static const darkSurface = Color(0xFF171717);
   static const onDarkText = Color(0xFFFFFFFF);
-  static const darkDivider = Color(0x17FFFFFF);
+  static const darkDivider = Color(0xFFFFFFFF);
+  static const darkChip = Color(0xFF0F0F0F);
   static const iosError = Color(0xFFE74444);
   static const defaultError = Color(0xFFFF3D56);
   static const defaultShadowColor = Colors.black38;

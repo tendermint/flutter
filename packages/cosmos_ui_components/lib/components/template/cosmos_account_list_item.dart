@@ -35,7 +35,7 @@ class CosmosAccountListItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: theme.borderRadiusM,
-              border: Border.all(color: isSelected ? theme.colors.divider : Colors.transparent),
+              border: Border.all(color: isSelected ? theme.colors.inactive : Colors.transparent),
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: theme.spacingM),
@@ -46,7 +46,12 @@ class CosmosAccountListItem extends StatelessWidget {
                     children: [
                       SizedBox(height: 32, child: GradientAvatar(stringKey: address)),
                       SizedBox(width: theme.spacingM),
-                      Text(name, style: CosmosTextTheme.title0Medium),
+                      Text(
+                        name,
+                        style: CosmosTextTheme.title0Medium.copyWith(
+                          color: theme.colors.text,
+                        ),
+                      ),
                     ],
                   ),
                   if (suffix != null) suffix!,

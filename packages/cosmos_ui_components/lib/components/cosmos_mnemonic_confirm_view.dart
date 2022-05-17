@@ -59,7 +59,7 @@ class _CosmosMnemonicConfirmViewState extends State<CosmosMnemonicConfirmView> {
           decoration: BoxDecoration(
             borderRadius: CosmosTheme.of(context).borderRadiusL,
             border: Border.all(
-              color: CosmosTheme.of(context).colors.chipBackground,
+              color: CosmosTheme.of(context).colors.divider,
             ),
           ),
           child: Padding(
