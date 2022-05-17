@@ -15,7 +15,8 @@ dependencies:
   grpc:
   bech32:
   pointycastle:
-  protobuf:
+  protobuf: 
+  fixnum: 
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
