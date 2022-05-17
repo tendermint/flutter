@@ -10,7 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FLUTTER_VERSION: 2.10.1
   JAVA_VERSION: '12'
   RUBY_VERSION: '2.7'
   ALPHA_ANDROID_FIREBASE_TESTERS_GROUP: android-testers
@@ -53,9 +52,12 @@ jobs:
         with:
           fetch-depth: 10
 
+      - uses: kuhnroyal/flutter-fvm-config-action@v1
+
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '${{ env.FLUTTER_VERSION }}'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: pub get
         working-directory: ./starport_template/android
