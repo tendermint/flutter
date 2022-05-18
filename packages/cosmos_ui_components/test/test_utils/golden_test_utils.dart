@@ -7,8 +7,8 @@ import 'package:meta/meta.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 final testThemes = {
-  'light': const CosmosThemeData(),
-  'dark': cosmosDarkThemeData,
+  'light': const CosmosThemeData.light(),
+  'dark': const CosmosThemeData.dark(),
 };
 
 @isTest
