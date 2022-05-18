@@ -24,9 +24,19 @@ class SignTransactionTabViewItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: CosmosTextTheme.titleS),
+          Text(
+            text,
+            style: CosmosTextTheme.titleS.copyWith(
+              color: theme.colors.text,
+            ),
+          ),
           const Spacer(),
-          Text(balance.amountWithDenomText, style: CosmosTextTheme.title1Medium),
+          Text(
+            balance.amountWithDenomText,
+            style: CosmosTextTheme.title1Medium.copyWith(
+              color: theme.colors.text,
+            ),
+          ),
           SizedBox(width: theme.spacingL),
           CosmosTokenAvatar(text: balance.denom.text),
         ],

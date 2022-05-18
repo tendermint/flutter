@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cosmos_auth/cosmos_auth.dart';
 import 'package:cosmos_ui_components/components/template/settings_item.dart';
-import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ class _SecuritySheetState extends State<SecuritySheet> {
       children: [
         CosmosBottomSheetHeader(
           title: 'Security',
-          titleTextStyle: CosmosTextTheme.title2Bold,
           leading: const Icon(Icons.ten_k, color: Colors.transparent),
           actions: [
             CosmosTextButton(
@@ -54,7 +52,6 @@ class _SecuritySheetState extends State<SecuritySheet> {
             onChanged: _setAppLockEnabled,
           ),
           showArrow: false,
-          textStyle: CosmosTextTheme.copy0Normal,
           onTap: () => _setAppLockEnabled(!_settingsStore.appLockEnabled),
         ),
         if (_hasBiometrics)
@@ -65,7 +62,6 @@ class _SecuritySheetState extends State<SecuritySheet> {
               onChanged: _setBiometricsEnabled,
             ),
             showArrow: false,
-            textStyle: CosmosTextTheme.copy0Normal,
             onTap: () => _setBiometricsEnabled(!_settingsStore.biometricsEnabled),
           ),
         MinimalBottomSpacer(padding: theme.spacingXXXL)

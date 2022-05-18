@@ -6,6 +6,7 @@ import 'package:starport_template/app_config.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/stores/accounts_store.dart';
 import 'package:starport_template/stores/settings_store.dart';
+import 'package:starport_template/stores/theme_store.dart';
 import 'package:starport_template/stores/transactions_store.dart';
 import 'package:transaction_signing_gateway/mobile/no_op_transaction_summary_ui.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -40,6 +41,7 @@ void _buildDependencies() {
   StarportApp.accountsStore = AccountsStore(StarportApp.signingGateway, StarportApp.appConfig);
   StarportApp.settingsStore = SettingsStore(StarportApp.cosmosAuth, StarportApp.secureDataStore, StarportApp.appConfig);
   StarportApp.transactionsStore = TransactionsStore(StarportApp.appConfig);
+  StarportApp.themeStore = ThemeStore();
 }
 
 void _logBackendInfo(NetworkInfo networkInfo) => debugLog(
