@@ -175,9 +175,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => const CosmosBottomSheetContainer(
-        child: SettingsSheet(),
-      ),
+      builder: (context) => const SettingsSheet(),
     );
   }
 }

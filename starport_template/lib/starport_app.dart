@@ -31,11 +31,14 @@ class StarportApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) => CosmosTheme(
-        themeData: themeStore.isDarkTheme ? CosmosTheme.darkThemeData : const CosmosThemeData(),
-        child: const MaterialApp(
-          title: 'Starport template',
-          home: RoutingPage(),
-        ),
+        brightness: themeStore.isDarkTheme ? Brightness.dark : Brightness.light,
+        child: Builder(builder: (context) {
+          return MaterialApp(
+            title: 'Starport template',
+            theme: CosmosTheme.of(context).buildFlutterTheme(),
+            home: const RoutingPage(),
+          );
+        }),
       ),
     );
   }

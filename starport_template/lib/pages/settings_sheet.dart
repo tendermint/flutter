@@ -18,64 +18,68 @@ class SettingsSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     final textStyle = CosmosTextTheme.copy0Normal.copyWith(color: CosmosTheme.of(context).colors.link);
-    return Column(
-      children: [
-        CosmosBottomSheetHeader(
-          title: 'Settings',
-          leading: const Icon(Icons.ten_k, color: Colors.transparent),
-          actions: [
-            CosmosTextButton(
-              text: 'Close',
-              onTap: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
-        SizedBox(height: theme.spacingXXL),
-        SettingsItem(
-          text: 'Backup your account',
-          infoIcon: Image.asset('assets/images/icon_warning.png', package: packageName),
-          onTap: () => notImplemented(context),
-        ),
-        SettingsItem(
-          text: 'Security',
-          onTap: () => _onTapSecurity(context),
-        ),
-        Observer(
-          builder: (context) => SettingsItem(
-            text: 'Dark theme',
-            infoIcon: CosmosSwitch(
-              checked: isDarkTheme,
-              onChanged: (value) => StarportApp.themeStore.isDarkTheme = value,
-            ),
-            showArrow: false,
+    return Observer(
+      builder: (context) {
+        return CosmosBottomSheetContainer(
+          child: Column(
+            children: [
+              CosmosBottomSheetHeader(
+                title: 'Settings',
+                leading: const Icon(Icons.ten_k, color: Colors.transparent),
+                actions: [
+                  CosmosTextButton(
+                    text: 'Close',
+                    onTap: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              SizedBox(height: theme.spacingXXL),
+              SettingsItem(
+                text: 'Backup your account',
+                infoIcon: Image.asset('assets/images/icon_warning.png', package: packageName),
+                onTap: () => notImplemented(context),
+              ),
+              SettingsItem(
+                text: 'Security',
+                onTap: () => _onTapSecurity(context),
+              ),
+              SettingsItem(
+                text: 'Dark theme',
+                infoIcon: CosmosSwitch(
+                  checked: isDarkTheme,
+                  onChanged: (value) => StarportApp.themeStore.isDarkTheme = value,
+                ),
+                showArrow: false,
+              ),
+              SizedBox(height: theme.spacingXL),
+              SettingsItem(
+                text: 'Join the Telegram community',
+                textStyle: textStyle,
+                onTap: () => notImplemented(context),
+              ),
+              SettingsItem(
+                text: 'Twitter',
+                textStyle: textStyle,
+                onTap: () => notImplemented(context),
+              ),
+              SettingsItem(
+                text: 'Starport',
+                textStyle: textStyle,
+                onTap: () => notImplemented(context),
+              ),
+              const Spacer(),
+              Padding(
+                padding: EdgeInsets.only(left: theme.spacingXL, bottom: theme.spacingXXL),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppVersionText(appInfoProvider: AppInfoProvider()),
+                ),
+              ),
+              MinimalBottomSpacer(padding: theme.spacingXXXL)
+            ],
           ),
-        ),
-        SizedBox(height: theme.spacingXL),
-        SettingsItem(
-          text: 'Join the Telegram community',
-          textStyle: textStyle,
-          onTap: () => notImplemented(context),
-        ),
-        SettingsItem(
-          text: 'Twitter',
-          textStyle: textStyle,
-          onTap: () => notImplemented(context),
-        ),
-        SettingsItem(
-          text: 'Starport',
-          textStyle: textStyle,
-          onTap: () => notImplemented(context),
-        ),
-        const Spacer(),
-        Padding(
-          padding: EdgeInsets.only(left: theme.spacingXL, bottom: theme.spacingXXL),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: AppVersionText(appInfoProvider: AppInfoProvider()),
-          ),
-        ),
-        MinimalBottomSpacer(padding: theme.spacingXXXL)
-      ],
+        );
+      },
     );
   }
 
