@@ -33,16 +33,7 @@ class CosmosTheme extends InheritedWidget {
   static CosmosThemeData of(BuildContext context) {
     final cosmosTheme = context.dependOnInheritedWidgetOfExactType<CosmosTheme>();
     assert(cosmosTheme != null, "No 'CosmosTheme' widget found in the widget tree");
-    return cosmosTheme!.brightness == Brightness.dark ? cosmosTheme.themeData : cosmosTheme.darkThemeData;
-  }
-
-  ThemeData buildFlutterTheme() {
-    switch (brightness) {
-      case Brightness.light:
-        return themeData.buildFlutterTheme();
-      case Brightness.dark:
-        return darkThemeData.buildFlutterTheme();
-    }
+    return cosmosTheme!.brightness == Brightness.light ? cosmosTheme.themeData : cosmosTheme.darkThemeData;
   }
 
   @Deprecated('Use CosmosTheme instead')
