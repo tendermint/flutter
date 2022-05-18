@@ -15,6 +15,8 @@ const darkThemeColors = CosmosColorsData(
   shadowColor: CosmosColorsData.onDarkText,
 );
 
+const lightThemeColors = CosmosColorsData();
+
 class CosmosTheme extends InheritedWidget {
   const CosmosTheme({
     required Widget child,
@@ -85,70 +87,13 @@ class CosmosThemeData extends Equatable {
     this.elevationL = defaultElevationL,
     this.colors = const CosmosColorsData(),
     this.brightness = Brightness.light,
-    this.errorColor = CosmosColorsData.defaultError,
   });
 
-  const CosmosThemeData.dark({
-    this.spacingXXXL = defaultSpacingXXXL,
-    this.spacingXXL = defaultSpacingXXL,
-    this.spacingXL = defaultSpacingXL,
-    this.spacingL = defaultSpacingL,
-    this.spacingM = defaultSpacingM,
-    this.spacingS = defaultSpacingS,
-    this.spacingXS = defaultSpacingXS,
-    this.longDuration = defaultLongDuration,
-    this.mediumDuration = defaultMediumDuration,
-    this.shortDuration = defaultShortDuration,
-    this.radiusXL = defaultRadiusXL,
-    this.radiusL = defaultRadiusL,
-    this.radiusM = defaultRadiusM,
-    this.radiusS = defaultRadiusS,
-    this.fontSizeS = defaultFontSizeS,
-    this.fontSizeM = defaultFontSizeM,
-    this.fontSizeL = defaultFontSizeL,
-    this.fontSizeXL = defaultFontSizeXL,
-    this.fontSizeXXL = defaultFontSizeXXL,
-    this.borderRadiusL = defaultBorderRadiusL,
-    this.borderRadiusM = defaultBorderRadiusM,
-    this.borderRadiusS = defaultBorderRadiusS,
-    this.elevationS = defaultElevationS,
-    this.elevationM = defaultElevationM,
-    this.elevationL = defaultElevationL,
-    this.colors = darkThemeColors,
-    this.brightness = Brightness.dark,
-    this.errorColor = CosmosColorsData.defaultError,
-  });
+  const CosmosThemeData.dark() : this(colors: darkThemeColors, brightness: Brightness.dark);
 
-  const CosmosThemeData.light({
-    this.spacingXXXL = defaultSpacingXXXL,
-    this.spacingXXL = defaultSpacingXXL,
-    this.spacingXL = defaultSpacingXL,
-    this.spacingL = defaultSpacingL,
-    this.spacingM = defaultSpacingM,
-    this.spacingS = defaultSpacingS,
-    this.spacingXS = defaultSpacingXS,
-    this.longDuration = defaultLongDuration,
-    this.mediumDuration = defaultMediumDuration,
-    this.shortDuration = defaultShortDuration,
-    this.radiusXL = defaultRadiusXL,
-    this.radiusL = defaultRadiusL,
-    this.radiusM = defaultRadiusM,
-    this.radiusS = defaultRadiusS,
-    this.fontSizeS = defaultFontSizeS,
-    this.fontSizeM = defaultFontSizeM,
-    this.fontSizeL = defaultFontSizeL,
-    this.fontSizeXL = defaultFontSizeXL,
-    this.fontSizeXXL = defaultFontSizeXXL,
-    this.borderRadiusL = defaultBorderRadiusL,
-    this.borderRadiusM = defaultBorderRadiusM,
-    this.borderRadiusS = defaultBorderRadiusS,
-    this.elevationS = defaultElevationS,
-    this.elevationM = defaultElevationM,
-    this.elevationL = defaultElevationL,
-    this.colors = const CosmosColorsData(),
-    this.brightness = Brightness.light,
-    this.errorColor = CosmosColorsData.defaultError,
-  });
+  const CosmosThemeData.light() : this(colors: lightThemeColors, brightness: Brightness.light);
+
+  ThemeData buildFlutterTheme() => convertCosmosThemeToMaterialTheme(this);
 
   static const offWhite = Color(0xFFF2F2F2);
 
@@ -210,7 +155,6 @@ class CosmosThemeData extends Equatable {
   final BorderRadius borderRadiusL;
   final BorderRadius borderRadiusS;
   final CosmosColorsData colors;
-  final Color errorColor;
 
   @override
   List<Object?> get props => [
