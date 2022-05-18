@@ -29,12 +29,14 @@ class _ImportAccountPageState extends State<ImportAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Material(
       child: Observer(
         builder: (context) => ContentStateSwitcher(
           isLoading: isImporting,
           loadingChild: const LoadingSplash(text: 'Importing..'),
           contentChild: Scaffold(
+            backgroundColor: theme.colors.background,
             appBar: _appBar(),
             body: SafeArea(
               child: Padding(

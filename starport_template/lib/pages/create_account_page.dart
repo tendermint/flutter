@@ -63,6 +63,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating account..'),
         ),
         contentChild: Scaffold(
+          backgroundColor: CosmosTheme.of(context).colors.background,
           body: _contentUI(),
           appBar: _appBar(),
         ),

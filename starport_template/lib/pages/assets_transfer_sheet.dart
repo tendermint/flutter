@@ -76,13 +76,18 @@ class _AssetsTransferSheetState extends State<AssetsTransferSheet> {
                       child: Image.asset('assets/images/check_circle.png'),
                     ),
                     SizedBox(height: theme.spacingXL),
-                    Text('Transferred!', style: CosmosTextTheme.title2Bold),
+                    Text(
+                      'Transferred!',
+                      style: CosmosTextTheme.title2Bold.copyWith(
+                        color: theme.colors.text,
+                      ),
+                    ),
                     const Spacer(),
                     Text(
                       '${formatAmount(widget.recipientGetsAmountBalance.amount.value.toDouble())} '
                               '${widget.recipientGetsAmountBalance.denom}'
                           .toUpperCase(),
-                      style: CosmosTextTheme.title0Medium,
+                      style: CosmosTextTheme.title0Medium.copyWith(color: theme.colors.text),
                     ),
                     const Spacer(),
                     Row(

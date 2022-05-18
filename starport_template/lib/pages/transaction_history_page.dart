@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/transaction_history_item.dart';
 import 'package:starport_template/pages/accounts_list_sheet.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
@@ -41,6 +40,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       body: SafeArea(
         child: Column(
           children: [
@@ -49,14 +49,17 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
             _gradientAvatar(context),
             AssetPortfolioHeading(title: selectedAccount.name, onTap: _onDropDownTapped, isCentered: true),
             _textButtonRow(context, theme),
-            if (!selectedAccount.data.isBackedUp)
-              Padding(
-                padding: EdgeInsets.all(theme.spacingL),
-                child: CosmosWarningBox(
-                  text: 'Back up your account',
-                  suffix: Image.asset('assets/images/arrow_right.png'),
+            // if (!selectedAccount.data.isBackedUp)
+            Padding(
+              padding: EdgeInsets.all(theme.spacingL),
+              child: CosmosWarningBox(
+                text: 'Back up your account',
+                suffix: Image.asset(
+                  'assets/images/arrow_right.png',
+                  color: theme.colors.text,
                 ),
               ),
+            ),
             _transactionHistory(),
           ],
         ),
@@ -172,9 +175,7 @@ class _TransactionHistoryPageState extends State<TransactionHistoryPage> {
     await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => const CosmosBottomSheetContainer(
-        child: SettingsSheet(),
-      ),
+      builder: (context) => const SettingsSheet(),
     );
   }
 }
