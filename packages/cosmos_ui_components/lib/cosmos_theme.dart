@@ -46,7 +46,10 @@ class CosmosTheme extends InheritedWidget {
   static ThemeData buildAppTheme() => CosmosAppTheme.buildAppTheme();
 
   @override
-  bool updateShouldNotify(CosmosTheme oldWidget) => oldWidget.themeData != themeData;
+  bool updateShouldNotify(CosmosTheme oldWidget) =>
+      oldWidget.themeData != themeData ||
+      oldWidget.brightness != brightness ||
+      oldWidget.darkThemeData != darkThemeData;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
