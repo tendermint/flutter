@@ -14,7 +14,7 @@ ThemeData convertCosmosThemeToMaterialTheme(CosmosThemeData theme) {
     onSurface: theme.colors.text,
     onBackground: theme.colors.text,
     onError: theme.colors.chipBackground,
-    error: theme.errorColor,
+    error: theme.colors.error,
     brightness: theme.brightness,
   );
   return ThemeData(
