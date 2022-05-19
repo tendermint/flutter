@@ -122,9 +122,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   }
 
   Widget _errorUI() {
-    return const Center(
-      child: Text('Error!'),
-    );
+    return ErrorWidget.withDetails();
   }
 
   Future<void> _authenticateUser() async {
