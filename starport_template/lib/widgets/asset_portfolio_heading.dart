@@ -21,7 +21,6 @@ class AssetPortfolioHeading extends StatelessWidget {
       child: Row(
         mainAxisAlignment: isCentered ? MainAxisAlignment.center : MainAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(fontSize: CosmosTheme.of(context).fontSizeXL, fontWeight: FontWeight.w700)),
           IconButton(icon: Icon(Icons.arrow_downward_sharp, size: CosmosTheme.of(context).fontSizeXL), onPressed: onTap)
         ],
       ),

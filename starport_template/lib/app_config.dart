@@ -3,9 +3,9 @@ import 'package:grpc/grpc.dart';
 
 class AppConfig {
   AppConfig({
-    this.lcdUrl = 'http://localhost',
-    this.grpcUrl = 'http://localhost',
-    this.lcdPort = '1317',
+    this.lcdUrl = 'https://api.testnet.cosmos.network',
+    this.grpcUrl = 'https://grpc.testnet.cosmos.network',
+    this.lcdPort = '443',
     this.grpcPort = '9090',
     this.prefixAddress = 'cosmos',
   });
