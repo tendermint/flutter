@@ -35,10 +35,8 @@ class AccountsStore {
   final Observable<String> _errorDetails = Observable('');
 
   final ObservableList<Balance> balancesList = ObservableList();
-  final Observable<CredentialsStorageFailure?> loadAccountsFailure =
-      Observable(null);
-  final Observable<CredentialsStorageFailure?> _renameAccountFailure =
-      Observable(null);
+  final Observable<CredentialsStorageFailure?> loadAccountsFailure = Observable(null);
+  final Observable<CredentialsStorageFailure?> _renameAccountFailure = Observable(null);
   final ObservableList<AccountPublicInfo> accounts = ObservableList();
 
   int? get selectedAccountIndex => _selectetAccountIndex.value;
@@ -47,8 +45,7 @@ class AccountsStore {
 
   bool get areAccountsLoading => _areAccountsLoading.value;
 
-  set areAccountsLoading(bool val) =>
-      Action(() => _areAccountsLoading.value = val)();
+  set areAccountsLoading(bool val) => Action(() => _areAccountsLoading.value = val)();
 
   bool get isSendingMoney => _isSendingMoney.value;
 
@@ -56,38 +53,31 @@ class AccountsStore {
 
   bool get isRenamingAccount => _isRenamingAccount.value;
 
-  set isRenamingAccount(bool val) =>
-      Action(() => _isRenamingAccount.value = val)();
+  set isRenamingAccount(bool val) => Action(() => _isRenamingAccount.value = val)();
 
   bool get isSendMoneyError => _isSendMoneyError.value;
 
-  set isSendMoneyError(bool val) =>
-      Action(() => _isSendMoneyError.value = val)();
+  set isSendMoneyError(bool val) => Action(() => _isSendMoneyError.value = val)();
 
   bool get isSendMoneyLoading => _isSendMoneyLoading.value;
 
-  set isSendMoneyLoading(bool val) =>
-      Action(() => _isSendMoneyLoading.value = val)();
+  set isSendMoneyLoading(bool val) => Action(() => _isSendMoneyLoading.value = val)();
 
   bool get isBalancesLoadingError => _isBalancesLoadingError.value;
 
-  set isBalancesLoadingError(bool val) =>
-      Action(() => _isBalancesLoadingError.value = val)();
+  set isBalancesLoadingError(bool val) => Action(() => _isBalancesLoadingError.value = val)();
 
   bool get isBalancesLoading => _isBalancesLoading.value;
 
-  set isBalancesLoading(bool val) =>
-      Action(() => _isBalancesLoading.value = val)();
+  set isBalancesLoading(bool val) => Action(() => _isBalancesLoading.value = val)();
 
   bool get isAccountImportingError => _isAccountImportingError.value;
 
-  set isAccountImportingError(bool val) =>
-      Action(() => _isAccountImportingError.value = val)();
+  set isAccountImportingError(bool val) => Action(() => _isAccountImportingError.value = val)();
 
   bool get isMnemonicCreatingError => _isMnemonicCreatingError.value;
 
-  set isMnemonicCreatingError(bool val) =>
-      Action(() => _isMnemonicCreatingError.value = val)();
+  set isMnemonicCreatingError(bool val) => Action(() => _isMnemonicCreatingError.value = val)();
 
   String get errorDetails => _errorDetails.value;
 
@@ -95,19 +85,15 @@ class AccountsStore {
 
   bool get isMnemonicCreating => _isMnemonicCreating.value;
 
-  set isMnemonicCreating(bool val) =>
-      Action(() => _isMnemonicCreating.value = val)();
+  set isMnemonicCreating(bool val) => Action(() => _isMnemonicCreating.value = val)();
 
   bool get isAccountImporting => _isAccountImporting.value;
 
-  set isAccountImporting(bool val) =>
-      Action(() => _isAccountImporting.value = val)();
+  set isAccountImporting(bool val) => Action(() => _isAccountImporting.value = val)();
 
-  CredentialsStorageFailure? get renameAccountFailure =>
-      _renameAccountFailure.value;
+  CredentialsStorageFailure? get renameAccountFailure => _renameAccountFailure.value;
 
-  set renameAccountFailure(CredentialsStorageFailure? val) =>
-      Action(() => _renameAccountFailure.value = val)();
+  set renameAccountFailure(CredentialsStorageFailure? val) => Action(() => _renameAccountFailure.value = val)();
 
   AccountPublicInfo get selectedAccount {
     final index = _selectetAccountIndex.value;
@@ -157,8 +143,7 @@ class AccountsStore {
         .fold(
       (fail) => Action(() => renameAccountFailure = fail)(),
       (success) {
-        final index =
-            accounts.indexWhere((it) => it.accountId == newInfo.accountId);
+        final index = accounts.indexWhere((it) => it.accountId == newInfo.accountId);
         accounts[index] = newInfo;
       },
     );
@@ -169,8 +154,7 @@ class AccountsStore {
     isBalancesLoadingError = false;
     isBalancesLoading = true;
     try {
-      final newBalances =
-          await CosmosBalances(appConfig).getBalances(accountAddress);
+      final newBalances = await CosmosBalances(appConfig).getBalances(accountAddress);
       balancesList
         ..clear()
         ..addAll(newBalances);
@@ -303,8 +287,7 @@ class AccountsStore {
 
   void selectAccount(AccountPublicInfo account) {
     try {
-      selectedAccountIndex = accounts
-          .indexWhere((element) => element.accountId == account.accountId);
+      selectedAccountIndex = accounts.indexWhere((element) => element.accountId == account.accountId);
     } catch (ex, stack) {
       logError(ex, stack);
     }
