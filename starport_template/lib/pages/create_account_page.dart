@@ -195,6 +195,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading))
       ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
       ..add(DiagnosticsProperty<bool>('isAccountImportingError', isAccountImportingError))
-      ..add(DiagnosticsProperty<bool>('isError', isError));
+      ..add(DiagnosticsProperty<bool>('isError', isError))
+      ..add(DiagnosticsProperty<String>('errorDetails', errorDetails));
   }
 }
