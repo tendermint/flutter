@@ -64,4 +64,5 @@ void main() {
 
 const _words12Mnemonic = Mnemonic('tackle merit banner page pulse clean good behave bridge exchange sail tribe');
 const _words24Mnemonic = Mnemonic(
-    'movie tiny range scorpion silver reunion science essence lawn cushion goddess pilot act mosquito village same hobby radio unfold elder help riot sadness face');
+  'movie tiny range scorpion silver reunion science essence lawn cushion goddess pilot act mosquito village same hobby radio unfold elder help riot sadness face',
+);

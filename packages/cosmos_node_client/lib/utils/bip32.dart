@@ -10,8 +10,7 @@ class Bip32 {
   Bip32(
     this.privateKey,
     this._publicKey,
-    this.chainCode,
-    this.network, {
+    this.chainCode, {
     this.depth = 0,
     this.index = 0,
     this.parentFingerprint = 0x00000000,
@@ -32,7 +31,7 @@ class Bip32 {
       throw ArgumentError('Private key not in range [1, n]');
     }
 
-    return Bip32(privateKey, null, chainCode, _bitcoinNetworkType);
+    return Bip32(privateKey, null, chainCode);
   }
 
   factory Bip32.fromPublicKey({
@@ -46,7 +45,7 @@ class Bip32 {
       throw ArgumentError('Point is not on the curve');
     }
 
-    return Bip32(null, publicKey, chainCode, _bitcoinNetworkType);
+    return Bip32(null, publicKey, chainCode);
   }
 
   factory Bip32.fromSeed(Uint8List seed) {
@@ -68,10 +67,6 @@ class Bip32 {
     return Bip32.fromPrivateKey(privateKey: iL, chainCode: iR);
   }
 
-  static const _bitcoinNetworkType = _NetworkType(
-    wif: 0x80,
-    bip32: _Bip32Type(public: 0x0488b21e, private: 0x0488ade4),
-  );
   static const _UINT32_MAX = 4294967295; // 2^32 - 1
   static const _UINT31_MAX = 2147483647; // 2^31 - 1
   static const _HIGHEST_BIT = 0x80000000;
@@ -80,7 +75,6 @@ class Bip32 {
   final Uint8List? privateKey;
   Uint8List? _publicKey;
   final Uint8List chainCode;
-  final _NetworkType network;
   int depth;
   int index;
   int parentFingerprint;
@@ -111,7 +105,7 @@ class Bip32 {
   Uint8List get fingerprint => identifier.sublist(0, 4);
 
   Bip32 derivePath(String path) {
-    final regex = RegExp(r"^(m\/)?(\d+'?\/)*\d+'?$");
+    final regex = RegExp(r"^(m/)?(\d+'?/)*\d+'?$");
     if (!regex.hasMatch(path)) {
       throw ArgumentError('Expected BIP32 Path');
     }
@@ -125,7 +119,7 @@ class Bip32 {
       splitPath = splitPath.sublist(1);
     }
 
-    return splitPath.fold(this, (Bip32 prevHd, String indexStr) {
+    return splitPath.fold(this, (prevHd, indexStr) {
       int index;
       if (indexStr.substring(indexStr.length - 1) == "'") {
         index = int.parse(indexStr.substring(0, indexStr.length - 1));
@@ -189,9 +183,10 @@ class Bip32 {
       hd = Bip32.fromPublicKey(publicKey: ki, chainCode: iR);
     }
 
-    hd.depth = depth + 1;
-    hd.index = index;
-    hd.parentFingerprint = fingerprint.buffer.asByteData().getUint32(0);
+    hd
+      ..depth = depth + 1
+      ..index = index
+      ..parentFingerprint = fingerprint.buffer.asByteData().getUint32(0);
 
     return hd;
   }
@@ -207,20 +202,6 @@ class Bip32 {
   bool isNeutered() {
     return privateKey == null;
   }
-}
-
-class _NetworkType {
-  const _NetworkType({required this.wif, required this.bip32});
-
-  final int wif;
-  final _Bip32Type bip32;
-}
-
-class _Bip32Type {
-  const _Bip32Type({required this.public, required this.private});
-
-  final int public;
-  final int private;
 }
 
 class Bip32EccCurve {
@@ -295,7 +276,7 @@ class Bip32EccCurve {
     final pp = Bip32._secp256k1.curve.decodePoint(p);
 
     if (_compare(tweak, _ZERO32) == 0) {
-      return pp!.getEncoded(true);
+      return pp!.getEncoded();
     }
 
     final tt = tweak.toBigInt();
@@ -306,7 +287,7 @@ class Bip32EccCurve {
       return null;
     }
 
-    return uu.getEncoded(true);
+    return uu.getEncoded();
   }
 
   bool isPoint(Uint8List p) {
@@ -371,6 +352,6 @@ class Bip32EccCurve {
       throw Exception('Derived infinity');
     }
 
-    return pp.getEncoded(true);
+    return pp.getEncoded();
   }
 }
