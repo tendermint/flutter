@@ -1,4 +1,5 @@
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:starport_template/starport_app.dart';
@@ -7,8 +8,7 @@ import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
 
-  AccountPublicInfo get selectedAccount =>
-      StarportApp.accountsStore.selectedAccount;
+  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,7 @@ class MenuPage extends StatelessWidget {
                       height: 35,
                       child: InkWell(
                         onTap: () {},
-                        child: GradientAvatar(
-                            stringKey: selectedAccount.publicAddress),
+                        child: GradientAvatar(stringKey: selectedAccount.publicAddress),
                       ),
                     ),
                   ),
@@ -53,5 +52,10 @@ class MenuPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<AccountPublicInfo>('selectedAccount', selectedAccount));
   }
 }

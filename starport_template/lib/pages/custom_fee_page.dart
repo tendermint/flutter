@@ -37,7 +37,9 @@ class _CustomFeePageState extends State<CustomFeePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       appBar: const CosmosAppBar(
         title: 'Custom Fee',
         leading: CosmosBackButton(),

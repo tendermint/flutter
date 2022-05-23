@@ -85,6 +85,7 @@ class _PasswordPromptPageState extends State<PasswordPromptPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CosmosTheme.of(context).colors.background,
       body: SafeArea(
         child: CosmosPasscodePrompt(
           key: _promptKey,

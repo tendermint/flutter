@@ -52,6 +52,7 @@ class _SignTransactionPageState extends State<SignTransactionPage> {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       appBar: const CosmosAppBar(
         leading: CosmosBackButton(),
         title: 'Sign Transaction',

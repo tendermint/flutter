@@ -8,12 +8,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
-import 'package:starport_template/pages/accounts_list_sheet.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/pages/transaction_history_page.dart';
 import 'package:starport_template/starport_app.dart';
-import 'package:starport_template/widgets/asset_portfolio_heading.dart';
 import 'package:starport_template/widgets/balance_card_list.dart';
 import 'package:starport_template/widgets/starport_button_bar.dart';
 import 'package:transaction_signing_gateway/transaction_signing_gateway.dart';
@@ -28,8 +26,7 @@ class AssetsPortfolioPage extends StatefulWidget {
 }
 
 class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
-  ObservableList<Balance> get balancesList =>
-      StarportApp.accountsStore.balancesList;
+  ObservableList<Balance> get balancesList => StarportApp.accountsStore.balancesList;
 
   bool get isBalancesLoading => StarportApp.accountsStore.isBalancesLoading;
 
@@ -37,12 +34,13 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
   bool get isError => StarportApp.accountsStore.isBalancesLoadingError;
 
-  AccountPublicInfo get selectedAccount =>
-      StarportApp.accountsStore.selectedAccount;
+  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
 
   @override
   Widget build(BuildContext context) {
+    final theme = CosmosTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.background,
       body: SafeArea(
         child: Center(
           child: Observer(
@@ -81,8 +79,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     onSendPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              SelectAssetPage(balancesList: balancesList),
+                          builder: (context) => SelectAssetPage(balancesList: balancesList),
                         ),
                       );
                     },
@@ -91,8 +88,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
               ),
               isLoading: isBalancesLoading,
               isError: isError,
-              errorChild:
-                  const Center(child: Text('An unexpected error occurred')),
+              errorChild: const Center(child: Text('An unexpected error occurred')),
             ),
           ),
         ),
@@ -120,7 +116,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
         MaterialPageRoute(builder: (context) => const TransactionHistoryPage()),
       );
 
-  Future<void> _onTapDropDown() async {
+  /* Future<void> _onTapDropDown() async {
     final account = await showMaterialModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -133,7 +129,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
     if (account != null) {
       StarportApp.accountsStore.selectAccount(account);
     }
-  }
+  } */
 
   void _onTapReceive() {
     showMaterialModalBottomSheet(

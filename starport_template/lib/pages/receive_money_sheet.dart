@@ -25,7 +25,7 @@ class ReceiveMoneySheet extends StatelessWidget {
           children: [
             CosmosBottomSheetHeader(
               title: '',
-              titleTextStyle: CosmosTextTheme.title2Bold,
+              titleTextStyle: CosmosTextTheme.title2Bold.copyWith(color: theme.colors.text),
               leading: const Icon(Icons.ten_k, color: Colors.transparent),
               actions: [
                 CosmosTextButton(
@@ -53,14 +53,14 @@ class ReceiveMoneySheet extends StatelessWidget {
                 SizedBox(width: theme.spacingL),
                 Text(
                   accountInfo.name,
-                  style: CosmosTextTheme.title1Medium,
+                  style: CosmosTextTheme.title1Medium.copyWith(color: theme.colors.text),
                 )
               ],
             ),
             SizedBox(height: theme.spacingL),
             Text(
               maskAddress(accountAddress),
-              style: CosmosTextTheme.title1Medium,
+              style: CosmosTextTheme.title1Medium.copyWith(color: theme.colors.text),
             ),
             const Spacer(),
             CosmosTextButton(

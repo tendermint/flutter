@@ -153,7 +153,11 @@ packages:
     description:
       path: "packages/cosmos_auth"
       ref: main
+<<<<<<< HEAD
       resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
+=======
+      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
+>>>>>>> origin
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -162,7 +166,11 @@ packages:
     description:
       path: "packages/cosmos_lint"
       ref: main
+<<<<<<< HEAD
       resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
+=======
+      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
+>>>>>>> origin
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "1.9.0"
@@ -171,7 +179,11 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
+<<<<<<< HEAD
       resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
+=======
+      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
+>>>>>>> origin
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -180,7 +192,11 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
+<<<<<<< HEAD
       resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
+=======
+      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
+>>>>>>> origin
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -804,7 +820,11 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
+<<<<<<< HEAD
       resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
+=======
+      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
+>>>>>>> origin
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"

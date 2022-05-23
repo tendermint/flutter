@@ -33,6 +33,7 @@ class _BackUpAccountPageState extends State<BackUpAccountPage> {
     return Material(
       child: ContentStateSwitcher(
         contentChild: Scaffold(
+          backgroundColor: CosmosTheme.of(context).colors.background,
           body: _contentUI(),
           appBar: _appBar(),
         ),
