@@ -40,9 +40,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   bool get isAccountImporting => StarportApp.accountsStore.isAccountImporting;
 
-  bool get isMnemonicCreatingError => StarportApp.accountsStore.isMnemonicCreatingError;
+  bool get isMnemonicCreatingError =>
+      StarportApp.accountsStore.isMnemonicCreatingError;
 
-  bool get isAccountImportingError => StarportApp.accountsStore.isAccountImportingError;
+  bool get isAccountImportingError =>
+      StarportApp.accountsStore.isAccountImportingError;
 
   @override
   void initState() {
@@ -60,7 +62,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         loadingChild: LoadingSplash(
           text: isAuthenticating
               ? 'Authenticating..'
-              : (isMnemonicCreating ? 'Creating a recovery phrase..' : 'Creating account..'),
+              : (isMnemonicCreating
+                  ? 'Creating a recovery phrase..'
+                  : 'Creating account..'),
         ),
         contentChild: Scaffold(
           backgroundColor: CosmosTheme.of(context).colors.background,
@@ -102,12 +106,16 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               style: CosmosTextTheme.copy0Normal,
             ),
             SizedBox(height: theme.spacingXL),
-            const InfoCard(text: 'We will never ask you to share your recovery phrase.'),
-            SizedBox(height: theme.spacingL),
-            const InfoCard(text: 'Never share your recovery phrase with anyone, store it securely.'),
+            const InfoCard(
+                text: 'We will never ask you to share your recovery phrase.'),
             SizedBox(height: theme.spacingL),
             const InfoCard(
-              text: 'If you don’t backup your account or lose your recovery phrase, '
+                text:
+                    'Never share your recovery phrase with anyone, store it securely.'),
+            SizedBox(height: theme.spacingL),
+            const InfoCard(
+              text:
+                  'If you don’t backup your account or lose your recovery phrase, '
                   'you will not able to recover your account',
             ),
             const Spacer(),
@@ -147,7 +155,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     }
     if (mounted) {
       await Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => BackUpAccountPage(mnemonic: mnemonic)),
+        MaterialPageRoute(
+            builder: (context) => BackUpAccountPage(mnemonic: mnemonic)),
       );
     }
   }
@@ -171,7 +180,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       password: password,
       isBackedUp: isBackedUp,
       onMnemonicGenerationStarted: () => setState(() {}),
-      onAccountCreationStarted: () => setState(() {}), //this will cause the loading message to update
+      onAccountCreationStarted: () =>
+          setState(() {}), //this will cause the loading message to update
     );
     if (mounted) {
       await Navigator.of(context).pushAndRemoveUntil(
@@ -187,12 +197,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<bool>('isMnemonicCreatingError', isMnemonicCreatingError))
+      ..add(DiagnosticsProperty<bool>(
+          'isMnemonicCreatingError', isMnemonicCreatingError))
       ..add(DiagnosticsProperty<bool>('isMnemonicCreating', isMnemonicCreating))
       ..add(DiagnosticsProperty<bool>('isAccountImporting', isAccountImporting))
       ..add(DiagnosticsProperty<bool>('isLoading', isLoading))
       ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
-      ..add(DiagnosticsProperty<bool>('isAccountImportingError', isAccountImportingError))
+      ..add(DiagnosticsProperty<bool>(
+          'isAccountImportingError', isAccountImportingError))
       ..add(DiagnosticsProperty<bool>('isError', isError));
   }
 }

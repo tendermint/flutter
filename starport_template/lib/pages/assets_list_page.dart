@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/pages/menu_page.dart';
 import 'package:starport_template/pages/receive_money_sheet.dart';
 import 'package:starport_template/pages/select_asset_page.dart';
 import 'package:starport_template/pages/transaction_history_page.dart';
@@ -26,7 +27,8 @@ class AssetsPortfolioPage extends StatefulWidget {
 }
 
 class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
-  ObservableList<Balance> get balancesList => StarportApp.accountsStore.balancesList;
+  ObservableList<Balance> get balancesList =>
+      StarportApp.accountsStore.balancesList;
 
   bool get isBalancesLoading => StarportApp.accountsStore.isBalancesLoading;
 
@@ -34,7 +36,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
 
   bool get isError => StarportApp.accountsStore.isBalancesLoadingError;
 
-  AccountPublicInfo get selectedAccount => StarportApp.accountsStore.selectedAccount;
+  AccountPublicInfo get selectedAccount =>
+      StarportApp.accountsStore.selectedAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: _onTapMenu,
                             icon: SvgPicture.asset(
                               'assets/images/svg/menu_bar.svg',
                             ),
@@ -79,7 +82,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
                     onSendPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => SelectAssetPage(balancesList: balancesList),
+                          builder: (context) =>
+                              SelectAssetPage(balancesList: balancesList),
                         ),
                       );
                     },
@@ -88,7 +92,8 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
               ),
               isLoading: isBalancesLoading,
               isError: isError,
-              errorChild: const Center(child: Text('An unexpected error occurred')),
+              errorChild:
+                  const Center(child: Text('An unexpected error occurred')),
             ),
           ),
         ),
@@ -141,6 +146,12 @@ class _AssetsPortfolioPageState extends State<AssetsPortfolioPage> {
           accountInfo: StarportApp.accountsStore.selectedAccount,
         ),
       ),
+    );
+  }
+
+  void _onTapMenu() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const MenuPage()),
     );
   }
 

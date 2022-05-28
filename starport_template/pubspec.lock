@@ -153,11 +153,7 @@ packages:
     description:
       path: "packages/cosmos_auth"
       ref: main
-<<<<<<< HEAD
-      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
-=======
-      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
->>>>>>> origin
+      resolved-ref: d21c434b9d4bf574375e8674120338899524aa6c
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -166,11 +162,7 @@ packages:
     description:
       path: "packages/cosmos_lint"
       ref: main
-<<<<<<< HEAD
-      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
-=======
-      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
->>>>>>> origin
+      resolved-ref: d21c434b9d4bf574375e8674120338899524aa6c
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "1.9.0"
@@ -179,11 +171,7 @@ packages:
     description:
       path: "packages/cosmos_ui_components"
       ref: main
-<<<<<<< HEAD
-      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
-=======
-      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
->>>>>>> origin
+      resolved-ref: d21c434b9d4bf574375e8674120338899524aa6c
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -192,11 +180,7 @@ packages:
     description:
       path: "packages/cosmos_utils"
       ref: main
-<<<<<<< HEAD
-      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
-=======
-      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
->>>>>>> origin
+      resolved-ref: d21c434b9d4bf574375e8674120338899524aa6c
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -417,7 +401,7 @@ packages:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   image:
     dependency: transitive
     description:
@@ -820,11 +804,7 @@ packages:
     description:
       path: "packages/transaction_signing_gateway"
       ref: main
-<<<<<<< HEAD
-      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
-=======
-      resolved-ref: "0710c51c597daafbf62cf552fbbc5280cd90f7bc"
->>>>>>> origin
+      resolved-ref: d21c434b9d4bf574375e8674120338899524aa6c
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "0.0.1"
@@ -855,7 +835,7 @@ packages:
       name: url_launcher_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.16"
+    version: "6.0.17"
   url_launcher_linux:
     dependency: transitive
     description:
