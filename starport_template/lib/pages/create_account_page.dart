@@ -5,6 +5,7 @@ import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:starport_template/entities/error_details.dart';
 import 'package:starport_template/pages/assets_portfolio_page.dart';
 import 'package:starport_template/pages/back_up_account_page.dart';
 import 'package:starport_template/pages/backup_later_bottom_sheet.dart';
@@ -44,7 +45,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   bool get isAccountImportingError => StarportApp.accountsStore.isAccountImportingError;
 
-  String get errorDetails => StarportApp.accountsStore.errorDetails;
+  CosmosErrorDetails get errorDetails => StarportApp.accountsStore.errorDetails;
 
   @override
   void initState() {
@@ -125,7 +126,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   Widget _errorUI() {
     return ErrorWidget.withDetails(
-      error: FlutterError(errorDetails),
+      error: FlutterError(errorDetails.toString()),
     );
   }
 
@@ -196,6 +197,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       ..add(DiagnosticsProperty<bool>('isAuthenticating', isAuthenticating))
       ..add(DiagnosticsProperty<bool>('isAccountImportingError', isAccountImportingError))
       ..add(DiagnosticsProperty<bool>('isError', isError))
-      ..add(DiagnosticsProperty<String>('errorDetails', errorDetails));
+      ..add(DiagnosticsProperty<CosmosErrorDetails>('errorDetails', errorDetails));
   }
 }

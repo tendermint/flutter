@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:starport_template/app_config.dart';
 import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/balance.dart';
+import 'package:starport_template/entities/error_details.dart';
 import 'package:starport_template/entities/import_account_form_data.dart';
 import 'package:starport_template/utils/cosmos_balances.dart';
 import 'package:starport_template/utils/token_sender.dart';
@@ -32,7 +33,7 @@ class AccountsStore {
   final Observable<bool> _isBalancesLoadingError = Observable(false);
   final Observable<bool> _isRenamingAccount = Observable(false);
   final Observable<bool> _isSendingMoney = Observable(false);
-  final Observable<String> _errorDetails = Observable('');
+  final Observable<CosmosErrorDetails> _errorDetails = Observable(CosmosErrorDetails.empty());
 
   final ObservableList<Balance> balancesList = ObservableList();
   final Observable<CredentialsStorageFailure?> loadAccountsFailure = Observable(null);
@@ -79,9 +80,9 @@ class AccountsStore {
 
   set isMnemonicCreatingError(bool val) => Action(() => _isMnemonicCreatingError.value = val)();
 
-  String get errorDetails => _errorDetails.value;
+  CosmosErrorDetails get errorDetails => _errorDetails.value;
 
-  set errorDetails(String val) => Action(() => _errorDetails.value = val)();
+  set errorDetails(CosmosErrorDetails val) => Action(() => _errorDetails.value = val)();
 
   bool get isMnemonicCreating => _isMnemonicCreating.value;
 
@@ -207,7 +208,7 @@ class AccountsStore {
     return result.fold(
       (fail) {
         logError(fail);
-        errorDetails = fail.toString();
+        errorDetails = CosmosErrorDetails(error: fail);
         isAccountImportingError = true;
         return null;
       },
@@ -240,7 +241,7 @@ class AccountsStore {
       await getBalances(selectedAccount.publicAddress);
     } catch (ex, stack) {
       logError(ex, stack);
-      errorDetails = '$ex\n\nStackTrace:\n\n$stack';
+      errorDetails = CosmosErrorDetails(error: ex, stackTrace: stack);
       isSendMoneyError = true;
     }
     isSendMoneyLoading = false;
@@ -278,7 +279,7 @@ class AccountsStore {
       mnemonic = await generateMnemonic();
     } catch (ex, stack) {
       logError(ex, stack);
-      errorDetails = '$ex\n\nStackTrace:\n\n$stack';
+      errorDetails = CosmosErrorDetails(error: ex, stackTrace: stack);
       isMnemonicCreatingError = true;
     }
     isMnemonicCreating = false;
