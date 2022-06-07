@@ -37,13 +37,6 @@ ThemeData convertCosmosThemeToMaterialTheme(CosmosThemeData theme) {
     disabledColor: theme.colors.inactive,
     dividerColor: theme.colors.divider,
     colorScheme: colorScheme,
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: theme.colors.chipBackground,
-      border: const OutlineInputBorder(
-        borderSide: BorderSide.none,
-      ),
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
