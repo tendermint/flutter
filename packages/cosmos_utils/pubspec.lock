@@ -69,7 +69,7 @@ packages:
     description:
       path: "packages/cosmos_lint"
       ref: main
-      resolved-ref: "64fc9a44b76bef7a6a6cd98763048630afdc99da"
+      resolved-ref: "5b1a8296cf9481824940c330d8bf6bdf23ec14e7"
       url: "https://github.com/tendermint/flutter.git"
     source: git
     version: "1.9.0"

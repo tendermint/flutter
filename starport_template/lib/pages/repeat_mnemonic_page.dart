@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:starport_template/entities/account_additional_data.dart';
 import 'package:starport_template/entities/import_account_form_data.dart';
-import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/pages/assets_list_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';
 import 'package:starport_template/widgets/loading_splash.dart';

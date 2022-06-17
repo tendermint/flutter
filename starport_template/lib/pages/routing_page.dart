@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:starport_template/pages/assets_portfolio_page.dart';
+import 'package:starport_template/pages/assets_list_page.dart';
 import 'package:starport_template/pages/onboarding_page.dart';
 import 'package:starport_template/pages/passcode_prompt_page.dart';
 import 'package:starport_template/starport_app.dart';

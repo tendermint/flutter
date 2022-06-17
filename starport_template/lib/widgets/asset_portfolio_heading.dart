@@ -1,4 +1,3 @@
-import 'package:cosmos_ui_components/cosmos_text_theme.dart';
 import 'package:cosmos_ui_components/cosmos_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,21 +18,17 @@ class AssetPortfolioHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = CosmosTheme.of(context);
     return Padding(
-      padding: EdgeInsets.only(left: CosmosTheme.of(context).spacingL, top: theme.spacingM),
+      padding: EdgeInsets.only(
+        left: CosmosTheme.of(context).spacingL,
+        top: theme.spacingM,
+      ),
       child: Row(
         mainAxisAlignment: isCentered ? MainAxisAlignment.center : MainAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: CosmosTextTheme.title2Bold.copyWith(
-              color: theme.colors.text,
-            ),
-          ),
           IconButton(
             icon: Icon(
               Icons.arrow_downward_sharp,
-              size: theme.fontSizeXL,
-              color: theme.colors.text,
+              size: CosmosTheme.of(context).fontSizeXL,
             ),
             onPressed: onTap,
           )
