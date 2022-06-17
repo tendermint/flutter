@@ -121,7 +121,7 @@ jobs:
       - name: cosmos_ui_components - tests
         working-directory: packages/cosmos_ui_components
         if: env.changes_cosmos_ui_components == 'true'
-        run: flutter test
+        run: flutter test --dart-define=IS_CI=true
 
       ###########################################################################################
       ## COSMOS_UTILS
