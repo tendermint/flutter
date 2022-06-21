@@ -1,16 +1,11 @@
 import 'package:bech32/bech32.dart';
-import 'package:hex/hex.dart';
 
-@Deprecated("Use cosmos-node-client's `Account` class instead")
-String bech32ToHex(String address) {
-  const bech32codec = Bech32Codec();
-  final bech32address = bech32codec.decode(address);
-
-  return HEX.encode(_convertBits(bech32address.data, 5, 8, false));
-}
-
-@Deprecated("Use cosmos-node-client's `Account` class instead")
-List<int> _convertBits(List<int> data, int from, int to, bool pad) {
+List<int> convertBits(
+  List<int> data, {
+  required int from,
+  required int to,
+  bool pad = true,
+}) {
   var acc = 0;
   var bits = 0;
   final result = <int>[];

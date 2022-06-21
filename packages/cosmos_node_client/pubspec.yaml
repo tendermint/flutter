@@ -11,6 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  bech32: 0.2.1
+  bip39: 1.0.6
+  equatable: 2.0.3
+  dartz: 0.10.1
+  pointycastle: 3.6.0
+  hex: 0.2.0
+  cosmos_utils:
+    git:
+      url: https://github.com/tendermint/flutter.git
+      path: packages/cosmos_utils
+      ref: main
 
 ## convenient overrides for development to reference packages on local disk, just uncomment following lines and make sure
 ## it points to the location of the checked out tendermint/flutter repository
@@ -27,6 +38,6 @@ dev_dependencies:
       path: packages/cosmos_lint
       ref: main
 
-  mocktail: 0.2.0
+  mocktail: 0.3.0
 
 flutter:
