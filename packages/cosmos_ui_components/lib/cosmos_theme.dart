@@ -12,7 +12,7 @@ const darkThemeColors = CosmosColorsData(
   inputBorder: CosmosColorsData.darkDivider,
   chipBackground: CosmosColorsData.darkSurface,
   cardBackground: CosmosColorsData.darkSurface,
-  shadowColor: CosmosColorsData.onDarkText,
+  shadowColor: CosmosColorsData.darkInactive,
 );
 
 const lightThemeColors = CosmosColorsData();
