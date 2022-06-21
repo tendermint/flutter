@@ -1,6 +1,6 @@
 import 'package:alan/alan.dart';
 import 'package:cosmos_auth/auth/cosmos_auth.dart';
-import 'package:cosmos_ui_components/cosmos_theme.dart';
+import 'package:cosmos_ui_components/cosmos_ui_components.dart';
 import 'package:cosmos_utils/cosmos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -34,6 +34,7 @@ class StarportApp extends StatelessWidget {
         brightness: themeStore.isDarkTheme ? Brightness.dark : Brightness.light,
         child: Builder(
           builder: (context) {
+            setErrorBuilder(context);
             return MaterialApp(
               title: 'Starport template',
               theme: CosmosTheme.of(context).buildFlutterTheme(),
@@ -43,5 +44,49 @@ class StarportApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void setErrorBuilder(BuildContext context) {
+    ErrorWidget.builder = (errorDetails) {
+      return Material(
+        color: Colors.white,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: ListView(
+              children: [
+                const Text(
+                  'Error!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  errorDetails.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Row(
+                  children: [
+                    CosmosElevatedButton(
+                      text: 'Take me back',
+                      onTap: () => Navigator.pop(context),
+                      textColor: Colors.black,
+                    ),
+                    CosmosTextButton(
+                      text: 'Back',
+                      onTap: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    };
   }
 }
